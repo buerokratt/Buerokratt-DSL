@@ -25,7 +25,7 @@ COPY Dmapper/v1 /Dmapper/v1
 COPY Dmapper/v2 /Dmapper/v2
 COPY Liquibase /Liquibase
 COPY OpenSearch /OpenSearch
-COPY Openserch /Opensearch
+COPY Opensearch /Opensearch
 
 # Set the main command to run your application
 CMD ["python", "run.py"]
