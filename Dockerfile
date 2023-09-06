@@ -27,5 +27,7 @@ COPY Liquibase /Liquibase
 COPY OpenSearch /OpenSearch
 COPY Opensearch /Opensearch
 
+LABEL org.opencontainers.image.description Buerokratt-DSL 
+
 # Set the main command to run your application
 CMD ["python", "run.py"]
