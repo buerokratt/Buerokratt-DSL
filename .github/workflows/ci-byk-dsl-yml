@@ -1,0 +1,455 @@
+name: Buerokratt DSL
+
+on:
+  push:
+    branches:
+      - dev # Adjust the branch name if needed
+    paths:
+      - '.env' #this trigger is for testing purposes only
+
+jobs:
+  setup_directories:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+        
+      - name: Check and Create Folder Structure and copy DSLs for Ruuter v2 private
+        run: |
+          FOLDER_PATH=Ruuter/private/v2/
+          if [ ! -d "$FOLDER_PATH" ]; then
+            echo "Folder structure does not exist, creating..."
+            mkdir -p "$FOLDER_PATH"
+            touch "$FOLDER_PATH/README.md"
+          else
+            echo "Folder structure already exists."
+          fi
+
+          SUBFOLDERS=("analytics" "backoffice" "services" "training")
+          for folder in "${SUBFOLDERS[@]}"; do
+            SUBFOLDER_PATH="$FOLDER_PATH$folder"
+            if [ ! -d "$SUBFOLDER_PATH" ]; then
+              echo "Creating $folder folder..."
+              mkdir -p "$SUBFOLDER_PATH"
+              touch "$SUBFOLDER_PATH/README.md"
+            else
+              echo "$folder folder already exists."
+            fi
+          done
+
+          SOURCE_REPO_CHATBOT=buerokratt/Buerokratt-Chatbot
+          SOURCE_FOLDER_CHATBOT=DSL.Ruuter.private/DSL
+          git clone --depth=1   "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
+          cp -R "source-repo-chatbot/$SOURCE_FOLDER_CHATBOT/." "$FOLDER_PATH/backoffice"
+
+          SOURCE_REPO_ANALYTICS=buerokratt/Analytics-Module
+          SOURCE_FOLDER_ANALYTICS=DSL/Ruuter
+          git clone --depth=1 "https://github.com/$SOURCE_REPO_ANALYTICS.git" source-repo-analytics
+          cp -R "source-repo-analytics/$SOURCE_FOLDER_ANALYTICS/." "$FOLDER_PATH/analytics"
+
+          SOURCE_REPO_SERVICE=buerokratt/Service-Module
+          SOURCE_FOLDER_SERVICE=DSL/Ruuter
+          git clone --depth=1 "https://github.com/$SOURCE_REPO_SERVICE.git" source-repo-service
+          cp -R "source-repo-service/$SOURCE_FOLDER_SERVICE/." "$FOLDER_PATH/services"
+
+          SOURCE_REPO_TRAINING=buerokratt/Training-Module
+          SOURCE_FOLDER_TRAINING=DSL/Ruuter.private
+          git clone --depth=1  "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
+          cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING/." "$FOLDER_PATH/training"
+
+      - name: Clean Up Cloned Repositories
+        run: |
+          rm -rf source-repo-chatbot
+          rm -rf source-repo-analytics
+          rm -rf source-repo-service
+          rm -rf source-repo-training
+
+      - name: Check and Create Folder Structure and copy DSLs for Ruuter v2 public
+        run: |
+          FOLDER_PATH=Ruuter/public/v2/
+          if [ ! -d "$FOLDER_PATH" ]; then
+            echo "Folder structure does not exist, creating..."
+            mkdir -p "$FOLDER_PATH"
+            touch "$FOLDER_PATH/README.md"
+          else
+            echo "Folder structure already exists."
+          fi
+
+          SUBFOLDERS=("analytics" "backoffice" "services" "training")
+          for folder in "${SUBFOLDERS[@]}"; do
+            SUBFOLDER_PATH="$FOLDER_PATH$folder"
+            if [ ! -d "$SUBFOLDER_PATH" ]; then
+              echo "Creating $folder folder..."
+              mkdir -p "$SUBFOLDER_PATH"
+              touch "$SUBFOLDER_PATH/README.md"
+            else
+              echo "$folder folder already exists."
+            fi
+          done
+
+          SOURCE_REPO_CHATBOT=buerokratt/Buerokratt-Chatbot
+          SOURCE_FOLDER_CHATBOT=DSL.Ruuter.public/DSL
+          git clone --depth=1   "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
+          cp -R "source-repo-chatbot/$SOURCE_FOLDER_CHATBOT/." "$FOLDER_PATH/backoffice"
+
+
+          SOURCE_REPO_TRAINING=buerokratt/Training-Module
+          SOURCE_FOLDER_TRAINING=DSL/Ruuter.public
+          git clone --depth=1  "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
+          cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING/." "$FOLDER_PATH/training"
+
+      - name: Clean Up Cloned Repositories
+        run: |
+          rm -rf source-repo-chatbot
+          rm -rf source-repo-analytics
+          rm -rf source-repo-service
+          rm -rf source-repo-training
+          
+      - name: Check and Create Folder Structure and copy DSLs for RESQL
+        run: |
+          FOLDER_PATH=Resql/
+          if [ ! -d "$FOLDER_PATH" ]; then
+            echo "Folder structure does not exist, creating..."
+            mkdir -p "$FOLDER_PATH"
+            touch "$FOLDER_PATH/README.md"
+          else
+            echo "Folder structure already exists."
+          fi
+
+          SUBFOLDERS=("analytics" "backoffice" "services" "training")
+          for folder in "${SUBFOLDERS[@]}"; do
+            SUBFOLDER_PATH="$FOLDER_PATH$folder"
+            if [ ! -d "$SUBFOLDER_PATH" ]; then
+              echo "Creating $folder folder..."
+              mkdir -p "$SUBFOLDER_PATH"
+              touch "$SUBFOLDER_PATH/README.md"
+            else
+              echo "$folder folder already exists."
+            fi
+          done
+
+          SOURCE_REPO_CHATBOT=buerokratt/Buerokratt-Chatbot
+          SOURCE_FOLDER_CHATBOT=DSL.Resql
+          git clone --depth=1   "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
+          cp -R "source-repo-chatbot/$SOURCE_FOLDER_CHATBOT/." "$FOLDER_PATH/backoffice"
+
+          SOURCE_REPO_ANALYTICS=buerokratt/Analytics-Module
+          SOURCE_FOLDER_ANALYTICS=DSL/Resql
+          git clone --depth=1 "https://github.com/$SOURCE_REPO_ANALYTICS.git" source-repo-analytics
+          cp -R "source-repo-analytics/$SOURCE_FOLDER_ANALYTICS/." "$FOLDER_PATH/analytics"
+
+          SOURCE_REPO_SERVICE=buerokratt/Service-Module
+          SOURCE_FOLDER_SERVICE=DSL/Resql
+          git clone --depth=1 "https://github.com/$SOURCE_REPO_SERVICE.git" source-repo-service
+          cp -R "source-repo-service/$SOURCE_FOLDER_SERVICE/." "$FOLDER_PATH/services"
+
+          SOURCE_REPO_TRAINING=buerokratt/Training-Module
+          SOURCE_FOLDER_TRAINING=DSL/Resql
+          git clone --depth=1  "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
+          cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING/." "$FOLDER_PATH/training"
+
+      - name: Clean Up Cloned Repositories
+        run: |
+          rm -rf source-repo-chatbot
+          rm -rf source-repo-analytics
+          rm -rf source-repo-service
+          rm -rf source-repo-training
+
+      - name: Check and Create Folder Structure and copy DSLs for DATAMAPPER v1
+        run: |
+          FOLDER_PATH=DataMapper/v1/
+          if [ ! -d "$FOLDER_PATH" ]; then
+            echo "Folder structure does not exist, creating..."
+            mkdir -p "$FOLDER_PATH"
+            touch "$FOLDER_PATH/README.md"
+          else
+            echo "Folder structure already exists."
+          fi
+
+          SUBFOLDERS=("analytics" "backoffice" "services" "training")
+          for folder in "${SUBFOLDERS[@]}"; do
+            SUBFOLDER_PATH="$FOLDER_PATH$folder"
+            if [ ! -d "$SUBFOLDER_PATH" ]; then
+              echo "Creating $folder folder..."
+              mkdir -p "$SUBFOLDER_PATH"
+              touch "$SUBFOLDER_PATH/README.md"
+            else
+              echo "$folder folder already exists."
+            fi
+          done
+
+          SOURCE_REPO_CHATBOT=buerokratt/Buerokratt-Chatbot
+          SOURCE_FOLDER_CHATBOT=DSL.DMapper
+          git clone --depth=1   "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
+          cp -R "source-repo-chatbot/$SOURCE_FOLDER_CHATBOT/." "$FOLDER_PATH/backoffice"
+
+          SOURCE_REPO_ANALYTICS=buerokratt/Analytics-Module
+          SOURCE_FOLDER_ANALYTICS=DSL/DMapper
+          git clone --depth=1 "https://github.com/$SOURCE_REPO_ANALYTICS.git" source-repo-analytics
+          cp -R "source-repo-analytics/$SOURCE_FOLDER_ANALYTICS/." "$FOLDER_PATH/analytics"
+
+          SOURCE_REPO_SERVICE=buerokratt/Service-Module
+          SOURCE_FOLDER_SERVICE=DSL/DMapper
+          git clone --depth=1 "https://github.com/$SOURCE_REPO_SERVICE.git" source-repo-service
+          cp -R "source-repo-service/$SOURCE_FOLDER_SERVICE/." "$FOLDER_PATH/services"
+
+          SOURCE_REPO_TRAINING=buerokratt/Training-Module
+          SOURCE_FOLDER_TRAINING=DSL/DataMapper
+          git clone --depth=1  "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
+          cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING/." "$FOLDER_PATH/training"
+
+      - name: Clean Up Cloned Repositories
+        run: |
+          rm -rf source-repo-chatbot
+          rm -rf source-repo-analytics
+          rm -rf source-repo-service
+          rm -rf source-repo-training
+
+      - name: Check and Create Folder Structure and copy DSLs for DATAMAPPER v2
+        run: |
+          FOLDER_PATH=DataMapper/v2/
+          if [ ! -d "$FOLDER_PATH" ]; then
+            echo "Folder structure does not exist, creating..."
+            mkdir -p "$FOLDER_PATH"
+            touch "$FOLDER_PATH/README.md"
+          else
+            echo "Folder structure already exists."
+          fi
+
+          SUBFOLDERS=("backoffice")
+          for folder in "${SUBFOLDERS[@]}"; do
+            SUBFOLDER_PATH="$FOLDER_PATH$folder"
+            if [ ! -d "$SUBFOLDER_PATH" ]; then
+              echo "Creating $folder folder..."
+              mkdir -p "$SUBFOLDER_PATH"
+              touch "$SUBFOLDER_PATH/README.md"
+            else
+              echo "$folder folder already exists."
+            fi
+          done
+
+          SOURCE_REPO_CHATBOT=buerokratt/Buerokratt-Chatbot
+          SOURCE_FOLDER_CHATBOT=DSL.DMapper-v2
+          git clone --depth=1   "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
+          cp -R "source-repo-chatbot/$SOURCE_FOLDER_CHATBOT/." "$FOLDER_PATH/backoffice"
+
+      - name: Clean Up Cloned Repositories
+        run: |
+          rm -rf source-repo-chatbot
+          rm -rf source-repo-analytics
+          rm -rf source-repo-service
+          rm -rf source-repo-training
+
+      - name: Check and Create Folder Structure and copy DSLs for Liquibase
+        run: |
+          FOLDER_PATH=Liquibase/
+          if [ ! -d "$FOLDER_PATH" ]; then
+            echo "Folder structure does not exist, creating..."
+            mkdir -p "$FOLDER_PATH"
+            touch "$FOLDER_PATH/README.md"
+          else
+            echo "Folder structure already exists."
+          fi
+
+          SUBFOLDERS=("analytics" "backoffice" "services" "training")
+          for folder in "${SUBFOLDERS[@]}"; do
+            SUBFOLDER_PATH="$FOLDER_PATH$folder"
+            if [ ! -d "$SUBFOLDER_PATH" ]; then
+              echo "Creating $folder folder..."
+              mkdir -p "$SUBFOLDER_PATH"
+              touch "$SUBFOLDER_PATH/README.md"
+            else
+              echo "$folder folder already exists."
+            fi
+          done
+
+          SOURCE_REPO_CHATBOT=buerokratt/Buerokratt-Chatbot
+          SOURCE_FOLDER_CHATBOT=DSL.Liquibase
+          git clone --depth=1   "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
+          cp -R "source-repo-chatbot/$SOURCE_FOLDER_CHATBOT/." "$FOLDER_PATH/backoffice"
+
+          SOURCE_REPO_ANALYTICS=buerokratt/Analytics-Module
+          SOURCE_FOLDER_ANALYTICS=DSL/Liquibase
+          git clone --depth=1 "https://github.com/$SOURCE_REPO_ANALYTICS.git" source-repo-analytics
+          cp -R "source-repo-analytics/$SOURCE_FOLDER_ANALYTICS/." "$FOLDER_PATH/analytics"
+
+          SOURCE_REPO_SERVICE=buerokratt/Service-Module
+          SOURCE_FOLDER_SERVICE=DSL/Liquibase
+          git clone --depth=1 "https://github.com/$SOURCE_REPO_SERVICE.git" source-repo-service
+          cp -R "source-repo-service/$SOURCE_FOLDER_SERVICE/." "$FOLDER_PATH/services"
+
+          SOURCE_REPO_TRAINING=buerokratt/Training-Module
+          SOURCE_FOLDER_TRAINING=DSL/Liquibase
+          git clone --depth=1  "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
+          cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING/." "$FOLDER_PATH/training"
+
+      - name: Clean Up Cloned Repositories
+        run: |
+          rm -rf source-repo-chatbot
+          rm -rf source-repo-analytics
+          rm -rf source-repo-service
+          rm -rf source-repo-training
+
+      - name: Check and Create Folder Structure and copy DSLs for Ruuter v1 private
+        run: |
+          FOLDER_PATH=Ruuter/private/v1/
+          if [ ! -d "$FOLDER_PATH" ]; then
+            echo "Folder structure does not exist, creating..."
+            mkdir -p "$FOLDER_PATH"
+            touch "$FOLDER_PATH/README.md"
+          else
+            echo "Folder structure already exists."
+          fi
+
+          SOURCE_REPO_CHATBOT=buerokratt/Buerokratt-Chatbot
+          SOURCE_FOLDER_CHATBOT=DSL.Ruuter-v1.private
+          git clone --depth=1   "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
+          cp -R "source-repo-chatbot/$SOURCE_FOLDER_CHATBOT/." "$FOLDER_PATH"
+
+      - name: Clean Up Cloned Repositories
+        run: |
+          rm -rf source-repo-chatbot
+
+      - name: Check and Create Folder Structure and copy DSLs for Ruuter v1 public
+        run: |
+          FOLDER_PATH=Ruuter/public/v1/
+          if [ ! -d "$FOLDER_PATH" ]; then
+            echo "Folder structure does not exist, creating..."
+            mkdir -p "$FOLDER_PATH"
+            touch "$FOLDER_PATH/README.md"
+          else
+            echo "Folder structure already exists."
+          fi
+
+          SOURCE_REPO_CHATBOT=buerokratt/Buerokratt-Chatbot
+          SOURCE_FOLDER_CHATBOT=DSL.Ruuter-v1.public
+          git clone --depth=1   "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
+          cp -R "source-repo-chatbot/$SOURCE_FOLDER_CHATBOT/." "$FOLDER_PATH"
+
+      - name: Clean Up Cloned Repositories
+        run: |
+          rm -rf source-repo-chatbot
+
+      - name: Clean Up Cloned Repositories
+        run: |
+          rm -rf source-repo-chatbot
+
+      - name: Check and Create Folder Structure and copy DSLs for OpenSearch
+        run: |
+          FOLDER_PATH=OpenSearch/
+          if [ ! -d "$FOLDER_PATH" ]; then
+            echo "Folder structure does not exist, creating..."
+            mkdir -p "$FOLDER_PATH"
+            touch "$FOLDER_PATH/README.md"
+          else
+            echo "Folder structure already exists."
+          fi
+
+          SUBFOLDERS=("services" "training")
+          for folder in "${SUBFOLDERS[@]}"; do
+            SUBFOLDER_PATH="$FOLDER_PATH$folder"
+            if [ ! -d "$SUBFOLDER_PATH" ]; then
+              echo "Creating $folder folder..."
+              mkdir -p "$SUBFOLDER_PATH"
+              touch "$SUBFOLDER_PATH/README.md"
+            else
+              echo "$folder folder already exists."
+            fi
+          done
+
+          SOURCE_REPO_SERVICE=buerokratt/Service-Module
+          SOURCE_FOLDER_SERVICE=DSL/OpenSearch
+          git clone --depth=1 "https://github.com/$SOURCE_REPO_SERVICE.git" source-repo-service
+          cp -R "source-repo-service/$SOURCE_FOLDER_SERVICE/." "$FOLDER_PATH/services"
+
+          SOURCE_REPO_TRAINING=buerokratt/Training-Module
+          SOURCE_FOLDER_TRAINING=DSL/OpenSearch
+          git clone --depth=1  "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
+          cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING/." "$FOLDER_PATH/training"
+
+      - name: Clean Up Cloned Repositories
+        run: |
+          rm -rf source-repo-service
+          rm -rf source-repo-training
+
+      - name: Check and Create Folder Structure and copy DSLs for Opensearch
+        run: |
+          FOLDER_PATH=Opensearch/
+          if [ ! -d "$FOLDER_PATH" ]; then
+            echo "Folder structure does not exist, creating..."
+            mkdir -p "$FOLDER_PATH"
+            touch "$FOLDER_PATH/README.md"
+          else
+            echo "Folder structure already exists."
+          fi
+
+          SUBFOLDERS=("services")
+          for folder in "${SUBFOLDERS[@]}"; do
+            SUBFOLDER_PATH="$FOLDER_PATH$folder"
+            if [ ! -d "$SUBFOLDER_PATH" ]; then
+              echo "Creating $folder folder..."
+              mkdir -p "$SUBFOLDER_PATH"
+              touch "$SUBFOLDER_PATH/README.md"
+            else
+              echo "$folder folder already exists."
+            fi
+          done
+
+          SOURCE_REPO_SERVICE=buerokratt/Service-Module
+          SOURCE_FOLDER_SERVICE=DSL/Opensearch
+          git clone --depth=1 "https://github.com/$SOURCE_REPO_SERVICE.git" source-repo-service
+          cp -R "source-repo-service/$SOURCE_FOLDER_SERVICE/." "$FOLDER_PATH/services"
+
+      - name: Clean Up Cloned Repositories
+        run: |
+          rm -rf source-repo-service
+
+      - name: Commit and Push Folder Structure with Copied Contents
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          git add Ruuter
+          git add Resql
+          git add DataMapper
+          git add Liquibase
+          git add OpenSearch
+          git add Opensearch
+          git diff-index --quiet HEAD || git commit -m "Copy contents and update folder structure using GitHub Actions"
+          git push
+
+      - name: Clean Up Cloned Repositories
+        run: |
+          rm -rf source-repo-chatbot
+          rm -rf source-repo-analytics
+          rm -rf source-repo-service
+          rm -rf source-repo-training
+
+      - uses: actions/checkout@v2
+
+      - name: Docker Setup BuildX
+        uses: docker/setup-buildx-action@v2
+
+      - name: Load environment variables and set them
+        run: |
+          if [ -f .env ]; then
+            export $(cat .env | grep -v '^#' | xargs)
+          fi
+          echo "RELEASE=$RELEASE" >> $GITHUB_ENV
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          echo "BUILD=$BUILD" >> $GITHUB_ENV
+          echo "FIX=$FIX" >> $GITHUB_ENV
+      - name: Set repo
+        run: |
+           LOWER_CASE_GITHUB_REPOSITORY=$(echo $GITHUB_REPOSITORY | tr '[:upper:]' '[:lower:]')
+           echo "DOCKER_TAG_CUSTOM=ghcr.io/${LOWER_CASE_GITHUB_REPOSITORY}:$RELEASE-$VERSION.$BUILD.$FIX" >> $GITHUB_ENV
+           echo "$GITHUB_ENV"
+      - name: Docker Build
+        run: | 
+           docker image build --tag $DOCKER_TAG_CUSTOM .
+
+      - name: Log in to GitHub container registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
+
+      - name: Push Docker image to ghcr
+ #       run: docker push $DOCKER_TAG_CUSTOM
