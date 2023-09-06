@@ -1,18 +1,31 @@
-FROM alpine:3.18.3
+# Use the official Python 3.8 image as the base
+FROM python:3.8
 
-# Create folder structure
-RUN mkdir -p /Ruuter/private/v2/backoffice
-RUN mkdir -p /Ruuter/private/v2/analytics
-RUN mkdir -p /Ruuter/private/v2/backoffice
-RUN mkdir -p /Ruuter/private/v2/services
-RUN mkdir -p /Ruuter/private/v2/training
+# Install Flask
+RUN pip install Flask
 
+# Create the application directory
+WORKDIR /app
 
-# Copy files
-COPY Ruuter/private/v2/backoffice /Ruuter/private/v2/backoffice
-COPY Ruuter/private/v2/analytics /Ruuter/private/v2/analytics
-COPY Ruuter/private/v2/backoffice /Ruuter/private/v2/backoffice
-COPY Ruuter/private/v2/services /Ruuter/private/v2/services
-COPY Ruuter/private/v2/training /Ruuter/private/v2/training
+# Copy the Python script and other files
+COPY run.py .
 
-CMD ["sh", "-c", "echo 'Enjoy the Ruuter' && wait"]
+# Define the directory structure
+ENV APP_DIRS="/Ruuter/private/v2 /Ruuter/public/v2 Ruuter/private/v1 /Ruuter/public/v1 /Resql /DataMapper /Liquibase /OpenSearch /Opensearch"
+RUN mkdir -p $APP_DIRS
+RUN mkdir -p $APP_DIRS/backoffice $APP_DIRS/analytics $APP_DIRS/services $APP_DIRS/training
+
+# Copy files for each directory
+COPY Ruuter/private/v2 /Ruuter/private/v2
+COPY Ruuter/public/v2 /Ruuter/public/v2
+COPY Ruuter/private/v1 /Ruuter/private/v1
+COPY Ruuter/public/v1 /Ruuter/public/v1
+COPY Resql /Resql
+COPY Dmapper/v1 /Dmapper/v1
+COPY Dmapper/v2 /Dmapper/v2
+COPY Liquibase /Liquibase
+COPY OpenSearch /OpenSearch
+COPY Openserch /Opensearch
+
+# Set the main command to run your application
+CMD ["python", "run.py"]
