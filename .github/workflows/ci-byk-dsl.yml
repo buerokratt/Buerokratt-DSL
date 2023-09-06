@@ -3,7 +3,7 @@ name: Buerokratt DSL
 on:
   push:
     branches:
-      - dev # Adjust the branch name if needed
+      - test # Adjust the branch name if needed
     paths:
       - '.env' #this trigger is for testing purposes only
 
