@@ -373,9 +373,9 @@ jobs:
           rm -rf source-repo-service
           rm -rf source-repo-training
 
-      - name: Check and Create Folder Structure and copy DSLs for Opensearch
+      - name: Check and Create Folder Structure and copy DSLs for OpenSearch 2
         run: |
-          FOLDER_PATH=Opensearch/
+          FOLDER_PATH=OpenSearch2/
           if [ ! -d "$FOLDER_PATH" ]; then
             echo "Folder structure does not exist, creating..."
             mkdir -p "$FOLDER_PATH"
@@ -414,23 +414,21 @@ jobs:
           git add DataMapper
           git add Liquibase
           git add OpenSearch
-          git add Opensearch
+          git add OpenSearch2
           git diff-index --quiet HEAD || git commit -m "Copy contents and update folder structure using GitHub Actions"
           git push
 
-      - name: Clean Up Cloned Repositories
-        run: |
-          rm -rf source-repo-chatbot
-          rm -rf source-repo-analytics
-          rm -rf source-repo-service
-          rm -rf source-repo-training
+             
+  build:
+     needs: setup_directories
+     runs-on: ubuntu-22.04
 
-      - uses: actions/checkout@v2
+     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-      - name: Docker Setup BuildX
-        uses: docker/setup-buildx-action@v2
-
-      - name: Load environment variables and set them
+          
+      - name: Load Environment Variables
         run: |
           if [ -f .env ]; then
             export $(cat .env | grep -v '^#' | xargs)
@@ -439,16 +437,19 @@ jobs:
           echo "VERSION=$VERSION" >> $GITHUB_ENV
           echo "BUILD=$BUILD" >> $GITHUB_ENV
           echo "FIX=$FIX" >> $GITHUB_ENV
-      - name: Set repo
+
+      - name: Set Docker Tag
         run: |
-           LOWER_CASE_GITHUB_REPOSITORY=$(echo $GITHUB_REPOSITORY | tr '[:upper:]' '[:lower:]')
-           echo "DOCKER_TAG_CUSTOM=ghcr.io/${LOWER_CASE_GITHUB_REPOSITORY}:$RELEASE-$VERSION.$BUILD.$FIX" >> $GITHUB_ENV
-           echo "$GITHUB_ENV"
+          LOWER_CASE_GITHUB_REPOSITORY=$(echo $GITHUB_REPOSITORY | tr '[:upper:]' '[:lower:]')
+          echo "DOCKER_TAG_CUSTOM=ghcr.io/${LOWER_CASE_GITHUB_REPOSITORY}:$RELEASE-$VERSION.$BUILD.$FIX" >> $GITHUB_ENV
+          echo "$GITHUB_ENV"
+
       - name: Docker Build
         run: | 
            docker image build --tag $DOCKER_TAG_CUSTOM .
 
-      - name: Log in to GitHub container registry
+
+      - name: Log in to GitHub Container Registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
 
       - name: Push Docker image to ghcr
