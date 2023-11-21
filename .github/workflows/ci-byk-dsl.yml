@@ -206,40 +206,40 @@ jobs:
           rm -rf source-repo-service
           rm -rf source-repo-training
 
-#      - name: Check and Create Folder Structure and copy DSLs for DATAMAPPER v2
-#        run: |
-#          FOLDER_PATH=DataMapper/v2/
-#          if [ ! -d "$FOLDER_PATH" ]; then
-#            echo "Folder structure does not exist, creating..."
-#            mkdir -p "$FOLDER_PATH"
-#            touch "$FOLDER_PATH/readme.yml"
-#          else
-#            echo "Folder structure already exists."
-#          fi
+      - name: Check and Create Folder Structure and copy DSLs for DATAMAPPER v2
+        run: |
+          FOLDER_PATH=DataMapper/v2/
+          if [ ! -d "$FOLDER_PATH" ]; then
+            echo "Folder structure does not exist, creating..."
+            mkdir -p "$FOLDER_PATH"
+            touch "$FOLDER_PATH/readme.yml"
+          else
+            echo "Folder structure already exists."
+          fi
 
- #         SUBFOLDERS=("backoffice")
- #         for folder in "${SUBFOLDERS[@]}"; do
- #           SUBFOLDER_PATH="$FOLDER_PATH$folder"
- #           if [ ! -d "$SUBFOLDER_PATH" ]; then
- #             echo "Creating $folder folder..."
- #             mkdir -p "$SUBFOLDER_PATH"
- #             touch "$SUBFOLDER_PATH/readme.yml"
- #           else
- #             echo "$folder folder already exists."
- #           fi
-  #        done
+          SUBFOLDERS=("backoffice")
+          for folder in "${SUBFOLDERS[@]}"; do
+            SUBFOLDER_PATH="$FOLDER_PATH$folder"
+            if [ ! -d "$SUBFOLDER_PATH" ]; then
+              echo "Creating $folder folder..."
+              mkdir -p "$SUBFOLDER_PATH"
+              touch "$SUBFOLDER_PATH/readme.yml"
+            else
+              echo "$folder folder already exists."
+            fi
+          done
 
-   #       SOURCE_REPO_CHATBOT=buerokratt/Buerokratt-Chatbot
-   #       SOURCE_FOLDER_CHATBOT=DSL.DMapper-v2
-   #       git clone --depth=1 --branch=dev   "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
-   #       cp -R "source-repo-chatbot/$SOURCE_FOLDER_CHATBOT/." "$FOLDER_PATH"
+          SOURCE_REPO_CHATBOT=buerokratt/Buerokratt-Chatbot
+          SOURCE_FOLDER_CHATBOT=DSL.DMapper-v2
+          git clone --depth=1 --branch=dev   "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
+          cp -R "source-repo-chatbot/$SOURCE_FOLDER_CHATBOT/." "$FOLDER_PATH"
 
-    #  - name: Clean Up Cloned Repositories
-    #    run: |
-    #      rm -rf source-repo-chatbot
-    #      rm -rf source-repo-analytics
-    #      rm -rf source-repo-service
-    #      rm -rf source-repo-training
+      - name: Clean Up Cloned Repositories
+        run: |
+          rm -rf source-repo-chatbot
+          rm -rf source-repo-analytics
+          rm -rf source-repo-service
+          rm -rf source-repo-training
 
       - name: Check and Create Folder Structure and copy DSLs for Liquibase
         run: |
