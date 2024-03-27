@@ -268,46 +268,49 @@ jobs:
         run: |
           FOLDER_PATH=OpenSearch/
           if [ ! -d "$FOLDER_PATH" ]; then
-            echo "Folder structure does not exist, creating..."
-            mkdir -p "$FOLDER_PATH"
-            touch "$FOLDER_PATH/readme.yml"
-          else
-            echo "Folder structure already exists."
-          fi
-
-          SUBFOLDERS=("services" "training" "backoffice")
-          for folder in "${SUBFOLDERS[@]}"; do
-            SUBFOLDER_PATH="$FOLDER_PATH$folder"
-            if [ ! -d "$SUBFOLDER_PATH" ]; then
-              echo "Creating $folder folder..."
-              mkdir -p "$SUBFOLDER_PATH"
-              touch "$SUBFOLDER_PATH/readme.yml"
+          echo "Folder structure does not exist, creating..."
+          mkdir -p "$FOLDER_PATH"
+          touch "$FOLDER_PATH/readme.yml"
             else
-              echo "$folder folder already exists."
+          echo "Folder structure already exists."
             fi
-          done
 
-          SOURCE_REPO_SERVICE=buerokratt/Service-Module
-          SOURCE_FOLDER_SERVICE=DSL/OpenSearch
-          git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_SERVICE.git" source-repo-service
-          cp -R "source-repo-service/$SOURCE_FOLDER_SERVICE/." "$FOLDER_PATH/services"
+        SUBFOLDERS=("services" "training" "backoffice")
+        for folder in "${SUBFOLDERS[@]}"; do
+          SUBFOLDER_PATH="$FOLDER_PATH$folder"
+          if [ ! -d "$SUBFOLDER_PATH" ]; then
+            echo "Creating $folder folder..."
+            mkdir -p "$SUBFOLDER_PATH"
+            touch "$SUBFOLDER_PATH/readme.yml"
+          else
+            echo "$folder folder already exists."
+          fi
+        done
 
-          SOURCE_REPO_TRAINING=buerokratt/Training-Module
-          SOURCE_FOLDER_TRAINING=DSL/OpenSearch
-          git clone --depth=1 --branch=dev  "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
-          cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING/." "$FOLDER_PATH/training"
+        # Clone and copy for services
+        SOURCE_REPO_SERVICE=buerokratt/Service-Module
+        SOURCE_FOLDER_SERVICE=DSL/OpenSearch/services
+        git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_SERVICE.git" source-repo-service
+        cp -R "source-repo-service/$SOURCE_FOLDER_SERVICE/." "$FOLDER_PATH/services"
 
-          SOURCE_REPO_CHATBOT=buerokratt/Buerokratt-Chatbot
-          SOURCE_FOLDER_CHATBOT=DSL/OpenSearch
-          git clone --depth=1 --branch=dev  "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
-          cp -R "source-repo-training/$SOURCE_FOLDER_CHATBOT/." "$FOLDER_PATH/backoffice"
+        # Clone and copy for training
+        SOURCE_REPO_TRAINING=buerokratt/Training-Module
+        SOURCE_FOLDER_TRAINING=DSL/OpenSearch/training
+        git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
+        cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING/." "$FOLDER_PATH/training"
 
+        # Clone and copy for backoffice
+        SOURCE_REPO_CHATBOT=buerokratt/Buerokratt-Chatbot
+        SOURCE_FOLDER_CHATBOT=DSL/OpenSearch/backoffice
+        git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
+        cp -R "source-repo-chatbot/$SOURCE_FOLDER_CHATBOT/." "$FOLDER_PATH/backoffice"
 
       - name: Clean Up Cloned Repositories
         run: |
           rm -rf source-repo-service
           rm -rf source-repo-training
           rm -rf source-repo-chatbot
+
 
 
       - name: Commit and Push Folder Structure with Copied Contents
