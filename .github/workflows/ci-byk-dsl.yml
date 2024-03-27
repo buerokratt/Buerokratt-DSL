@@ -266,7 +266,7 @@ jobs:
 
       - name: Check and Create Folder Structure and copy DSLs for OpenSearch
         run: |
-          FOLDER_PATH=OpenSearch/
+          FOLDER_PATH=OpenSearch
           if [ ! -d "$FOLDER_PATH" ]; then
           echo "Folder structure does not exist, creating..."
           mkdir -p "$FOLDER_PATH"
