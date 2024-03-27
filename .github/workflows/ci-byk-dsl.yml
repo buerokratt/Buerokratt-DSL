@@ -299,7 +299,7 @@ jobs:
 
           SOURCE_REPO_CHATBOT=buerokratt/Buerokratt-Chatbot
           SOURCE_FOLDER_CHATBOT=DSL/OpenSearch
-          git clone --depth=1 --branch=dev  "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-training
+          git clone --depth=1 --branch=dev  "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
           cp -R "source-repo-training/$SOURCE_FOLDER_CHATBOT/." "$FOLDER_PATH/backoffice"
 
 
