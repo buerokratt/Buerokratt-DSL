@@ -307,7 +307,7 @@ jobs:
         run: |
           rm -rf source-repo-service
           rm -rf source-repo-training
-          rm -rf source-repo-training
+          rm -rf source-repo-chatbot
       - name: Clean Up Cloned Repositories
 
 
@@ -324,7 +324,6 @@ jobs:
           git push
 
              
-
   build:
      needs: setup_directories
      runs-on: ubuntu-22.04
