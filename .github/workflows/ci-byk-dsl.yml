@@ -308,7 +308,6 @@ jobs:
           rm -rf source-repo-service
           rm -rf source-repo-training
           rm -rf source-repo-chatbot
-      - name: Clean Up Cloned Repositories
 
 
       - name: Commit and Push Folder Structure with Copied Contents
