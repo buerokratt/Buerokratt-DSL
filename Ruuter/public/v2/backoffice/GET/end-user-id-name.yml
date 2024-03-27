@@ -43,7 +43,7 @@ assignChatId:
 insertIdAndName:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/backoffice/update-chat-with-end-user-id-and-name"
+    url: "[#CHATBOT_RESQL]/update-chat-with-end-user-id-and-name"
     body:
       chatId: ${chatId}
       endUserId: "${id ? id : ''}"
@@ -55,7 +55,7 @@ insertIdAndName:
 getUuid:
   call: http.post
   args:
-    url: "[#CHATBOT_DMAPPER]/backoffice/hbs/return_uuid"
+    url: "[#CHATBOT_DMAPPER]/hbs/chat-bot/return_uuid"
     headers:
       type: json
   result: uuid_result
@@ -69,7 +69,7 @@ assignUuid:
 insertMessage:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/backoffice/insert-message"
+    url: "[#CHATBOT_RESQL]/insert-message"
     body:
       chatId: ${chatId}
       messageId: ${uuid}

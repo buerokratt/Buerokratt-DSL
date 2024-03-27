@@ -1,7 +1,7 @@
 getOrganizationWorkingTime:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/backoffice/get-organization-working-time"
+    url: "[#CHATBOT_RESQL]/get-organization-working-time"
   result: res
 
 validateOrganizationWorkingTimeExists:
@@ -13,7 +13,7 @@ validateOrganizationWorkingTimeExists:
 mapWorkingTimeData:
   call: http.post
   args:
-    url: "[#CHATBOT_DMAPPER]/backoffice/hbs/return_organization_working_time"
+    url: "[#CHATBOT_DMAPPER]/hbs/chat-bot/return_organization_working_time"
     headers:
       type: json
     body:

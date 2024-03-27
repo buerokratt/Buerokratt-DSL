@@ -36,7 +36,7 @@ assignChatId:
 getActiveChatById:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/backoffice/get-active-chat-by-id"
+    url: "[#CHATBOT_RESQL]/get-active-chat-by-id"
     body:
       id: ${chatId}
   result: activeChatRes
@@ -51,7 +51,7 @@ checkActiveChatResult:
 getUuid:
   call: http.post
   args:
-    url: "[#CHATBOT_DMAPPER]/backoffice/hbs/return_uuid"
+    url: "[#CHATBOT_DMAPPER]/hbs/chat-bot/return_uuid"
     headers:
       type: json
   result: uuid_result
@@ -65,7 +65,7 @@ assignUuid:
 insertMessage:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/backoffice/insert-message"
+    url: "[#CHATBOT_RESQL]/insert-message"
     body:
       chatId: ${chatId}
       messageId: ${uuid}
@@ -93,7 +93,7 @@ check_skip_bot:
 postMessageToBot:
   call: http.post
   args:
-    url: "[#CHATBOT_RUUTER_PUBLIC]/backoffice/message-to-bot"
+    url: "[#CHATBOT_RUUTER_PUBLIC]/message-to-bot"
     body:
       chatId: ${chatId}
       content: ${content}

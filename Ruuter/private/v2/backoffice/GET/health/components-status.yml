@@ -7,7 +7,7 @@ getTimHealth:
 # getDataMapperHealth:
 #   call: http.post
 #   args:
-#     url: "[#CHATBOT_DMAPPER]/backoffice/healthz"
+#     url: "[#CHATBOT_DMAPPER]/healthz"
 #   result: data_mapper_res  
 
 # getPublicRuuterHealth:
@@ -25,13 +25,13 @@ getTimHealth:
 getResqlHealth:
   call: http.get
   args:
-    url: "[#CHATBOT_RESQL]/backoffice/healthz"
+    url: "[#CHATBOT_RESQL]/healthz"
   result: resql_res
 
 # formatHealthResponse:
 #   call: http.post
 #   args:
-#     url: "[#CHATBOT_DMAPPER]/backoffice/hbs/return_components_health"
+#     url: "[#CHATBOT_DMAPPER]/hbs/chat-bot/return_components_health"
 #     headers:
 #       type: json
 #     body:

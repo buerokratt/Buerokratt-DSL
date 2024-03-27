@@ -18,7 +18,7 @@ extractRequestData:
 getChatUuid:
   call: http.post
   args:
-    url: "[#CHATBOT_DMAPPER]/backoffice/hbs/return_uuid"
+    url: "[#CHATBOT_DMAPPER]/hbs/chat-bot/return_uuid"
     headers:
       type: json
   result: chat_uuid_result
@@ -32,7 +32,7 @@ assignChatUuid:
 getMessageUuid:
   call: http.post
   args:
-    url: "[#CHATBOT_DMAPPER]/backoffice/hbs/return_uuid"
+    url: "[#CHATBOT_DMAPPER]/hbs/chat-bot/return_uuid"
     headers:
       type: json
   result: message_uuid_result
@@ -46,7 +46,7 @@ assignMessageUuid:
 get_session_length:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/backoffice/get-configuration"
+    url: "[#CHATBOT_RESQL]/get-configuration"
     body:
       key: "session_length"
   result: session_result
@@ -78,7 +78,7 @@ assign_cookie:
 postGreetingMessage:
   call: http.post
   args:
-    url: "[#CHATBOT_RUUTER_PUBLIC]/backoffice/greeting-to-chat"
+    url: "[#CHATBOT_RUUTER_PUBLIC]/greeting-to-chat"
     body:
       chatId: ${chatUuid}
       authorTimestamp: ${authorTimestamp}
@@ -88,7 +88,7 @@ postGreetingMessage:
 postClientMessage:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/backoffice/insert-message"
+    url: "[#CHATBOT_RESQL]/insert-message"
     body:
       chatId: ${chatUuid}
       messageId: ${messageUuid}
@@ -110,7 +110,7 @@ postClientMessage:
 insertChat:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/backoffice/init-chat"
+    url: "[#CHATBOT_RESQL]/init-chat"
     body:
       id: ${chatUuid}
       endUserId: ${endUserId}
@@ -137,7 +137,7 @@ insertChat:
 postMessageToBot:
   call: http.post
   args:
-    url: "[#CHATBOT_RUUTER_PUBLIC]/backoffice/message-to-bot"
+    url: "[#CHATBOT_RUUTER_PUBLIC]/message-to-bot"
     body:
       chatId: ${chatUuid}
       content: ${content}
@@ -149,7 +149,7 @@ postMessageToBot:
 getChat:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/backoffice/get-chat-by-id"
+    url: "[#CHATBOT_RESQL]/get-chat-by-id"
     body:
       id: ${chatUuid}
   result: chat_result

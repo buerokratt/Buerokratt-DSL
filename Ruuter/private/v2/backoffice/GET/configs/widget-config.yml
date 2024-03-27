@@ -1,7 +1,7 @@
 getWidgetConfig:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/backoffice/get-widget-config"
+    url: "[#CHATBOT_RESQL]/get-widget-config"
   result: res
   next: validate_response
 
@@ -14,7 +14,7 @@ validate_response:
 mapWidgetConfigData:
   call: http.post
   args:
-    url: "[#CHATBOT_DMAPPER]/backoffice/hbs/return_widget_config"
+    url: "[#CHATBOT_DMAPPER]/hbs/chat-bot/return_widget_config"
     headers:
       type: json
     body:

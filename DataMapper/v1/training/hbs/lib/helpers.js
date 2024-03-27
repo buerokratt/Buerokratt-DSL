@@ -8,6 +8,10 @@ Handlebars.registerHelper('eq', function(a, b) {
     return a == b;
 });
 
+Handlebars.registerHelper('jsonParse', function(obj) {
+    return JSON.parse(obj);
+});
+
 Handlebars.registerHelper('arrayIsNotEmpty', function(array) {
     return !(!Array.isArray(array) || !array.length);
 });
@@ -60,6 +64,12 @@ Handlebars.registerHelper('sortEntities', function (entities) {
 Handlebars.registerHelper('isInModel', function(intentTitle, intents) {
     const inModelIntents = intents?.inmodel;
     return Array.isArray(inModelIntents) ? inModelIntents.includes(intentTitle) : false;
+});
+
+Handlebars.registerHelper('findConnectedServiceId', function(intentTitle, intents) {
+  const name = intentTitle.replace('_', ' ');
+  const service = intents?.connections.find(x => x.intent === name);
+  return service?.service ?? "";
 });
 
 Handlebars.registerHelper('getCount', function(intentTitle, intents) {
