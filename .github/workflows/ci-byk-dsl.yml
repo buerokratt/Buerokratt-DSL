@@ -161,7 +161,7 @@ jobs:
           rm -rf source-repo-service
           rm -rf source-repo-training
 
-      - name: Check and Create Folder Structure and copy DSLs for DATAMAPPER v1
+      - name: Check and Create Folder Structure and copy DSLs for DATAMAPPER
         run: |
           FOLDER_PATH=DataMapper/v1/
           if [ ! -d "$FOLDER_PATH" ]; then
@@ -275,7 +275,7 @@ jobs:
             echo "Folder structure already exists."
           fi
 
-          SUBFOLDERS=("services" "training")
+          SUBFOLDERS=("services" "training" "backoffice")
           for folder in "${SUBFOLDERS[@]}"; do
             SUBFOLDER_PATH="$FOLDER_PATH$folder"
             if [ ! -d "$SUBFOLDER_PATH" ]; then
@@ -297,38 +297,16 @@ jobs:
           git clone --depth=1 --branch=dev  "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
           cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING/." "$FOLDER_PATH/training"
 
+          SOURCE_REPO_CHATBOT=buerokratt/Buerokratt-Chatbot
+          SOURCE_FOLDER_CHATBOT=DSL/OpenSearch
+          git clone --depth=1 --branch=dev  "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-training
+          cp -R "source-repo-training/$SOURCE_FOLDER_CHATBOT/." "$FOLDER_PATH/backoffice"
+
+
       - name: Clean Up Cloned Repositories
         run: |
           rm -rf source-repo-service
           rm -rf source-repo-training
-
-      - name: Check and Create Folder Structure and copy DSLs for OpenSearch 2
-        run: |
-          FOLDER_PATH=OpenSearch2/
-          if [ ! -d "$FOLDER_PATH" ]; then
-            echo "Folder structure does not exist, creating..."
-            mkdir -p "$FOLDER_PATH"
-            touch "$FOLDER_PATH/readme.yml"
-          else
-            echo "Folder structure already exists."
-          fi
-
-          SUBFOLDERS=("services")
-          for folder in "${SUBFOLDERS[@]}"; do
-            SUBFOLDER_PATH="$FOLDER_PATH$folder"
-            if [ ! -d "$SUBFOLDER_PATH" ]; then
-              echo "Creating $folder folder..."
-              mkdir -p "$SUBFOLDER_PATH"
-              touch "$SUBFOLDER_PATH/readme.yml"
-            else
-              echo "$folder folder already exists."
-            fi
-          done
-
-          SOURCE_REPO_SERVICE=buerokratt/Service-Module
-          SOURCE_FOLDER_SERVICE=DSL/Opensearch
-          git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_SERVICE.git" source-repo-service
-          cp -R "source-repo-service/$SOURCE_FOLDER_SERVICE/." "$FOLDER_PATH/services"
 
       - name: Clean Up Cloned Repositories
         run: |
