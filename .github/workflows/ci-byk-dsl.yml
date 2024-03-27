@@ -295,7 +295,7 @@ jobs:
           ls -la "source-repo-service/$SOURCE_FOLDER_SERVICE/"
               # Check if the source directory exists before copying
           if [ -d "source-repo-service/$SOURCE_FOLDER_SERVICE/" ]; then
-          cp -R "source-repo-service/$SOURCE_FOLDER_SERVICE." "$FOLDER_PATH/services"
+          cp -R "source-repo-service/$SOURCE_FOLDER_SERVICE/." "$FOLDER_PATH/services"
           else
           echo "Source directory does not exist or is empty: source-repo-service/$SOURCE_FOLDER_SERVICE/"
           fi
