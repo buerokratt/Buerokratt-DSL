@@ -290,8 +290,19 @@ jobs:
           # Clone and copy for services
           SOURCE_REPO_SERVICE=buerokratt/Service-Module
           SOURCE_FOLDER_SERVICE=DSL/OpenSearch
-          git clone "https://github.com/$SOURCE_REPO_SERVICE.git" source-repo-service
+          git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_SERVICE.git" source-repo-service
+          echo "Contents of source directory: source-repo-service/$SOURCE_FOLDER_SERVICE"
+          ls -la "source-repo-service/$SOURCE_FOLDER_SERVICE/"
+              # Check if the source directory exists before copying
+          if [ -d "source-repo-service/$SOURCE_FOLDER_SERVICE/" ]; then
           cp -R "source-repo-service/$SOURCE_FOLDER_SERVICE/." "$FOLDER_PATH/services"
+          else
+          echo "Source directory does not exist or is empty: source-repo-service/$SOURCE_FOLDER_SERVICE/"
+          fi
+
+    # Debug information after copying
+    echo "Contents of destination directory: $FOLDER_PATH/services"
+    ls -la "$FOLDER_PATH/services/"
 
           # Clone and copy for training
           SOURCE_REPO_TRAINING=buerokratt/Training-Module
@@ -305,7 +316,11 @@ jobs:
           git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
           cp -R "source-repo-chatbot/$SOURCE_FOLDER_CHATBOT/." "$FOLDER_PATH/backoffice"
 
-
+      - name: Clean Up Cloned Repositories
+        run: |
+          rm -rf source-repo-service
+          rm -rf source-repo-training
+          rm -rf source-repo-chatbot
 
 
 
@@ -322,40 +337,3 @@ jobs:
           git push
 
              
-  build:
-     needs: setup_directories
-     runs-on: ubuntu-22.04
-
-     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-          
-      - name: Load Environment Variables
-        run: |
-          if [ -f .env ]; then
-            export $(cat .env | grep -v '^#' | xargs)
-          fi
-          echo "RELEASE=$RELEASE" >> $GITHUB_ENV
-          echo "VERSION=$VERSION" >> $GITHUB_ENV
-          echo "BUILD=$BUILD" >> $GITHUB_ENV
-          echo "FIX=$FIX" >> $GITHUB_ENV
-
-      - name: Set Docker Tag
-        run: |
-          LOWER_CASE_GITHUB_REPOSITORY=$(echo $GITHUB_REPOSITORY | tr '[:upper:]' '[:lower:]')
-          echo "DOCKER_TAG_CUSTOM=ghcr.io/${LOWER_CASE_GITHUB_REPOSITORY}:$RELEASE-$VERSION.$BUILD.$FIX" >> $GITHUB_ENV
-          echo "$GITHUB_ENV"
-      - name: Remove README.md files
-        run: |
-          find . -name "README.md" -type f -delete
-      - name: Docker Build
-        run: | 
-           docker image build --no-cache --tag $DOCKER_TAG_CUSTOM .
-
-
-      - name: Log in to GitHub Container Registry
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
-
-      - name: Push Docker image to ghcr
-        run: docker push $DOCKER_TAG_CUSTOM
