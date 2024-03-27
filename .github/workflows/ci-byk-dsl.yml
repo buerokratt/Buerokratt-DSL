@@ -291,7 +291,7 @@ jobs:
           SOURCE_REPO_SERVICE=buerokratt/Service-Module
           SOURCE_FOLDER_SERVICE=DSL/OpenSearch
           git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_SERVICE.git" source-repo-service
-          cp -R "source-repo-service/$SOURCE_FOLDER_SERVICE/." "$FOLDER_PATH/services"
+          cp -R "buerokratt/Service-Module/$SOURCE_FOLDER_SERVICE/." "$FOLDER_PATH/services"
 
           # Clone and copy for training
           SOURCE_REPO_TRAINING=buerokratt/Training-Module
