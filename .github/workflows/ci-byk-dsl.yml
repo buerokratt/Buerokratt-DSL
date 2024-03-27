@@ -307,10 +307,9 @@ jobs:
         run: |
           rm -rf source-repo-service
           rm -rf source-repo-training
-
+          rm -rf source-repo-training
       - name: Clean Up Cloned Repositories
-        run: |
-          rm -rf source-repo-service
+
 
       - name: Commit and Push Folder Structure with Copied Contents
         run: |

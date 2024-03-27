@@ -28,7 +28,6 @@ COPY Resql /Resql
 COPY DataMapper /DataMapper
 COPY Liquibase /Liquibase
 COPY OpenSearch /OpenSearch
-COPY OpenSearch2 /OpenSearch2
 COPY bot /bot
 
 LABEL org.opencontainers.image.description Docker PRE-ALPHA image for Buerokratt-DSL
