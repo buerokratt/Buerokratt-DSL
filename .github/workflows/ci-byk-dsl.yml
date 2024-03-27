@@ -332,7 +332,7 @@ jobs:
           git push
 
           
-    build:
+  build:
      needs: setup_directories
      runs-on: ubuntu-22.04
 
