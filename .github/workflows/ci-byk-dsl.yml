@@ -300,9 +300,8 @@ jobs:
           echo "Source directory does not exist or is empty: source-repo-service/$SOURCE_FOLDER_SERVICE/"
           fi
 
-    # Debug information after copying
-    echo "Contents of destination directory: $FOLDER_PATH/services"
-    ls -la "$FOLDER_PATH/services/"
+          echo "Contents of destination directory: $FOLDER_PATH/services"
+          ls -la "$FOLDER_PATH/services/"
 
           # Clone and copy for training
           SOURCE_REPO_TRAINING=buerokratt/Training-Module
