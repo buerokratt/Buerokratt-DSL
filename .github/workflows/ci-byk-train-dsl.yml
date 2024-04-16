@@ -185,5 +185,5 @@ jobs:
           git config --local user.name "GitHub Actions"
           git add -A .
           git commit --amend --no-edit
-          git pull origin dev-tmp --rebase
+          git pull origin dev-tmp-train --rebase
           git push
