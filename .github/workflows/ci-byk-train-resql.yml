@@ -42,8 +42,8 @@ jobs:
 
           SOURCE_REPO_TRAINING=buerokratt/Training-Module
           SOURCE_FOLDER_TRAINING=DSL/Resql/training
-          SOURCE_FOLDER_TRAINING_SERVICE=DSL/Resql/service
-          SOURCE_FOLDER_TRAINING_USERS=DSL/Resql/service
+          SOURCE_FOLDER_TRAINING_SERVICE=DSL/Resql/services
+          SOURCE_FOLDER_TRAINING_USERS=DSL/Resql/users
           git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
           cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING/." "$FOLDER_PATH/training/POST"
           cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING_SERVICE/." "$FOLDER_PATH/training/POST"
