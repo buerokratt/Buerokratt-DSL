@@ -106,7 +106,7 @@ jobs:
             fi
           done
 
-          SOURCE_REPO_TRAINING=buerokratt/Training-Module
+          SOURCE_REPO_TRAINING=varmoh/Training-Module
           SOURCE_FOLDER_TRAINING=DSL/DataMapper
           git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
           cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING/." "$FOLDER_PATH/training/hbs"
