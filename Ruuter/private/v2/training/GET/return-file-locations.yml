@@ -1,14 +1,14 @@
 assign_step:
   assign:
     locations:
-      rules_location: '/locations/data/rules.yml'
-      stories_location: '/locations/data/stories.yml'
-      domain_location: '/locations/domain.yml'
-      test_stories_location: '/locations/tests/test_stories.yml'
-      intents_location: '/locations/data/nlu/'
-      regex_location: '/locations/data/regex/'
-      training_result_location: '/locations/results'
-      config_location: '/locations/config.yml'
+      rules_location: '/workspace/app/locations/data/rules.yml'
+      stories_location: '/workspace/app/locations/data/stories.yml'
+      domain_location: '/workspace/app/locations/domain.yml'
+      test_stories_location: '/workspace/app/locations/tests/test_stories.yml'
+      intents_location: '/workspace/app/locations/data/nlu/'
+      regex_location: '/workspace/app/locations/data/regex/'
+      training_result_location: '/workspace/app/locations/results'
+      config_location: '/workspace/app/locations/config.yml'
       docker_location: '/docker-bot/docker-compose-bot.yml'
 return_value:
   return: ${locations}
