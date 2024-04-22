@@ -347,5 +347,5 @@ jobs:
           git config --local user.name "GitHub Actions"
           git pull origin dev-tmp --no-ff --allow-unrelated-histories
           git add -A .
-          git commit --amend --no-edit
-          git push
+          git commit -m Update
+          git push 
