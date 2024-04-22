@@ -347,5 +347,5 @@ jobs:
           git config --local user.name "GitHub Actions"
           git pull origin dev-tmp --no-ff --allow-unrelated-histories
           git add -A .
-          git commit -m Update --allow-empty
+          git commit --allow-empty -m Update 
           git push 
