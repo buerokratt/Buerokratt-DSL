@@ -348,4 +348,4 @@ jobs:
           git pull origin dev-tmp --no-ff --allow-unrelated-histories
           git add -A .
           git commit --amend --no-edit
-          git push -f
+          git push
