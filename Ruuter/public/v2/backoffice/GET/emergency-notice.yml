@@ -2,11 +2,12 @@ getEmergencyNotice:
   call: http.post
   args:
     url: "[#CHATBOT_RESQL]/backoffice/get-emergency-notice"
-  result: getEmergencyNoticeResult
+  result: res
+  next: validate_res
 
-validateEmergencyNoticeExists:
+validate_res:
   switch:
-    - condition: "${getEmergencyNoticeResult.response.body.length > 0}"
+    - condition: "${res.response.body.length > 0}"
       next: mapEmergencyNoticeData
   next: return_not_found
 
@@ -17,8 +18,9 @@ mapEmergencyNoticeData:
     headers:
       type: json
     body:
-      configurationArray: ${getEmergencyNoticeResult.response.body}
+      configurationArray: ${res.response.body}
   result: formattedData
+  next: return_result
 
 return_result:
   return: ${formattedData.response.body}
@@ -26,3 +28,4 @@ return_result:
 
 return_not_found:
   return: "error: not found"
+  next: end
