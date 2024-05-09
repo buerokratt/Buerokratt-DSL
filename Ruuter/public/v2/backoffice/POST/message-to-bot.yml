@@ -75,7 +75,7 @@ check_for_post_message_to_client_result:
 
 check_if_bot_is_unable_to_reply:
   switch:
-    - condition: ${post_message_to_client_result.response.body[0].text == 'UNKNOWN'}
+    - condition: ${post_message_to_client_result.response.body[0].text == 'Suunan teid klienditeenindajale. Varuge natukene kannatust.'}
       next: get_organization_working_details
   next: extract_bot_responses
 
