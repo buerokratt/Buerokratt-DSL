@@ -200,10 +200,6 @@ extract_bot_responses:
   assign:
     botMsg: ${post_message_to_bot_result.response.body}
 
-check_if_bot_message_start_with_hash:
-  switch:
-    - condition: ${botMsg.startsWith('#')}
-      next: call_service
   next: convert_bot_responses_to_messages
 
 call_service:
