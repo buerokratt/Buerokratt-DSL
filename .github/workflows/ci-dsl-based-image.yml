@@ -3,7 +3,7 @@ name: Docker Build and Push
 on:
   push:
     branches:
-      - dev-tmp
+      - dev-tmp-llm
     paths:
       - '.env.img'
       - 'module_based_image_builder.py'
