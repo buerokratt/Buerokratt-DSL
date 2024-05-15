@@ -43,7 +43,7 @@ get_chat:
     body:
       id: ${chatId}
   result: get_chat_result
-  next: check_for_get_chat_result  
+  next: check_for_get_chat_result
 
 check_for_get_chat_result:
   switch:
@@ -75,10 +75,27 @@ check_for_post_message_to_client_result:
 
 check_if_bot_is_unable_to_reply:
   switch:
+    - condition: ${post_message_to_client_result.response.body[0].text == 'UNKNOWN'}
+      next: check_for_fallback_bot
     - condition: ${post_message_to_client_result.response.body[0].text == 'Suunan teid klienditeenindajale. Varuge natukene kannatust.'}
       next: get_organization_working_details
   next: extract_bot_responses
 
+check_for_fallback_bot:
+  call: http.post
+  args:
+    url: "[#CHATBOT_RUUTER_PUBLIC_INTERNAL]/external-bot"
+    body:
+      sender: ${chatId}
+      message: ${content}
+  result: fallback_bot_result
+  next: check_if_fallback_bot_is_unable_to_reply
+
+check_if_fallback_bot_is_unable_to_reply:
+  switch:
+    - condition: ${fallback_bot_result.response.body.response[0].text == 'Vabandust, kuid ma ei saa teie küsimusest aru. Kas saaksite palun selgitada, mida soovite teada saada või kuidas saaksin teid aidata?'}
+      next: get_organization_working_details
+  next: convert_fallback_bot_responses_to_messages
 get_organization_working_details:
   call: http.post
   args:
@@ -95,14 +112,14 @@ assign_organization_details:
     org_details: ${org_res.response.body[0]}
   next: check_if_organization_is_available
 
-check_if_organization_is_available: 
+check_if_organization_is_available:
   switch:
     - condition: ${org_details.isWithinWorkingTime === true && org_details.isWithinWorkingDays === true && org_details.isAllowedToWorkAtHolidays === true}
       next: get_all_available_csas
     - condition: ${org_details.isWithinWorkingTime === true && org_details.isWithinWorkingDays === true && org_details.isAllowedToWorkAtHolidays === false && org_details.isHoliday == true}
       next: return_is_a_holiday
     - condition: ${org_details.isWithinWorkingTime === true && org_details.isWithinWorkingDays === true && org_details.isAllowedToWorkAtHolidays === false && org_details.isHoliday == false}
-      next: get_all_available_csas   
+      next: get_all_available_csas
   next: return_organization_is_not_available
 
 return_is_a_holiday:
@@ -110,7 +127,7 @@ return_is_a_holiday:
   args:
     url: "[#CHATBOT_RESQL]/insert-bot-message"
     body:
-      messages: 
+      messages:
          -
           chatId: ${chatId}
           content: ${org_details.holidayMessage}
@@ -206,7 +223,7 @@ check_if_bot_message_start_with_hash:
 call_service:
   call: http.post
   args:
-    url: "[#CHATBOT_RUUTER_PUBLIC]/call-service"
+    url: "[#CHATBOT_RUUTER_PUBLIC_INTERNAL]/call-service"
     body:
       chatId: ${chatId}
       msg: ${botMsg}
@@ -235,7 +252,8 @@ convert_bot_responses_to_messages:
     headers:
       type: json
     body:
-      data: {
+      data:
+        {
         "botMessages": "${botMsg}",
         "chatId": "${chatId}",
         "authorId": "${get_bot_name_result.response.body[0].value}",
@@ -244,6 +262,26 @@ convert_bot_responses_to_messages:
         "authorTimestamp": "${new Date().toISOString()}",
         "created": "${new Date().toISOString()}"
       }
+  result: converted_messages_res
+  next: add_bot_message_to_db
+
+convert_fallback_bot_responses_to_messages:
+  call: http.post
+  args:
+    url: "[#CHATBOT_DMAPPER]/backoffice/hbs/bot_responses_to_messages"
+    headers:
+      type: json
+    body:
+      data:
+        {
+          "botMessages": "${fallback_bot_result.response.body.response}",
+          "chatId": "${chatId}",
+          "authorId": "${get_bot_name_result.response.body[0].value}",
+          "authorFirstName": "",
+          "authorLastName": "",
+          "authorTimestamp": "${new Date().toISOString()}",
+          "created": "${new Date().toISOString()}",
+        }
   result: converted_messages_res
   next: add_bot_message_to_db
 
