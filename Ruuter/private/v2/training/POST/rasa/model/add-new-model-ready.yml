@@ -1,0 +1,25 @@
+
+getLatestProcessingModelFromDb:
+  call: http.post
+  args:
+    url: "[#TRAINING_RESQL]/get-last-processing-model"
+  result: dbModelResult
+
+updateInDatabase:
+  call: http.post
+  args:
+    url: "[#TRAINING_RESQL]/add-llm-trainings"
+    body:
+      model_type: ${dbModelResult.response.body[0].modelType}
+      state: "READY"
+      file_name: ${incoming.body.fileName}
+      version_number: ${dbModelResult.response.body[0].versionNumber}
+      model_version: ${dbModelResult.response.body[0].modelVersion}
+      test_report: ${incoming.body.testReport}
+      cross_validation_report: ${incoming.body.crossValidationReport}
+  result: dbModelResult
+
+returnSuccess:
+  return: "Inserted model with READY status. "
+  wrapper: false
+  next: end
