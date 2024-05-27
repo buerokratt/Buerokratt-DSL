@@ -1,0 +1,17 @@
+declaration:
+  call: declare
+  version: 0.1
+  description: "Decription placeholder for 'SCHEDULED-REPORTS'"
+  method: get
+  accepts: json
+  returns: json
+  namespace: analytics
+
+getScheduledReports:
+  call: http.post
+  args:
+    url: "[#ANALYTICS_RESQL]/get-scheduled-reports"
+  result: scheduledReports
+
+return:
+  return: ${scheduledReports.response.body}

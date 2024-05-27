@@ -1,0 +1,68 @@
+declaration:
+  call: declare
+  version: 0.1
+  description: "Decription placeholder for 'UPDATE'"
+  method: post
+  accepts: json
+  returns: json
+  namespace: training
+  allowlist:
+    body:
+      - field: recipe
+        type: string
+        description: "Body field 'recipe'"
+      - field: language
+        type: string
+        description: "Body field 'language'"
+      - field: pipeline
+        type: string
+        description: "Body field 'pipeline'"
+      - field: policies
+        type: string
+        description: "Body field 'policies'"
+    headers:
+      - field: cookie
+        type: string
+        description: "Cookie field"
+
+assign_values:
+  assign:
+    input: ${incoming.body}
+  next: getFileLocations
+
+getFileLocations:
+  call: http.get
+  args:
+    url: "[#TRAINING_PUBLIC_RUUTER]/internal/return-file-locations"
+    headers:
+      cookie: ${incoming.headers.cookie}
+  result: fileLocations
+
+convertJsonToYaml:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]/conversion/json_to_yaml"
+    body:
+      recipe: ${input.recipe}
+      language: ${input.language}
+      pipeline: ${input.pipeline}
+      policies: ${input.policies}
+  result: configYaml
+
+saveConfigFile:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]/file-manager/create"
+    body:
+      file_path: ${fileLocations.response.body.response.config_location}
+      content: ${configYaml.response.body.json}
+  result: fileResult
+  next: returnSuccess
+
+returnSuccess:
+  return: "Config updated"
+  next: end
+
+returnUnauthorized:
+  return: "error: unauthorized"
+  next: end

@@ -1,0 +1,64 @@
+declaration:
+  call: declare
+  version: 0.1
+  description: "Decription placeholder for 'RESULTS'"
+  method: post
+  accepts: json
+  returns: json
+  namespace: training
+  allowlist:
+    body:
+      - field: trained_model
+        type: string
+        description: "Body field 'trained_model'"
+    headers:
+      - field: cookie
+        type: string
+        description: "Cookie field"
+
+extractRequestData:
+  assign:
+    parameters: ${incoming.body}
+  next: getFileLocations
+
+getFileLocations:
+  call: http.get
+  args:
+    url: "[#TRAINING_PUBLIC_RUUTER]/internal/return-file-locations"
+    headers:
+      cookie: ${incoming.headers.cookie}
+  result: fileLocations
+
+checkModelExists:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]/file-manager/exists"
+    body:
+      file_path: ${fileLocations.response.body.response.training_result_location + '/' + parameters.trained_model}
+  result: modelExists
+
+validateModelExists:
+  switch:
+    - condition: ${modelExists.response.body.error === false}
+      next: getTrainedModel
+  next: returnTrainedModelMissing
+
+getTrainedModel:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]/file-manager/read-file-dir"
+    body:
+      file_path: ${fileLocations.response.body.response.training_result_location + '/' + parameters.trained_model}
+  result: trainingResults
+
+returnSuccess:
+  return: ${trainingResults.response.body}
+  next: end
+
+returnTrainedModelMissing:
+  return: "Trained model directory is missing"
+  next: end
+
+returnUnauthorized:
+  return: "error: unauthorized"
+  next: end

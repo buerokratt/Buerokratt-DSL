@@ -1,0 +1,40 @@
+declaration:
+  call: declare
+  version: 0.1
+  description: "Decription placeholder for 'NEGATIVE-FEEDBACK'"
+  method: get
+  accepts: json
+  returns: json
+  namespace: analytics
+  allowlist:
+    params:
+      - field: end
+        type: string
+        description: "Parameter 'end'"
+      - field: events
+        type: string
+        description: "Parameter 'events'"
+      - field: start
+        type: string
+        description: "Parameter 'start'"
+
+extract_request_data:
+  assign:
+    start: ${incoming.params.start}
+    end: ${incoming.params.end}
+    events: ${incoming.params.events}
+
+get_negative_feedback:
+  call: http.post
+  args:
+    url: "[#ANALYTICS_RESQL]/negative-feedback"
+    body:
+      start: ${start}
+      end: ${end}
+      events: ${events.split(',')}
+  result: feedback
+
+return_value:
+  return: ${feedback.response.body}
+  next: end
+
