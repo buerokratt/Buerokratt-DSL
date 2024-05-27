@@ -52,6 +52,7 @@ loadTrainedModel:
     url: "[#CHATBOT_BOT]/model"
     body:
       model_file: "/app/models/${modelFileName}"
+  sleep: 10000
   result: loadResponse   
 
 checkLoadedModelResponse:
