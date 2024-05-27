@@ -347,7 +347,8 @@ jobs:
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
-          git pull origin dev-tmp --no-ff --allow-unrelated-histories
+          git restore .
+          git pull origin test-tmp --no-ff --allow-unrelated-histories
           git add -A .
           git commit --allow-empty -m Update 
           git push 
