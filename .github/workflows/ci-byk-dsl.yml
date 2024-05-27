@@ -212,7 +212,7 @@ jobs:
           cp -R "source-repo-service/$SOURCE_FOLDER_SERVICE_SECRET/." "$FOLDER_PATH/services/secrets"
 
           SOURCE_REPO_TRAINING=buerokratt/Training-Module
-          SOURCE_FOLDER_TRAINING=DSL/DataMapper
+          SOURCE_FOLDER_TRAINING=DSL/DMapper
           git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
           cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING/." "$FOLDER_PATH/training/hbs"
 
