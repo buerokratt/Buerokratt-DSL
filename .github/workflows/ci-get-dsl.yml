@@ -22,7 +22,7 @@ jobs:
           if [ ! -d "$FOLDER_PATH" ]; then
             echo "Folder structure does not exist, creating..."
             mkdir -p "$FOLDER_PATH"
-            touch "$FOLDER_PATH/README.yml"
+            touch "$FOLDER_PATH/readme.md"
           else
             echo "Folder structure already exists."
           fi
@@ -33,10 +33,10 @@ jobs:
             if [ ! -d "$SUBFOLDER_PATH" ]; then
               echo "Creating $folder folder..."
               mkdir -p "$SUBFOLDER_PATH"
-              touch "$SUBFOLDER_PATH/readme.yml"
+              touch "$SUBFOLDER_PATH/readme.md"
               echo "Creating GET $folder ..."
               mkdir -p "$SUBFOLDER_PATH/GET"
-              touch "$SUBFOLDER_PATH/GET/readme.yml"
+              touch "$SUBFOLDER_PATH/GET/readme.md"
             else
               echo "$folder folder already exists."
             fi
@@ -75,7 +75,7 @@ jobs:
           if [ ! -d "$FOLDER_PATH" ]; then
             echo "Folder structure does not exist, creating..."
             mkdir -p "$FOLDER_PATH"
-            touch "$FOLDER_PATH/readme.yml"
+            touch "$FOLDER_PATH/readme.md"
           else
             echo "Folder structure already exists."
           fi
@@ -86,7 +86,7 @@ jobs:
             if [ ! -d "$SUBFOLDER_PATH" ]; then
               echo "Creating $folder folder..."
               mkdir -p "$SUBFOLDER_PATH"
-              touch "$SUBFOLDER_PATH/readme.yml"
+              touch "$SUBFOLDER_PATH/readme.md"
             else
               echo "$folder folder already exists."
             fi
@@ -115,7 +115,7 @@ jobs:
           if [ ! -d "$FOLDER_PATH" ]; then
             echo "Folder structure does not exist, creating..."
             mkdir -p "$FOLDER_PATH"
-            touch "$FOLDER_PATH/readme.yml"
+            touch "$FOLDER_PATH/readme.md"
           else
             echo "Folder structure already exists."
           fi
@@ -126,7 +126,7 @@ jobs:
             if [ ! -d "$SUBFOLDER_PATH" ]; then
               echo "Creating $folder folder..."
               mkdir -p "$SUBFOLDER_PATH/GET"
-              touch "$SUBFOLDER_PATH/GET/readme.yml"
+              touch "$SUBFOLDER_PATH/GET/readme.md"
             else
               echo "$folder folder already exists."
             fi
@@ -177,7 +177,7 @@ jobs:
           if [ ! -d "$FOLDER_PATH" ]; then
             echo "Folder structure does not exist, creating..."
             mkdir -p "$FOLDER_PATH"
-            touch "$FOLDER_PATH/readme.yml"
+            touch "$FOLDER_PATH/readme.md"
           else
             echo "Folder structure already exists."
           fi
@@ -188,7 +188,7 @@ jobs:
             if [ ! -d "$SUBFOLDER_PATH" ]; then
               echo "Creating $folder folder..."
               mkdir -p "$SUBFOLDER_PATH"
-              touch "$SUBFOLDER_PATH/readme.yml"
+              touch "$SUBFOLDER_PATH/readme.md"
             else
               echo "$folder folder already exists."
             fi
@@ -229,7 +229,7 @@ jobs:
           if [ ! -d "$FOLDER_PATH" ]; then
             echo "Folder structure does not exist, creating..."
             mkdir -p "$FOLDER_PATH"
-            touch "$FOLDER_PATH/readme.yml"
+            touch "$FOLDER_PATH/readme.md"
           else
             echo "Folder structure already exists."
           fi
@@ -240,7 +240,7 @@ jobs:
             if [ ! -d "$SUBFOLDER_PATH" ]; then
               echo "Creating $folder folder..."
               mkdir -p "$SUBFOLDER_PATH"
-              touch "$SUBFOLDER_PATH/readme.yml"
+              touch "$SUBFOLDER_PATH/readme.md"
             else
               echo "$folder folder already exists."
             fi
@@ -279,7 +279,7 @@ jobs:
           if [ ! -d "$FOLDER_PATH" ]; then
             echo "Folder structure does not exist, creating..."
             mkdir -p "$FOLDER_PATH"
-            touch "$FOLDER_PATH/readme.yml"
+            touch "$FOLDER_PATH/readme.md"
           else
             echo "Folder structure already exists."
           fi
@@ -290,7 +290,7 @@ jobs:
             if [ ! -d "$SUBFOLDER_PATH" ]; then
               echo "Creating $folder folder..."
               mkdir -p "$SUBFOLDER_PATH"
-              touch "$SUBFOLDER_PATH/readme.yml"
+              touch "$SUBFOLDER_PATH/readme.md"
             else
               echo "$folder folder already exists."
             fi
@@ -317,7 +317,7 @@ jobs:
           if [ ! -d "$FOLDER_PATH" ]; then
             echo "Folder structure does not exist, creating..."
             mkdir -p "$FOLDER_PATH"
-            touch "$FOLDER_PATH/readme.yml"
+            touch "$FOLDER_PATH/readme.md"
           else
             echo "Folder structure already exists."
           fi
@@ -328,7 +328,7 @@ jobs:
             if [ ! -d "$SUBFOLDER_PATH" ]; then
               echo "Creating $folder folder..."
               mkdir -p "$SUBFOLDER_PATH"
-              touch "$SUBFOLDER_PATH/readme.yml"
+              touch "$SUBFOLDER_PATH/readme.md"
             else
               echo "$folder folder already exists."
             fi
