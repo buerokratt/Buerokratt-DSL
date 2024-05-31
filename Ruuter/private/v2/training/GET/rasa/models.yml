@@ -22,7 +22,7 @@ validateDbRecords:
 checkEntity:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/hbs/training/checkV"
+    url: "[#TRAINING_DMAPPER]/training/hbs/training/checkV"
     headers:
       type: 'json'
     body:
@@ -32,7 +32,7 @@ checkEntity:
 mapModels:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/hbs/training/get_models"
+    url: "[#TRAINING_DMAPPER]/training/hbs/training/get_models"
     headers:
       type: 'json'
     body:
