@@ -62,6 +62,7 @@ loadTrainedModel:
     url: "[#TRAINING_RASA]/model"
     body:
       model_file: "/app/models/${resqlResponse.response.body[0].fileName}"
+  sleep: 10000
   result: loadResponse   
 
 checkLoadedModelResponse:
