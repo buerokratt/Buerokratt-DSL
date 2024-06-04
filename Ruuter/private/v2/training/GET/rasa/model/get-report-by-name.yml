@@ -38,7 +38,7 @@ validateRecordExists:
   next: returnEmptyObject
 
 returnSuccess:
-  return: ${JSON.parse(dbResult.response.body[0].test_report)}
+  return: ${dbResult.response.body}
   wrapper: false
   next: end
 
