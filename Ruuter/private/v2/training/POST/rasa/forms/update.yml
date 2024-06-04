@@ -55,7 +55,7 @@ updateFormData:
 convertResponseInput:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/training/hbs/training/get_form_responses"
+    url: "[#TRAINING_DMAPPER]/hbs/training/get_form_responses"
     headers:
       type: "json"
     body:

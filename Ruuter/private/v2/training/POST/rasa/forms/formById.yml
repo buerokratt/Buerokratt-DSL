@@ -61,7 +61,7 @@ gatherFormDetails:
 mapFormsData:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/training/hbs/training/get_form_details"
+    url: "[#TRAINING_DMAPPER]/hbs/training/get_form_details"
     headers:
       type: 'json'
     body:
