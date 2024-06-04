@@ -30,7 +30,7 @@ getResponses:
 mapSlotsData:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/hbs/training/get_slots_with_response"
+    url: "[#TRAINING_DMAPPER]/training/hbs/training/get_slots_with_response"
     headers:
       type: 'json'
     body:

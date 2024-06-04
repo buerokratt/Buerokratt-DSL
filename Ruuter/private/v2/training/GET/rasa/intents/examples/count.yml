@@ -20,7 +20,7 @@ getIntentsExampleCount:
 mapIntentsData:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/hbs/training/get_intents_with_examples_count"
+    url: "[#TRAINING_DMAPPER]/training/hbs/training/get_intents_with_examples_count"
     headers:
       type: 'json'
     body:

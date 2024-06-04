@@ -27,7 +27,7 @@ getIntentLastChanged:
 mapIntentsData:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/hbs/training/get_intent_last_changed"
+    url: "[#TRAINING_DMAPPER]/training/hbs/training/get_intent_last_changed"
     headers:
       type: 'json'
     body:
