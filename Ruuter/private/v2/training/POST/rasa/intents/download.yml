@@ -67,7 +67,7 @@ splitExamples:
 mapIntentsData:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/training/hbs/training/get_intent_csv"
+    url: "[#TRAINING_DMAPPER]/hbs/training/get_intent_csv"
     body:
       examples: ${splitExamples.response.body}
     headers:

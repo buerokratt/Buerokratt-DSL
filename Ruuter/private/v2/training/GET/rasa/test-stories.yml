@@ -16,7 +16,7 @@ getTestStories:
 mapTestStoriesData:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/training/hbs/training/get_test_stories"
+    url: "[#TRAINING_DMAPPER]/hbs/training/get_test_stories"
     headers:
       type: 'json'
     body:
