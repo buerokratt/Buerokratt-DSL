@@ -3,7 +3,7 @@ name: Buerokratt DSL
 on:
   push:
     branches:
-      - test-tmp-3 # Adjust the branch name if needed
+      - test-tmp-4 # Adjust the branch name if needed
     # Remove paths filter to trigger on any change
     paths:
        - '.env'
