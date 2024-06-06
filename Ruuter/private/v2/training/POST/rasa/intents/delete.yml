@@ -195,7 +195,7 @@ assignExamples:
 mapIntentsData:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/training/hbs/training/get_intent_file"
+    url: "[#TRAINING_DMAPPER]/hbs/training/get_intent_file"
     headers:
       type: "json"
     body:
