@@ -92,11 +92,7 @@ postMessage:
       forwardedFromCsa: ""
       forwardedToCsa: ""
   result: message_res
-  next: return_testy
-
-return_testy:
-  return: ${activeChatRes.response.body}
-  next: end
+  next: endChat
 
 endChat:
   call: http.post
