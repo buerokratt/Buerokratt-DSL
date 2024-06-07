@@ -92,7 +92,11 @@ postMessage:
       forwardedFromCsa: ""
       forwardedToCsa: ""
   result: message_res
-  next: endChat
+  next: return_testy
+
+return_testy:
+  return: ${activeChatRes.response.body}
+  next: end
 
 endChat:
   call: http.post
@@ -109,7 +113,7 @@ endChat:
       status: ${status ?? "ENDED"}
       created: ${activeChat.created ?? new Date().toISOString()}
       ended: ${new Date().toISOString()}
-      feedbackRating: 0
+      feedbackRating: ${activeChat.feedbackRating ?? ""}
       feedbackText: ${activeChat.feedbackText ?? ""}
       endUserEmail: ${activeChat.endUserEmail ?? ""}
       endUserPhone: ${activeChat.endUserPhone ?? ""}
