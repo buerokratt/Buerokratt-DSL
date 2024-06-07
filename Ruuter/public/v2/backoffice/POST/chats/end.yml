@@ -113,7 +113,7 @@ endChat:
       status: ${status ?? "ENDED"}
       created: ${activeChat.created ?? new Date().toISOString()}
       ended: ${new Date().toISOString()}
-      feedbackRating: ${activeChat.feedbackRating ?? ""}
+      feedbackRating: "${activeChat.feedbackRating ?? ''}"
       feedbackText: ${activeChat.feedbackText ?? ""}
       endUserEmail: ${activeChat.endUserEmail ?? ""}
       endUserPhone: ${activeChat.endUserPhone ?? ""}
