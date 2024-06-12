@@ -64,7 +64,7 @@ syncDockerCompose:
 syncCronTask:
   call: http.post
   args:
-    url: "[#TRAINING_PUBLIC_RUUTER]/internal/sync/cron"
+    url: "[#TRAINING_PUBLIC_RUUTER_INTERNAL]/internal/sync/cron"
     headers:
       cookie: ${incoming.headers.cookie}
   result: updatedCron
