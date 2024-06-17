@@ -46,7 +46,7 @@ domainEntities:
 
 validateDomainEntities:
   switch:
-    - condition: ${domainEntities.response.statusCodeValue == 200}
+    - condition: ${!domainEntities.response.body.response}
       next: regexEntities
   next: returnEntityHasDependencyToDomain
 
