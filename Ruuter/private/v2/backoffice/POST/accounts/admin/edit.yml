@@ -91,4 +91,3 @@ return_not_exists:
   return: "error: user does not exist"
   status: 400
   next: end
-
