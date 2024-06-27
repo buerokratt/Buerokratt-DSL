@@ -73,7 +73,7 @@ responses:
   - text: "Mis firma kohta sa infot soovid?"
 
   utter_common_service_companies:
-  - text: "OPENSEARCH {common_service_companies}"
+  - text: "OPENSEARCH; {common_service_companies}"
 
   utter_fallback:
   - text: "UNKNOWN"  
