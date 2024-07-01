@@ -118,7 +118,7 @@ check_if_bot_is_unable_to_reply:
 common_service1:
   call: http.post
   args:
-    url: "[#CHATBOT_RUUTER_PUBLIC_INTERNAL_CS]/services/companies/search.yml"
+    url: "[#CHATBOT_RUUTER_PUBLIC_INTERNAL_CS]/services/companies/search"
     body:
       message: ${post_message_to_bot_result.response.body?.[0]?.text.match(/^OPENSEARCH(.*)/)}
   result: common_service1_result
