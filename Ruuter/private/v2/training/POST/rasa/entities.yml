@@ -23,7 +23,7 @@ getEntitiesWithName:
 mapEntitiesData:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/hbs/training/get_entity_with_name"
+    url: "[#TRAINING_DMAPPER]/training/hbs/training/get_entity_with_name"
     headers:
       type: 'json'
     body:

@@ -37,7 +37,7 @@ getFaults:
 mapFaultsData:
   call: http.post
   args:
-    url: "[#SERVICE_DMAPPER]/hbs/services/get-faults"
+    url: "[#SERVICE_DMAPPER]/services/hbs/services/get-faults"
     headers:
       type: "json"
     body:
