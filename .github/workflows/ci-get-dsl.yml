@@ -235,7 +235,7 @@ jobs:
           SOURCE_FOLDER_COMMONSERVICES=DSL/DMapper
           git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_COMMONSERVICES.git" source-repo-Common-Services
           mkdir -p "$FOLDER_PATH/Common-Services"
-          cp -R "source-repo-Common-Services/$SOURCE_FOLDER_COMMONSERVICES/." "$FOLDER_PATH/Common-Services/hbs"
+          cp -R "source-repo-Common-Services/$SOURCE_FOLDER_COMMONSERVICES/." "$FOLDER_PATH/Common-Services"
 
       - name: Clean Up Cloned Repositories
         run: |
