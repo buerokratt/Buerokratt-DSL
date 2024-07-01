@@ -109,12 +109,19 @@ jobs:
           git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
           cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING/." "$FOLDER_PATH/training"
 
+          # common-services..... 
+          SOURCE_REPO_COMMONSERVICES=buerokratt/Common-Services
+          SOURCE_FOLDER_COMMONSERVICES=DSL/Ruuter.public
+          git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_COMMONSERVICES.git" source-repo-Common-Services
+          cp -R "source-repo-Common-Services/$SOURCE_FOLDER_COMMONSERVICES/." "$FOLDER_PATH/Common-Services"
+
       - name: Clean Up Cloned Repositories
         run: |
           rm -rf source-repo-chatbot
           rm -rf source-repo-analytics
           rm -rf source-repo-service
           rm -rf source-repo-training
+          rm -rf source-repo-Common-Services
 
       - name: Check and Create Folder Structure and copy DSLs for RESQL
         run: |
@@ -223,12 +230,19 @@ jobs:
           git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
           cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING/." "$FOLDER_PATH/training/hbs"
 
+          # common-services..... 
+          SOURCE_REPO_COMMONSERVICES=buerokratt/Common-Services
+          SOURCE_FOLDER_COMMONSERVICES=DSL/DMapper
+          git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_COMMONSERVICES.git" source-repo-Common-Services
+          cp -R "source-repo-Common-Services/$SOURCE_FOLDER_COMMONSERVICES/." "$FOLDER_PATH/Common-Services/hbs"
+
       - name: Clean Up Cloned Repositories
         run: |
           rm -rf source-repo-chatbot
           rm -rf source-repo-analytics
           rm -rf source-repo-service
           rm -rf source-repo-training
+          rm -rf source-repo-Common-Services
 
       - name: Check and Create Folder Structure and copy DSLs for Liquibase
         run: |
@@ -313,10 +327,17 @@ jobs:
           git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
           cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING/." "$FOLDER_PATH/training"
 
+          # common-services..... 
+          SOURCE_REPO_COMMONSERVICES=buerokratt/Common-Services
+          SOURCE_FOLDER_COMMONSERVICES=DSL/OpenSearch
+          git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_COMMONSERVICES.git" source-repo-Common-Services
+          cp -R "source-repo-Common-Services/$SOURCE_FOLDER_COMMONSERVICES/." "$FOLDER_PATH/Common-Services"
+
       - name: Clean Up Cloned Repositories
         run: |
           rm -rf source-repo-service
           rm -rf source-repo-training
+          rm -rf source-repo-Common-Services
 
       - name: Check and Create Folder Structure and copy DSLs for OpenSearch 2
         run: |
