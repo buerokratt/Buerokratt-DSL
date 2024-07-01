@@ -5,7 +5,7 @@ check_for_cookie:
   next: authenticate
 
 authenticate:
-  template: training/check-user-authority
+  template: check-user-authority
   requestType: templates
   headers:
     cookie: ${incoming.headers.cookie}

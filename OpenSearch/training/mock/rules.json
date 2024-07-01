@@ -1,4 +1,4 @@
-"index":{"_id":"common_tervitus"}}
+{"index":{"_id":"common_tervitus"}}
 {"rule":"common_tervitus","steps":[{"intent":"common_tervitus"}, {"action": "utter_common_tervitus"}]}
 {"index":{"_id":"common_tervitus_conversation"}}
 {"rule":"common_tervitus_conversation","conversation_start": true,"steps":[{"intent":"common_tervitus"}, {"action": "utter_common_esimene_tervitus"}]}

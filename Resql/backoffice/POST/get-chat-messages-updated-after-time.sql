@@ -39,3 +39,4 @@ LEFT JOIN "user" u ON m.author_id = u.id_code
 JOIN MaxMessages ON m.id = maxId
 WHERE :timeRangeBegin::timestamp with time zone < m.updated
 ORDER BY m.created;
+

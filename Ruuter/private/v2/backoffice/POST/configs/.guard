@@ -5,7 +5,7 @@ check_for_cookie:
   next: authenticate
 
 authenticate:
-  template: backoffice/check-admin-authority
+  template: check-admin-authority
   requestType: templates
   headers:
     cookie: ${incoming.headers.cookie}

@@ -92,7 +92,7 @@ getStoriesSearchForSlots:
 mapStoriesData:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/training/hbs/training/get_stories"
+    url: "[#TRAINING_DMAPPER]/hbs/training/get_stories"
     headers:
       type: "json"
     body:

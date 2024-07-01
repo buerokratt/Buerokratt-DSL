@@ -32,3 +32,4 @@
 {"name":"utter_common_ilm_checkpoint","response": [{"text":""}]}
 {"index":{"_id":"utter_common_teenus_ilm_fallback"}}
 {"name":"utter_common_teenus_ilm_fallback","response": [{"condition": [{"type": "slot","name": "common_teenus_ilm_asukoht","value": null}],"text":"Kahjuks ei saanud ma praegu piirkonnast aru ja ei oska ilma kohta midagi öelda. Kuidas saan abiks olla?"}, {"text":"#weather; {common_teenus_ilm_asukoht};"}]}
+

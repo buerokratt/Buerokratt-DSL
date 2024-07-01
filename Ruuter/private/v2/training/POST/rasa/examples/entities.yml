@@ -28,7 +28,7 @@ getEntitiesWithExamples:
 mapEntitiesData:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/training/hbs/training/get_entities_with_examples"
+    url: "[#TRAINING_DMAPPER]/hbs/training/get_entities_with_examples"
     headers:
       type: 'json'
     body:

@@ -23,8 +23,7 @@ getCookieInfo:
     contentType: plaintext
     headers:
       cookie: ${incoming.headers.cookie}
-    plaintext:
-      "customJwtCookie"
+    plaintext: "customJwtCookie"
   result: res
   next: checkCookieInfoResponse
 

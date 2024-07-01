@@ -40,8 +40,8 @@ return_authorized:
   next: end
 
 return_unauthorized:
-  return: false
   status: 200
+  return: false
   next: end
 
 return_bad_request:

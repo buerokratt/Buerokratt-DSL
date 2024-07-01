@@ -16,7 +16,7 @@ getResponses:
 mapResponsesData:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/training/hbs/training/get_responses"
+    url: "[#TRAINING_DMAPPER]/hbs/training/get_responses"
     headers:
       type: 'json'
     body:
