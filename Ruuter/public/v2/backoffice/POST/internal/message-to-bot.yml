@@ -123,6 +123,9 @@ common_service1:
       message: ${post_message_to_bot_result.response.body?.[0]?.text.match(/^OPENSEARCH(.*)/)}
   result: common_service1_result
   next: extract_bot_responses
+
+logstep3:
+  log: ${common_service1_result}
   
 check_for_fallback_bot:
   call: http.post
