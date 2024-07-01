@@ -111,7 +111,7 @@ check_if_bot_is_unable_to_reply:
       next: check_for_fallback_bot
     - condition: ${post_message_to_bot_result.response.body?.[0]?.text == 'Suunan teid klienditeenindajale. Varuge natukene kannatust.'}
       next: get_organization_working_details
-    - condition: ${post_message_to_bot_result.response.body?.[0]?.text.match(/^OPENSEARCH/)}
+    - condition: ${post_message_to_bot_result.response.body?.[0]?.text.match(/^OPENSEARCH/) != null}
       next: common_service1
   next: extract_bot_responses
 
