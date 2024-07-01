@@ -92,6 +92,12 @@ post_message_to_bot:
       sender: ${chatId}
       message: ${decodedContent}
   result: post_message_to_bot_result
+
+logstep:
+  log: ${post_message_to_bot_result}
+
+logstep2:
+  log: ${post_message_to_bot_result.response.body?.[0]?.text}
   
 check_for_post_message_to_bot_result:
   switch:
