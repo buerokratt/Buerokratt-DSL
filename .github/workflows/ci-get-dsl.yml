@@ -187,7 +187,7 @@ jobs:
 
       - name: Check and Create Folder Structure and copy DSLs for DATAMAPPER v1
         run: |
-          FOLDER_PATH=DataMapper/v1
+          FOLDER_PATH=DataMapper/v1/
           if [ ! -d "$FOLDER_PATH" ]; then
             echo "Folder structure does not exist, creating..."
             mkdir -p "$FOLDER_PATH"
@@ -234,6 +234,7 @@ jobs:
           SOURCE_REPO_COMMONSERVICES=buerokratt/Common-Services
           SOURCE_FOLDER_COMMONSERVICES=DSL/DMapper
           git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_COMMONSERVICES.git" source-repo-Common-Services
+          mkdir -p "$FOLDER_PATH/Common-Services/hbs"
           cp -R "source-repo-Common-Services/$SOURCE_FOLDER_COMMONSERVICES/." "$FOLDER_PATH/Common-Services/hbs"
 
       - name: Clean Up Cloned Repositories
