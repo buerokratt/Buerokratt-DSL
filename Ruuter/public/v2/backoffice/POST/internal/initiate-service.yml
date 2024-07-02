@@ -1,3 +1,10 @@
+logstep6:
+  log: ${incoming.body.list[0]}
+logstep7:
+  log: ${incoming.body.list}
+logstep6:
+  log: ${incoming.body}
+
 checkservice:
   switch:
     - condition: ${incoming.body.list[0] === "#laborMarket"}
