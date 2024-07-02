@@ -1,9 +1,11 @@
 logstepFIXED:
-  log: ${incoming.body.msg[0].text.match(/^(#riigikoguIsikuKohalolu),(.*)/)[2].trim()}
-logstepFIXED2:
-  log: ${incoming.body.msg[0].text}
+  log: ${incoming.body.msg}
+
 logstepFIXED3:
-  log: ${incoming.body.msg[0].text.match(/^(#riigikoguIsikuKohalolu),(.*)/)[1].trim()}
+  log: ${incoming.body.msg[0]}
+
+logstepFIXED2:
+  log: ${incoming.body.msg[0].recipient_id}
   
 checkservice:
   switch:
