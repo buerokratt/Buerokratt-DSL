@@ -200,9 +200,6 @@ riigikoguAttendance:
     body:
       memberName: ${incoming.body.msg.match(/^(#riigikoguIsikuKohalolu),(.*)/)[2].trim()}
   result: riigikoguAttendanceRequest
-
-logstep12:
-  log: ${riigikoguAttendanceRequest}
   return: ${riigikoguAttendanceRequest}
   next: end
   
