@@ -3,9 +3,9 @@ logstep8:
 logstep9:
   log: ${incoming.body.msg.match(/^#riigikoguIsikuKohalolu,(.*)/)}
 logstep10:
-  log: ${incoming.body.msg.match(/^(#riigikoguIsikuKohalolu),(.*)/)[1]}
-logstep10:
-  log: ${incoming.body.msg.match(/^(#riigikoguIsikuKohalolu),(.*)/)[2]}
+  log: ${incoming.body.msg.match(/^(#riigikoguIsikuKohalolu),(.*)/)[1].trim()}
+logstep11:
+  log: ${incoming.body.msg.match(/^(#riigikoguIsikuKohalolu),(.*)/)[2].trim()}
   
 checkservice:
   switch:
