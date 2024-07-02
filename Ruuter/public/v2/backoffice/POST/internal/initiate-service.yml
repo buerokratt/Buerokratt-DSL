@@ -195,15 +195,15 @@ riigikoguAttendance:
     url: "[#CHATBOT_RUUTER_PUBLIC_INTERNAL_CS]/riigikogu/riigikogu-attendance"
     body:
       memberName: ${incoming.body.msg.match(/^(#riigikoguIsikuKohalolu),(.*)/)[2].trim()}
-  result: riigikoguAttendanceRequest
+  result: call_service_result
 
 logstepVASTUS2:
-  log: ${riigikoguAttendanceRequest.response.body}
+  log: ${call_service_result.response.body}
 logstepVASTUS3:
-  log: ${riigikoguAttendanceRequest.response.body.repsonse}
+  log: ${call_service_result.response.body.repsonse}
 
 returbsrep:
-  return: ${riigikoguAttendanceRequest.response.body}
+  return: ${call_service_result.response.body}
   next: end
   
 riigikoguAttendanceAnswer:
