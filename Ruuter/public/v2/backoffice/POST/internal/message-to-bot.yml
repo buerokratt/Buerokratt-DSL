@@ -294,12 +294,8 @@ call_service:
     body:
       msg: ${botMsgTxt}
   result: call_service_result
+  next: convert_service_bot_responses_to_messages
   
-logstep5:
-  log: ${call_service_result}
-
-logstep6:
-  log: ${call_service_result.response.body}
 
 logstep7:
   log: ${call_service_result.response.body.response}
@@ -338,7 +334,7 @@ convert_bot_responses_to_messages:
 convert_fallback_bot_responses_to_messages:
   call: http.post
   args:
-    url: "[#CHATBOT_DMAPPER]/backoffice/hbs//bot_responses_to_messages"
+    url: "[#CHATBOT_DMAPPER]/backoffice/hbs/bot_responses_to_messages"
     headers:
       type: json
     body:
@@ -354,6 +350,26 @@ convert_fallback_bot_responses_to_messages:
         }
   result: converted_messages_res
   next: add_bot_message_to_db
+
+convert_service_bot_responses_to_messages:
+  call: http.post
+  args:
+    url: "[#CHATBOT_DMAPPER]/backoffice/hbs/bot_responses_to_messages"
+    headers:
+      type: json
+    body:
+      data:
+        {
+          "botMessages": "${call_service_result.response.body.response}",
+          "chatId": "${chatId}",
+          "authorId": "${get_bot_name_result.response.body[0].value}",
+          "authorFirstName": "",
+          "authorLastName": "",
+          "authorTimestamp": "${new Date().toISOString()}",
+          "created": "${new Date().toISOString()}",
+        }
+  result: converted_messages_res
+  next: add_bot_message_to_db  
 
 add_bot_message_to_db:
   call: http.post
