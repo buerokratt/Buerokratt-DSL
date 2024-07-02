@@ -3,27 +3,27 @@ logstep8:
 
 checkservice:
   switch:
-    - condition: ${incoming.body.list[0] === "#laborMarket"}
+    - condition: ${incoming.body.msg === "#laborMarket"}
       next: laborMarket
-    - condition: ${incoming.body.list[0] === "#estimatedSubsidence"}
+    - condition: ${incoming.body.msg === "#estimatedSubsidence"}
       next: estimatedSubsidence
-    - condition: ${incoming.body.list[0] === "#priceIndex"}
+    - condition: ${incoming.body.msg === "#priceIndex"}
       next: priceIndex
-    - condition: ${incoming.body.list[0] === "#nordpool"}
+    - condition: ${incoming.body.msg === "#nordpool"}
       next: nordpoolService
-    - condition: ${incoming.body.list[0] === "#nordpool2"}
+    - condition: ${incoming.body.msg === "#nordpool2"}
       next: nordpool2Service
-    - condition: ${incoming.body.list[0] === "#nordpool3"}
+    - condition: ${incoming.body.msg === "#nordpool3"}
       next: nordpool3Service
-    - condition: ${incoming.body.list[0] === "#rahvaAlgatus"}
+    - condition: ${incoming.body.msg === "#rahvaAlgatus"}
       next: initiativeEvents
-    - condition: ${incoming.body.list[0] === "#rahvaAlgatusPopulaarne"}
+    - condition: ${incoming.body.msg === "#rahvaAlgatusPopulaarne"}
       next: initiativeEventsPopular
-    - condition: ${incoming.body.list[0] === "#riigikoguIsikuKohalolu"}
+    - condition: ${incoming.body.msg === "#riigikoguIsikuKohalolu"}
       next: riigikoguAttendance
-    - condition: ${incoming.body.list[0] === "#recentVoting"}
+    - condition: ${incoming.body.msg === "#recentVoting"}
       next: riigikoguRecentVoting
-    - condition: ${incoming.body.list[0] == null}
+    - condition: ${incoming.body.msg == null}
       next: noService
   next: noService
 
@@ -230,6 +230,6 @@ riigikoguRecentVotingAnswer:
   next: end
 
 noService:
-  return: "${incoming.body.list[0]} , POLE TEENUST"
+  return: "${incoming.body.msg} , POLE TEENUST"
   status: 400
   next: end
