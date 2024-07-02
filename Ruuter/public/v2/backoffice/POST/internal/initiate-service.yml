@@ -199,8 +199,10 @@ riigikoguAttendance:
       memberName: ${incoming.body.msg[0].text.match(/^(#riigikoguIsikuKohalolu),(.*)/)[2].trim()}
   result: call_service_result
 
+logstepVASTUS1:
+  log: ${call_service_result}
 logstepVASTUS2:
-  log: ${call_service_result.response.body}
+  log: ${call_service_result.response}
 logstepVASTUS3:
   log: ${call_service_result.response.body.repsonse}
 
