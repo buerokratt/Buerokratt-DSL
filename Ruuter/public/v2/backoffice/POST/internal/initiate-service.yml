@@ -2,6 +2,10 @@ logstep8:
   log: ${incoming.body.msg}
 logstep9:
   log: ${incoming.body.msg.match(/^#riigikoguIsikuKohalolu,(.*)/)}
+logstep10:
+  log: ${incoming.body.msg.match(/^(#riigikoguIsikuKohalolu),(.*)/)[1]}
+logstep10:
+  log: ${incoming.body.msg.match(/^(#riigikoguIsikuKohalolu),(.*)/)[2]}
   
 checkservice:
   switch:
