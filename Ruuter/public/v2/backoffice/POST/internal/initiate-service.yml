@@ -1,5 +1,5 @@
 logstepFIXED:
-  log: ${incoming.body.msg}
+  log: ${incoming.body.msg[0].text.match(/^(#riigikoguIsikuKohalolu),(.*)/)[2].trim()}
 logstepFIXED2:
   log: ${incoming.body.msg[0].text}
 logstepFIXED3:
@@ -23,7 +23,7 @@ checkservice:
       next: initiativeEvents
     - condition: ${incoming.body.msg === "#rahvaAlgatusPopulaarne"}
       next: initiativeEventsPopular
-    - condition: ${incoming.body.msg.match(/^(#riigikoguIsikuKohalolu),(.*)/)[1].trim() === "#riigikoguIsikuKohalolu"}
+    - condition: ${incoming.body.msg[0].text.match(/^(#riigikoguIsikuKohalolu),(.*)/)[1].trim() === "#riigikoguIsikuKohalolu"}
       next: riigikoguAttendance
     - condition: ${incoming.body.msg === "#recentVoting"}
       next: riigikoguRecentVoting
@@ -196,7 +196,7 @@ riigikoguAttendance:
   args:
     url: "[#CHATBOT_RUUTER_PUBLIC_INTERNAL_CS]/riigikogu/riigikogu-attendance"
     body:
-      memberName: ${incoming.body.msg.match(/^(#riigikoguIsikuKohalolu),(.*)/)[2].trim()}
+      memberName: ${incoming.body.msg[0].text.match(/^(#riigikoguIsikuKohalolu),(.*)/)[2].trim()}
   result: call_service_result
 
 logstepVASTUS2:
