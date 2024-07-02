@@ -197,17 +197,19 @@ riigikoguAttendance:
     url: "[#CHATBOT_RUUTER_PUBLIC_INTERNAL_CS]/riigikogu/riigikogu-attendance"
     body:
       memberName: ${incoming.body.msg[0].text.match(/^(#riigikoguIsikuKohalolu),(.*)/)[2].trim()}
-  result: call_service_result
+  result: riigikoguAttendanceResult
+
+assign_step:
+  assign:
+    call_service_result: 
+      text: ${riigikoguAttendanceResult.response.body.repsonse}
+      recipient_id: ${incoming.body.msg[0].recipient_id}
 
 logstepVASTUS1:
   log: ${call_service_result}
-logstepVASTUS2:
-  log: ${call_service_result.response}
-logstepVASTUS3:
-  log: ${call_service_result.response.body.repsonse}
 
 returbsrep:
-  return: ${call_service_result.response.body}
+  return: ${call_service_result}
   next: end
   
 riigikoguAttendanceAnswer:
