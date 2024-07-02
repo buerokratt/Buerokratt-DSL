@@ -5,7 +5,8 @@ logstepFIXED3:
   log: ${incoming.body.msg[0]}
 
 logstepFIXED2:
-  log: ${incoming.body.msg[0].recipient_id}
+  assign:
+    recipient_id: ${incoming.body.msg[0].recipient_id}
   
 checkservice:
   switch:
@@ -205,7 +206,7 @@ assign_step:
   assign:
     call_service_result: 
       text: ${riigikoguAttendanceResult.response.body.repsonse}
-      recipient_id: ${incoming.body.msg[0].recipient_id}
+      recipient_id: ${recipient_id}
 
 logstepVASTUS1:
   log: ${call_service_result}
