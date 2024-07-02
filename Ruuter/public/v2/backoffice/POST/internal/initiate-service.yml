@@ -19,7 +19,7 @@ checkservice:
       next: initiativeEvents
     - condition: ${incoming.body.msg === "#rahvaAlgatusPopulaarne"}
       next: initiativeEventsPopular
-    - condition: ${incoming.body.msg === "#riigikoguIsikuKohalolu"}
+    - condition: ${incoming.body.msg === "#riigikoguIsikuKohalolu;"}
       next: riigikoguAttendance
     - condition: ${incoming.body.msg === "#recentVoting"}
       next: riigikoguRecentVoting
@@ -190,9 +190,9 @@ initiativeEventsPopularAnswer:
 riigikoguAttendance:
   call: http.post
   args:
-    url: "[#CHATBOT_RUUTER_PUBLIC]/riigikogu-attendance"
+    url: "[#CHATBOT_RUUTER_PUBLIC_INTERNAL_CS]/riigikogu/riigikogu-attendance"
     body:
-      memberName: ${incoming.body.list[1]}
+      memberName: ${incoming.body.msg[1]}
   result: riigikoguAttendanceRequest
   next: riigikoguAttendanceAnswer
 riigikoguAttendanceAnswer:
