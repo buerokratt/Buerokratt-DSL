@@ -294,11 +294,7 @@ call_service:
     body:
       msg: ${botMsg}
   result: call_service_result
-
-logstep7:
-  log: ${call_service_result}
-logstep8:
-  log: ${call_service_result.response.body}
+  next: convert_service_bot_responses_to_messages
 
 check_if_call_service_result_is_ok:
   switch:
@@ -360,7 +356,7 @@ convert_service_bot_responses_to_messages:
     body:
       data:
         {
-          "botMessages": "${call_service_result.response.body.response.response}",
+          "botMessages": "${call_service_result.response}",
           "chatId": "${chatId}",
           "authorId": "${get_bot_name_result.response.body[0].value}",
           "authorFirstName": "",
