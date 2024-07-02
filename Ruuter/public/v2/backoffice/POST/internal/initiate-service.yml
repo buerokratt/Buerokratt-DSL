@@ -1,9 +1,9 @@
 logstep6:
-  log: ${incoming.body.list[0]}
+  log: ${incoming.body}
 logstep7:
   log: ${incoming.body.list}
-logstep6:
-  log: ${incoming.body}
+logstep8:
+  log: ${incoming.body.msg[0]}
 
 checkservice:
   switch:
