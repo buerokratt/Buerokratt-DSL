@@ -1,9 +1,9 @@
 logstepFIXED:
   log: ${incoming.body.msg}
 logstepFIXED2:
-  log: ${incoming.body.msg[0]}
+  log: ${incoming.body.msg[0].text}
 logstepFIXED3:
-  log: ${incoming.body.msg[1]}
+  log: ${incoming.body.msg[0].text.match(/^(#riigikoguIsikuKohalolu),(.*)/)[1].trim()}
   
 checkservice:
   switch:
