@@ -296,9 +296,9 @@ call_service:
   result: call_service_result
 
 logstep7:
-  log: ${call_service_result.response.body.response}
+  log: ${call_service_result}
 logstep8:
-  log: ${call_service_result.response.body.response.response}
+  log: ${call_service_result.response.body}
 
 check_if_call_service_result_is_ok:
   switch:
