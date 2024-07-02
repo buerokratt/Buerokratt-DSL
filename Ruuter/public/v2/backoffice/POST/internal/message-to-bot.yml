@@ -278,14 +278,14 @@ extract_bot_responses:
     botMsg: ${post_message_to_bot_result.response.body}
     botMsgTxt: ${post_message_to_bot_result.response.body?.[0]?.text}
 
+logstep4:
+  log: ${botMsgTxt}
+
 check_if_bot_message_start_with_hash:
   switch:
     - condition: ${botMsgTxt.startsWith('#')}
       next: call_service
   next: convert_bot_responses_to_messages
-
-logstep4:
-  log: ${botMsgTxt}
 
 call_service:
   call: http.post
