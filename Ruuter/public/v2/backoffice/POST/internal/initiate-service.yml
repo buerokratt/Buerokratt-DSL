@@ -2,6 +2,12 @@ logstepSERVICE:
   log: ${incoming.body.msg.match(/^(#riigikoguIsikuKohalolu),(.*)/)[1].trim()}
 logstepPAYLOAD:
   log: ${incoming.body.msg.match(/^(#riigikoguIsikuKohalolu),(.*)/)[2].trim()}
+logstepFIXED:
+  log: ${incoming.body.msg}
+logstepFIXED2:
+  log: ${incoming.body.msg[0]}
+logstepFIXED3:
+  log: ${incoming.body.msg[1]}
   
 checkservice:
   switch:
