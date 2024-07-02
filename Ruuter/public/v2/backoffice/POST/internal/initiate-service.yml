@@ -25,7 +25,7 @@ checkservice:
       next: initiativeEvents
     - condition: ${incoming.body.msg === "#rahvaAlgatusPopulaarne"}
       next: initiativeEventsPopular
-    - condition: ${incoming.body.msg.match(/^(#riigikoguIsikuKohalolu),(.*)/)[1].trim() === "#riigikoguIsikuKohalolu;"}
+    - condition: ${incoming.body.msg.match(/^(#riigikoguIsikuKohalolu),(.*)/)[1].trim() === "#riigikoguIsikuKohalolu"}
       next: riigikoguAttendance
     - condition: ${incoming.body.msg === "#recentVoting"}
       next: riigikoguRecentVoting
