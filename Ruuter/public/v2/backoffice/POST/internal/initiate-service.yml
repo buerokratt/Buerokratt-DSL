@@ -1,10 +1,6 @@
-logstep8:
-  log: ${incoming.body.msg}
-logstep9:
-  log: ${incoming.body.msg.match(/^#riigikoguIsikuKohalolu,(.*)/)}
-logstep10:
+logstepSERVICE:
   log: ${incoming.body.msg.match(/^(#riigikoguIsikuKohalolu),(.*)/)[1].trim()}
-logstep11:
+logstepPAYLOAD:
   log: ${incoming.body.msg.match(/^(#riigikoguIsikuKohalolu),(.*)/)[2].trim()}
   
 checkservice:
