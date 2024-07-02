@@ -1,6 +1,8 @@
 logstep8:
   log: ${incoming.body.msg}
-
+logstep9:
+  log: ${incoming.body.msg.match(/^#riigikoguIsikuKohalolu,(.*)/)}
+  
 checkservice:
   switch:
     - condition: ${incoming.body.msg === "#laborMarket"}
