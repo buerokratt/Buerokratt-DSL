@@ -1,7 +1,3 @@
-logstepSERVICE:
-  log: ${incoming.body.msg.match(/^(#riigikoguIsikuKohalolu),(.*)/)[1].trim()}
-logstepPAYLOAD:
-  log: ${incoming.body.msg.match(/^(#riigikoguIsikuKohalolu),(.*)/)[2].trim()}
 logstepFIXED:
   log: ${incoming.body.msg}
 logstepFIXED2:
