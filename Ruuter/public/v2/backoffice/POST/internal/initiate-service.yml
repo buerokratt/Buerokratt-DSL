@@ -154,7 +154,7 @@ nordpool3Answer:
 initiativeEvents:
   call: http.get
   args:
-    url: "[#CHATBOT_RUUTER_PUBLIC_INTERNAL_CS]/rahvaalgatus/initiative-events-latest.yml"
+    url: "[#CHATBOT_RUUTER_PUBLIC_INTERNAL_CS]/rahvaalgatus/initiative-events-latest"
   result: ServiceResult
 
 logstepEVENTS:
