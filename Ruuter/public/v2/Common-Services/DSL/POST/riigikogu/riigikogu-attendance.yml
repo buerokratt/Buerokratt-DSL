@@ -4,7 +4,7 @@ prepareRequest:
     startDate: ${currentYear + "-01-01"}
     endDate: ${currentYear + "-12-31"}
     lang: "ET"
-    memberName: ${incoming.body.list[1]}
+    memberName: ${incoming.body.memberName}
   next: makeAPIRequest
 
 makeAPIRequest:
