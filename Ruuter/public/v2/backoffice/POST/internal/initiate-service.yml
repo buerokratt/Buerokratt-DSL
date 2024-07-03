@@ -1,5 +1,5 @@
 logstepPAYLOAD:
-  log: ${incoming.body.msg[0].text.match(/^(#riigikoguIsikuKohalolu),(.*)/)[2].trim()}
+  log: ${incoming.body.msg[0].text}
 
 earlyassign:
   assign:
@@ -19,7 +19,7 @@ checkservice:
       next: nordpool2Service
     - condition: ${incoming.body.msg === "#nordpool3"}
       next: nordpool3Service
-    - condition: ${incoming.body.msg === "#rahvaAlgatus"}
+    - condition: ${incoming.body.msg[0].text === "#rahvaAlgatus;"}
       next: initiativeEvents
     - condition: ${incoming.body.msg === "#rahvaAlgatusPopulaarne"}
       next: initiativeEventsPopular
@@ -154,9 +154,14 @@ nordpool3Answer:
 initiativeEvents:
   call: http.get
   args:
-    url: "[#CHATBOT_RUUTER_PUBLIC]/initiative-events"
-  result: initiativeEvents
-  next: initiativeEventsAnswer
+    url: "[#CHATBOT_RUUTER_PUBLIC_INTERNAL_CS]/rahvaalgatus/initiative-events-latest.yml"
+  result: ServiceResult
+
+logstepEVENTS:
+  log: ${ServiceResult}
+  next: assign_step
+
+  
 initiativeEventsAnswer:
   call: http.post
   args:
@@ -197,33 +202,15 @@ riigikoguAttendance:
     url: "[#CHATBOT_RUUTER_PUBLIC_INTERNAL_CS]/riigikogu/riigikogu-attendance"
     body:
       memberName: ${incoming.body.msg[0].text.match(/^(#riigikoguIsikuKohalolu),(.*)/)[2].trim()}
-  result: riigikoguAttendanceResult
+  result: ServiceResult
+  next: assign_step
 
 assign_step:
   assign:
     call_service_result: 
-    - text: ${riigikoguAttendanceResult.response.body.response}
+    - text: ${ServiceResult.response.body.response}
       recipient_id: ${recipient_id}
-
-logstepVASTUS1:
-  log: ${call_service_result}
-
-returbsrep:
   return: ${call_service_result}
-  next: end
-  
-riigikoguAttendanceAnswer:
-  call: http.post
-  args:
-    url: "[#CHATBOT_RESQL]/service-post"
-    body:
-      serviceContent: ${riigikoguAttendanceRequest.response.body.response}
-      chatId: ${incoming.body.chatId}
-      authorId: ${incoming.body.authorId}
-      authorFirstName: ${incoming.body.authorFirstName}
-      authorLastName: ""
-      authorTimestamp: ${incoming.body.authorTimestamp}
-      created: ${incoming.body.created}
   next: end
 
 riigikoguRecentVoting:
