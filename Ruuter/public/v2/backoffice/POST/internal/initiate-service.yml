@@ -168,7 +168,7 @@ logstepEVENTS3:
 assign_step_events:
   assign:
     call_service_result: 
-    - text: ${ServiceResult.response.body.response}
+    - text: ${ServiceResult.response.body.response.replace(/\n/g," ")}
       recipient_id: ${recipient_id}
 
 return_step_events:
