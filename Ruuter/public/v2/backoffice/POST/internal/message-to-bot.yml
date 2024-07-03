@@ -294,6 +294,9 @@ call_service:
     body:
       msg: ${botMsg}
   result: call_service_result
+  
+logstepAnswerFromService:
+  log: ${call_service_result} 
   next: convert_service_bot_responses_to_messages
 
 check_if_call_service_result_is_ok:
