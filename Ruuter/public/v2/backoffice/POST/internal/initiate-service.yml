@@ -1,5 +1,9 @@
 logstepPAYLOAD:
   log: ${incoming.body.msg[0].text.match(/^(#riigikoguIsikuKohalolu),(.*)/)[2].trim()}
+
+earlyassign:
+  assign:
+    recipient_id: ${incoming.body.msg[0].recipient_id}
   
 checkservice:
   switch:
