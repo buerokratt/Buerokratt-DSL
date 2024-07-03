@@ -4,7 +4,7 @@ prepareRequest:
     startDate: ${currentYear + "-01-01"}
     endDate: ${currentYear + "-12-31"}
     lang: "ET"
-    memberName: ${incoming.body.memberName}
+    memberName: ${incoming.body.list[1]}
   next: makeAPIRequest
 
 makeAPIRequest:
@@ -24,7 +24,7 @@ makeAPIRequest:
 
 filterMember:
   assign:
-    memberData: ${kohaloluData.response.body.filter(member => member.fullName === memberName)[0]}
+    memberData: ${kohaloluData.response.body.filter(member => member.fullName.toLowerCase() === memberName.toLowerCase())[0]}
   next: returnResult
 
 returnResult:
