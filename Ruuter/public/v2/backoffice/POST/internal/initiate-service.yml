@@ -205,7 +205,7 @@ riigikoguAttendance:
 assign_step:
   assign:
     call_service_result: 
-      text: ${riigikoguAttendanceResult.response.body.response}
+    - text: ${riigikoguAttendanceResult.response.body.response}
       recipient_id: ${recipient_id}
 
 logstepVASTUS1:
