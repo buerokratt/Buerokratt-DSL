@@ -159,6 +159,10 @@ initiativeEvents:
 
 logstepEVENTS:
   log: ${ServiceResult}
+logstepEVENTS2:
+  log: ${ServiceResult.response}
+logstepEVENTS3:
+  log: ${ServiceResult.response.response}
   next: assign_step
 
   
