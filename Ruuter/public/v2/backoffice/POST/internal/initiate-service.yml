@@ -163,22 +163,18 @@ logstepEVENTS2:
   log: ${ServiceResult.response.body}
 logstepEVENTS3:
   log: ${ServiceResult.response.body.response}
-  next: assign_step
+  next: assign_step_events
 
-  
-initiativeEventsAnswer:
-  call: http.post
-  args:
-    url: "[#CHATBOT_RESQL]/resql/service-post"
-    body:
-      serviceContent: ${initiativeEvents.response.body.response}
-      chatId: ${incoming.body.chatId}
-      authorId: ${incoming.body.authorId}
-      authorFirstName: ${incoming.body.authorFirstName}
-      authorLastName: ""
-      authorTimestamp: ${incoming.body.authorTimestamp}
-      created: ${incoming.body.created}
+assign_step_events:
+  assign:
+    call_service_result: 
+    - text: ${ServiceResult.response.body}
+      recipient_id: ${recipient_id}
+
+return_step_events:
+  return: ${call_service_result}
   next: end
+
 
 initiativeEventsPopular:
   call: http.get
