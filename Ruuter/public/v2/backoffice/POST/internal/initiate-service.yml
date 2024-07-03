@@ -155,11 +155,11 @@ initiativeEvents:
   call: http.get
   args:
     url: "[#CHATBOT_RUUTER_PUBLIC_INTERNAL_CS]/rahvaalgatus/initiative-events-latest.yml"
-  result: ServiceResultsss
+  result: ServiceResult
 
 logstepEVENTS:
   log: ${ServiceResult}
-  next: assign_stepsss
+  next: assign_step
 
   
 initiativeEventsAnswer:
@@ -202,14 +202,16 @@ riigikoguAttendance:
     url: "[#CHATBOT_RUUTER_PUBLIC_INTERNAL_CS]/riigikogu/riigikogu-attendance"
     body:
       memberName: ${incoming.body.msg[0].text.match(/^(#riigikoguIsikuKohalolu),(.*)/)[2].trim()}
-  result: requestResult
+  result: ServiceResult
   next: assign_step
 
 assign_step:
   assign:
     call_service_result: 
-    - text: ${requestResult.response.body.response}
+    - text: ${ServiceResult.response.body.response}
       recipient_id: ${recipient_id}
+
+return_step:
   return: ${call_service_result}
   next: end
 
