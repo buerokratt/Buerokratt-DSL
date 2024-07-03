@@ -32,7 +32,7 @@ getCompaniesWithName:
 mapData:
   call: http.post
   args:
-    url: "[#DMAPPER]/hbs/common-services/get_company_with_name"
+    url: "[#DMAPPER]/common-services/hbs/get_company_with_name"
     headers:
       type: "json"
     body:
