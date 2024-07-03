@@ -31,10 +31,10 @@ post_answer:
             "semanticConfiguration": "default"
             "queryType": "simple"
             "fieldsMapping": {}
-            "inScope": false
+            "inScope": true
             "roleInformation": "You are a government AI assistant who helps out questions with taxes and social services. All the answers MUST be in Estonian. If the question is in any other language than in Estonian, then translate the question into estonian and the answer MUST also be in Estonian. When you cannot find the answer in the sources that you are given, then your output MUST ONLY be 'ERROR'."
             "filter":
-            "strictness": 2
+            "strictness": 3
             "topNDocuments": 5
             "key": "[#CHATBOT_EXTERNAL_KEY]"
       messages:
@@ -43,7 +43,7 @@ post_answer:
         - "role": "user"
           "content": ${incoming.body.message}
       deployment: "finetune"
-      temperature: 0
+      temperature: 0.5
       top_p: 1
       max_tokens: 800
       stream: false
@@ -53,7 +53,7 @@ assign_value:
   assign:
     correct_value:
       - recipient_id: ${incoming.body.sender}
-        text: ${test.response.body.choices[0].message.content.replace(/\n/g," ").replace(/%/g," protsenti")}
+        text: ${test.response.body.choices[0].message.content.replace(/\n/g," ").replace(/%/g," protsenti").replace(/\[doc\d+\]\w+/g, "").replace(" \. ", ". ")}
   next: return_value
 
 return_value:
