@@ -135,7 +135,7 @@ check_for_fallback_bot:
       sender: ${chatId}
       message: ${content}
   result: fallback_bot_result
-  next: check_for_fallback_bot_result
+  next: check_if_fallback_bot_is_unable_to_reply
 
 check_for_fallback_bot_result:
   switch:
@@ -156,7 +156,7 @@ check_if_user_wants_csa:
     body:
       sender: ${chatId}
       message: "csa"
-  result: post_message_to_client_result
+  result: post_message_to_bot_result
   next: check_for_post_message_to_bot_result
 
 get_organization_working_details:
