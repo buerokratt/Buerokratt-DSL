@@ -48,6 +48,11 @@ post_answer:
       max_tokens: 800
       stream: false
   result: test
+
+logstepAZURE:
+  log: ${test.response.body.choices[0].message.content.replace(/\n/g," ")}
+logstepAZURE2:
+  log: ${test.response.body.choices[0].message.content.replace(/\n/g," ").replace(/%/g," protsenti").replace(/\[doc\d+\]\w+/g, "").replace(" \. ", ". ")}
   
 assign_value:
   assign:
