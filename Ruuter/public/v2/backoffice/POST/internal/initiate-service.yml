@@ -25,7 +25,7 @@ checkservice:
       next: initiativeEventsPopular
     - condition: ${incoming.body.msg[0].text.match(/^(#riigikoguIsikuKohalolu),(.*)/)[1].trim() === "#riigikoguIsikuKohalolu"}
       next: riigikoguAttendance
-    - condition: ${incoming.body.msg === "#recentVoting"}
+    - condition: ${incoming.body.msg[0].text === "#recentVoting"}
       next: riigikoguRecentVoting
     - condition: ${incoming.body.msg == null}
       next: noService
@@ -111,24 +111,33 @@ riigikoguAttendance:
     body:
       memberName: ${incoming.body.msg[0].text.match(/^(#riigikoguIsikuKohalolu),(.*)/)[2].trim()}
   result: ServiceResult
-  next: assign_step
+  next: assign_step_attendance
 
-assign_step:
+assign_step_attendance:
   assign:
     call_service_result: 
     - text: ${ServiceResult.response.body.response}
       recipient_id: ${recipient_id}
 
-return_step:
+return_step_attendance:
   return: ${call_service_result}
   next: end
 
 riigikoguRecentVoting:
   call: http.get
   args:
-    url: "[#CHATBOT_RUUTER_PUBLIC]/riigikogu-recent-voting"
-  result: riigikoguRecentVotingRequest
-  next: riigikoguRecentVotingAnswer
+    url: "[#CHATBOT_RUUTER_PUBLIC_INTERNAL_CS]/riigikogu/riigikogu-five-latest-votings"
+  result: ServiceResult
+
+assign_step_voting:
+  assign:
+    call_service_result: 
+    - text: ${ServiceResult.response.body.response}
+      recipient_id: ${recipient_id}
+
+return_step_voting:
+  return: ${call_service_result}
+  next: end  
 
 noService:
   return: "${incoming.body.msg} , POLE TEENUST"
