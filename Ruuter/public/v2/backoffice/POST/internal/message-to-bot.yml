@@ -145,7 +145,7 @@ check_for_fallback_bot_result:
 
 check_if_fallback_bot_is_unable_to_reply:
   switch:
-    - condition: ${fallback_bot_result.response.body.response[0].text == 'ERROR'}
+    - condition: ${fallback_bot_result.response.body.response == 'ERROR'}
       next: check_if_user_wants_csa
   next: convert_fallback_bot_responses_to_messages
 
