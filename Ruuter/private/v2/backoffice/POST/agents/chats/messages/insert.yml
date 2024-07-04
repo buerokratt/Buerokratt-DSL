@@ -72,7 +72,7 @@ assignIdCode:
 getUuid:
   call: http.post
   args:
-    url: "[#CHATBOT_DMAPPER]/backoffice/hbs//return_uuid"
+    url: "[#CHATBOT_DMAPPER]/backoffice/hbs/return_uuid"
     headers:
       type: json
   result: uuid_result

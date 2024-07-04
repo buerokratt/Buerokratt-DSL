@@ -27,7 +27,7 @@ extract_body:
 extrat_trigger_service_info:
   call: http.post
   args:
-    url: "[#CHATBOT_DMAPPER]/backoffice/hbs//extract_trigger_service_info"
+    url: "[#CHATBOT_DMAPPER]/backoffice/hbs/extract_trigger_service_info"
     headers:
       type: json
     body:
