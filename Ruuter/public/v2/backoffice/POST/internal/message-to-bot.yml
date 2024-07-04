@@ -135,6 +135,8 @@ check_for_fallback_bot:
       sender: ${chatId}
       message: ${content}
   result: fallback_bot_result
+logstepAZUREVASTUS:
+  log: ${fallback_bot_result}
   next: check_if_fallback_bot_is_unable_to_reply
 
 check_for_fallback_bot_result:
