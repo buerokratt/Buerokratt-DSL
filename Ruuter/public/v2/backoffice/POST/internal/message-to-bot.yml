@@ -335,6 +335,11 @@ convert_bot_responses_to_messages:
   next: add_bot_message_to_db
 
 convert_fallback_bot_responses_to_messages:
+  log: ${fallback_bot_result.response.body.response}
+convert_fallback_bot_responses_to_messages2:
+  log: ${fallback_bot_result.response.body}
+
+temp_step:
   call: http.post
   args:
     url: "[#CHATBOT_DMAPPER]/backoffice/hbs/bot_responses_to_messages"
