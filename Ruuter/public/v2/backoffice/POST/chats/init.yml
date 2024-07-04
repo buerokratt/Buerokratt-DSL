@@ -165,7 +165,13 @@ postMessageToBot:
       holidays: ${holidays}
       holidayNames: ${holidayNames}
   result: message_to_bot_result
-  next: check_for_post_message_to_bot_result
+
+logstepERROR:
+  log: ${message_to_bot_result}
+logstepERROR2:
+  log: ${message_to_bot_result.response.body.response}
+  next: getChat
+  
 
 check_for_post_message_to_bot_result:
   switch:
