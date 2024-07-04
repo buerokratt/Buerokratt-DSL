@@ -63,6 +63,3 @@ assign_value:
 
 return_value:
   return: ${correct_value}
-
-failed_request:
-  return: "ERROR"
