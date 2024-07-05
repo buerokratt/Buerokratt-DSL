@@ -103,11 +103,11 @@ initiativeEventsPopular:
     url: "[#CHATBOT_RUUTER_PUBLIC_INTERNAL_CS]/rahvaalgatus/initiative-events-popular"
   result: ServiceResult
 
-logstepEVENTS:
+logstepEVENTSPOPULAR:
   log: ${ServiceResult.response}
-logstepEVENTS2:
+logstepEVENTS2POPULAR2:
   log: ${ServiceResult.response.body}
-logstepEVENTS3:
+logstepEVENTS3POPULAR3:
   log: ${ServiceResult.response.body.response}
   next: assign_step_events_popular
 
@@ -117,7 +117,7 @@ assign_step_events_popular:
     - text: ${ServiceResult.response.body.response.replace(/\n/g," ")}
       recipient_id: ${recipient_id}
 
-return_step_events:
+return_step_events_popular:
   return: ${call_service_result}
   next: end
 
