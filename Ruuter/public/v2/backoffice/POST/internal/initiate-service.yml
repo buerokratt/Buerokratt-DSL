@@ -23,12 +23,12 @@ checkservice:
       next: initiativeEvents
     - condition: ${incoming.body.msg === "#rahvaAlgatusPopulaarne"}
       next: initiativeEventsPopular
-    - condition: ${incoming.body.msg[0].text.match(/^(#riigikoguIsikuKohalolu),(.*)/)[1].trim() === "#riigikoguIsikuKohalolu"}
-      next: riigikoguAttendance
     - condition: ${incoming.body.msg[0].text === "#recentFiveVoting"}
       next: riigikoguRecentVoting
     - condition: ${incoming.body.msg == null}
       next: noService
+    - condition: ${incoming.body.msg[0].text.match(/^(#riigikoguIsikuKohalolu),(.*)/)[1].trim() === "#riigikoguIsikuKohalolu"}
+      next: riigikoguAttendance
   next: noService
 
 laborMarket:
