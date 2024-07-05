@@ -100,9 +100,26 @@ return_step_events:
 initiativeEventsPopular:
   call: http.get
   args:
-    url: "[#CHATBOT_RUUTER_PUBLIC]/initiative-events-popular"
-  result: initiativeEventsPopular
-  next: initiativeEventsPopularAnswer
+    url: "[#CHATBOT_RUUTER_PUBLIC_INTERNAL_CS]/rahvaalgatus/initiative-events-popular"
+  result: ServiceResult
+
+logstepEVENTS:
+  log: ${ServiceResult.response}
+logstepEVENTS2:
+  log: ${ServiceResult.response.body}
+logstepEVENTS3:
+  log: ${ServiceResult.response.body.response}
+  next: assign_step_events_popular
+
+assign_step_events_popular:
+  assign:
+    call_service_result: 
+    - text: ${ServiceResult.response.body.response.replace(/\n/g," ")}
+      recipient_id: ${recipient_id}
+
+return_step_events:
+  return: ${call_service_result}
+  next: end
 
 riigikoguAttendance:
   call: http.post
