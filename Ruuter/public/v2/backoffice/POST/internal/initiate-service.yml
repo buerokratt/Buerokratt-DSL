@@ -21,7 +21,7 @@ checkservice:
       next: nordpool3Service
     - condition: ${incoming.body.msg[0].text === "#rahvaAlgatus;"}
       next: initiativeEvents
-    - condition: ${incoming.body.msg === "#rahvaAlgatusPopulaarne"}
+    - condition: ${incoming.body.msg[0].text === "#rahvaAlgatusPopulaarne"}
       next: initiativeEventsPopular
     - condition: ${incoming.body.msg[0].text === "#recentFiveVoting"}
       next: riigikoguRecentVoting
