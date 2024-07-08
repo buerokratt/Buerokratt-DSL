@@ -125,8 +125,20 @@ common_service1:
 
 logstep3:
   log: ${common_service1_result}
-  next: extract_bot_responses
-  
+#  next: extract_bot_responses
+
+common_service2: 
+  call: http.post
+  args: 
+    url: "[#CHATBOT_RUUTER_PUBLIC_INTERNAL_CS]/services/companies/employees"
+    body:
+      message: ${registry_code=12890714}
+  result: botMsg
+
+logstepmployees:
+  log: ${botMsg}
+  next: convert_bot_responses_to_messages
+
 check_for_fallback_bot:
   call: http.post
   args:
