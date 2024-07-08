@@ -19,7 +19,9 @@
 assign_values:
   assign:
     params: ${incoming.body}
-
+logstepOSPARAMS:
+  log: ${params}
+  
 getCompaniesWithName:
   call: http.post
   args:
