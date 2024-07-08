@@ -42,8 +42,11 @@ getWithCode:
       id: "company-with-code"
       params: { registry_code: "${params.message}", field: "workers" }
   result: res
-  next: mapCodeData
+  #next: mapCodeData
 
+logstepres:
+  log: ${res}
+  next: mapCodeData
 mapCodeData:
   call: http.post
   args:
