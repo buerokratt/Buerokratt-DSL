@@ -23,9 +23,6 @@ assign_values:
   assign:
     params: ${incoming.body}
 
-logstepbody:
-  log: ${params.message}
-
 checkForParams:
   switch:
     - condition: ${params.registry_code != null}
@@ -40,13 +37,10 @@ getWithCode:
     url: "[#OPENSEARCH]/companies/_search/template"
     body:
       id: "company-with-code"
-      params: { registry_code: "${params.message}", field: "workers" }
+      params: { registry_code: "${params.registry_code}", field: "workers" }
   result: res
-  #next: mapCodeData
-
-logstepres:
-  log: ${res}
   next: mapCodeData
+
 mapCodeData:
   call: http.post
   args:
