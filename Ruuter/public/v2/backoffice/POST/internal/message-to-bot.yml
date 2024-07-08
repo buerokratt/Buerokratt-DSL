@@ -125,6 +125,7 @@ common_service1:
 
 logstep3:
   log: ${common_service1_result}
+  next: extract_bot_responses
   
 check_for_fallback_bot:
   call: http.post
