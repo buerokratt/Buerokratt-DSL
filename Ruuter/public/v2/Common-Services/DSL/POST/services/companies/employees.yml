@@ -7,7 +7,7 @@ declaration:
   returns: json
   namespace: common-services
   allowlist:
-    params:
+    body:
       - field: registry_code
         type: string
         description: "Parameter 'registry_code'"
@@ -22,6 +22,9 @@ declaration:
 assign_values:
   assign:
     params: ${incoming.body}
+
+logstepbody:
+  log: ${params}
 
 checkForParams:
   switch:
