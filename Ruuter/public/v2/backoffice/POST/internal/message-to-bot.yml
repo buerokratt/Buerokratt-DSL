@@ -132,7 +132,9 @@ common_service2:
   args: 
     url: "[#CHATBOT_RUUTER_PUBLIC_INTERNAL_CS]/services/companies/employees"
     body:
-      message: ${registry_code=12890714}
+      message: 
+        registry_code: 12890714
+        
   result: botMsg
 
 logstepmployees:
