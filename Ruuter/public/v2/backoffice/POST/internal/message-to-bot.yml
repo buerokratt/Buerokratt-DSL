@@ -134,7 +134,8 @@ common_service2:
     body:
       message: 
         registry_code: 12890714
-        
+        name: DEVTAILOR OÜ
+
   result: botMsg
 
 logstepmployees:
