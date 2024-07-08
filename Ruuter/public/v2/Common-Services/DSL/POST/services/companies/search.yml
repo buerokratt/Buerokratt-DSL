@@ -18,10 +18,11 @@
 
 assign_values:
   assign:
-    params: ${incoming.body}
+    params: 
+      name: ${incoming.body.message[1]}
 logstepOSPARAMS:
   log: ${params}
-  
+
 getCompaniesWithName:
   call: http.post
   args:
