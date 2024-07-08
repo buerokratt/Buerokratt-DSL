@@ -29,6 +29,9 @@ getCompaniesWithName:
       params: ${params}
   result: res
 
+logstepOS:
+  log: ${res}
+
 mapData:
   call: http.post
   args:
