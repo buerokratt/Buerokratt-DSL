@@ -24,7 +24,7 @@ assign_values:
     params: ${incoming.body}
 
 logstepbody:
-  log: ${params}
+  log: ${params.message}
 
 checkForParams:
   switch:
