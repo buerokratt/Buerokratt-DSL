@@ -1,20 +1,20 @@
-declaration:
-  call: declare
-  version: 0.1
-  description: "Search Companies by name"
-  method: post
-  accepts: json
-  returns: json
-  namespace: common-services
-  allowlist:
-    params:
-      - field: name
-        type: string
-        description: "Parameter 'name'"
-    headers:
-      - field: cookie
-        type: string
-        description: "Cookie field"
+#declaration:
+#  call: declare
+#  version: 0.1
+#  description: "Search Companies by name"
+#  method: post
+#  accepts: json
+#  returns: json
+#  namespace: common-services
+#  allowlist:
+#    params:
+#      - field: name
+#        type: string
+#        description: "Parameter 'name'"
+#    headers:
+#      - field: cookie
+#        type: string
+#        description: "Cookie field"
 
 assign_values:
   assign:
