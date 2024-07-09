@@ -49,7 +49,7 @@ getWithCode:
 
 mapCodeData:
   assign:
-    employees: ${res.response.body.hits.hits.map((hit) => { return {"result": hit.workers, "text": result.name}; })}
+    employees: "${res.response.body.hits.hits.map((hit) => { return {'result': hit.workers, 'text': result.name}; })}"
 
 
 
