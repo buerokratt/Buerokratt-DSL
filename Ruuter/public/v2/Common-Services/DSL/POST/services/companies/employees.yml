@@ -50,14 +50,14 @@ mapCodeData:
     body:
       hits: ${res.response.body.hits.hits}
   result: codeMappedData
-#  next: checkMappedData
+  next: checkMappedData
 
 logstepmapCODEDATA:
     log: ${codeMappedData.response.body}
 
 logstepmapHITS:
     log:  ${res.response.body.hits.hits}
-    next: checkMappedData
+
 
 
 checkMappedData:
