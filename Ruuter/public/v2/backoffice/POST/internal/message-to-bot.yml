@@ -127,21 +127,21 @@ logstep3:
   log: ${common_service1_result}
 
 logstepCM2R:
-  log: ${common_service1_result.response.body}
+  log: ${post_message_to_bot_result.response.body}
 #  next: extract_bot_responses
 
-common_service2: 
-  call: http.post
-  args: 
-    url: "[#CHATBOT_RUUTER_PUBLIC_INTERNAL_CS]/services/companies/employees"
-    body: 
-      message: ${common_service1_result.response.body.registry_code}
+#common_service2: 
+#  call: http.post
+#  args: 
+#    url: "[#CHATBOT_RUUTER_PUBLIC_INTERNAL_CS]/services/companies/employees"
+#    body: 
+#      message: ${common_service1_result.response.body.registry_code}
 
-  result: botMsg
+#  result: botMsg
 
-logstepmployees:
-  log: ${botMsg}
-  next: convert_bot_responses_to_messages
+#logstepmployees:
+#  log: ${botMsg}
+#  next: convert_bot_responses_to_messages
 
 check_for_fallback_bot:
   call: http.post
@@ -340,7 +340,7 @@ convert_bot_responses_to_messages:
       data:
         {
           "botMessages": "${botMsg}",
-          "buttons": [{"title": "TEST", "payload": "1234567"}],
+#          "buttons": [{"title": "TEST", "payload": "1234567"}],
           "chatId": "${chatId}",
           "authorId": "${get_bot_name_result.response.body[0].value}",
           "authorFirstName": "",
