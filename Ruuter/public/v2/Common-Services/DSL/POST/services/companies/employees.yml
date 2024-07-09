@@ -29,6 +29,12 @@ checkForParams:
       next: getWithCode
     - condition: ${params.county != null}
       next: getWithCounty
+#  next: getAll
+
+logstepCHCKPARAMS:
+  log: ${params.registry_code != null}
+logstepCHCKPARAMS2: 
+  log: ${params.county != null}
   next: getAll
 
 getWithCode:
@@ -74,6 +80,8 @@ return_no_companies_found:
   return: "No companies found"
   next: end
 
+
+
 getWithCounty:
   call: http.post
   args:
@@ -98,6 +106,9 @@ mapCountyData:
 return_county_result:
   return: ${countyMappedData.response.body}
   next: end
+
+logstepGETALL:
+  log: res
 
 getAll:
   call: http.post
