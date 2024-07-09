@@ -125,7 +125,7 @@ common_service1:
 
 logstep3:
   log: ${common_service1_result}
-#  next: extract_bot_responses
+  next: extract_bot_responses
 
 common_service2: 
   call: http.post
@@ -134,8 +134,8 @@ common_service2:
     body: 
       registry_code: 11139712
 
-  result: botMsg
-
+  result: common_service2_result
+  next: extract_bot_responses
 logstepmployees:
   log: "bots6num ${botMsg}"
   next: convert_bot_responses_to_messages
