@@ -48,21 +48,8 @@ getWithCode:
   next: mapCodeData
 
 mapCodeData:
-  call: http.post
-  args:
-    url: "[#DMAPPER]/common-services/hbs/get_employees_with_code"
-    headers:
-      type: "json"
-    body:
-      hits: ${res.response.body.hits.hits}
-  result: codeMappedData
-  next: checkMappedData
-
-logstepmapCODEDATA:
-    log: ${codeMappedData.response.body}
-
-logstepmapHITS:
-    log:  ${res.response.body.hits.hits}
+  assign:
+    employees: ${res.response.body.hits.hits.map((hit) => { return {"result": hit.workers, "text": result.name}; })}
 
 
 
