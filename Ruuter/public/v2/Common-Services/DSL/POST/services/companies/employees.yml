@@ -44,7 +44,7 @@ getWithCode:
 mapCodeData:
   call: http.post
   args:
-    url: "[#DMAPPER]/hbs/common-services/get_employees_with_code"
+    url: "[#DMAPPER]/common-services/hbs/get_employees_with_code"
     headers:
       type: "json"
     body:
