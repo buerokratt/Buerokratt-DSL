@@ -137,7 +137,7 @@ common_service2:
   result: botMsg
 
 logstepmployees:
-  log: ${botMsg}
+  log: "bots6num ${botMsg}"
   next: convert_bot_responses_to_messages
 
 check_for_fallback_bot:
@@ -327,6 +327,9 @@ trigger_service_is_not_exist:
     botMsgPlaceholder: { "temp": [{"text":"service_currently_unavailable", "recipient_id": "${chatId}"}] }
     botMsg: ${botMsgPlaceholder.temp}
 
+logstepBOTMSG:
+  log: ${botMsg}
+
 convert_bot_responses_to_messages:
   call: http.post
   args:
@@ -347,6 +350,7 @@ convert_bot_responses_to_messages:
         }
   result: converted_messages_res
   next: add_bot_message_to_db
+
 
 convert_fallback_bot_responses_to_messages:
   call: http.post
