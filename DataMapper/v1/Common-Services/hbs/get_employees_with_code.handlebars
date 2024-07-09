@@ -3,7 +3,7 @@
     {{#each hits}}
             {
               "result": {{ _source.workers }},
-              "name": "{{ _source.name }}"
+              "text": "{{ _source.name }}"
             }{{#unless @last}},{{/unless}}
     {{/each}}
     ]
