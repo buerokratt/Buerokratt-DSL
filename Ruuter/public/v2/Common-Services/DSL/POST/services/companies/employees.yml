@@ -52,6 +52,12 @@ mapCodeData:
   result: codeMappedData
   next: checkMappedData
 
+logstepmapCODEDATA:
+    log:  ${codeMappedData}
+
+logstepmapHITS:
+    log:  ${res.response.body.hits.hits}
+
 checkMappedData:
   switch:
     - condition: ${codeMappedData.response.body.employees.length > 0}
