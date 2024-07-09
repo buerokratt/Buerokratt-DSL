@@ -125,7 +125,7 @@ common_service1:
 
 logstep3:
   log: ${common_service1_result}
-  next: extract_bot_responses
+#  next: extract_bot_responses
 
 common_service2: 
   call: http.post
@@ -134,10 +134,10 @@ common_service2:
     body: 
       registry_code: 11139712
 
-  result: common_service2_result
+  result: botMsg
 
 logstepmployees:
-  log: "bots6num ${common_service2_result}"
+  log: ${botMsg}
   next: convert_bot_responses_to_messages
 
 check_for_fallback_bot:
@@ -327,9 +327,6 @@ trigger_service_is_not_exist:
     botMsgPlaceholder: { "temp": [{"text":"service_currently_unavailable", "recipient_id": "${chatId}"}] }
     botMsg: ${botMsgPlaceholder.temp}
 
-logstepBOTMSG:
-  log: ${botMsg}
-
 convert_bot_responses_to_messages:
   call: http.post
   args:
@@ -350,7 +347,6 @@ convert_bot_responses_to_messages:
         }
   result: converted_messages_res
   next: add_bot_message_to_db
-
 
 convert_fallback_bot_responses_to_messages:
   call: http.post
