@@ -57,7 +57,7 @@ logstepmapCODEDATA:
 
 logstepmapHITS:
     log:  ${res.response.body.hits.hits}
-  next: checkMappedData
+    next: checkMappedData
 
 
 checkMappedData:
