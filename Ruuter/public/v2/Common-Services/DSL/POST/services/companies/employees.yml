@@ -53,7 +53,7 @@ mapCodeData:
 #  next: checkMappedData
 
 logstepmapCODEDATA:
-    log: "töötajatearv ${codeMappedData.response.body.employees.length}"
+    log: ${codeMappedData.response.body}
 
 logstepmapHITS:
     log:  ${res.response.body.hits.hits}
