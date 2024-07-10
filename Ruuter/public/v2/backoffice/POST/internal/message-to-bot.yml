@@ -136,11 +136,12 @@ common_service2:
     url: "[#CHATBOT_RUUTER_PUBLIC_INTERNAL_CS]/services/companies/employees"
     body: 
       registry_code: 12252422
+      result: 190
 
   result: botMsg
 
 logstepmployees:
-  log: ${botMsg}
+  log: ${botMsgTxt}
   next: extract_bot_responses
 
 check_for_fallback_bot:
