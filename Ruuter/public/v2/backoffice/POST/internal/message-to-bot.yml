@@ -127,7 +127,10 @@ logstep3:
   log: ${common_service1_result}
 
 logstepVALTER:
-  log: ${common_service1_result.response}
+  log: ${common_service1_result.response.body}
+
+logstepJAVA:
+  log: ${common_service1_result.response.body.response}
 
 logstepCM2R:
   log: ${post_message_to_bot_result.response.body}
@@ -138,7 +141,7 @@ common_service2:
   args: 
     url: "[#CHATBOT_RUUTER_PUBLIC_INTERNAL_CS]/services/companies/employees"
     body: 
-      message: ${common_service1_result.response}
+      message: ${common_service1_result.response.body}
 
   result: common_service2_result
 
