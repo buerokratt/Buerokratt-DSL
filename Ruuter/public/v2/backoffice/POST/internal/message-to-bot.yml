@@ -141,7 +141,7 @@ common_service2:
 
 logstepCS2: 
   log: ${common_service2_result}
-  next: post_message_to_bot
+  next: extract_bot_responses
 
 check_for_fallback_bot:
   call: http.post
@@ -293,8 +293,15 @@ extract_bot_responses:
   assign:
     botMsg: ${post_message_to_bot_result.response.body}
     botMsgTxt: ${post_message_to_bot_result.response.body?.[0]?.text}
-logstepBOTMSG: 
-  log: ${post_message_to_bot_result.response.body}
+  next: check_if_bot_message_start_with_hash
+
+extract_bot_responses2:
+  assign:
+    botMsg: ${common_service2_result.response.body}
+    botMsgTxt: ${common_service2_result.response.body?.[0]?.text}
+
+logstepCS2BMSG:
+  log: ${botMsg}
 
 check_if_bot_message_start_with_hash:
   switch:
