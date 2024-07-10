@@ -141,7 +141,7 @@ common_service2:
 
 logstepCS2: 
   log: ${common_service2_result}
-  next: extract_bot_responses2y
+  next: extract_bot_responses2
 
 check_for_fallback_bot:
   call: http.post
@@ -301,7 +301,7 @@ logstepBOTMSG294:
 extract_bot_responses2:
   assign:
     botMsg: ${common_service2_result.response.body}
-    botMsgTxt: ${common_service2_result.response.body?.[0]?.text}
+    botMsgTxt: ${common_service2_result.response.body.result}
   next: convert_bot_responses_to_messages
 
 logstepCS2BMSG:
