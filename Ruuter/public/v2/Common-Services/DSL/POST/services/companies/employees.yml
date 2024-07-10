@@ -7,7 +7,7 @@ declaration:
   returns: json
   namespace: common-services
   allowlist:
-    body:
+    params:
       - field: registry_code
         type: string
         description: "Parameter 'registry_code'"
