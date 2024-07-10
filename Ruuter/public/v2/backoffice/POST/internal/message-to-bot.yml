@@ -128,14 +128,14 @@ logstep3:
 
 logstepCM2R:
   log: ${post_message_to_bot_result.response.body}
-#  next: extract_bot_responses
+  next: extract_bot_responses
 
 common_service2: 
   call: http.post
   args: 
     url: "[#CHATBOT_RUUTER_PUBLIC_INTERNAL_CS]/services/companies/employees"
     body: 
-      message: ${common_service1_result.response}
+      message: ${post_message_to_bot_result.response.body}
 
   result: botMsg
 
