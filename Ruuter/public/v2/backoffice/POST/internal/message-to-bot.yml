@@ -300,7 +300,7 @@ logstepBOTMSG294:
 
 extract_bot_responses2:
   assign:
-    botMsg: ${common_service2_result.response.body}
+    botMsg: ${common_service2_result.response.body.result}
     botMsgTxt: ${common_service2_result.response.body.result}
   
 
