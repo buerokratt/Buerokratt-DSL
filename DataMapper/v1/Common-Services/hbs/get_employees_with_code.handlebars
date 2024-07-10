@@ -2,8 +2,8 @@
     "employees": [
     {{#each hits}}
             {
-              "result": {{ _source.workers }},
-              "text": "{{ _source.name }}"
+              "text": {{ _source.workers }},
+              "result": "{{ _source.name }}"
             }{{#unless @last}},{{/unless}}
     {{/each}}
     ]
