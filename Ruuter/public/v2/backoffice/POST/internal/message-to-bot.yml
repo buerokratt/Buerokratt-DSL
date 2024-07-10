@@ -141,7 +141,7 @@ common_service2:
 
 logstepCS2: 
   log: ${common_service2_result}
-  next: extract_bot_responses
+  next: post_message_to_bot
 
 check_for_fallback_bot:
   call: http.post
