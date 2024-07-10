@@ -32,7 +32,7 @@ checkForParams:
       next: getWithCode
     - condition: ${params.county != null}
       next: getWithCounty
-  next: getAll
+#  next: getAll
 
 getWithCode:
   call: http.post
