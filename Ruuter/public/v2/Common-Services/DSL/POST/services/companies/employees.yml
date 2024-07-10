@@ -34,6 +34,10 @@ checkForParams:
       next: getWithCounty
 #  next: getAll
 
+logstepCHCGETWCODE: 
+  log: ${getWithCode}
+ 
+
 getWithCode:
   call: http.post
   args:
@@ -42,11 +46,9 @@ getWithCode:
       id: "company-with-code"
       params: { registry_code: "${params.registry_code}", field: "workers" }
   result: res
-#  next: mapCodeData
-
-logstepCHCGETWCODE: 
-  log: ${res}
   next: mapCodeData
+
+
 
 mapCodeData:
   call: http.post
