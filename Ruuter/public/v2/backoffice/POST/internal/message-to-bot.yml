@@ -126,8 +126,8 @@ common_service1:
 logstep3:
   log: ${common_service1_result}
 
-logstepVALTER:
-  log: ${common_service1_result.response.companies?.shift()}
+#logstepVALTER:
+#  log: ${common_service1_result.response.companies?.shift()}
 
 logstepCM2R:
   log: ${post_message_to_bot_result.response.body}
