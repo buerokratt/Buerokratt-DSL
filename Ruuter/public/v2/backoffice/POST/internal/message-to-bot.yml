@@ -128,7 +128,7 @@ logstep3:
 
 logstepCM2R:
   log: ${post_message_to_bot_result.response.body}
-  next: extract_bot_responses
+#  next: extract_bot_responses
 
 common_service2: 
   call: http.post
@@ -293,9 +293,6 @@ extract_bot_responses:
   assign:
     botMsg: ${post_message_to_bot_result.response.body}
     botMsgTxt: ${post_message_to_bot_result.response.body?.[0]?.text}
-
-logstep4:
-  log: ${botMsg}
 
 check_if_bot_message_start_with_hash:
   switch:
