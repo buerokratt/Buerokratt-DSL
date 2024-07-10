@@ -346,6 +346,10 @@ convert_bot_responses_to_messages:
           "created": "${new Date().toISOString()}",
         }
   result: converted_messages_res
+#  next: add_bot_message_to_db
+
+logstepCONVERTBOTMSG:
+  log: ${converted_messages_res}
   next: add_bot_message_to_db
 
 convert_fallback_bot_responses_to_messages:
@@ -387,6 +391,8 @@ convert_service_bot_responses_to_messages:
         }
   result: converted_messages_res
   next: add_bot_message_to_db  
+
+
 
 add_bot_message_to_db:
   call: http.post
