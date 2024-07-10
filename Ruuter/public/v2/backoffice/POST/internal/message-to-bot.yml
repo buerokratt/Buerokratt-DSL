@@ -137,10 +137,13 @@ common_service2:
     body: 
       registry_code: 12252422
 
-  result: botMsg2
+  result: common_service2_result
+
+logstepCS2: 
+  log: ${common_service2_result}
 
 logstepmployees:
-  log: ${botMsg2}
+  log: ${botMsg}
   next: extract_bot_responses
 
 check_for_fallback_bot:
@@ -292,7 +295,6 @@ add_chat_id_to_queue_notification_node:
 extract_bot_responses:
   assign:
     botMsg: ${post_message_to_bot_result.response.body}
-    botMsg2: 190
     botMsgTxt: ${post_message_to_bot_result.response.body?.[0]?.text}
 logstepBOTMSG: 
   log: ${post_message_to_bot_result.response.body}
