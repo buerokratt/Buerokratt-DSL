@@ -136,7 +136,6 @@ common_service2:
     url: "[#CHATBOT_RUUTER_PUBLIC_INTERNAL_CS]/services/companies/employees"
     body: 
       registry_code: 12252422
-      result: 190
 
   result: botMsg
 
@@ -294,6 +293,8 @@ extract_bot_responses:
   assign:
     botMsg: ${post_message_to_bot_result.response.body}
     botMsgTxt: ${post_message_to_bot_result.response.body?.[0]?.text}
+logstep: 
+  log: ${post_message_to_bot_result.response.body}
 
 check_if_bot_message_start_with_hash:
   switch:
