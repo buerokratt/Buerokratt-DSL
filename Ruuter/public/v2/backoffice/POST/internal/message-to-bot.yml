@@ -141,9 +141,6 @@ common_service2:
 
 logstepCS2: 
   log: ${common_service2_result}
-
-logstepmployees:
-  log: ${botMsg}
   next: extract_bot_responses
 
 check_for_fallback_bot:
