@@ -302,11 +302,11 @@ extract_bot_responses2:
   assign:
     botMsg: ${common_service2_result.response.body}
     botMsgTxt: ${common_service2_result.response.body.result}
-  next: convert_bot_responses_to_messages
+  
 
 logstepCS2BMSG:
   log: ${botMsg}
-
+  next: convert_bot_responses_to_messages
 check_if_bot_message_start_with_hash:
   switch:
     - condition: ${botMsgTxt.startsWith('#')}
