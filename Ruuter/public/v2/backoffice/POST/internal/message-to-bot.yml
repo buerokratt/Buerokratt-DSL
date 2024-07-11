@@ -315,6 +315,7 @@ extract_bot_responses2:
   assign:
     botMsg: ${common_service2_result.response.body}
     botMsgTxt: ${common_service2_result.response.body.result}
+  next: convert_bot_responses_to_messages
 
 extract_bot_responses3:
   assign:
