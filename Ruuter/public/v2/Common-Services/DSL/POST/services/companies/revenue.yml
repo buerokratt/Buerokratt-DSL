@@ -25,7 +25,7 @@ assign_values:
 
 checkForParams:
   switch:
-    - condition: ${params.registry_code != null}
+    - condition: ${params.message.registry_code != null}
       next: getWithCode
     - condition: ${params.county != null}
       next: getWithCounty

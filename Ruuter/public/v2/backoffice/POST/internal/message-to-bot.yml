@@ -113,6 +113,8 @@ check_if_bot_is_unable_to_reply:
       next: get_organization_working_details
     - condition: ${post_message_to_bot_result.response.body?.[0]?.text.match(/^OPENSEARCH/) != null}
       next: common_service1
+    - condition: ${post_message_to_bot_result.response.body?.[0]?.text.match(/^REVENUEOPENSEARCH/) != null}
+      next: common_service_revenue1
   next: extract_bot_responses
 
 common_service1:
@@ -123,31 +125,36 @@ common_service1:
       message: ${post_message_to_bot_result.response.body?.[0]?.text.match(/^OPENSEARCH(.*)/)}
   result: common_service1_result
 
-logstep3:
-  log: ${common_service1_result}
-
-logstepVALTER:
-  log: ${common_service1_result.response.body.response.companies}
-
-logstepJAVA:
-  log: ${common_service1_result.response.body.response.companies[0]}
-
-logstepCM2R:
-  log: ${post_message_to_bot_result.response.body}
-#  next: extract_bot_responses
-
 common_service2: 
   call: http.post
   args: 
     url: "[#CHATBOT_RUUTER_PUBLIC_INTERNAL_CS]/services/companies/employees"
     body: 
       message: ${common_service1_result.response.body.response.companies[0]}
-
   result: common_service2_result
+  next: extract_bot_responses2
+
+common_service_revenue1:
+  call: http.post
+  args:
+    url: "[#CHATBOT_RUUTER_PUBLIC_INTERNAL_CS]/services/companies/search"
+    body:
+      message: ${post_message_to_bot_result.response.body?.[0]?.text.match(/^REVENUEOPENSEARCH(.*)/)}
+  result: common_service_revenue1_result
+  
+
+common_service_revenue2: 
+  call: http.post
+  args: 
+    url: "[#CHATBOT_RUUTER_PUBLIC_INTERNAL_CS]/services/companies/revenue"
+    body: 
+      message: ${common_service_revenue_result.response.body.response.companies[0]}
+
+  result: common_service_revenue2_result
 
 logstepCS2: 
   log: ${common_service2_result}
-  next: extract_bot_responses2
+  next: extract_bot_responses3
 
 check_for_fallback_bot:
   call: http.post
@@ -308,6 +315,11 @@ extract_bot_responses2:
   assign:
     botMsg: ${common_service2_result.response.body}
     botMsgTxt: ${common_service2_result.response.body.result}
+
+extract_bot_responses3:
+  assign:
+    botMsg: ${common_service_revenue2_result.response.body}
+    botMsgTxt: ${common_service_revenue2_result.response.body.result}
   
 
 logstepCS2BMSG:
