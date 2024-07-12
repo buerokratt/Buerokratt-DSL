@@ -115,9 +115,9 @@ check_if_bot_is_unable_to_reply:
       next: common_service1
     - condition: ${post_message_to_bot_result.response.body?.[0]?.text.match(/^REVENUEOPENSEARCH/) != null}
       next: common_service_revenue1
-    - condition: ${post_message_to_bot_result.response.body?.[0]?.text.match(/^NATIONALTAXEOPENSEARCH/) != null}
+    - condition: ${post_message_to_bot_result.response.body?.[0]?.text.match(/^NATIONALTAXOPENSEARCH/) != null}
       next: common_service_national_tax1
-    - condition: ${post_message_to_bot_result.response.body?.[0]?.text.match(/^WORKFORCETAXEOPENSEARCH/) != null}
+    - condition: ${post_message_to_bot_result.response.body?.[0]?.text.match(/^WORKFORCETAXOPENSEARCH/) != null}
       next: common_service_workforce_tax1
   next: extract_bot_responses
 
@@ -181,7 +181,7 @@ common_service_workforce_tax1:
   args:
     url: "[#CHATBOT_RUUTER_PUBLIC_INTERNAL_CS]/services/companies/search"
     body:
-      message: ${post_message_to_bot_result.response.body?.[0]?.text.match(/^WORKFORCEOPENSEARCH(.*)/)}
+      message: ${post_message_to_bot_result.response.body?.[0]?.text.match(/^WORKFORCETAXOPENSEARCH(.*)/)}
   result: common_service_workforce_tax1_result
   
 
