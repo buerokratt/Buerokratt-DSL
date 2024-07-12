@@ -117,9 +117,6 @@ check_if_bot_is_unable_to_reply:
       next: common_service_revenue1
   next: extract_bot_responses
 
-logstep:
-  log: 
-
 common_service1:
   call: http.post
   args:
@@ -151,12 +148,12 @@ common_service_revenue2:
   args: 
     url: "[#CHATBOT_RUUTER_PUBLIC_INTERNAL_CS]/services/companies/revenue"
     body: 
-      message: ${common_service_revenue_result.response.body.response.companies[0]}
+      message: ${common_service_revenue1_result.response.body.response.companies[0]}
 
   result: common_service_revenue2_result
 
 logstepCS2: 
-  log: ${common_service2_result}
+  log: ${common_service_revenue2_result}
   next: extract_bot_responses3
 
 check_for_fallback_bot:
