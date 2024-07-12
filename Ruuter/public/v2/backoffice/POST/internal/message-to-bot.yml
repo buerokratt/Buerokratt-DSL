@@ -198,7 +198,6 @@ common_service_workforce_tax2:
     url: "[#CHATBOT_RUUTER_PUBLIC_INTERNAL_CS]/services/companies/work-force-taxes"
     body: 
       message: ${common_service_workforce_tax1_result.response.body.response.companies[0]}
-
   result: common_service_workforce_tax2_result
   next: extract_bot_responses_workforce_tax
 
@@ -391,7 +390,7 @@ extract_bot_responses_national_tax:
 extract_bot_responses_workforce_tax:
   assign:
     botMsg: ${common_service_workforce_tax2_result.response.body}
-    botMsgTxt: ${common_service_worforce_tax2_result.response.body.result}
+    botMsgTxt: ${common_service_workforce_tax2_result.response.body.result}
   next: convert_bot_responses_to_messages
 
 check_if_bot_message_start_with_hash:

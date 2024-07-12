@@ -79,7 +79,7 @@ getWithCounty:
 mapCountyData:
   call: http.post
   args:
-    url: "[#DMAPPER]/hbs/common-services/get_total_with_county"
+    url: "[#DMAPPER]/common-services/hbs/get_total_with_county"
     headers:
       type: "json"
     body:
@@ -104,7 +104,7 @@ getAll:
 mapAllData:
   call: http.post
   args:
-    url: "[#DMAPPER]/hbs/common-services/get_total"
+    url: "[#DMAPPER]/common-services/hbs/get_total"
     headers:
       type: "json"
     body:
