@@ -388,7 +388,7 @@ extract_bot_responses_national_tax:
     botMsgTxt: ${common_service_national_tax2_result.response.body.result}
   next: convert_bot_responses_to_messages
 
-extract_bot_responses_workfroce_tax:
+extract_bot_responses_workforce_tax:
   assign:
     botMsg: ${common_service_workforce_tax2_result.response.body}
     botMsgTxt: ${common_service_worforce_tax2_result.response.body.result}
