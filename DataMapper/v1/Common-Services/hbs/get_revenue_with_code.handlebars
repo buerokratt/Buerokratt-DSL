@@ -3,7 +3,7 @@
     {{#each hits}}
             {
               "result": "{{ _source.turnover }}",
-              "text": "{{ _source.name }}käive oli {{ _source.turnover }} "
+              "text": "{{ _source.name }} käive oli {{ _source.turnover }} "
             }{{#unless @last}},{{/unless}}
     {{/each}}
     ]

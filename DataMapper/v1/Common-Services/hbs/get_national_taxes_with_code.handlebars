@@ -3,7 +3,7 @@
     {{#each hits}}
             {
               "result": "{{ _source.national_taxes }}",
-              "name": "{{ _source.name }}"
+              "text": "{{ _source.name }} riiklikud maksud olid {{ _source.national_taxes }}"
             }{{#unless @last}},{{/unless}}
     {{/each}}
     ]
