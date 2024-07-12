@@ -27,6 +27,7 @@ extractRequestData:
     content: ${incoming.body.content ?? ""}
     holidays: ${incoming.body.holidays}
     holidayNames: ${incoming.body.holidayNames}
+    buttons: []
   next: check_bot_is_active
 
 check_bot_is_active:
