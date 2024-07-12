@@ -151,6 +151,11 @@ common_service_revenue1:
       next: extract_bot_responses_revenue
   next: common_service_revenue2
 
+logstepREVENUE1: 
+  log: ${common_service_revenue1_result.response.body.response.companies}
+logstepREVENUE2:
+  log: ${common_service_revenue1_result.response.body.response.companies[1]}
+
 common_service_revenue2: 
   call: http.post
   args: 
