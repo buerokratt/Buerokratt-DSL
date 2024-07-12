@@ -152,10 +152,6 @@ common_service_revenue2:
 
   result: common_service_revenue2_result
 
-logstepCS2: 
-  log: ${common_service2_result}
-  next: extract_bot_responses3
-
 check_for_fallback_bot:
   call: http.post
   args:
