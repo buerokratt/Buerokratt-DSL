@@ -111,9 +111,9 @@ check_if_bot_is_unable_to_reply:
       next: check_for_fallback_bot
     - condition: ${post_message_to_bot_result.response.body?.[0]?.text == 'Suunan teid klienditeenindajale. Varuge natukene kannatust.'}
       next: get_organization_working_details
-#    - condition: ${post_message_to_bot_result.response.body?.[0]?.text.match(/^OPENSEARCH/) != null}
-#      next: common_service1
     - condition: ${post_message_to_bot_result.response.body?.[0]?.text.match(/^OPENSEARCH/) != null}
+      next: common_service1
+    - condition: ${post_message_to_bot_result.response.body?.[0]?.text.match(/^REVENUEOPENSEARCH/) != null}
       next: common_service_revenue1
   next: extract_bot_responses
 
@@ -122,7 +122,7 @@ common_service1:
   args:
     url: "[#CHATBOT_RUUTER_PUBLIC_INTERNAL_CS]/services/companies/search"
     body:
-      message: ${post_message_to_bot_result.response.body?.[0]?.text.match(/^REVENUEOPENSEARCH(.*)/)}
+      message: ${post_message_to_bot_result.response.body?.[0]?.text.match(/^OPENSEARCH(.*)/)}
   result: common_service1_result
 
 common_service2: 
@@ -139,7 +139,7 @@ common_service_revenue1:
   args:
     url: "[#CHATBOT_RUUTER_PUBLIC_INTERNAL_CS]/services/companies/search"
     body:
-      message: ${post_message_to_bot_result.response.body?.[0]?.text.match(/^OPENSEARCH(.*)/)}
+      message: ${post_message_to_bot_result.response.body?.[0]?.text.match(/^REVENUEOPENSEARCH(.*)/)}
   result: common_service_revenue1_result
   
 
@@ -153,7 +153,7 @@ common_service_revenue2:
   result: common_service_revenue2_result
 
 logstepCS2: 
-  log: ${common_service_revenue2_result}
+  log: ${common_service2_result}
   next: extract_bot_responses3
 
 check_for_fallback_bot:
