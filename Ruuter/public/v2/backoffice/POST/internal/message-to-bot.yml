@@ -361,15 +361,23 @@ extract_bot_responses_employees:
   next: convert_bot_responses_to_messages
 
 extract_bot_responses_revenue:
+  switch:
+    - condition: ${common_service_revenue2_result != null}
+      next: extract_bot_responses_revenue_without_buttons
+extract_bot_responses_revenue_with_buttons:
   assign:
     buttons: "$=common_service_revenue1_result.response.body.response?.companies.map((company) => {return {title: company.name, payload: 'REVENUEOPENSEARCH '+ company.name} });="
     botMsg: ${common_service_revenue2_result.response.body}
     botMsgTxt: ${common_service_revenue2_result.response.body.result}
-  
-
-logstepCS2BMSG:
-  log: ${botMsg}
   next: convert_bot_responses_to_messages
+
+extract_bot_responses_revenue_without_buttons:
+  assign:
+    buttons: []
+    botMsg: ${common_service_revenue2_result.response.body}
+    botMsgTxt: ${common_service_revenue2_result.response.body.result}
+  next: convert_bot_responses_to_messages
+
 
 extract_bot_responses_national_tax:
   assign:
