@@ -151,6 +151,7 @@ common_service_revenue2:
       message: ${common_service_revenue1_result.response.body.response.companies[0]}
 
   result: common_service_revenue2_result
+  next: extract_bot_responses3
 
 check_for_fallback_bot:
   call: http.post
