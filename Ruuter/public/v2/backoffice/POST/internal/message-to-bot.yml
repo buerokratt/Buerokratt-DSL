@@ -136,7 +136,7 @@ common_service2:
     body: 
       message: ${common_service1_result.response.body.response.companies[0]}
   result: common_service2_result
-  next: extract_bot_responses2
+  next: extract_bot_responses_employees
 
 common_service_revenue1:
   call: http.post
@@ -155,7 +155,7 @@ common_service_revenue2:
       message: ${common_service_revenue1_result.response.body.response.companies[0]}
 
   result: common_service_revenue2_result
-  next: extract_bot_responses3
+  next: extract_bot_responses_revenue
 
 common_service_national_tax1:
   call: http.post
@@ -174,7 +174,7 @@ common_service_national_tax2:
       message: ${common_service_national_tax1_result.response.body.response.companies[0]}
 
   result: common_service_national_tax2_result
-  next: extract_bot_responses4
+  next: extract_bot_responses_national_tax
 
 common_service_workforce_tax1:
   call: http.post
@@ -193,7 +193,7 @@ common_service_workforce_tax2:
       message: ${common_service_workforce_tax1_result.response.body.response.companies[0]}
 
   result: common_service_workforce_tax2_result
-  next: extract_bot_responses5
+  next: extract_bot_responses_workforce_tax
 
 check_for_fallback_bot:
   call: http.post
@@ -350,14 +350,15 @@ logstepBOTMSG294:
   log: ${botMsg}
   next: check_if_bot_message_start_with_hash
 
-extract_bot_responses2:
+extract_bot_responses_employees:
   assign:
     botMsg: ${common_service2_result.response.body}
     botMsgTxt: ${common_service2_result.response.body.result}
   next: convert_bot_responses_to_messages
 
-extract_bot_responses3:
+extract_bot_responses_revenue:
   assign:
+    buttons: "$=common_service_revenue1_result.response.body.response?.companies.map((company) => {return {title: company.name, payload: company.registry_code} });="
     botMsg: ${common_service_revenue2_result.response.body}
     botMsgTxt: ${common_service_revenue2_result.response.body.result}
   
@@ -366,13 +367,13 @@ logstepCS2BMSG:
   log: ${botMsg}
   next: convert_bot_responses_to_messages
 
-extract_bot_responses4:
+extract_bot_responses_national_tax:
   assign:
     botMsg: ${common_service_national_tax2_result.response.body}
     botMsgTxt: ${common_service_national_tax2_result.response.body.result}
   next: convert_bot_responses_to_messages
 
-extract_bot_responses5:
+extract_bot_responses_workfroce_tax:
   assign:
     botMsg: ${common_service_workforce_tax2_result.response.body}
     botMsgTxt: ${common_service_worforce_tax2_result.response.body.result}
@@ -421,7 +422,7 @@ convert_bot_responses_to_messages:
       data:
         {
           "botMessages": "${botMsg}",
-#          "buttons": [{"title": "TEST", "payload": "1234567"}],
+          "buttons": ${buttons},
           "chatId": "${chatId}",
           "authorId": "${get_bot_name_result.response.body[0].value}",
           "authorFirstName": "",
