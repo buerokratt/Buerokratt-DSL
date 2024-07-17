@@ -212,6 +212,9 @@ check_for_fallback_bot:
       sender: ${chatId}
       message: ${content}
   result: fallback_bot_result
+
+logstepAZURERESPONSE:
+  log: ${fallback_bot_result}
   next: check_for_fallback_bot_result
 
 check_for_fallback_bot_result:
