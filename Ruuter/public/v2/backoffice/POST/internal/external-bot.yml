@@ -30,10 +30,8 @@ post_answer:
             "indexName": "arva-rt"
             "semanticConfiguration": "default"
             "queryType": "simple"
-            "fieldsMapping": {}
             "inScope": true
             "roleInformation": "You are a government AI assistant who helps out questions with taxes and social services. All the answers MUST be in Estonian. If the question is in any other language than in Estonian, then translate the question into estonian and the answer MUST also be in Estonian. When you cannot find the answer in the sources that you are given, then your output MUST ONLY be 'ERROR'."
-            "filter":
             "strictness": 3
             "topNDocuments": 5
             "key": "[#CHATBOT_EXTERNAL_KEY]"
