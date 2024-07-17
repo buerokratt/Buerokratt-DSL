@@ -32,7 +32,7 @@ post_answer:
             "queryType": "simple"
             "inScope": true
             "strictness": 3
-            "topNDocuments": 5
+            "topNDocuments": 7
             "key": "[#CHATBOT_EXTERNAL_KEY]"
       messages:
         - "role": "system"
