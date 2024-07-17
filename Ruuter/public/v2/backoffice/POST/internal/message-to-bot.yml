@@ -171,7 +171,6 @@ common_service_national_tax1:
     body:
       message: ${post_message_to_bot_result.response.body?.[0]?.text.match(/^NATIONALTAXOPENSEARCH(.*)/)}
   result: common_service_national_tax1_result
-  
 
 common_service_national_tax2: 
   call: http.post
@@ -191,6 +190,10 @@ common_service_workforce_tax1:
       message: ${post_message_to_bot_result.response.body?.[0]?.text.match(/^WORKFORCETAXOPENSEARCH(.*)/)}
   result: common_service_workforce_tax1_result
   
+logstepTAX2:
+  log: ${common_service_workforce_tax1_result}
+logstepTAX2_2:
+  log: ${common_service_workforce_tax1_result.response.body.response.companies[0]}
 
 common_service_workforce_tax2: 
   call: http.post
