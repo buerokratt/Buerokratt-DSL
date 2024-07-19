@@ -25,7 +25,7 @@ assign_values:
 
 checkForParams:
   switch:
-    - condition: ${params.message.registry_code != null}
+    - condition: ${params.message != null}
       next: getWithCode
     - condition: ${params.county != null}
       next: getWithCounty
@@ -37,7 +37,7 @@ getWithCode:
     url: "[#OPENSEARCH]/companies/_search/template"
     body:
       id: "company-with-code"
-      params: { registry_code: "${params.message.registry_code}", field: "national_taxes" }
+      params: { registry_code: "${params.message}", field: "national_taxes" }
   result: res
   next: mapCodeData
 
