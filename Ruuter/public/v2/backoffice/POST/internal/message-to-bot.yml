@@ -30,9 +30,13 @@ extractRequestData:
     buttons: []
 
 logstepINCOMINGRECUESTDATA:
-  log: ${incoming.body.content ?? ""}
+  log: ${content}
+
+skip_rasa_switch:
+  switch:
+    - condition: ${content.match(/^SKIPRASA/) != null}
+      next: common_service_revenue2
   next: check_bot_is_active
-##siia assign step
 
 check_bot_is_active:
   call: http.post
@@ -164,11 +168,11 @@ common_service_revenue2:
   args: 
     url: "[#CHATBOT_RUUTER_PUBLIC_INTERNAL_CS]/services/companies/revenue"
     body: 
-      message: ${common_service_revenue1_result.response.body.response.companies[0]}
+      message: ${content.match(/^SKIPRASA(.*)/)}
   result: common_service_revenue2_result
 
 LOGSTEPREVENUE2:
-  log: ${common_service_revenue2_result}
+  log: ${content.match(/^SKIPRASA(.*)/)}
   next: extract_bot_responses_revenue_with_buttons
 
 common_service_national_tax1:
