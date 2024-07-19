@@ -374,7 +374,7 @@ extract_bot_responses_employees:
 #      next: extract_bot_responses_revenue_without_buttons
 extract_bot_responses_revenue_with_buttons:
   assign:
-    buttons: "$=common_service_revenue1_result.response.body.response?.companies.map((company) => {return {title: company.name, payload: 'REVENUEOPENSEARCH '+ company.name} });="
+    buttons: "$=common_service_revenue1_result.response.body.response?.companies.map((company) => {return {title: company.name, payload: 'SKIPRASA '+ company.name} });="
     botMsg: ${post_message_to_bot_result.response.body}
 #    botMsgTxt: ${common_service_revenue2_result.response.body.result}
 
