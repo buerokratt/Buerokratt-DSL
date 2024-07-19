@@ -172,8 +172,8 @@ common_service_revenue2:
     url: "[#CHATBOT_RUUTER_PUBLIC_INTERNAL_CS]/services/companies/revenue"
     body: 
       message: ${content.match(/^SKIPRASA (.*)/)[1]}
-  result: common_service_revenue2_result
-  next: extract_bot_responses_revenue_with_buttons
+  result: post_message_to_bot_result
+  next: extract_bot_responses
 
 common_service_national_tax1:
   call: http.post
