@@ -171,14 +171,14 @@ logstepREVENUE1:
 #      next: extract_bot_responses_revenue
 
 LOGSTEPREVENUE2:
-  log: ${content.match(/^SKIPRASA (.*)/)[1]}
+  log: ${content.match(/^SKIPRASA1 (.*)/)[1]}
   
 common_service_revenue2: 
   call: http.post
   args: 
     url: "[#CHATBOT_RUUTER_PUBLIC_INTERNAL_CS]/services/companies/revenue"
     body: 
-      message: ${content.match(/^SKIPRASA (.*)/)[1]}
+      message: ${content.match(/^SKIPRASA1 (.*)/)[1]}
   result: post_message_to_bot_result
   next: extract_bot_responses_opensearch
 
