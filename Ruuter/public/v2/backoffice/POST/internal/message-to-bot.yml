@@ -171,7 +171,7 @@ common_service_revenue2:
   args: 
     url: "[#CHATBOT_RUUTER_PUBLIC_INTERNAL_CS]/services/companies/revenue"
     body: 
-      message: ${content.match(/^SKIPRASA(.*)/)[1]}
+      message: ${content.match(/^SKIPRASA (.*)/)[1]}
   result: common_service_revenue2_result
   next: extract_bot_responses_revenue_with_buttons
 
@@ -189,7 +189,6 @@ common_service_national_tax2:
     url: "[#CHATBOT_RUUTER_PUBLIC_INTERNAL_CS]/services/companies/national-taxes"
     body: 
       message: ${common_service_national_tax1_result.response.body.response.companies[0]}
-
   result: common_service_national_tax2_result
   next: extract_bot_responses_national_tax
 
@@ -382,7 +381,7 @@ extract_bot_responses_employees:
 #      next: extract_bot_responses_revenue_without_buttons
 extract_bot_responses_revenue_with_buttons:
   assign:
-    buttons: "$=common_service_revenue1_result.response.body.response?.companies.map((company) => {return {title: company.registry_code, payload: 'SKIPRASA '+ company.registry_code} });="
+    buttons: "$=common_service_revenue1_result.response.body.response?.companies.map((company) => {return {title: company.name, payload: 'SKIPRASA '+ company.registry_code} });="
     botMsg: ${post_message_to_bot_result.response.body}
 #    botMsgTxt: ${common_service_revenue2_result.response.body.result}
 
