@@ -141,6 +141,7 @@ common_service1:
     body:
       message: ${post_message_to_bot_result.response.body?.[0]?.text.match(/^OPENSEARCH(.*)/)}
   result: common_service1_result
+  next: extract_bot_responses_revenue_with_buttons
 
 common_service2: 
   call: http.post
@@ -186,6 +187,7 @@ common_service_national_tax1:
     body:
       message: ${post_message_to_bot_result.response.body?.[0]?.text.match(/^NATIONALTAXOPENSEARCH(.*)/)}
   result: common_service_national_tax1_result
+  next: extract_bot_responses_opensearch
 
 common_service_national_tax2: 
   call: http.post
@@ -203,6 +205,7 @@ common_service_workforce_tax1:
     body:
       message: ${post_message_to_bot_result.response.body?.[0]?.text.match(/^WORKFORCETAXOPENSEARCH(.*)/)}
   result: common_service_workforce_tax1_result
+  next: extract_bot_responses_opensearch
   
 logstepTAX2:
   log: ${common_service_workforce_tax1_result}
