@@ -94,7 +94,7 @@ decode_content_to_be_sent_to_bot:
 
 skip_rasa_switch:
   switch:
-    - condition: ${content.match(/^SKIPRASA/) != null}
+    - condition: ${content.match(/^SKIPRASA1/) != null}
       next: LOGSTEPREVENUE2
     - condition: ${content.match(/^SKIPRASA2/) != null}
       next: common_service2
@@ -394,7 +394,7 @@ extract_bot_responses_employees:
 #      next: extract_bot_responses_revenue_without_buttons
 extract_bot_responses_revenue_with_buttons:
   assign:
-    buttons: "$=common_service_revenue1_result.response.body.response?.companies.map((company) => {return {title: company.name, payload: 'SKIPRASA '+ company.registry_code} });="
+    buttons: "$=common_service_revenue1_result.response.body.response?.companies.map((company) => {return {title: company.name, payload: 'SKIPRASA1 '+ company.registry_code} });="
     botMsg: ${post_message_to_bot_result.response.body}
   next: logstepBUTTONCONTENCT
 
