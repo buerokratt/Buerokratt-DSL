@@ -140,7 +140,7 @@ common_service1:
     url: "[#CHATBOT_RUUTER_PUBLIC_INTERNAL_CS]/services/companies/search"
     body:
       message: ${post_message_to_bot_result.response.body?.[0]?.text.match(/^OPENSEARCH(.*)/)}
-  result: common_service1_result
+  result: common_service_revenue1_result
   next: extract_bot_responses_revenue_with_buttons
 
 common_service2: 
@@ -186,7 +186,7 @@ common_service_national_tax1:
     url: "[#CHATBOT_RUUTER_PUBLIC_INTERNAL_CS]/services/companies/search"
     body:
       message: ${post_message_to_bot_result.response.body?.[0]?.text.match(/^NATIONALTAXOPENSEARCH(.*)/)}
-  result: common_service_national_tax1_result
+  result: common_service_revenue1_result
   next: extract_bot_responses_opensearch
 
 common_service_national_tax2: 
@@ -204,7 +204,7 @@ common_service_workforce_tax1:
     url: "[#CHATBOT_RUUTER_PUBLIC_INTERNAL_CS]/services/companies/search"
     body:
       message: ${post_message_to_bot_result.response.body?.[0]?.text.match(/^WORKFORCETAXOPENSEARCH(.*)/)}
-  result: common_service_workforce_tax1_result
+  result: common_service_revenue1_result
   next: extract_bot_responses_opensearch
   
 logstepTAX2:
