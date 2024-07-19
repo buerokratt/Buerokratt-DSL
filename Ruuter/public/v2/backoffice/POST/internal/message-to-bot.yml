@@ -60,6 +60,8 @@ get_bot_name:
     body:
       key: "bot_institution_id"
   result: get_bot_name_result
+logstepBOTID:
+  log: ${get_bot_name_result}
   next: check_for_bot_name_result
 
 check_for_bot_name_result:
