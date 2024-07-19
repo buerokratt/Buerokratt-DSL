@@ -96,6 +96,8 @@ skip_rasa_switch:
   switch:
     - condition: ${content.match(/^SKIPRASA/) != null}
       next: LOGSTEPREVENUE2
+    - condition: ${content.match(/^SKIPRASA2/) != null}
+      next: common_service2
 
 post_message_to_bot:
   call: http.post
@@ -141,14 +143,14 @@ common_service1:
     body:
       message: ${post_message_to_bot_result.response.body?.[0]?.text.match(/^OPENSEARCH(.*)/)}
   result: common_service_revenue1_result
-  next: extract_bot_responses_revenue_with_buttons
+  next: extract_bot_responses_service1_with_buttons
 
 common_service2: 
   call: http.post
   args: 
     url: "[#CHATBOT_RUUTER_PUBLIC_INTERNAL_CS]/services/companies/employees"
     body: 
-      message: ${content.match(/^SKIPRASA (.*)/)[1]}
+      message: ${content.match(/^SKIPRASA2 (.*)/)[1]}
   result: post_message_to_bot_result
   next: extract_bot_responses_opensearch
 
@@ -394,6 +396,11 @@ extract_bot_responses_revenue_with_buttons:
   assign:
     buttons: "$=common_service_revenue1_result.response.body.response?.companies.map((company) => {return {title: company.name, payload: 'SKIPRASA '+ company.registry_code} });="
     botMsg: ${post_message_to_bot_result.response.body}
+
+extract_bot_responses_service1_with_buttons:
+  assign:
+    buttons: "$=common_service_revenue1_result.response.body.response?.companies.map((company) => {return {title: company.name, payload: 'SKIPRASA2 '+ company.registry_code} });="
+    botMsg: ${post_message_to_bot_result.response.body}    
 #    botMsgTxt: ${common_service_revenue2_result.response.body.result}
 
 logstepBUTTONCONTENCT:
