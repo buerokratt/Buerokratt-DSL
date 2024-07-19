@@ -379,9 +379,11 @@ extract_bot_responses_revenue_with_buttons:
     botMsgTxt: ${common_service_revenue2_result.response.body.result}
 
 logstepBUTTONCONTENCT:
-  log: ${$=common_service_revenue1_result.response.body.response?.companies.map((company) => {return {title: company.name, payload: 'REVENUEOPENSEARCH '+ company.name} });=}
+  log: ${buttons}
 logstepBUTTONCONTENCT2:
-  log: ${"$=common_service_revenue1_result.response.body.response?.companies.map((company) => {return {title: company.name, payload: 'REVENUEOPENSEARCH '+ company.name} });="}  
+  log: ${botMsg}
+logstepBUTTONCONTENCT3:
+  log: ${botMsgTxt}  
   next: convert_bot_responses_to_messages
 
 extract_bot_responses_revenue_without_buttons:
