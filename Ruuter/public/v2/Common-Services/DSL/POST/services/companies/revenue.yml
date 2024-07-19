@@ -28,7 +28,7 @@ logstepREVENUEPARAMS:
 
 checkForParams:
   switch:
-    - condition: ${params.message.registry_code != null}
+    - condition: ${params.message != null}
       next: getWithCode
     - condition: ${params.county != null}
       next: getWithCounty
