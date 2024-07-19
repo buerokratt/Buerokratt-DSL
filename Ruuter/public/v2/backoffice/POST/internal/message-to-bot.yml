@@ -148,16 +148,16 @@ common_service_revenue1:
   result: common_service_revenue1_result
   switch:
     - condition: ${common_service_revenue1_result.response.body.response.companies.length > 1}
-      next: extract_bot_responses_revenue
+#      next: extract_bot_responses_revenue
   
-common_service_revenue2: 
-  call: http.post
-  args: 
-    url: "[#CHATBOT_RUUTER_PUBLIC_INTERNAL_CS]/services/companies/revenue"
-    body: 
-      message: ${common_service_revenue1_result.response.body.response.companies[0]}
+#common_service_revenue2: 
+#  call: http.post
+#  args: 
+#    url: "[#CHATBOT_RUUTER_PUBLIC_INTERNAL_CS]/services/companies/revenue"
+#    body: 
+#      message: ${common_service_revenue1_result.response.body.response.companies[0]}
 
-  result: common_service_revenue2_result
+#  result: common_service_revenue2_result
   
 logstepREVENUE1: 
   log: ${common_service_revenue1_result.response.body.response.companies}  
