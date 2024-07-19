@@ -150,10 +150,6 @@ common_service_revenue1:
     - condition: ${common_service_revenue1_result.response.body.response.companies.length > 1}
       next: extract_bot_responses_revenue
   
-
-logstepREVENUE1: 
-  log: ${common_service_revenue1_result.response.body.response.companies}
-
 common_service_revenue2: 
   call: http.post
   args: 
@@ -162,6 +158,9 @@ common_service_revenue2:
       message: ${common_service_revenue1_result.response.body.response.companies[0]}
 
   result: common_service_revenue2_result
+  
+logstepREVENUE1: 
+  log: ${common_service_revenue1_result.response.body.response.companies}  
   next: extract_bot_responses_revenue
 
 common_service_national_tax1:
