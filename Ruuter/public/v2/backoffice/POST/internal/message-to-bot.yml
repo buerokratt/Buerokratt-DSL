@@ -173,7 +173,7 @@ common_service_revenue2:
     body: 
       message: ${content.match(/^SKIPRASA (.*)/)[1]}
   result: post_message_to_bot_result
-  next: extract_bot_responses
+  next: extract_bot_responses_opensearch
 
 common_service_national_tax1:
   call: http.post
@@ -360,6 +360,10 @@ add_chat_id_to_queue_notification_node:
       id: ${chatId}
   result: add_chat_id_to_queue_notification_node_res
 
+extract_bot_responses_opensearch:
+  assign:
+    botMsg: ${post_message_to_bot_result.response.body}
+  next: convert_bot_responses_to_messages
 extract_bot_responses:
   assign:
     botMsg: ${post_message_to_bot_result.response.body}
