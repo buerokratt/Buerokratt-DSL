@@ -149,7 +149,7 @@ common_service_revenue1:
 
 logstepREVENUE1: 
   log: ${common_service_revenue1_result.response.body.response.companies}  
-#  next: extract_bot_responses_revenue
+  next: extract_bot_responses_revenue_with_buttons
   
 #  switch:
 #    - condition: ${common_service_revenue1_result.response.body.response.companies.length > 1}
@@ -375,15 +375,11 @@ extract_bot_responses_employees:
 extract_bot_responses_revenue_with_buttons:
   assign:
     buttons: "$=common_service_revenue1_result.response.body.response?.companies.map((company) => {return {title: company.name, payload: 'REVENUEOPENSEARCH '+ company.name} });="
-    botMsg: ${common_service_revenue2_result.response.body}
-    botMsgTxt: ${common_service_revenue2_result.response.body.result}
+#    botMsg: ${common_service_revenue2_result.response.body}
+#    botMsgTxt: ${common_service_revenue2_result.response.body.result}
 
 logstepBUTTONCONTENCT:
   log: ${buttons}
-logstepBUTTONCONTENCT2:
-  log: ${botMsg}
-logstepBUTTONCONTENCT3:
-  log: ${botMsgTxt}  
   next: convert_bot_responses_to_messages
 
 extract_bot_responses_revenue_without_buttons:
