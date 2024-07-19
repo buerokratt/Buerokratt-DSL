@@ -146,9 +146,14 @@ common_service_revenue1:
     body:
       message: ${post_message_to_bot_result.response.body?.[0]?.text.match(/^REVENUEOPENSEARCH(.*)/)}
   result: common_service_revenue1_result
-  switch:
-    - condition: ${common_service_revenue1_result.response.body.response.companies.length > 1}
-      next: extract_bot_responses_revenue
+
+logstepREVENUE1: 
+  log: ${common_service_revenue1_result.response.body.response.companies}  
+#  next: extract_bot_responses_revenue
+  
+#  switch:
+#    - condition: ${common_service_revenue1_result.response.body.response.companies.length > 1}
+#      next: extract_bot_responses_revenue
   
 common_service_revenue2: 
   call: http.post
@@ -156,12 +161,11 @@ common_service_revenue2:
     url: "[#CHATBOT_RUUTER_PUBLIC_INTERNAL_CS]/services/companies/revenue"
     body: 
       message: ${common_service_revenue1_result.response.body.response.companies[0]}
-
   result: common_service_revenue2_result
-  
-logstepREVENUE1: 
-  log: ${common_service_revenue1_result.response.body.response.companies}  
-  next: extract_bot_responses_revenue
+
+LOGSTEPREVENUE2:
+  log: ${common_service_revenue2_result}
+  next: extract_bot_responses_revenue_with_buttons
 
 common_service_national_tax1:
   call: http.post
@@ -364,10 +368,10 @@ extract_bot_responses_employees:
     botMsgTxt: ${common_service2_result.response.body.result}
   next: convert_bot_responses_to_messages
 
-extract_bot_responses_revenue:
-  switch:
-    - condition: ${common_service_revenue2_result != null}
-      next: extract_bot_responses_revenue_without_buttons
+#extract_bot_responses_revenue:
+#  switch:
+#    - condition: ${common_service_revenue2_result != null}
+#      next: extract_bot_responses_revenue_without_buttons
 extract_bot_responses_revenue_with_buttons:
   assign:
     buttons: "$=common_service_revenue1_result.response.body.response?.companies.map((company) => {return {title: company.name, payload: 'REVENUEOPENSEARCH '+ company.name} });="
