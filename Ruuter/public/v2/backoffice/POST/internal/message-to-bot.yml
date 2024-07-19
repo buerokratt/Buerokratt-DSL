@@ -396,12 +396,13 @@ extract_bot_responses_revenue_with_buttons:
   assign:
     buttons: "$=common_service_revenue1_result.response.body.response?.companies.map((company) => {return {title: company.name, payload: 'SKIPRASA '+ company.registry_code} });="
     botMsg: ${post_message_to_bot_result.response.body}
+  next: logstepBUTTONCONTENCT
 
 extract_bot_responses_service1_with_buttons:
   assign:
     buttons: "$=common_service_revenue1_result.response.body.response?.companies.map((company) => {return {title: company.name, payload: 'SKIPRASA2 '+ company.registry_code} });="
-    botMsg: ${post_message_to_bot_result.response.body}    
-#    botMsgTxt: ${common_service_revenue2_result.response.body.result}
+    botMsg: ${post_message_to_bot_result.response.body}   
+  next: logstepBUTTONCONTENCT
 
 logstepBUTTONCONTENCT:
   log: ${buttons}
