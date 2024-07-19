@@ -23,6 +23,9 @@ assign_values:
   assign:
     params: ${incoming.body}
 
+logstepREVENUEPARAMS:
+  log: ${params}
+
 checkForParams:
   switch:
     - condition: ${params.message.registry_code != null}
