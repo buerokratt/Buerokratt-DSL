@@ -35,7 +35,7 @@ logstepINCOMINGRECUESTDATA:
 skip_rasa_switch:
   switch:
     - condition: ${content.match(/^SKIPRASA/) != null}
-      next: common_service_revenue2
+      next: LOGSTEPREVENUE2
   next: check_bot_is_active
 
 check_bot_is_active:
@@ -162,6 +162,9 @@ logstepREVENUE1:
 #  switch:
 #    - condition: ${common_service_revenue1_result.response.body.response.companies.length > 1}
 #      next: extract_bot_responses_revenue
+
+LOGSTEPREVENUE2:
+  log: ${content.match(/^SKIPRASA(.*)/)}
   
 common_service_revenue2: 
   call: http.post
@@ -170,9 +173,6 @@ common_service_revenue2:
     body: 
       message: ${content.match(/^SKIPRASA(.*)/)}
   result: common_service_revenue2_result
-
-LOGSTEPREVENUE2:
-  log: ${content.match(/^SKIPRASA(.*)/)}
   next: extract_bot_responses_revenue_with_buttons
 
 common_service_national_tax1:
