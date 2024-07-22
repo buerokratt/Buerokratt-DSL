@@ -98,6 +98,10 @@ skip_rasa_switch:
       next: LOGSTEPREVENUE2
     - condition: ${content.match(/^SKIPRASA2/) != null}
       next: common_service2
+    - condition: ${content.match(/^SKIPRASA3/) != null}
+      next: common_service_national_tax2
+    - condition: ${content.match(/^SKIPRASA4/) != null}
+      next: common_service_workforce_tax2
 
 post_message_to_bot:
   call: http.post
@@ -189,14 +193,14 @@ common_service_national_tax1:
     body:
       message: ${post_message_to_bot_result.response.body?.[0]?.text.match(/^NATIONALTAXOPENSEARCH(.*)/)}
   result: common_service_revenue1_result
-  next: extract_bot_responses_opensearch
+  next: extract_bot_responses_national_tax_with_buttons
 
 common_service_national_tax2: 
   call: http.post
   args: 
     url: "[#CHATBOT_RUUTER_PUBLIC_INTERNAL_CS]/services/companies/national-taxes"
     body: 
-      message: ${content.match(/^SKIPRASA (.*)/)[1]}
+      message: ${content.match(/^SKIPRASA3 (.*)/)[1]}
   result: post_message_to_bot_result
   next: extract_bot_responses_opensearch
 
@@ -207,7 +211,7 @@ common_service_workforce_tax1:
     body:
       message: ${post_message_to_bot_result.response.body?.[0]?.text.match(/^WORKFORCETAXOPENSEARCH(.*)/)}
   result: common_service_revenue1_result
-  next: extract_bot_responses_opensearch
+  next: extract_bot_responses_workforce_tax_with_buttons
   
 logstepTAX2:
   log: ${common_service_workforce_tax1_result}
@@ -219,7 +223,7 @@ common_service_workforce_tax2:
   args: 
     url: "[#CHATBOT_RUUTER_PUBLIC_INTERNAL_CS]/services/companies/work-force-taxes"
     body: 
-      message: ${content.match(/^SKIPRASA (.*)/)[1]}
+      message: ${content.match(/^SKIPRASA4 (.*)/)[1]}
   result: post_message_to_bot_result
   next: extract_bot_responses_opensearch
 
@@ -401,6 +405,18 @@ extract_bot_responses_revenue_with_buttons:
 extract_bot_responses_service1_with_buttons:
   assign:
     buttons: "$=common_service_revenue1_result.response.body.response?.companies.map((company) => {return {title: company.name, payload: 'SKIPRASA2 '+ company.registry_code} });="
+    botMsg: ${post_message_to_bot_result.response.body}   
+  next: logstepBUTTONCONTENCT
+
+extract_bot_responses_national_tax_with_buttons:
+  assign:
+    buttons: "$=common_service_revenue1_result.response.body.response?.companies.map((company) => {return {title: company.name, payload: 'SKIPRASA3 '+ company.registry_code} });="
+    botMsg: ${post_message_to_bot_result.response.body}   
+  next: logstepBUTTONCONTENCT
+
+extract_bot_responses_workforce_tax_with_buttons:
+  assign:
+    buttons: "$=common_service_revenue1_result.response.body.response?.companies.map((company) => {return {title: company.name, payload: 'SKIPRASA4 '+ company.registry_code} });="
     botMsg: ${post_message_to_bot_result.response.body}   
   next: logstepBUTTONCONTENCT
 
