@@ -399,7 +399,7 @@ extract_bot_responses_employees:
 extract_bot_responses_revenue_with_buttons:
   assign:
     buttons: "$=common_service_revenue1_result.response.body.response?.companies.map((company) => {return {title: company.name, payload: 'SKIPRASA1 '+ company.registry_code} });="
-    botMsg: ${post_message_to_bot_result.response.body.replace(/SKIPRASA1 \d+/g, 'Firmad')}
+    botMsg: "$=JSON.parse(JSON.stringify(post_message_to_bot_result.response.body)).replace(/SKIPRASA1 \\d+/g, 'Firmad');="
   next: logstepBUTTONCONTENCT
 
 extract_bot_responses_service1_with_buttons:
