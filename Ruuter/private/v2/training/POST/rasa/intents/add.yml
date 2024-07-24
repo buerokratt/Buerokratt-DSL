@@ -69,6 +69,9 @@ convertJsonToYaml:
       nlu: ${intentFileJson.response.body}
   result: intentYaml
 
+logstepJ2Y:
+  log: ${nlu}
+
 saveIntentFile:
   call: http.post
   args:
