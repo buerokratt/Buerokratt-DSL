@@ -72,6 +72,9 @@ convertJsonToYaml:
 logstepJ2Y:
   log: ${intentFileJson.response.body}
 
+logstepJ2Y2:
+  log: ${intentYaml}
+
 saveIntentFile:
   call: http.post
   args:
