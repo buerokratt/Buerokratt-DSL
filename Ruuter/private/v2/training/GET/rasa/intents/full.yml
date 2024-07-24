@@ -32,7 +32,7 @@ getIntentsData:
   result: getIntentDataResult
 
 logstepGIDHits:
-  log: ${getIntentsResult.response.body.hits.hits}
+  log: ${getIntentsResult.response.body.hits}
 
 getDomainFile:
   call: http.get
