@@ -61,6 +61,14 @@ assignResults:
       inmodel: ${getDomainDataResult.response.body.response.intents}
       connections: ${connection_res.response.body}
 
+logstepAIntents:
+  log: ${getIntentDataResult.response.body.intents}
+logstepAInModel:
+  log: ${getDomainDataResult.response.body.response.intents}
+logstepAConnections:
+  log: ${connection_res.response.body}
+
+
 mapIntentsData:
   call: http.post
   args:
@@ -71,6 +79,12 @@ mapIntentsData:
       intents: ${intents}
   result: getIntentDataResult
   next: returnSuccess
+
+
+logstepMAPIData:
+  log: ${getIntentDataResult}
+logstepRETSUCCESS:
+  log:  ${getIntentDataResult.response.body}
 
 returnSuccess:
   return: ${getIntentDataResult.response.body}
