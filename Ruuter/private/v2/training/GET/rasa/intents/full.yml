@@ -62,7 +62,7 @@ assignResults:
       connections: ${connection_res.response.body}
 
 logstepAIntents:
-  log: ${getIntentDataResult.response.body.intents}
+  log: ${getIntentDataResult.response.body.intents.examples}
 logstepAInModel:
   log: ${getDomainDataResult.response.body.response.intents}
 logstepAConnections:
