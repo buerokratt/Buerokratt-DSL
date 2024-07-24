@@ -18,6 +18,9 @@ getIntents:
     url: "[#TRAINING_OPENSEARCH]/intents/_search?size=10000"
   result: getIntentsResult
 
+logstepOSGINTENT:
+  log: ${getIntentsResult}
+
 getIntentsData:
   call: http.post
   args:
@@ -27,6 +30,9 @@ getIntentsData:
     body:
       hits: ${getIntentsResult.response.body.hits.hits}
   result: getIntentDataResult
+
+logstepGIDHits:
+  log: ${getIntentsResult.response.body.hits.hits}
 
 getDomainFile:
   call: http.get
