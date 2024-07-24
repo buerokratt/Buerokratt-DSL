@@ -68,8 +68,6 @@ convertJsonToYaml:
       version: "3.0"
       nlu: ${intentFileJson.response.body}
   result: intentYaml
-logstepCONVJ2Y:
-  log: ${nlu}
 
 saveIntentFile:
   call: http.post
