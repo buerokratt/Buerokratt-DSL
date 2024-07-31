@@ -113,8 +113,8 @@ SELECT c.base_id AS id,
       c.forwarded_to_name,
       c.received_from,
       c.received_from_name,
-      LastContentMessage.content AS last_message,
-      ContactsMessage.content AS contacts_message,
+      '' AS last_message,
+      '' AS contacts_message,
       MessagesUpdateTime.updated AS last_message_timestamp,
       LastEventMessage.event AS last_message_event
 FROM ActiveChats AS c
