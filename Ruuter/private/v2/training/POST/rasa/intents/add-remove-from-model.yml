@@ -48,7 +48,7 @@ rename_tmp_file:
   args: 
     url: "[#TRAINING_DMAPPER]/file-manager/move"
     body:
-      file_path: "${intentTmpFile"
+      file_path: "${intentTmpFile}"
       new_path: "${intentFile}"
 
 getDomainFile:
