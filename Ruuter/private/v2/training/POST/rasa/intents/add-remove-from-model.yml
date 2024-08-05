@@ -43,6 +43,14 @@ log_filenames:
 log_tmpfile:
   log: ${intentTmpFile}
 
+rename_tmp_file:
+  call: http.post
+  args: 
+    url: "[#TRAINING_DMAPPER]/file-manager/move"
+    body:
+      file_path: "${intentTmpFile"
+      new_path: "${intentFile}"
+
 getDomainFile:
   call: http.get
   args:
