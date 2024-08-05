@@ -7,6 +7,8 @@ earlyassign:
   
 checkservice:
   switch:
+    - condition: ${incoming.body.msg == null}
+      next: noService
     - condition: ${incoming.body.msg === "#laborMarket"}
       next: laborMarket
     - condition: ${incoming.body.msg === "#estimatedSubsidence"}
