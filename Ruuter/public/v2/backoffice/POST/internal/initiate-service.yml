@@ -29,7 +29,7 @@ checkservice:
       next: riigikoguRecentVoting
     - condition: ${incoming.body.msg[0].text == null}
       next: noService
-    - condition: ${incoming.body.msg[0].text.match(/^(#riigikoguIsikuKohalolu),(.*)/)[1].trim() === "#riigikoguIsikuKohalolu"}
+    - condition: ${incoming.body.msg[0]?.text.match(/^(#riigikoguIsikuKohalolu),(.*)/)[1].trim() === "#riigikoguIsikuKohalolu"}
       next: riigikoguAttendance
   next: noService
 
