@@ -50,7 +50,8 @@ rename_tmp_file:
     body:
       file_path: "${intentTmpFile}"
       new_path: "${intentFile}"
-
+  result: moved
+  
 getDomainFile:
   call: http.get
   args:
