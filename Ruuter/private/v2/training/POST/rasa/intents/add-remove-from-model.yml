@@ -37,12 +37,6 @@ assign_filename:
     intentFile: ${fileLocations.response.body.response.intents_location + intent + "_nlu.yml"}
     intentTmpFile: ${fileLocations.response.body.response.intents_location + intent + "_nlu.yml.tmp"}
 
-log_filenames:
-  log: ${intentFile}
-
-log_tmpfile:
-  log: ${intentTmpFile}
-
 rename_tmp_file:
   call: http.post
   args: 
@@ -52,6 +46,7 @@ rename_tmp_file:
       new_path: "${intentFile}"
   result: moved
   
+
 getDomainFile:
   call: http.get
   args:
@@ -64,6 +59,16 @@ isInModel:
   switch:
     - condition: ${inModel}
       next: removeFromDomainArray
+#  next: mergeIntents
+
+rename_back_to_tmp_file:
+  call: http.post
+  args: 
+    url: "[#TRAINING_DMAPPER]/file-manager/move"
+    body:
+      file_path: "${intentFile}"
+      new_path: "${intentTmpFile}"
+  result: movedback
   next: mergeIntents
 
 removeFromDomainArray:
