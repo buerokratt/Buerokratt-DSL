@@ -4,11 +4,14 @@ logstepPAYLOAD:
 earlyassign:
   assign:
     recipient_id: ${incoming.body.msg[0].recipient_id}
-  
-checkservice:
+
+checkfaultyservice:
   switch:
     - condition: ${incoming.body.msg == null}
       next: noService
+
+checkservice:
+  switch:
     - condition: ${incoming.body.msg === "#laborMarket"}
       next: laborMarket
     - condition: ${incoming.body.msg === "#estimatedSubsidence"}
@@ -29,7 +32,7 @@ checkservice:
       next: riigikoguRecentVoting
     - condition: ${incoming.body.msg[0].text == null}
       next: noService
-    - condition: ${incoming.body.msg[0]?.text.match(/^(#riigikoguIsikuKohalolu),(.*)/)[1].trim() === "#riigikoguIsikuKohalolu"}
+    - condition: ${incoming.body.msg[0].text.match(/^(#riigikoguIsikuKohalolu),(.*)/)[1].trim() === "#riigikoguIsikuKohalolu"}
       next: riigikoguAttendance
   next: noService
 
