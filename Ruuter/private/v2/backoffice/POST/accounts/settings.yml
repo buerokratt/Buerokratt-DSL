@@ -68,7 +68,7 @@ assignIdCode:
 #  next: setUserSettingValue  
 
 logstepSETTING:
-  log: ${forwardedChatPopupNotifications}
+  log: ${incoming.body}
   next: setUserSettingValue  
 
 setUserSettingValue:
