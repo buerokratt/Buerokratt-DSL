@@ -11,7 +11,7 @@ checkfaultyservice:
       next: noweather
 noweather:
   return: "Ilma hetkel ei saa öelda, vabandan"
-  status: 200
+  status: 400
   next: end
 
 checkservice:
