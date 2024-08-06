@@ -69,7 +69,10 @@ assignIdCode:
 
 logstepSETTING:
   log: ${incoming.body}
-  next: setUserSettingValue  
+   
+logstepINCOMING:
+  log: ${incoming}
+  next: setUserSettingValue 
 
 setUserSettingValue:
   call: http.post
