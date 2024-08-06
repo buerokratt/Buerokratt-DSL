@@ -34,6 +34,8 @@ checkservice:
       next: noService
     - condition: ${incoming.body.msg[0].text.match(/^(#riigikoguIsikuKohalolu),(.*)/)?.[1].trim() === "#riigikoguIsikuKohalolu"}
       next: riigikoguAttendance
+    - condition: ${incoming.body.msg[0].text.match(/^#/)}
+      next: noService
   next: noService
 
 laborMarket:
