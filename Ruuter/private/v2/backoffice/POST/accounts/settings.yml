@@ -65,6 +65,10 @@ check_user_info_response:
 assignIdCode:
   assign:
     idCode: ${res.response.body.idCode}
+#  next: setUserSettingValue  
+
+logstepSETTING:
+  log: ${res.response.body.idCode}
   next: setUserSettingValue  
 
 setUserSettingValue:
@@ -82,8 +86,7 @@ setUserSettingValue:
       useAutocorrect: ${useAutocorrect}
   result: returnSuccess
 
-logstepSETTING:
-  log: returnSuccess
+
 
 returnSuccess:
   return: ${returnSuccess.response.body}
