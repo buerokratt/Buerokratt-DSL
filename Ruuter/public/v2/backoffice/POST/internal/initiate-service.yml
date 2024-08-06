@@ -7,12 +7,8 @@ earlyassign:
 
 checkfaultyservice:
   switch:
-    - condition: ${incoming.body.msg === "#weather"}
-      next: noweather
-noweather:
-  return: "Ilma hetkel ei saa öelda, vabandan"
-  status: 400
-  next: end
+    - condition: ${incoming.body.msg == null}
+      next: noService
 
 checkservice:
   switch:
