@@ -5,10 +5,10 @@ earlyassign:
   assign:
     recipient_id: ${incoming.body.msg[0].recipient_id}
 
-checkfaultyservice:
-  switch:
-    - condition: ${incoming.body.msg == null}
-      next: noService
+# checkfaultyservice:
+#   switch:
+#     - condition: ${incoming.body.msg == null}
+#       next: noService
 
 checkservice:
   switch:
