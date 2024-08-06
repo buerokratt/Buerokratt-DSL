@@ -82,6 +82,8 @@ setUserSettingValue:
       useAutocorrect: ${useAutocorrect}
   result: returnSuccess
 
+logstepSETTING:
+  log: returnSuccess
 
 returnSuccess:
   return: ${returnSuccess.response.body}
