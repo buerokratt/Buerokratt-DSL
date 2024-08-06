@@ -7,10 +7,8 @@ earlyassign:
 
 checkfaultyservice:
   switch:
-    - condition: ${incoming.body.msg == null}
-      next: callInit
-    - condition: ${incoming.body.msg != null}
-      next: checkservice
+    - condition: ${incoming.body.msg === "#weather"}
+      next: noService
 
 checkservice:
   switch:
@@ -166,10 +164,4 @@ return_step_voting:
 noService:
   return: "${incoming.body.msg} , POLE TEENUST"
   status: 400
-  next: end
-
-callInit:
-  call: http.post
-  args:
-    url: "[#CHATBOT_RUUTER_PUBLIC]/init.yml"
   next: end
