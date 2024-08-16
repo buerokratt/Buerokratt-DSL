@@ -92,6 +92,12 @@ MessagesUpdateTime AS (
   SELECT updated, chat_base_id
   FROM message
   JOIN MessagaeNotRatingOrForwardEvents ON id = maxId
+),
+CustomerMessages AS (
+    SELECT chat_base_id, COUNT(id) AS messages_count
+    FROM message
+    WHERE message.author_role = 'end-user'
+    GROUP BY chat_base_id
 )
 SELECT c.base_id AS id,
       c.customer_support_id,
@@ -113,8 +119,9 @@ SELECT c.base_id AS id,
       c.forwarded_to_name,
       c.received_from,
       c.received_from_name,
-      '' AS last_message,
-      '' AS contacts_message,
+      CustomerMessages.messages_count AS customer_messages,
+      LastContentMessage.content AS last_message,
+      ContactsMessage.content AS contacts_message,
       MessagesUpdateTime.updated AS last_message_timestamp,
       LastEventMessage.event AS last_message_event
 FROM ActiveChats AS c
@@ -122,6 +129,7 @@ LEFT JOIN MessagesUpdateTime ON c.base_id = MessagesUpdateTime.chat_base_id
 LEFT JOIN LastContentMessage ON c.base_id = LastContentMessage.chat_base_id
 LEFT JOIN LastEventMessage ON c.base_id = LastEventMessage.chat_base_id
 LEFT JOIN ContactsMessage ON ContactsMessage.chat_base_id = c.base_id
+LEFT JOIN CustomerMessages ON CustomerMessages.chat_base_id = c.base_id
 CROSS JOIN TitleVisibility
 ORDER BY created ASC
 LIMIT :limit;
