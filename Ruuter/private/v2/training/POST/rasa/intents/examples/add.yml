@@ -118,7 +118,7 @@ convertStringToArray:
   args:
     url: "[#TRAINING_DMAPPER]/conversion/string-to-array"
     body:
-      data: ${intentData.response.body.nlu[0].examples}
+      data: $= intentData.response.body.nlu[0].examples.replace(/(["#{}\\])/g, '\\$1') =
   result: convertedArray
 
 assignExamples:
