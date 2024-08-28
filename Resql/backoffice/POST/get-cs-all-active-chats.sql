@@ -97,6 +97,7 @@ CustomerMessages AS (
     SELECT chat_base_id, COUNT(id) AS messages_count
     FROM message
     WHERE message.author_role = 'end-user'
+    AND (message.event = '' OR message.event IS NULL)
     GROUP BY chat_base_id
 )
 SELECT c.base_id AS id,
