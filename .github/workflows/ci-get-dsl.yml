@@ -3,7 +3,7 @@ name: Buerokratt DSL
 on:
   push:
     branches:
-      - test-tmp-6 # Adjust the branch name if needed
+      - v2.1-alpha # Adjust the branch name if needed
     # Remove paths filter to trigger on any change
     paths:
        - '.env'
@@ -377,7 +377,7 @@ jobs:
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
           
-          git pull origin test-tmp-6 --no-ff --allow-unrelated-histories
+          git pull origin v2.1-alpha --no-ff --allow-unrelated-histories
           git add -A .
           git commit --allow-empty -m Update 
           git push 
