@@ -13,6 +13,7 @@ getActiveChats:
     url: "[#CHATBOT_RESQL]/get-cs-all-active-chats"
     body:
       limit: 100
+  limit: 1000
   result: res
 
 return_result:

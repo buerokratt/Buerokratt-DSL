@@ -7,7 +7,6 @@ INSERT INTO chat (
   end_user_last_name,
   status,
   created,
-  updated,
   ended,
   end_user_os,
   end_user_url,
@@ -32,7 +31,6 @@ SELECT
   end_user_last_name,
   status,
   created,
-  updated,
   ended,
   end_user_os,
   end_user_url,
@@ -51,4 +49,3 @@ FROM chat
 WHERE base_id = :chatId
 ORDER BY id DESC
 LIMIT 1;
-
