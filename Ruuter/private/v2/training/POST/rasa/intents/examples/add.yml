@@ -118,7 +118,7 @@ convertStringToArray:
   args:
     url: "[#TRAINING_DMAPPER]/conversion/string-to-array"
     body:
-      data: ${intentData.response.body.nlu[0].examples}
+      data: $= intentData.response.body.nlu[0].examples.replace(/(["#{}\\])/g, '\\$1') =
   result: convertedArray
 
 assignExamples:
@@ -189,7 +189,7 @@ addNewIntentInPipeline:
   args:
     url: "[#TRAINING_PIPELINE]/put/intents/intent"
     body:
-      input:  $= pipelineIntent.response.body.replace(/(["#{}\\])/g, '\\$1') =
+      input: $= pipelineIntent.response.body.replace(/(["#{}\\])/g, '\\$1') =
   result: updateSearchResult
 
 addInDatabase:

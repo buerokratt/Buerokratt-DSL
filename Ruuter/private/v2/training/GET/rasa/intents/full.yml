@@ -55,6 +55,7 @@ assignResults:
       inmodel: ${getDomainDataResult.response.body.response.intents}
       connections: ${connection_res.response.body}
 
+
 mapIntentsData:
   call: http.post
   args:
