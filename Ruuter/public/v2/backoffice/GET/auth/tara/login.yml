@@ -30,6 +30,7 @@ mock_tara_user_info:
           personalCode: "30303039914"
           authMethod: "smartid"
           fullName: "OK TESTNUMBER"
+  next: get_session_length
 
 get_tara_user_info:
   call: http.get
