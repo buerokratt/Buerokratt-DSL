@@ -11,6 +11,16 @@ declaration:
       - field: cookie
         type: string
         description: "Cookie field"
+    params:
+      - field: mock
+        type: boolean
+        description: "mock SSO session"
+
+check_if_mock:
+  switch:
+    - condition: {incoming.params.mock == "true" }
+      next: mock_tara_user_info
+  next: get_tara_user_info
 
 get_tara_user_info:
   call: http.get
