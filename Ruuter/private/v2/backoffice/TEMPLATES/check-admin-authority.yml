@@ -13,7 +13,8 @@ declaration:
         description: "Cookie field"
 
 get_sso_info:
-  condition: ${incoming.eval.ssoMaster == null}
+  switch:
+  - condition: ${incoming.eval.ssoMaster == null}
     next: get_cookie_info
   next: get_sso_from_master
 
