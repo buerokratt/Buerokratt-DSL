@@ -3,7 +3,7 @@ name: Docker Build and Push
 on:
   push:
     branches:
-      - v2.1-alpha
+      - v2.2-alpha
     paths:
       - '.env.img'
       - 'module_based_image_builder.py'
