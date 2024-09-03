@@ -32,6 +32,10 @@ get_sso_from_master:
   result: res
   next: log_cookie_info_response
 
+log_cookie_info_response:
+  log: ${res}
+  next: check_cookie_info_response
+
 get_cookie_info:
   call: http.post
   args:
