@@ -12,7 +12,7 @@ check_for_cookie:
     
 return_cookie_if_exists:
   headers:
-    Location: ${incoming.headers.referer}
+    Location: "${incoming.headers.referer}/"
     "Set-Cookie": ${incoming.headers.cookie}
   status: 302
   return: ${incoming.headers.cookie}
