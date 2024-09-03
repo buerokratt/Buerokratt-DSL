@@ -27,7 +27,7 @@ mock_tara_user_info:
     tara_info:
       response:
         body:
-          personalCode: "30303039914"
+          personalCode: "EE30303039914"
           authMethod: "smartid"
           fullName: "OK TESTNUMBER"
   next: get_session_length
