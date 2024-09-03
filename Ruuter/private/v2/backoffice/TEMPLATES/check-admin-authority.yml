@@ -12,6 +12,9 @@ declaration:
         type: string
         description: "Cookie field"
 
+log_sso:
+  log: "ssomaster => ${incoming.eval.ssoMaster}"
+  
 get_sso_info:
   condition: ${incoming.eval.ssoMaster == null}
     next: get_cookie_info
@@ -26,6 +29,10 @@ get_sso_from_master:
       cookie: ${incoming.headers.cookie}
     plaintext: "customJwtCookie"
   result: res
+  next: log_cookie_info_response
+
+log_cookie_info_response:
+  log: ${res}
   next: check_cookie_info_response
 
 get_cookie_info:
