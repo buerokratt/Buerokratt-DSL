@@ -2,7 +2,7 @@ log_cookie_step:
   log: ${incoming.headers.cookie}
 
 log_header_step:
-  log: ${incoming.headers.referer}
+  log: ${incoming.headers}
 
 check_for_cookie:
   switch:
