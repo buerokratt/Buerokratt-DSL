@@ -10,14 +10,13 @@ check_for_cookie:
 
 redirect_sso:
   headers:
-    Location: "${incoming.eval.ssoMaster}/backoffice/auth/sso?referer=http%3A%2F%2Fadmin.stage.buerokratt.ee%2Fchat"
-    Referer: "/chat/"
+    Location: "${incoming.eval.ssoMaster}/backoffice/auth/sso?referer=https%3A%2F%2Fadmin.stage.buerokratt.ee%2Fchat"
   status: 302
   return: "sso_login"
   next: end
 
 redirect_classic:
   headers:
-    Location: "/"
+    Location: "/chat/"
   status: 302
   return: "sso_error"
