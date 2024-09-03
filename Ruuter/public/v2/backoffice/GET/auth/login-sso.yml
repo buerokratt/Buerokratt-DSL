@@ -10,7 +10,7 @@ check_for_cookie:
 
 redirect_sso:
   headers:
-    Location: ${incoming.eval.ssoMaster}
+    Location: "${incoming.eval.ssoMaster}/auth/sso"
   status: 302
   return: "sso_login"
   next: end
