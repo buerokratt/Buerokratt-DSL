@@ -22,6 +22,15 @@ check_if_mock:
       next: mock_tara_user_info
   next: get_tara_user_info
 
+mock_tara_user_info:
+  assign:
+    tara_info:
+      response:
+        body:
+          personalCode: "30303039914"
+          authMethod: "smartid"
+          fullName: "OK TESTNUMBER"
+
 get_tara_user_info:
   call: http.get
   args:
