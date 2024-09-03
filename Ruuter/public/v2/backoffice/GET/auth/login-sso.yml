@@ -4,7 +4,7 @@ log_master:
 
 check_for_cookie:
   switch:
-    - condition: ${(incoming.headers == null || incoming.headers.cookie == null) && incoming.eval.ssoMaster != null }
+    - condition: ${ incoming.eval.ssoMaster != null }
       next: redirect_sso
   next: redirect_classic
 
