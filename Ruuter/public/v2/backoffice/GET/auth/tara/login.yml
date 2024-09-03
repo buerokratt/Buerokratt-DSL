@@ -18,7 +18,7 @@ declaration:
 
 check_if_mock:
   switch:
-    - condition: {incoming.params.mock == "true" }
+    - condition: ${incoming.params.mock == "true" }
       next: mock_tara_user_info
   next: get_tara_user_info
 
