@@ -135,6 +135,7 @@ redirect_if_mock:
 
 redirect_to_chat:
   headers:
-    Location: "/chat"
+    Set-Cookie: ${setCookie}
+    Location: "https://admin.stage.buerokratt.ee/chat"
   status: 302
-  return: "ok"
+  return: ${cookie_result.response.body.token}
