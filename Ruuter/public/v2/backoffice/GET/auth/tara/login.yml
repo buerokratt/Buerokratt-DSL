@@ -126,3 +126,15 @@ return_value:
 return_not_exists:
   return: "User does not exist"
   next: end
+
+redirect_if_mock:
+  switch:
+    - condition: {incoming.params.mock == "true" }
+      next: redirect_to_chat
+  next: redirect_if_mock
+
+redirect_to_chat:
+  headers:
+    Location: "/chat"
+  status: 302
+  return: "ok"
