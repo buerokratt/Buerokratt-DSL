@@ -11,10 +11,10 @@ declaration:
       - field: cookie
         type: string
         description: "Cookie field"
-    params:
-      - field: mock
-        type: boolean
-        description: "mock SSO session"
+#    params:
+#      - field: mock
+#        type: boolean
+#        description: "mock SSO session"
 
 check_if_mock:
   switch:
