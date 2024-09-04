@@ -121,7 +121,7 @@ return_value:
   headers:
     Set-Cookie: ${setCookie}
   return: ${cookie_result.response.body.token}
-  next: end 
+  next: redirect_if_mock 
 
 return_not_exists:
   return: "User does not exist"
@@ -129,9 +129,9 @@ return_not_exists:
 
 redirect_if_mock:
   switch:
-    - condition: {incoming.params.mock == "true" }
+    - condition: ${incoming.params.mock == "true" }
       next: redirect_to_chat
-  next: redirect_if_mock
+  next: end
 
 redirect_to_chat:
   headers:
