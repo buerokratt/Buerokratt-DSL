@@ -208,7 +208,7 @@ common_service_revenue1:
 
 
 logstepREVENUE1:
-  log: ${common_service_revenue1_result.response.body.response.companies}
+  log: ${common_service_revenue1_result}
   next: extract_bot_responses_revenue_with_buttons
 
 #  switch:
