@@ -266,8 +266,8 @@ common_service_national_tax1:
 common_service_national_tax2:
   requestType: post
   template: Common-Services/services/companies/national-taxes
-    body:
-      message: ${content.match(/^#taxes (.*)/)[1]}
+  body:
+    message: ${content.match(/^#taxes (.*)/)[1]}
   result: post_message_to_bot_result
   next: extract_bot_responses_opensearch
 
