@@ -1,1 +1,8 @@
-{{#each names}}{{#if @index}}|||{{/if}}{{#if this}}{{this}}-{{lookup ../messages @index}}{{else}}User-{{lookup ../messages @index}}{{/if}}{{/each}}
+{{#each messages}}
+  {{#if @index}} ||| {{/if}}
+  {{#if customerSupportDisplayName}}
+    {{customerSupportDisplayName}}: {{lastMessage}}
+  {{else}}
+    User: {{lastMessage}}
+  {{/if}}
+{{/each}}
