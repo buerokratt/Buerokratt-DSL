@@ -24,6 +24,9 @@ get_last_6_messages:
   result: get_last_6_messages_result
   next: format_messages_for_llm
 
+logstepResqlResponse:
+  log: ${get_last_6_messages_result.response.body}
+
 format_messages_for_llm:
   call: http.post
   args:
