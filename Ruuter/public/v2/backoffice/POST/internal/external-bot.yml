@@ -31,8 +31,8 @@ format_messages_for_llm:
     headers:
       type: json
     body:
-      names: ${get_last_6_messages_result.response.body.map{"customer_support_display_name"}}
-      messages: ${get_last_6_messages_result.response.body.map{"last_message"}}
+      names: "${get_last_6_messages_result.response.body.map(item => item.customer_support_display_name)}"
+      messages: "${get_last_6_messages_result.response.body.map(item => item.last_message)}"
   result: formattedMessages
 
 logstepFormattedResponse:
