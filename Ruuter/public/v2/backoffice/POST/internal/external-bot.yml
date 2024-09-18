@@ -27,7 +27,7 @@ get_last_6_messages:
 format_messages_for_llm:
   call: http.post
   args:
-    url: "[#CHATBOT_DMAPPER]/backoffice/hbs/format-messages-for-llm"
+    url: "[#CHATBOT_DMAPPER]/backoffice/hbs/format_messages_for_llm"
     headers:
       type: json
     body:
