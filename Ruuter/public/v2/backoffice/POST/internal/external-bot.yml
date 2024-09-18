@@ -22,7 +22,7 @@ get_last_6_messages:
     body:
       id: ${incoming.body.sender}
   result: get_last_6_messages_result
-  next: format_messages_for_llm
+  # next: format_messages_for_llm
 
 logstepResqlResponse:
   log: ${get_last_6_messages_result.response.body}
