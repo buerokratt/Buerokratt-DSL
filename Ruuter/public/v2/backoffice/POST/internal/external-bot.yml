@@ -27,22 +27,29 @@ get_last_6_messages:
 logstepResqlResponse:
   log: ${get_last_6_messages_result.response.body}
 
-format_messages_for_llm:
-  call: http.post
-  args:
-    url: "[#CHATBOT_DMAPPER]/backoffice/hbs/format_messages_for_llm"
-    headers:
-      type: json
-    body:
-      messages: "${get_last_6_messages_result.response.body}"
-  result: formattedMessages
+assign_latest_messages:
+  assign:
+    lastMessages: ${get_last_6_messages_result.response.body[0].lastMessage + "|||" + get_last_6_messages_result.response.body[1].lastMessage}
 
-logstepFormattedResponse:
-  log: ${formattedMessages.response.body}
+logstepLastMessage:
+  log: ${lastMessages}
+
+# format_messages_for_llm:
+#   call: http.post
+#   args:
+#     url: "[#CHATBOT_DMAPPER]/backoffice/hbs/format_messages_for_llm"
+#     headers:
+#       type: json
+#     body:
+#       messages: "${get_last_6_messages_result.response.body}"
+#   result: formattedMessages
+
+# logstepFormattedResponse:
+#   log: ${formattedMessages.response.body}
 
 assignData:
   assign:
-    formattedMessages: "${formattedMessages.response.body}"
+    formattedMessages: "${lastMessages}"
     currentDate: "${new Date().toISOString().split('T')[0]}"
   next: post_answer
 
