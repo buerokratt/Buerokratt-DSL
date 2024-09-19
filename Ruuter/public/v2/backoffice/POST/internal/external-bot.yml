@@ -29,7 +29,7 @@ logstepResqlResponse:
 
 assign_latest_messages:
   assign:
-    lastMessages: "${(get_last_6_messages_result.response.body || []).slice(0, 6).reverse().map(item => item?.lastMessage || '').join('|||')}"
+    lastMessages: "${(get_last_6_messages_result.response.body || []).slice(0, 3).reverse().map(item => item?.lastMessage || '').join('|||')}"
   # next: assignData
 
 logstepLastMessage:
