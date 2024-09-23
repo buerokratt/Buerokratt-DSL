@@ -40,7 +40,7 @@ getWithCode:
     url: "[#OPENSEARCH]/companies/_search/template"
     body:
       id: "company-with-code"
-      params: { registry_code: "${params.message}", field: "turnover" }
+      params: { registry_code: "${params.registry_code}", field: "turnover" }
   result: res
   next: mapCodeData
 
