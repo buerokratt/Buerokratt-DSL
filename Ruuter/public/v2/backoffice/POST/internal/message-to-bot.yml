@@ -492,7 +492,7 @@ extract_companies:
 addButtonsToFirstBotMessage:
   call: http.post
   args:
-    url: "[#CHATBOT_DMAPPER]/hbs/chat-bot/add_buttons_to_first_message"
+    url: "[#CHATBOT_DMAPPER]/backoffice/hbs/add_buttons_to_first_message"
     headers:
       type: json
     body:
@@ -509,7 +509,7 @@ extractMergedResult:
 convert_bot_responses_to_messages:
   call: http.post
   args:
-    url: "[#CHATBOT_DMAPPER]/hbs/chat-bot/bot_responses_to_messages"
+    url: "[#CHATBOT_DMAPPER]/backoffice/hbs/bot_responses_to_messages"
     headers:
       type: json
     body:
@@ -529,7 +529,7 @@ convert_bot_responses_to_messages:
 convert_fallback_bot_responses_to_messages:
   call: http.post
   args:
-    url: "[#CHATBOT_DMAPPER]/hbs/chat-bot/bot_responses_to_messages"
+    url: "[#CHATBOT_DMAPPER]/backoffice/hbs/bot_responses_to_messages"
     headers:
       type: json
     body:
