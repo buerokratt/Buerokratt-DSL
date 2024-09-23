@@ -83,7 +83,7 @@ decode_content_to_be_sent_to_bot:
 
 skip_rasa_switch:
   switch:
-    - condition: ${content.match(/^REVENUE/) != null}
+    - condition: ${content.match(/^#revenue/) != null}
       next: common_service_revenue2
     - condition: ${content.match(/^#employees/) != null}
       next: common_service2
