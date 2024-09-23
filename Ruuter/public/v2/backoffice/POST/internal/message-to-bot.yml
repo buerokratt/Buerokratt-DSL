@@ -505,6 +505,8 @@ addButtonsToFirstBotMessage:
 extractMergedResult:
   assign:
     botMsg: ${merged_messages_res.response.body}
+logstepBOTMSG:
+  log: ${botMsg}
 
 convert_bot_responses_to_messages:
   call: http.post
