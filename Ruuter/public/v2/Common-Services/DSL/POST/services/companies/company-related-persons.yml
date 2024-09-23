@@ -24,7 +24,7 @@ getRelatedPersons:
 mapRelatedPersons:
   call: http.post
   args:
-    url: "[#DMAPPER]/hbs/common-services/get-business-register-related-persons"
+    url: "[#DMAPPER]/common-services/hbs/get-business-register-related-persons"
     headers:
       type: "json"
     body:
