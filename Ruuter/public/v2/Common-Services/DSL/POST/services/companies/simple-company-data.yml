@@ -23,7 +23,7 @@ getSimpleCompanyData:
   args:
     url: "[#XTR]/ar/lihtandmed_v3"
     body:
-      params: { reg_code: "{$params.reg_code", username: "${params.username}", password: "${params.password}"}
+      params: { reg_code: "${params.reg_code}", username: "${params.username}", password: "${params.password}"}
     result: simpleCompanyData
     next: mapSimpleCompanyData
 
