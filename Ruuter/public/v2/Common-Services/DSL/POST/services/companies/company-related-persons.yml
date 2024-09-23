@@ -17,14 +17,14 @@ getRelatedPersons:
   args:
     url: "[#XTR]/ar/ettevottegaSeotudIsikud_v1"
     body:
-      params: { reg_code: "{$params.reg_code" }
+      params: { reg_code: "{$params.reg_code}" }
     result: relatedPersons
     next: mapRelatedPersons
 
 mapRelatedPersons:
   call: http.post
   args:
-    url: "[#DMAPPER]/common-services/hbs/get-business-register-related-persons"
+    url: "[#DMAPPER]/hbs/common-services/get-business-register-related-persons"
     headers:
       type: "json"
     body:
