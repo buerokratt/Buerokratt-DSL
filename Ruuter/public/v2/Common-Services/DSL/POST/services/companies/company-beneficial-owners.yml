@@ -37,7 +37,7 @@ getBeneficialOwnersData:
 mapBeneficialOwnersData:
   call: http.post
   args:
-    url: "[#DMAPPER]/hbs/common-services/get-business-register-beneficial-owners"
+    url: "[#DMAPPER]/common-services/hbs/get-business-register-beneficial-owners"
     headers:
       type: "json"
     body:
