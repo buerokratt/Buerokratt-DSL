@@ -33,7 +33,7 @@ getBeneficialOwnersData:
     result: beneficialOwnersData
 #    next: mapBeneficialOwnersData
 logstepINCOMING:
-  log: ${beneficialOwnersData.response.body}
+  log: ${beneficialOwnersData}
   next: mapBeneficialOwnersData
 mapBeneficialOwnersData:
   call: http.post
