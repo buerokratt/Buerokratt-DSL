@@ -26,8 +26,8 @@ getBeneficialOwnersData:
     url: "[#XTR]/ar/tegelikudKasusaajad_v2"
     body:
       reg_code: "${incoming.body.reg_code}" 
-      username: "${incoming.body.username}" 
-      password: "${incoming.body.password}"
+      username: "[#XTR_AR_USERNAME]" 
+      password: "[#XTR_AR_PASSWORD]"
     result: beneficialOwnersData
     next: mapBeneficialOwnersData
 
