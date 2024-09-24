@@ -8,6 +8,9 @@ declaration:
   namespace: common-services
   allowlist:
     params:
+      - field: message
+        type: string
+        description: "Registry code of the requested company"
       - field: reg_code
         type: string
         description: "Registry code of the requested company"
@@ -23,9 +26,11 @@ getSimpleCompanyData:
   args:
     url: "[#XTR]/ar/lihtandmed_v3"
     body:
-      params: { reg_code: "${params.reg_code}", username: "${params.username}", password: "${params.password}"}
-    result: simpleCompanyData
-    next: mapSimpleCompanyData
+      reg_code: "${incoming.body.message}" 
+      username: "[#XTR_AR_USERNAME]" 
+      password: "[#XTR_AR_PASSWORD]"
+  result: simpleCompanyData
+  next: mapSimpleCompanyData
 
 mapSimpleCompanyData:
   call: http.post
