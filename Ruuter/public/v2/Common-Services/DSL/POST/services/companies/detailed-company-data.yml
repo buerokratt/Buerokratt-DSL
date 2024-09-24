@@ -35,7 +35,7 @@ getDetailedCompanyData:
 mapDetailedCompanyData:
   call: http.post
   args:
-    url: "[#DMAPPER]/hbs/common-services/get-business-register-detailed-company-data"
+    url: "[#DMAPPER]/common-services/hbs/get-business-register-detailed-company-data"
     headers:
       type: "json"
     body:
