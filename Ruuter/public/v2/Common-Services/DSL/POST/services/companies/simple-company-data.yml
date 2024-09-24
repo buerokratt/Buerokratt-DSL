@@ -35,7 +35,7 @@ getSimpleCompanyData:
 mapSimpleCompanyData:
   call: http.post
   args:
-    url: "[#DMAPPER]/hbs/common-services/get-business-register-simple-company-data"
+    url: "[#DMAPPER]/common-services/hbs/get-business-register-simple-company-data"
     headers:
       type: "json"
     body:
