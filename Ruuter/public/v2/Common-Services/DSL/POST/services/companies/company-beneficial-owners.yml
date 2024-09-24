@@ -7,7 +7,7 @@ declaration:
   returns: json
   namespace: common-services
   allowlist:
-    params:
+    body:
       - field: reg_code
         type: string
         description: "Registry code of the requested company"
@@ -23,7 +23,7 @@ getBeneficialOwnersData:
   args:
     url: "[#XTR]/ar/tegelikudKasusaajad_v2"
     body:
-      params: { reg_code: "${params.reg_code}", username: "${params.username}", password: "${params.password}" }
+      params: { reg_code: "${incoming.body.reg_code}", username: "${incoming.body.username}", password: "${incoming.body.password}" }
     result: beneficialOwnersData
     next: mapBeneficialOwnersData
 
