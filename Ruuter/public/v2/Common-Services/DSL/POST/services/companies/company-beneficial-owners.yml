@@ -30,7 +30,7 @@ getBeneficialOwnersData:
       reg_code: "${incoming.body.message}" 
       username: "[#XTR_AR_USERNAME]" 
       password: "[#XTR_AR_PASSWORD]"
-    result: beneficialOwnersData
+  result: beneficialOwnersData
 #    next: mapBeneficialOwnersData
 logstepINCOMING:
   log: ${beneficialOwnersData}
