@@ -21,7 +21,6 @@ declaration:
         type: string
         description: "X-Road API password"
 
-  
 getBeneficialOwnersData:
   call: http.post
   args:
@@ -31,10 +30,7 @@ getBeneficialOwnersData:
       username: "[#XTR_AR_USERNAME]" 
       password: "[#XTR_AR_PASSWORD]"
   result: beneficialOwnersData
-#    next: mapBeneficialOwnersData
-logstepINCOMING:
-  log: ${beneficialOwnersData}
-  next: mapBeneficialOwnersData
+  
 mapBeneficialOwnersData:
   call: http.post
   args:
