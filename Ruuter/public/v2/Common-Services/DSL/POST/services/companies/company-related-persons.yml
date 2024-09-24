@@ -20,7 +20,7 @@ getRelatedPersons:
   args:
     url: "[#XTR]/ar/ettevottegaSeotudIsikud_v1"
     body:
-      params: { reg_code: "${incoming.body.message}" }
+      reg_code: "${incoming.body.message}"
   result: relatedPersons
   next: mapRelatedPersons
 
