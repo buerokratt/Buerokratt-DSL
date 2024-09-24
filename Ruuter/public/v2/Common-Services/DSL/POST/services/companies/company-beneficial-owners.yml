@@ -17,7 +17,9 @@ declaration:
       - field: password
         type: string
         description: "X-Road API password"
-
+logstepINCOMING:
+  log: ${incoming.body}
+  
 getBeneficialOwnersData:
   call: http.post
   args:
