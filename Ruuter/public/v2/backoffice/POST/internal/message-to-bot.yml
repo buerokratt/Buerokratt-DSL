@@ -436,6 +436,11 @@ extract_bot_responses_after_redirect_to_back_office:
     botMsg: ${post_message_to_bot_result.response.body}
   next: convert_bot_responses_to_messages
 
+extract_bot_responses_opensearch:
+  assign:
+    botMsg: ${[post_message_to_bot_result.response.body.response]}
+  next: convert_bot_responses_to_messages
+
 extract_bot_responses_opensearch_persons:
   assign:
     botMsg: ${[post_message_to_bot_result.response.body.response]}
