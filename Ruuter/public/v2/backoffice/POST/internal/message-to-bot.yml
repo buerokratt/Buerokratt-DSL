@@ -247,7 +247,7 @@ common_service_related_people2:
     body:
       message: ${content.match(/^#relatedpersons (.*)/)[1]}
   result: post_message_to_bot_result
-  next: extract_bot_responses_opensearch
+  next: extract_bot_responses_opensearch_persons
 
 common_service_company_details1:
   call: http.post
@@ -436,10 +436,10 @@ extract_bot_responses_after_redirect_to_back_office:
     botMsg: ${post_message_to_bot_result.response.body}
   next: convert_bot_responses_to_messages
 
-extract_bot_responses_opensearch:
+extract_bot_responses_opensearch_persons:
   assign:
     botMsg: ${[post_message_to_bot_result.response.body.response]}
-  next: convert_bot_responses_to_messages
+  next: convert_bot_responses_to_messages_persons
 
 extract_bot_responses:
   assign:
@@ -490,16 +490,25 @@ extract_bot_responses_simple_company_with_buttons:
 extract_companies:
   assign:
     companies: ${common_service_revenue1_result.response.body.response.companies}
-
 addButtonsToFirstBotMessage:
   call: http.post
   args:
-    url: "[#CHATBOT_DMAPPER]/backoffice/hbs/add_buttons_to_first_message"
+    url: "[#CHATBOT_DMAPPER]/hbs/chat-bot/add_buttons_to_first_message"
     headers:
       type: json
     body:
       messages: ${post_message_to_bot_result.response.body}
-      ignoreTexts: ["OPENSEARCH", "REVENUEOPENSEARCH", "NATIONALTAXOPENSEARCH", "WORKFORCETAXOPENSEARCH", "BENEFICIARIESOPENSEARCH", "RELATEDPEOPLEOPENSEARCH", "COMPANYDETAILSOPENSEARCH", "SIMPLECOMPANYOPENSEARCH"]
+      ignoreTexts:
+        [
+          "OPENSEARCH",
+          "REVENUEOPENSEARCH",
+          "NATIONALTAXOPENSEARCH",
+          "WORKFORCETAXOPENSEARCH",
+          "BENEFICIARIESOPENSEARCH",
+          "RELATEDPEOPLEOPENSEARCH",
+          "COMPANYDETAILSOPENSEARCH",
+          "SIMPLECOMPANYOPENSEARCH",
+        ]
       prefix: ${buttonPrefix}
       companies: ${companies}
   result: merged_messages_res
@@ -514,6 +523,26 @@ convert_bot_responses_to_messages:
   call: http.post
   args:
     url: "[#CHATBOT_DMAPPER]/backoffice/hbs/bot_responses_to_messages"
+    headers:
+      type: json
+    body:
+      data:
+        {
+          "botMessages": "${botMsg}",
+          "chatId": "${chatId}",
+          "authorId": "${get_bot_name_result.response.body[0].value}",
+          "authorFirstName": "",
+          "authorLastName": "",
+          "authorTimestamp": "${new Date().toISOString()}",
+          "created": "${new Date().toISOString()}",
+        }
+  result: converted_messages_res
+  next: add_bot_message_to_db
+
+convert_bot_responses_to_messages_persons:
+  call: http.post
+  args:
+    url: "[#CHATBOT_DMAPPER]/hbs/chat-bot/filter-company-related-persons"
     headers:
       type: json
     body:
