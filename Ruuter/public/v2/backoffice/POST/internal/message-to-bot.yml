@@ -542,7 +542,7 @@ convert_bot_responses_to_messages:
 convert_bot_responses_to_messages_persons:
   call: http.post
   args:
-    url: "[#CHATBOT_DMAPPER]/hbs/chat-bot/filter-company-related-persons"
+    url: "[#CHATBOT_DMAPPER]/backoffice/hbs/filter-company-related-persons"
     headers:
       type: json
     body:
