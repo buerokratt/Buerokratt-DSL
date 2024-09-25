@@ -39,7 +39,7 @@ mapDetailedCompanyData:
     headers:
       type: "json"
     body:
-      keha: ${detailedCompanyData.response.body.detailandmed_v2Response.keha.yldandmed.sidevahendid.item}
+      keha: ${detailedCompanyData.response.body.detailandmed_v2Response.keha.ettevotjad.item}
   result: mappedDetailedCompanyData
   next: returnDetailedCompanyData
 
