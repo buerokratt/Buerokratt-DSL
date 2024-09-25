@@ -100,7 +100,7 @@ skip_rasa_switch:
     - condition: ${content.match(/^#companydatasimple/) != null}
       next: common_service_simple_company2
 logstepDCD2:
-  log: ${content.match(/^#companydata (.*)/)[1]}
+  log: ${content}
   next: end
 post_message_to_bot:
   call: http.post
