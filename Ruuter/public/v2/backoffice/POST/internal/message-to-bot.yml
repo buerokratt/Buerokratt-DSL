@@ -493,7 +493,7 @@ extract_companies:
 addButtonsToFirstBotMessage:
   call: http.post
   args:
-    url: "[#CHATBOT_DMAPPER]/hbs/chat-bot/add_buttons_to_first_message"
+    url: "[#CHATBOT_DMAPPER]/backoffice/hbs/add_buttons_to_first_message"
     headers:
       type: json
     body:
