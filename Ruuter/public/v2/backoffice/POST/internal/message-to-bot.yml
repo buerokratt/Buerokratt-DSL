@@ -96,12 +96,12 @@ skip_rasa_switch:
     - condition: ${content.match(/^#relatedpersons/) != null}
       next: common_service_related_people2
     - condition: ${content.match(/^#companydata/) != null}
-      next: logstepDCD2
+      next: common_service_company_details2
     - condition: ${content.match(/^#companydatasimple/) != null}
       next: common_service_simple_company2
-logstepDCD2:
-  log: ${content}
-  next: end
+#logstepDCD2:
+#  log: ${content}
+#  next: end
 post_message_to_bot:
   call: http.post
   args:
