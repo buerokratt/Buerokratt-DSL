@@ -35,18 +35,18 @@ assign_latest_messages:
 logstepLastMessage:
   log: ${lastMessages}
 
-# format_messages_for_llm:
-#   call: http.post
-#   args:
-#     url: "[#CHATBOT_DMAPPER]/backoffice/hbs/format_messages_for_llm"
-#     headers:
-#       type: json
-#     body:
-#       messages: "${get_last_6_messages_result.response.body}"
-#   result: formattedMessages
+format_messages_for_llm:
+  call: http.post
+  args:
+    url: "[#CHATBOT_DMAPPER]/backoffice/hbs/format_messages_for_llm"
+    headers:
+      type: json
+    body:
+      messages: "${get_last_6_messages_result.response.body}"
+  result: formattedMessages
 
-# logstepFormattedResponse:
-#   log: ${formattedMessages.response.body}
+ logstepFormattedResponse:
+   log: ${formattedMessages.response.body}
 
 assignData:
   assign:
