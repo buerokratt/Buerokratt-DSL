@@ -14,39 +14,42 @@ declaration:
       - field: sender
         type: string
         description: "Body field 'sender'"
-
-get_last_6_messages:
-  call: http.post
-  args:
-    url: "[#CHATBOT_RESQL]/get-last-6-messages-by-id"
-    body:
-      id: ${incoming.body.sender}
-  result: get_last_6_messages_result
-  # next: format_messages_for_llm
-
-assign_latest_messages:
+getting_time:
   assign:
-    lastMessages: "${(get_last_6_messages_result.response.body || []).slice(0, 3).reverse().map(item => item?.lastMessage || '').join('|||')}"
-  # next: assignData
-
-logstepLastMessage:
-  log: ${lastMessages}
-
-format_messages_for_llm:
-  call: http.post
-  args:
-    url: "[#CHATBOT_DMAPPER]/backoffice/hbs/format_messages_for_llm"
-    headers:
-      type: json
-    body:
-      messages: "${get_last_6_messages_result.response.body}"
-  result: formattedMessages
-
-assignData:
-  assign:
-    formattedMessages: "${lastMessages}"
     currentDate: "${new Date().toISOString().split('T')[0]}"
   next: post_answer
+# get_last_6_messages:
+#   call: http.post
+#   args:
+#     url: "[#CHATBOT_RESQL]/get-last-6-messages-by-id"
+#     body:
+#       id: ${incoming.body.sender}
+#   result: get_last_6_messages_result
+#   # next: format_messages_for_llm
+
+# assign_latest_messages:
+#   assign:
+#     lastMessages: "${(get_last_6_messages_result.response.body || []).slice(0, 3).reverse().map(item => item?.lastMessage || '').join('|||')}"
+#   # next: assignData
+
+# logstepLastMessage:
+#   log: ${lastMessages}
+
+# format_messages_for_llm:
+#   call: http.post
+#   args:
+#     url: "[#CHATBOT_DMAPPER]/backoffice/hbs/format_messages_for_llm"
+#     headers:
+#       type: json
+#     body:
+#       messages: "${get_last_6_messages_result.response.body}"
+#   result: formattedMessages
+
+# assignData:
+#   assign:
+#     formattedMessages: "${lastMessages}"
+#     currentDate: "${new Date().toISOString().split('T')[0]}"
+#   next: post_answer
 
 post_answer:
   call: http.post
