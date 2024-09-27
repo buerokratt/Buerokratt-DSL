@@ -73,7 +73,6 @@ post_answer:
       stream: false
       frequency_penalty: 0
       presence_penalty: 0
-      stop: null
   result: test
 logstepAZUREBOT:
   log: ${test}
