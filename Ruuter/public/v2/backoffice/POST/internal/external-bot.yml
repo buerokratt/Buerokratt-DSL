@@ -14,7 +14,10 @@ declaration:
       - field: sender
         type: string
         description: "Body field 'sender'"
-
+getting_time:
+  assign:
+    currentDate: "${new Date().toISOString().split('T')[0]}"
+  next: post_answer
 # get_last_6_messages:
 #   call: http.post
 #   args:
