@@ -109,6 +109,9 @@ post_answer:
       top_p: 1
       max_tokens: 1000
       stream: false
+      frequency_penalty: 0
+      presence_penalty: 0
+      stop: null
   result: test
 
 logstepAZUREBOT:
