@@ -24,9 +24,6 @@ get_last_6_messages:
   result: get_last_6_messages_result
   # next: format_messages_for_llm
 
-logstepResqlResponse:
-  log: ${get_last_6_messages_result.response.body}
-
 assign_latest_messages:
   assign:
     lastMessages: "${(get_last_6_messages_result.response.body || []).slice(0, 3).reverse().map(item => item?.lastMessage || '').join('|||')}"
