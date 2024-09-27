@@ -297,7 +297,7 @@ check_for_fallback_bot:
 
 check_for_fallback_bot_result:
   switch:
-    - condition: ${200 <= fallback_bot_result.statusCodeValue && fallback_bot_result.statusCodeValue < 300}
+    - condition: ${200 <= fallback_bot_result.response.statusCodeValue && fallback_bot_result.response.statusCodeValue < 300}
       next: check_if_fallback_bot_is_unable_to_reply
   next: return_bot_error
 
