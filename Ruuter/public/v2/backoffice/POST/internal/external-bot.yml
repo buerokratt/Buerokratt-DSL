@@ -53,8 +53,10 @@ getting_time:
 
 logstepAZURESAADAME:
   log: ${incoming.body.message}
-logstepAZUREGET:
-  log: ${body}
+# logstepAZUREGET:
+#   log: ${body}
+
+
 
 post_answer:
   call: http.post
