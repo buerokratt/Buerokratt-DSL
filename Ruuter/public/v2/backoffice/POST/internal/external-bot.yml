@@ -79,7 +79,7 @@ post_answer:
               "key": "[#CHATBOT_EXTERNAL_KEY]"
             "embeddingDependency":
               "type": "endpoint",
-              "endpoint": "[#EMBEDDED_ENDPOINT_AZURE]",
+              "endpoint": "[#EMBEDDED_ENDPOINT_AZURE]"
               "authentication": {
                 "type": "api_key",
                 "key": "[#CHATBOT_EXTERNAL_API_KEY]"
