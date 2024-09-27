@@ -17,7 +17,7 @@ declaration:
 getting_time:
   assign:
     currentDate: "${new Date().toISOString().split('T')[0]}"
-  next: post_answer
+  #next: post_answer
 # get_last_6_messages:
 #   call: http.post
 #   args:
@@ -50,6 +50,11 @@ getting_time:
 #     formattedMessages: "${lastMessages}"
 #     currentDate: "${new Date().toISOString().split('T')[0]}"
 #   next: post_answer
+
+logstepAZURESAADAME:
+  log: ${incoming.body.message}
+logstepAZUREGET:
+  log: ${body}
 
 post_answer:
   call: http.post
