@@ -22,29 +22,29 @@ logstepAZURESAADAME:
   log: ${incoming.body.message}
 assign_data_sources:
   assign:
-    dataSources:
+    data_sources:
       - type: azure_search
         parameters:
           endpoint: "[#SEARCH_ENDPOINT]"
-          indexName: "[#SEARCH_INDEX_NAME]"
-          semanticConfiguration: azureml-default
-          queryType: vector_semantic_hybrid
-          inScope: true
-          roleInformation: You are an AI assistant that helps people find information.
+          index_name: "[#SEARCH_INDEX_NAME]"
+          semantic_configuration: azureml-default
+          query_type: vector_semantic_hybrid
+          in_scope: true
+          role_information: You are an AI assistant that helps people find information.
           filter: null
           strictness: 3
-          topNDocuments: 7
+          top_n_documents: 7
           authentication:
             type: api_key
             key: "[#CHATBOT_EXTERNAL_KEY]"
-          embeddingDependency:
+          embedding_dependency:
             type: endpoint
             endpoint: "[#EMBEDDED_ENDPOINT_AZURE]"
             authentication:
               type: api_key
               key: "[#CHATBOT_EXTERNAL_API_KEY]"
 logstepAZUREDS:
-  log: ${dataSources}
+  log: ${data_sources}
 assign_messages:
   assign:
     messages:
@@ -65,7 +65,7 @@ post_answer:
       Content-Type: application/json
       api-key: "[#CHATBOT_EXTERNAL_API_KEY]"
     body:
-      dataSources: ${dataSources}
+      data_sources: ${data_sources}
       messages: ${messages}
       temperature: 0
       top_p: 1
