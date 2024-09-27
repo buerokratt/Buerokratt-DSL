@@ -42,9 +42,6 @@ format_messages_for_llm:
       messages: "${get_last_6_messages_result.response.body}"
   result: formattedMessages
 
- logstepFormattedResponse:
-   log: ${formattedMessages.response.body}
-
 assignData:
   assign:
     formattedMessages: "${lastMessages}"
