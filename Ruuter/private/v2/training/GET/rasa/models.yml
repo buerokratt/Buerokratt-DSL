@@ -11,6 +11,7 @@ getModelsFromDB:
   call: http.post
   args:
     url: "[#TRAINING_RESQL]/get-llm-trainings"
+  limit: 512
   result: dbResult
 
 validateDbRecords:
