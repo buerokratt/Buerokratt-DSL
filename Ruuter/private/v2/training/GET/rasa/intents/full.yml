@@ -51,7 +51,7 @@ get_service_intent_connections:
 getIntentsNames:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/hbs/training/get_intents"
+    url: "[#TRAINING_DMAPPER]/training/hbs/training/get_intents"
     headers:
       type: 'json'
     body:
