@@ -4,6 +4,9 @@ extract_body:
     chatId: ${incoming.body.chatId}
     authorId: ${incoming.body.authorId}
 
+logstepCONT:
+  log: ${content}
+
 check_for_service:
   switch:
     - condition: ${content.match(/^#revenue/) != null}
