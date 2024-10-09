@@ -25,7 +25,7 @@ check_for_service:
       next: assign_company_contacts
     - condition: ${content.match(/^#companydatasimple/) != null}
       next: assign_company_data_simple
-  return: return_no_service 
+  next: return_no_service 
 
 assign_revenue:
   assign:
