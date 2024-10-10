@@ -191,7 +191,7 @@ notify_chats:
   next: notify_messages
 
 notify_messages:
-  template: backoffice/backoffice/messages/notify
+  template: backoffice/messages/notify
   requestType: templates
   body:
     chatId: ${chatUuid}
