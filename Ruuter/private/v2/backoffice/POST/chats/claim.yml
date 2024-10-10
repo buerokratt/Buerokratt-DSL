@@ -130,7 +130,7 @@ getClaimedChat:
   result: claimedChatRes
 
 notify_messages:
-  template: messages/notify
+  template: backoffice/messages/notify
   requestType: templates
   body:
     chatId: ${activeChat.id}

@@ -77,7 +77,7 @@ notify_chats:
   next: notify_messages
 
 notify_messages:
-  template: messages/notify
+  template: backoffice/messages/notify
   requestType: templates
   body:
     chatId: ${chatId}
