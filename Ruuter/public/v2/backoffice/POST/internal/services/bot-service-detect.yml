@@ -4,7 +4,9 @@ extract_body:
     chatId: ${incoming.body.chatId}
     authorId: ${incoming.body.authorId}
     botResponse: ${incoming.body.botResponse}
-
+logstepSRVDETECT:
+  log: ${content}
+  
 check_if_bot_detected_a_common_service:
   switch:
     - condition: ${content.match(/^OPENSEARCH/) != null}
