@@ -135,7 +135,7 @@ format_messages:
   result: res
 
 return_result:
-  return: ${res.response.body}
+  return: ${res.response.body.response}
   next: end
 
 return_no_common_service_detected:
