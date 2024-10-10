@@ -136,7 +136,7 @@ check_for_post_message_to_bot_result:
   next: notify_chats
 
 notify_chats:
-  template: chats/notify
+  template: backoffice/chats/notify
   requestType: templates
   body:
     chatId: ${chatId}

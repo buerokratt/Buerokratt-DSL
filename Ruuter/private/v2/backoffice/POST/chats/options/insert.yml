@@ -69,7 +69,7 @@ add_message_to_db:
   result: insertMessageResult
 
 notify_chats:
-  template: chats/notify
+  template: backoffice/chats/notify
   requestType: templates
   body:
     chatId: ${chatId}

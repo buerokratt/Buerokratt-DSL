@@ -168,7 +168,7 @@ assign_client_cookie:
   next: notify_chats
 
 notify_chats:
-  template: chats/notify
+  template: backoffice/chats/notify
   requestType: templates
   body:
     chatId: ${chatId}
