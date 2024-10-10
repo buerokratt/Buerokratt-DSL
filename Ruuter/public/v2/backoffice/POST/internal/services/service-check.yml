@@ -79,7 +79,7 @@ get_company_requested_info:
   next: return_result
 
 return_result:
-  return: ${res.response.body}
+  return: ${res.response.body.response}
   next: end
 
 return_no_service:
