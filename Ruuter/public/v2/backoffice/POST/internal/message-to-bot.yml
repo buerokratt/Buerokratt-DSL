@@ -127,10 +127,7 @@ check_if_bot_detected_a_common_service:
       authorId: ${get_bot_name_result.response.body[0].value}
       botResponse: ${post_message_to_bot_result.response.body}
   result: converted_messages_res
-#  next: check_detection_result
-
-logstepAHMEDVARMO:
-  log: ${converted_messages_res.response.body}
+  next: check_detection_result
 
 check_detection_result:
   switch:
@@ -332,6 +329,9 @@ format_fallback_bot_messages:
 #    - condition: ${converted_messages_res.response.body?.length > 0}
 #      next: do_add_bot_message_to_db
 #  next: return_ok
+
+#logstepAHMEDVARMO:
+#  log: ${converted_messages_res.response.body}
 
 add_bot_message_to_db:
   switch:
