@@ -6,7 +6,7 @@ extract_body:
     botResponse: ${incoming.body.botResponse}
 logstepSRVDETECT:
   log: ${content}
-  
+
 check_if_bot_detected_a_common_service:
   switch:
     - condition: ${content.match(/^OPENSEARCH/) != null}
@@ -135,7 +135,7 @@ format_messages:
   result: res
 
 return_result:
-  return: ${res}
+  return: ${res.response.body}
   next: end
 
 return_no_common_service_detected:
