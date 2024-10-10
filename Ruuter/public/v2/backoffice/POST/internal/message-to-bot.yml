@@ -127,7 +127,10 @@ check_if_bot_detected_a_common_service:
       authorId: ${get_bot_name_result.response.body[0].value}
       botResponse: ${post_message_to_bot_result.response.body}
   result: converted_messages_res
-  next: check_detection_result
+#  next: check_detection_result
+
+logstepAHMEDVARMO:
+  log: ${converted_messages_res.response.body}
 
 check_detection_result:
   switch:
