@@ -130,7 +130,7 @@ rename_dsl:
     url: "[#SERVICE_DMAPPER]/file-manager/move"
     body:
       file_path: "[#RUUTER_SERVICES_PATH]/${type}/[#RUUTER_SERVICES_DIR_PATH]/${old_state}/${old_name}.tmp"
-      new_path: "[#RUUTER_SERVICES_PATH]/${type}/[#RUUTER_SERVICES_DIR_PATH]/${new_state}/${name}.tmp"
+      new_path: "[#RUUTER_SERVICES_PATH]/${type}/[#RUUTER_SERVICES_DIR_PATH]/${old_state}/${name}.tmp"
   result: results
 
 check_result:
