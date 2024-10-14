@@ -79,7 +79,7 @@ add_get_dsl:
   args:
     url: "[#SERVICE_DMAPPER]/file-manager/create"
     body:
-      file_path: "/Ruuter/GET/services/draft/${name}.tmp"
+      file_path: "/shared-data/services/GET/services/draft/${name}.tmp"
       content: ${ymlResult.response.body.yaml}
   result: results
   next: check_result
@@ -89,7 +89,7 @@ add_post_dsl:
   args:
     url: "[#SERVICE_DMAPPER]/file-manager/create"
     body:
-      file_path: "/Ruuter/POST/services/draft/${name}.tmp"
+      file_path: "/shared-data/services/POST/services/draft/${name}.tmp"
       content: ${ymlResult.response.body.yaml}
   result: results
   next: check_result
