@@ -30,7 +30,6 @@ assign_data_sources:
           semantic_configuration: azureml-default
           query_type: vector_semantic_hybrid
           in_scope: true
-          role_information: You are an AI assistant that helps people find information.
           filter: null
           strictness: 3
           top_n_documents: 7
@@ -68,8 +67,7 @@ post_answer:
       data_sources: ${data_sources}
       messages: ${messages}
       temperature: 0
-      top_p: 1
-      max_tokens: 1000
+      max_tokens: 700
       stream: false
       frequency_penalty: 0
       presence_penalty: 0
