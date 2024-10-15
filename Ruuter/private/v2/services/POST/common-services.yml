@@ -20,6 +20,7 @@ declaration:
 
 get_services_list:
   call: http.post
+  limit: 1024
   args:
     url: "[#SERVICE_RESQL]/get-common-services-list"
     body:
