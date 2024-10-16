@@ -21,6 +21,9 @@ getDomainFile:
       file_path: ${fileLocations.response.body.response.domain_location}
   result: domainFile
 
+logstepDOMAIN:
+  log: ${domainFile.response.body.file}
+  
 convertYamlToJson:
   call: http.post
   args:
