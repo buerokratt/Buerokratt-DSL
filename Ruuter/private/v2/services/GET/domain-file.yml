@@ -25,14 +25,14 @@ getDomainFile:
   result: domainFile
 
 logstepDOMAIN:
-  log: ${domainFile.response.body.file}
+  log: ${domainFile}
   
 convertYamlToJson:
   call: http.post
   args:
     url: "[#SERVICE_DMAPPER]/conversion/yaml_to_json"
     body:
-      file: ${domainFile.response.body.file}
+      file: ${domainFile}
   result: domainData
 
 return_value:
