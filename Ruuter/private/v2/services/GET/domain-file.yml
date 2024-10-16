@@ -12,7 +12,10 @@ getFileLocations:
   args:
     url: "[#SERVICE_RUUTER]/internal/return-file-locations"
   result: fileLocations
-
+  
+logstepINTENTS:
+  log: ${fileLocations.response.body.response.domain_location}
+  
 getDomainFile:
   call: http.post
   args:
