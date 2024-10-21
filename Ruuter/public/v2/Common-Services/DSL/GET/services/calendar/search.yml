@@ -108,3 +108,6 @@
 #   next: returnValue
 # returnValue:
 #   return: ${mapped_result}
+return_value:
+  return: "ERROR"
+  next: end
