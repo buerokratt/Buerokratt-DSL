@@ -9,7 +9,7 @@ declaration:
 
 assignCronFileLocation:
   assign:
-    cronFileLocation: "/rasa/cron-data/DSL/train_bot.yml"
+    cronFileLocation: "/cron-data/DSL/train_bot.yml"
 
 getFromDatabase:
   call: http.post
