@@ -9,7 +9,7 @@ declaration:
 
 assignCronFileLocation:
   assign:
-    cronFileLocation: "/workspace/app/module/CronManager/train_bot.yml"
+    cronFileLocation: "/rasa/cron-data/DSL/train_bot.yml"
 
 getFromDatabase:
   call: http.post
