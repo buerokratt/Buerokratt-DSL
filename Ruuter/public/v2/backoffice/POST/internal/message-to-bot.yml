@@ -107,7 +107,7 @@ logstepPMTBsender:
   log: ${return_bot_error}
 logstepPMTBmessage:
   log: ${post_message_to_bot_result}
-next: check_if_bot_is_unable_to_reply
+
 
 check_if_bot_is_unable_to_reply:
   switch:
