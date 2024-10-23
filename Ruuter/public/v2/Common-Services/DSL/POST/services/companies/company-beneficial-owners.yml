@@ -51,7 +51,10 @@ mapBeneficialOwnersData:
 assign_response:
   assign:
     res: ${mappedBeneficialOwnersData.response.body}
-  next: format_messages
+#  next: format_messages
+
+logstepRES:
+  log: ${res}
 
 format_messages:
   call: http.post
