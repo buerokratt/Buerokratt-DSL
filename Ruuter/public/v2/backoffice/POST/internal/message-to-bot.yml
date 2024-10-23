@@ -110,7 +110,7 @@ check_if_bot_is_unable_to_reply:
       next: check_for_fallback_bot
     - condition: ${post_message_to_bot_result.response.body?.[0]?.text == 'Suunan teid klienditeenindajale. Varuge natukene kannatust.'}
       next: get_organization_working_details
-  next: check_if_bot_detected_a_common_service
+#  next: check_if_bot_detected_a_common_service
 
 logstepBOTSERVICE:
   log: ${post_message_to_bot_result.response.body?.[0]?.text}
