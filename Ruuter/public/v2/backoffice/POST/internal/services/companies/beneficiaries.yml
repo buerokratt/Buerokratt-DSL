@@ -15,4 +15,4 @@ get_company_beneficiaries:
   result: res
 
 return_result:
-  return: ${res.response.body}
+  return: ${res.response.body.response}
