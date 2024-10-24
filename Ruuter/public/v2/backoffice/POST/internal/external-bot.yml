@@ -85,5 +85,6 @@ logstepAZURERESPONSE:
   log: ${correct_value}
   
 return_value:
+  status: 200
   return: ${correct_value}
   next: end
