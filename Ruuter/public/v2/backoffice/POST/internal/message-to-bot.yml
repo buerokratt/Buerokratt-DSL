@@ -144,6 +144,9 @@ check_for_fallback_bot:
   error: return_bot_error
   next: check_if_fallback_bot_is_unable_to_reply
 
+logstepFALLBACKBOT:
+  log: ${fallback_bot_result}
+
 check_if_fallback_bot_is_unable_to_reply:
   switch:
     - condition: ${fallback_bot_result == 'ERROR'}
