@@ -80,6 +80,10 @@ assign_value:
       - recipient_id: ${incoming.body.sender}
         text: ${test.response.body.choices[0].message.content.replace(/\n/g,"\\n").replace(/%/g," protsenti").replace(/\s*\[doc\s*\d+\]\s*,?\s*/g,"").replace(" \. ", ". ")}
   next: return_value
+
+logstepAZURERESPONSE:
+  log: ${correct_value}
+  
 return_value:
   return: ${correct_value}
   next: end
