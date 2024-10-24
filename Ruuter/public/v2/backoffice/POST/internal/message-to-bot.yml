@@ -142,7 +142,7 @@ check_for_fallback_bot:
       message: ${content}
   result: fallback_bot_result
   error: return_bot_error
-  next: check_if_fallback_bot_is_unable_to_reply
+  #next: check_if_fallback_bot_is_unable_to_reply
 
 logstepFALLBACKBOT:
   log: ${fallback_bot_result}
