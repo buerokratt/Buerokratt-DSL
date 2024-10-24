@@ -104,7 +104,8 @@ post_message_to_bot:
   result: post_message_to_bot_result
 #  next: check_if_bot_is_unable_to_reply
 logstepPMTBmessage:
-  log: ${post_message_to_bot_result}
+  log: ${body}
+
 
 
 check_if_bot_is_unable_to_reply:
