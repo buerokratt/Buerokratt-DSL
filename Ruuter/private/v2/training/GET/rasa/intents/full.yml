@@ -26,6 +26,7 @@ getIntentsData:
       type: 'json'
     body:
       hits: ${getIntentsResult.response.body.hits.hits}
+      limit: 1000
   result: getIntentDataResult
 
 getDomainFile:
