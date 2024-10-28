@@ -44,22 +44,22 @@ jobs:
 
           SOURCE_REPO_CHATBOT=buerokratt/Buerokratt-Chatbot
           SOURCE_FOLDER_CHATBOT=DSL/Ruuter.private/DSL
-          git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
+          git clone --depth=1 --branch=v2.0.2 "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
           cp -R "source-repo-chatbot/$SOURCE_FOLDER_CHATBOT/." "$FOLDER_PATH/backoffice"
 
           SOURCE_REPO_ANALYTICS=buerokratt/Analytics-Module
           SOURCE_FOLDER_ANALYTICS=DSL/Ruuter
-          git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_ANALYTICS.git" source-repo-analytics
+          git clone --depth=1 --branch=v2.0.2 "https://github.com/$SOURCE_REPO_ANALYTICS.git" source-repo-analytics
           cp -R "source-repo-analytics/$SOURCE_FOLDER_ANALYTICS/." "$FOLDER_PATH/analytics"
 
           SOURCE_REPO_SERVICE=buerokratt/Service-Module
           SOURCE_FOLDER_SERVICE=DSL/Ruuter
-          git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_SERVICE.git" source-repo-service
+          git clone --depth=1 --branch=v2.0.2 "https://github.com/$SOURCE_REPO_SERVICE.git" source-repo-service
           cp -R "source-repo-service/$SOURCE_FOLDER_SERVICE/." "$FOLDER_PATH/services"
 
           SOURCE_REPO_TRAINING=buerokratt/Training-Module
           SOURCE_FOLDER_TRAINING=DSL/Ruuter.private
-          git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
+          git clone --depth=1 --branch=v2.0.2 "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
           cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING/." "$FOLDER_PATH/training"
 
           # common-services..... 
@@ -101,18 +101,18 @@ jobs:
 
           SOURCE_REPO_CHATBOT=buerokratt/Buerokratt-Chatbot
           SOURCE_FOLDER_CHATBOT=DSL/Ruuter.public/DSL
-          git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
+          git clone --depth=1 --branch=v2.0.2 "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
           cp -R "source-repo-chatbot/$SOURCE_FOLDER_CHATBOT/." "$FOLDER_PATH/backoffice"
 
           SOURCE_REPO_TRAINING=buerokratt/Training-Module
           SOURCE_FOLDER_TRAINING=DSL/Ruuter.public
-          git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
+          git clone --depth=1 --branch=v2.0.2 "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
           cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING/." "$FOLDER_PATH/training"
 
           # common-services..... 
           SOURCE_REPO_COMMONSERVICES=buerokratt/Common-Services
           SOURCE_FOLDER_COMMONSERVICES=DSL/Ruuter.public
-          git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_COMMONSERVICES.git" source-repo-Common-Services
+          git clone --depth=1 --branch=v2.0.2 "https://github.com/$SOURCE_REPO_COMMONSERVICES.git" source-repo-Common-Services
           cp -R "source-repo-Common-Services/$SOURCE_FOLDER_COMMONSERVICES/." "$FOLDER_PATH/Common-Services"
 
       - name: Clean Up Cloned Repositories
@@ -148,12 +148,12 @@ jobs:
 
           SOURCE_REPO_CHATBOT=buerokratt/Buerokratt-Chatbot
           SOURCE_FOLDER_CHATBOT=DSL/Resql
-          git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
+          git clone --depth=1 --branch=v2.0.2 "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
           cp -R "source-repo-chatbot/$SOURCE_FOLDER_CHATBOT/." "$FOLDER_PATH/backoffice/POST"
 
           SOURCE_REPO_ANALYTICS=buerokratt/Analytics-Module
           SOURCE_FOLDER_ANALYTICS=DSL/Resql
-          git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_ANALYTICS.git" source-repo-analytics
+          git clone --depth=1 --branch=v2.0.2 "https://github.com/$SOURCE_REPO_ANALYTICS.git" source-repo-analytics
           cp -R "source-repo-analytics/$SOURCE_FOLDER_ANALYTICS/." "$FOLDER_PATH/analytics/POST"
 
 
@@ -161,7 +161,7 @@ jobs:
           SOURCE_FOLDER_SERVICE=DSL/Resql/training
           SOURCE_FOLDER_SERVICE_SERVICE=DSL/Resql/services
           SOURCE_FOLDER_SERVICE_USERS=DSL/Resql/users
-          git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_SERVICE.git" source-repo-service
+          git clone --depth=1 --branch=v2.0.2 "https://github.com/$SOURCE_REPO_SERVICE.git" source-repo-service
           cp -R "source-repo-service/$SOURCE_FOLDER_SERVICE/." "$FOLDER_PATH/services/POST"
           cp -R "source-repo-service/$SOURCE_FOLDER_SERVICE_SERVICE/." "$FOLDER_PATH/services/POST"
           cp -R "source-repo-service/$SOURCE_FOLDER_SERVICE_USERS/." "$FOLDER_PATH/services/POST"
@@ -171,7 +171,7 @@ jobs:
           SOURCE_FOLDER_TRAINING=DSL/Resql/training
           SOURCE_FOLDER_TRAINING_SERVICE=DSL/Resql/services
           SOURCE_FOLDER_TRAINING_USERS=DSL/Resql/users
-          git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
+          git clone --depth=1 --branch=v2.0.2 "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
           ls -la "source-repo-training"
           cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING/." "$FOLDER_PATH/training/POST"
           cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING_SERVICE/." "$FOLDER_PATH/training/POST"
@@ -210,30 +210,30 @@ jobs:
 
           SOURCE_REPO_CHATBOT=buerokratt/Buerokratt-Chatbot
           SOURCE_FOLDER_CHATBOT=DSL/DMapper
-          git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
+          git clone --depth=1 --branch=v2.0.2 "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
           cp -R "source-repo-chatbot/$SOURCE_FOLDER_CHATBOT/." "$FOLDER_PATH/hbs/backoffice/hbs"
 
           SOURCE_REPO_ANALYTICS=buerokratt/Analytics-Module
           SOURCE_FOLDER_ANALYTICS=DSL/DMapper
-          git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_ANALYTICS.git" source-repo-analytics
+          git clone --depth=1 --branch=v2.0.2 "https://github.com/$SOURCE_REPO_ANALYTICS.git" source-repo-analytics
           cp -R "source-repo-analytics/$SOURCE_FOLDER_ANALYTICS/." "$FOLDER_PATH/analytics/hbs"
 
           SOURCE_REPO_SERVICE=buerokratt/Service-Module
           SOURCE_FOLDER_SERVICE=DSL/DMapper
           SOURCE_FOLDER_SERVICE_SECRET=/secrets
-          git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_SERVICE.git" source-repo-service
+          git clone --depth=1 --branch=v2.0.2 "https://github.com/$SOURCE_REPO_SERVICE.git" source-repo-service
           cp -R "source-repo-service/$SOURCE_FOLDER_SERVICE/." "$FOLDER_PATH/services/hbs"
           cp -R "source-repo-service/$SOURCE_FOLDER_SERVICE_SECRET/." "$FOLDER_PATH/services/secrets"
 
           SOURCE_REPO_TRAINING=buerokratt/Training-Module
           SOURCE_FOLDER_TRAINING=DSL/DMapper
-          git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
+          git clone --depth=1 --branch=v2.0.2 "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
           cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING/." "$FOLDER_PATH/training/hbs"
 
           # common-services..... 
           SOURCE_REPO_COMMONSERVICES=buerokratt/Common-Services
           SOURCE_FOLDER_COMMONSERVICES=DSL/DMapper
-          git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_COMMONSERVICES.git" source-repo-Common-Services
+          git clone --depth=1 --branch=v2.0.2 "https://github.com/$SOURCE_REPO_COMMONSERVICES.git" source-repo-Common-Services
           mkdir -p "$FOLDER_PATH/Common-Services"
           cp -R "source-repo-Common-Services/$SOURCE_FOLDER_COMMONSERVICES/." "$FOLDER_PATH/Common-Services"
 
@@ -270,22 +270,22 @@ jobs:
 
           SOURCE_REPO_CHATBOT=buerokratt/Buerokratt-Chatbot
           SOURCE_FOLDER_CHATBOT=DSL/Liquibase
-          git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
+          git clone --depth=1 --branch=v2.0.2 "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
           cp -R "source-repo-chatbot/$SOURCE_FOLDER_CHATBOT/." "$FOLDER_PATH/backoffice"
 
           SOURCE_REPO_ANALYTICS=buerokratt/Analytics-Module
           SOURCE_FOLDER_ANALYTICS=DSL/Liquibase
-          git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_ANALYTICS.git" source-repo-analytics
+          git clone --depth=1 --branch=v2.0.2 "https://github.com/$SOURCE_REPO_ANALYTICS.git" source-repo-analytics
           cp -R "source-repo-analytics/$SOURCE_FOLDER_ANALYTICS/." "$FOLDER_PATH/analytics"
 
           SOURCE_REPO_SERVICE=buerokratt/Service-Module
           SOURCE_FOLDER_SERVICE=DSL/Liquibase
-          git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_SERVICE.git" source-repo-service
+          git clone --depth=1 --branch=v2.0.2 "https://github.com/$SOURCE_REPO_SERVICE.git" source-repo-service
           cp -R "source-repo-service/$SOURCE_FOLDER_SERVICE/." "$FOLDER_PATH/services"
 
           SOURCE_REPO_TRAINING=buerokratt/Training-Module
           SOURCE_FOLDER_TRAINING=DSL/Liquibase
-          git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
+          git clone --depth=1 --branch=v2.0.2 "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
           cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING/." "$FOLDER_PATH/training"
 
       - name: Clean Up Cloned Repositories
@@ -320,18 +320,18 @@ jobs:
 
           SOURCE_REPO_SERVICE=buerokratt/Service-Module
           SOURCE_FOLDER_SERVICE=DSL/OpenSearch
-          git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_SERVICE.git" source-repo-service
+          git clone --depth=1 --branch=v2.0.2 "https://github.com/$SOURCE_REPO_SERVICE.git" source-repo-service
           cp -R "source-repo-service/$SOURCE_FOLDER_SERVICE/." "$FOLDER_PATH/services"
 
           SOURCE_REPO_TRAINING=buerokratt/Training-Module
           SOURCE_FOLDER_TRAINING=DSL/OpenSearch
-          git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
+          git clone --depth=1 --branch=v2.0.2 "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
           cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING/." "$FOLDER_PATH/training"
 
           # common-services..... 
           SOURCE_REPO_COMMONSERVICES=buerokratt/Common-Services
           SOURCE_FOLDER_COMMONSERVICES=DSL/OpenSearch
-          git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_COMMONSERVICES.git" source-repo-Common-Services
+          git clone --depth=1 --branch=v2.0.2 "https://github.com/$SOURCE_REPO_COMMONSERVICES.git" source-repo-Common-Services
           cp -R "source-repo-Common-Services/$SOURCE_FOLDER_COMMONSERVICES/." "$FOLDER_PATH/Common-Services"
 
       - name: Clean Up Cloned Repositories
@@ -365,7 +365,7 @@ jobs:
 
           SOURCE_REPO_SERVICE=buerokratt/Service-Module
           SOURCE_FOLDER_SERVICE=DSL/Opensearch
-          git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_SERVICE.git" source-repo-service
+          git clone --depth=1 --branch=v2.0.2 "https://github.com/$SOURCE_REPO_SERVICE.git" source-repo-service
           cp -R "source-repo-service/$SOURCE_FOLDER_SERVICE/." "$FOLDER_PATH/services"
 
       - name: Clean Up Cloned Repositories
