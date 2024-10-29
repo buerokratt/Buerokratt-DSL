@@ -140,7 +140,7 @@ check_if_fallback_bot_is_unable_to_reply:
   switch:
     - condition: ${converted_messages_res == 'ERROR'}
       next: check_if_user_wants_csa
-  next: add_bot_message_to_db
+  next: assign_converted_messages_res
 
 check_if_user_wants_csa:
   call: http.post
