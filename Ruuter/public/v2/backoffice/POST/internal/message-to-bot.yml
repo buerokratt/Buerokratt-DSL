@@ -134,16 +134,18 @@ check_for_fallback_bot:
       authorId: ${get_bot_name_result.response.body[0].value}
   result: converted_messages_res
   error: return_bot_error
-#  next: check_if_fallback_bot_is_unable_to_reply
-
-logstepFBOT:
-  log: ${converted_messages_res.response.body.response}
+  next: check_if_fallback_bot_is_unable_to_reply
 
 check_if_fallback_bot_is_unable_to_reply:
   switch:
     - condition: ${converted_messages_res == 'ERROR'}
       next: check_if_user_wants_csa
-  next: assign_converted_messages_res
+  next: assign_fallback_converted_messages_res
+
+assign_fallback_converted_messages_res:
+  assign:
+    converted_messages_res: ${converted_messages_res.response.body.response}
+  next: add_bot_message_to_db
 
 check_if_user_wants_csa:
   call: http.post
