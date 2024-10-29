@@ -81,7 +81,7 @@ assign_value:
     correct_value:
       - recipient_id: ${incoming.body.sender}
         text: ${test.response.body.choices[0].message.content.replace(/\n/g,"\\n").replace(/%/g," protsenti").replace(/\s*\[doc\s*\d+\]\s*,?\s*/g,"").replace(" \. ", ". ")}
-  next: return_value
+  next: check_value
 
 check_value:
   switch:
