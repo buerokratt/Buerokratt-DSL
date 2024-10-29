@@ -102,7 +102,7 @@ format_messages:
     body:
       data:
         {
-          "botMessages": "${correct_value.response.body.response}",
+          "botMessages": "${correct_value.response.body}",
           "chatId": "${chatId}",
           "authorId": "${get_bot_name_result.response.body[0].value}",
           "authorFirstName": "",
