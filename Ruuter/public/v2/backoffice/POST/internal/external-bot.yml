@@ -118,8 +118,8 @@ format_messages:
   result: converted_messages_res
 #  next: return_formatted_value
 logstepRETURN:
-  log: ${converted_messages_res.response.body.response}
+  log: ${converted_messages_res.response.body}
   
 return_formatted_value:
-  return: ${converted_messages_res.response.body.response}
+  return: ${converted_messages_res.response.body}
   next: end 
