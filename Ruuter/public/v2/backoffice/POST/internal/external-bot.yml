@@ -15,9 +15,14 @@ declaration:
       - field: sender
         type: string
         description: Body field 'sender'
-getting_time:
+      - field: authorId
+        type: string
+        description: "Parameter 'authorId'"
+extract_data:
   assign:
     currentDate: ${new Date().toISOString().split('T')[0]}
+    sender: ${incoming.body.sender}
+    authorId: ${incoming.body.authorId}
 logstepAZURESAADAME:
   log: ${incoming.body.message}
 assign_data_sources:
@@ -79,7 +84,7 @@ logstepAZUREBOT:
 assign_value:
   assign:
     correct_value:
-      - recipient_id: ${incoming.body.sender}
+      - recipient_id: ${sender}
         text: ${test.response.body.choices[0].message.content.replace(/\n/g,"\\n").replace(/%/g," protsenti").replace(/\s*\[doc\s*\d+\]\s*,?\s*/g,"").replace(" \. ", ". ")}
   next: check_value
 
@@ -103,8 +108,8 @@ format_messages:
       data:
         {
           "botMessages": "${[correct_value]}",
-          "chatId": "${chatId}",
-          "authorId": "${get_bot_name_result.response.body[0].value}",
+          "chatId": "${sender}",
+          "authorId": "${authorId}",
           "authorFirstName": "",
           "authorLastName": "",
           "authorTimestamp": "${new Date().toISOString()}",
