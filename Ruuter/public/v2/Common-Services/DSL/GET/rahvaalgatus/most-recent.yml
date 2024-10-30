@@ -1,0 +1,132 @@
+declaration:
+  call: declare
+  version: 0.1
+  description: get 5 most-recent active initiatives
+  method: get
+  returns: json
+  namespace: common-services
+
+prepareVariables:
+  assign:
+    chatId: ${incoming.params.chatId}
+    authorId: ${incoming.params.authorId}
+    order: "-occurredAt"
+    distinct: "initiativeId"
+    limit: "5"
+    rahvaalgatus: "https://rahvaalgatus.ee"
+    initiativeEventHeader: "application/vnd.rahvaalgatus.initiative-event+json; v=1"
+    initiativeHeader: "application/vnd.rahvaalgatus.initiative+json; v=1"
+  next: getEvents
+
+getEvents:
+  call: http.get
+  args:
+    url: "${rahvaalgatus}/initiative-events?order=${order}&distinct=${distinct}&limit=${limit}"
+    headers:
+      Accept: "${initiativeEventHeader}"
+  result: events
+  next: extractIds
+
+extractIds:
+  assign:
+    initiativeIds: ${events.response.body.map(event => event.initiativeId)}
+  next: getFirstEvent
+
+getFirstEvent:
+  call: http.get
+  args:
+    url: "${rahvaalgatus}/initiatives/${initiativeIds[0]}"
+    headers:
+      Accept: "${initiativeHeader}"
+  result: firstInitiative
+  next: getSecondEvent
+
+getSecondEvent:
+  call: http.get
+  args:
+    url: "${rahvaalgatus}/initiatives/${initiativeIds[1]}"
+    headers:
+      Accept: "${initiativeHeader}"
+  result: secondInitiative
+  next: getThirdEvent
+
+getThirdEvent:
+  call: http.get
+  args:
+    url: "${rahvaalgatus}/initiatives/${initiativeIds[2]}"
+    headers:
+      Accept: "${initiativeHeader}"
+  result: thirdInitiative
+  next: getFourthEvent
+
+getFourthEvent:
+  call: http.get
+  args:
+    url: "${rahvaalgatus}/initiatives/${initiativeIds[3]}"
+    headers:
+      Accept: "${initiativeHeader}"
+  result: fourthInitiative
+  next: getFifthEvent
+
+getFifthEvent:
+  call: http.get
+  args:
+    url: "${rahvaalgatus}/initiatives/${initiativeIds[4]}"
+    headers:
+      Accept: "${initiativeHeader}"
+  result: fifthInitiative
+  next: assignVariables
+
+assignVariables:
+  assign:
+    first: ${firstInitiative.response.body}
+    second: ${secondInitiative.response.body}
+    third: ${thirdInitiative.response.body}
+    fourth: ${fourthInitiative.response.body}
+    fifth: ${fifthInitiative.response.body}
+  next: formatResponse
+
+formatResponse:
+  assign:
+    res: {
+      "result" : "Viis viimast aktiivset algatust:
+        1. '${first.title}'
+          Kogutud allkirjad: ${first.signatureCount}/ min. allkirjad: ${first.signatureThreshold}
+
+        2. '${second.title}'
+          Kogutud allkirjad: ${second.signatureCount}/ min. allkirjad: ${second.signatureThreshold}
+
+        3. '${third.title}'
+          Kogutud allkirjad: ${third.signatureCount}/ min. allkirjad: ${third.signatureThreshold}
+
+        4. '${fourth.title}'
+          Kogutud allkirjad: ${fourth.signatureCount}/ min. allkirjad: ${fourth.signatureThreshold}
+
+        5. '${fifth.title}'
+          Kogutud allkirjad: ${fifth.signatureCount}/ min. allkirjad: ${fifth.signatureThreshold}"
+    }
+  next: formatMessages
+
+formatMessages:
+  call: http.post
+  args:
+    url: "[#DMAPPER]/common-services/hbs/bot_responses_to_messages"
+    headers:
+      type: json
+    body:
+      data:
+        {
+          "botMessages": "${[res]}",
+          "chatId": "${chatId}",
+          "authorId": "${authorId}",
+          "authorFirstName": "",
+          "authorLastName": "",
+          "authorTimestamp": "${new Date().toISOString()}",
+          "created": "${new Date().toISOString()}",
+        }
+  result: formatMessage
+  next: returnResult
+
+returnResult:
+  return: ${formatMessage.response.body}
+  next: end
