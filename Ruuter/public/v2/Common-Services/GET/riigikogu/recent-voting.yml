@@ -48,7 +48,6 @@ formatResult:
     res: {
       "result": "Viimane riigikogu hääletus oli:\\n\\n${votingTitle}\\n\\nRiigikogu liikmete osalus oli järgmine:\\nKohal: ${present}\\nPuudus: ${absent}\\nPoolt: ${inFavor}\\nVastu: ${against}\\nErapooletu: ${neutral}\\nEi hääletanud: ${abstained}"
     }
-
   next: formatMessages
 
 formatMessages:
