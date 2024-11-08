@@ -61,10 +61,6 @@ mapCodeData:
       hits: ${res.response.body.hits.hits}
       year: ${year}
   result: codeMappedData
-  #next: checkMappedData
-
-logstepRESULT:
-  log: ${result}
   next: checkMappedData
   
 checkMappedData:
