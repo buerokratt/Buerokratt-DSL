@@ -61,8 +61,14 @@ mapCodeData:
       hits: ${res.response.body.hits.hits}
       year: ${year}
   result: codeMappedData
-  next: checkMappedData
+  #next: checkMappedData
 
+logstepYEAR:
+  log: ${year}
+logstepRESULT:
+  log: ${codeMappedData}
+  next: checkMappedData
+  
 checkMappedData:
   switch:
     - condition: ${codeMappedData.response.body.revenue.length > 0}
