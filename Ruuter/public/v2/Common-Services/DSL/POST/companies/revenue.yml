@@ -63,10 +63,8 @@ mapCodeData:
   result: codeMappedData
   #next: checkMappedData
 
-logstepYEAR:
-  log: ${year}
 logstepRESULT:
-  log: ${codeMappedData}
+  log: ${result}
   next: checkMappedData
   
 checkMappedData:
