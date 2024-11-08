@@ -62,7 +62,7 @@ mapCodeData:
       type: "json"
     body:
       hits: ${res.response.body.hits.hits}
-      year: ${year}
+      year: 2024
   result: codeMappedData
   next: checkMappedData
   
