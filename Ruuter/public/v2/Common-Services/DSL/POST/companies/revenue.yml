@@ -33,9 +33,6 @@ extract_body:
     county: ${incoming.body.input[0]}
     year: ${new Date().getFullYear().toString()}
 
-logstepEXTRACT:
-  log: ${new Date().getFullYear().toString()}
-
 checkForParams:
   switch:
     - condition: ${registry_code != null}
@@ -52,8 +49,11 @@ getWithCode:
       id: "company-with-code"
       params: { registry_code: "${registry_code}", field: "turnover" }
   result: res
-  next: mapCodeData
+  #next: mapCodeData
 
+logstepMATI:
+  log: ${year}
+  next: mapCodeData
 mapCodeData:
   call: http.post
   args:
