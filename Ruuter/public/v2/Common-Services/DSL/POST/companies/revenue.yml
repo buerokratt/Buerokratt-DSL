@@ -34,7 +34,7 @@ extract_body:
     year: ${new Date().getFullYear().toString()}
   next: logstepMATI
 logstepMATI:
-  log: ${year}
+  log: 'LOGSTEP ${year}'
 
 checkForParams:
   switch:
