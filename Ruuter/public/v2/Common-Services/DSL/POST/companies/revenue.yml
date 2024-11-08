@@ -32,9 +32,6 @@ extract_body:
     authorId: ${incoming.body.authorId}
     county: ${incoming.body.input[0]}
     year: ${new Date().getFullYear().toString()}
-  next: logstepMATI
-logstepMATI:
-  log: 'LOGSTEP ${year}'
 
 checkForParams:
   switch:
@@ -60,12 +57,12 @@ mapCodeData:
     url: "[#DMAPPER]/common-services/hbs/get_revenue_with_code"
     headers:
       type: "json"
-    body: 
+    body:
       hits: ${res.response.body.hits.hits}
       year: ${year}
   result: codeMappedData
   next: checkMappedData
-  
+
 checkMappedData:
   switch:
     - condition: ${codeMappedData.response.body.revenue.length > 0}
