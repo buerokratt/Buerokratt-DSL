@@ -1,13 +1,14 @@
-remove_anonym_conversations:
-  trigger: 53 01 08 ? * 1 *
-  type: exec
-  command: ./scripts/delete_anonym_messages.sh
-  allowedEnvs: ["test"]
-  startDate: 1717920113000
-
-remove_auth_conversations:
-  trigger: 53 01 08 ? * 1 *
-  type: exec
-  command: ./scripts/delete_auth_messages.sh
-  allowedEnvs: ["test"]
-  startDate: 1717920113000
+anon_conversations:
+  trigger: 43 1 * * * ?
+  type: http
+  method: POST
+  url: http://localhost:8088/internal/delete-conversations
+  body:
+    isAuth: "false"
+auth_conversations:
+  trigger: 43 1 * * * ?
+  type: http
+  method: POST
+  url: http://localhost:8088/internal/delete-conversations
+  body:
+    isAuth: "true"
