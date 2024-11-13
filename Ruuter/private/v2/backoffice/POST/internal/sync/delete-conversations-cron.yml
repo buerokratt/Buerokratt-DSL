@@ -71,7 +71,7 @@ createAnonCronJson:
     body:
       cronExpression: ${expression}
       method: "GET"
-      url: "[#CHATBOT_RUUTER_PRIVATE_INTERNAL]/cron-tasks/delete-conversations?isAuth=false&skipAuth=true"
+      url: "[#CHATBOT_RUUTER_PRIVATE_INTERNAL]/backoffice/cron-tasks/delete-conversations?isAuth=false&skipAuth=true"
   result: anonCronJson
 
 checkAuthConditions:
