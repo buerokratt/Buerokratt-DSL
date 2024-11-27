@@ -144,5 +144,6 @@ format_messages:
   next: return_formatted_value
 
 return_formatted_value:
+  status: 200
   return: ${converted_messages_res.response.body.response}
   next: end 
