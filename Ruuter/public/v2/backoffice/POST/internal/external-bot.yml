@@ -147,6 +147,5 @@ logstepRETURNAZ:
   log: ${converted_messages_res.response.body}
   
 return_formatted_value:
-  status: 200
   return: ${converted_messages_res.response.body}
   next: end 
