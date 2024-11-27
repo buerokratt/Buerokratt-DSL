@@ -141,8 +141,11 @@ format_messages:
           "created": "${new Date().toISOString()}",
         }
   result: converted_messages_res
-  next: return_formatted_value
+  #next: return_formatted_value
 
+logstepRETURNAZ:
+  log: ${converted_messages_res.response.body.response}
+  
 return_formatted_value:
   status: 200
   return: ${converted_messages_res.response.body.response}
