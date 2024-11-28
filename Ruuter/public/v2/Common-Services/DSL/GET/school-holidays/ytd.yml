@@ -1,9 +1,9 @@
 declaration:
   call: declare
   version: 0.1
-  name: "Previous"
-  description: "This service returns the most recent national holiday before today's date"
-  method: GET
+  name: "EOY - end of year"
+  description: "Provides all school holidays from current date untill the end of year"
+  method: POST
   accepts: JSON
   returns: JSON
   namespace: common-services
@@ -20,33 +20,33 @@ prepare:
   assign:
     chatId: ${incoming.params.chatId}
     authorId: ${incoming.params.authorId}
-    endDate: ${new Date(new Date().setDate(new Date().getDate() - 1)).toISOString().split("T")[0]}
-    startDate: ${new Date(new Date().setMonth(new Date().getMonth() - 4)).toISOString().split("T")[0]}
-  next: makeApiCall
+    endDate: ${new Date().toISOString().split('T')[0]} 
+    startDate: ${endDate.split('-')[0] + '-01-01'} # end of current year
+  next: getAllHolidays
 
-makeApiCall:
+getAllHolidays:
   call: http.get
   args:
-    url: https://openholidaysapi.org/PublicHolidays?countryIsoCode=EE&languageIsoCode=EE&validFrom=${startDate}&validTo=${endDate}
+    url: https://openholidaysapi.org/SchoolHolidays?countryIsoCode=EE&languageIsoCode=EE&validFrom=${startDate}&validTo=${endDate}
     headers:
       accept: application/json
   result: holidays
-  next: formatHolidays
+  next: formatResult
 
-formatHolidays:
+formatResult:
   call: http.post
   args:
-    url: "[#DMAPPER]/common-services/hbs/calendar/national-holidays/get_national_holiday_previous"
+    url: "[#DMAPPER]/common-services/hbs/calendar/school-holidays/get_school_holidays_ytd"
     headers:
       type: json
     body:
       data: ${holidays.response.body}
-  result: formattedDate
-  next: formatValue
+  result: formattedHolidays
+  next: assignResponse
 
-formatValue:
+assignResponse:
   assign:
-    res: ${formattedDate.response.body}
+    res: ${formattedHolidays.response.body}
   next: formatMessages
 
 formatMessages:

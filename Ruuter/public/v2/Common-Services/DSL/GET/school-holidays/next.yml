@@ -1,9 +1,9 @@
 declaration:
   call: declare
   version: 0.1
-  name: "Previous"
-  description: "This service returns the most recent national holiday before today's date"
-  method: GET
+  name: "Next"
+  description: "Provides the next upcomping school holiday"
+  method: POST
   accepts: JSON
   returns: JSON
   namespace: common-services
@@ -20,33 +20,52 @@ prepare:
   assign:
     chatId: ${incoming.params.chatId}
     authorId: ${incoming.params.authorId}
-    endDate: ${new Date(new Date().setDate(new Date().getDate() - 1)).toISOString().split("T")[0]}
-    startDate: ${new Date(new Date().setMonth(new Date().getMonth() - 4)).toISOString().split("T")[0]}
-  next: makeApiCall
+    startDate: ${new Date().toISOString().split('T')[0]} # current date
+    nextYear: ${Math.floor(new Date().getFullYear() + 1)}
+    endDate: "${nextYear}${startDate.slice(4)}"
+  next: getAllHolidays
 
-makeApiCall:
+getAllHolidays:
   call: http.get
   args:
-    url: https://openholidaysapi.org/PublicHolidays?countryIsoCode=EE&languageIsoCode=EE&validFrom=${startDate}&validTo=${endDate}
+    url: https://openholidaysapi.org/SchoolHolidays?countryIsoCode=EE&languageIsoCode=EE&validFrom=${startDate}&validTo=${endDate}
     headers:
       accept: application/json
   result: holidays
-  next: formatHolidays
+  next: checkHolidays
 
-formatHolidays:
+checkHolidays:
+  switch:
+    - condition: ${startDate >= holidays.response.body[0].startDate}
+      next: assignNextHoliday
+  next: assignHoliday
+
+assignHoliday:
+  assign:
+    nextHoliday: 
+      - ${holidays.response.body[0]}
+  next: formatResult
+
+assignNextHoliday:
+  assign:
+    nextHoliday: 
+      - ${holidays.response.body[1]}
+  next: formatResult
+
+formatResult:
   call: http.post
   args:
-    url: "[#DMAPPER]/common-services/hbs/calendar/national-holidays/get_national_holiday_previous"
+    url: "[#DMAPPER]/common-services/hbs/calendar/school-holidays/get_school_holidays_next"
     headers:
       type: json
     body:
-      data: ${holidays.response.body}
-  result: formattedDate
-  next: formatValue
+      data: ${nextHoliday}
+  result: formattedHolidays
+  next: assignResponse
 
-formatValue:
+assignResponse:
   assign:
-    res: ${formattedDate.response.body}
+    res: "${formattedHolidays.response.body}"
   next: formatMessages
 
 formatMessages:

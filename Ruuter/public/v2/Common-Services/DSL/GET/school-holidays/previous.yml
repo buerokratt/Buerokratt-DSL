@@ -2,8 +2,8 @@ declaration:
   call: declare
   version: 0.1
   name: "Previous"
-  description: "This service returns the most recent national holiday before today's date"
-  method: GET
+  description: "Provides the previous past school holiday"
+  method: POST
   accepts: JSON
   returns: JSON
   namespace: common-services
@@ -20,33 +20,40 @@ prepare:
   assign:
     chatId: ${incoming.params.chatId}
     authorId: ${incoming.params.authorId}
-    endDate: ${new Date(new Date().setDate(new Date().getDate() - 1)).toISOString().split("T")[0]}
-    startDate: ${new Date(new Date().setMonth(new Date().getMonth() - 4)).toISOString().split("T")[0]}
-  next: makeApiCall
+    endDate: ${new Date().toISOString().split('T')[0]} # current date
+    previousYear: ${Math.floor(new Date().getFullYear() - 1)}
+    startDate: "${previousYear}${endDate.slice(4)}"
+  next: getAllHolidays
 
-makeApiCall:
+getAllHolidays:
   call: http.get
   args:
-    url: https://openholidaysapi.org/PublicHolidays?countryIsoCode=EE&languageIsoCode=EE&validFrom=${startDate}&validTo=${endDate}
+    url: https://openholidaysapi.org/SchoolHolidays?countryIsoCode=EE&languageIsoCode=EE&validFrom=${startDate}&validTo=${endDate}
     headers:
       accept: application/json
   result: holidays
-  next: formatHolidays
+  next: findPreviousHoliday
 
-formatHolidays:
+findPreviousHoliday:
+  assign:
+    previousHoliday:
+      - ${holidays.response.body.filter(holiday => holiday.endDate < endDate).pop()} # Get the last matching holiday
+  next: formatResult
+
+formatResult:
   call: http.post
   args:
-    url: "[#DMAPPER]/common-services/hbs/calendar/national-holidays/get_national_holiday_previous"
+    url: "[#DMAPPER]/common-services/hbs/calendar/school-holidays/get_school_holidays_previous"
     headers:
       type: json
     body:
-      data: ${holidays.response.body}
-  result: formattedDate
-  next: formatValue
+      data: ${previousHoliday}
+  result: formattedHolidays
+  next: assignResponse
 
-formatValue:
+assignResponse:
   assign:
-    res: ${formattedDate.response.body}
+    res: "${formattedHolidays.response.body}"
   next: formatMessages
 
 formatMessages:
