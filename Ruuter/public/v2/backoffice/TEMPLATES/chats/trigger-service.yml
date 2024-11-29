@@ -56,7 +56,10 @@ check_for_service_method:
   switch:
     - condition: ${serviceMethod === 'post'}
       next: trigger_post_service
-  next: trigger_get_service   
+#  next: trigger_get_service   
+
+logstepGETSER:
+  log: ${baseUrl}/${servicePath}
 
 trigger_get_service:
   call: http.get
