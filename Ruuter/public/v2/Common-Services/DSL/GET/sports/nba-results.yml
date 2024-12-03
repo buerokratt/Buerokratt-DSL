@@ -26,7 +26,7 @@ fetchNbaResults:
 formatResults:
   call: http.post
   args:
-    url: "[#CHATBOT_DMAPPER]/commonservice/hbs/sports/formatNBAresults"
+    url: "[#CHATBOT_DMAPPER]/common-service/hbs/sports/formatNBAresults"
     headers:
       type: json
     body:
