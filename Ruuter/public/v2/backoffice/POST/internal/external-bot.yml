@@ -36,6 +36,7 @@ assign_data_sources:
         parameters:
           endpoint: "[#SEARCH_ENDPOINT]"
           index_name: "[#SEARCH_INDEX_NAME]"
+          semantic_configuration: azureml-default
           query_type: vector_semantic_hybrid
           in_scope: true
           filter: null
