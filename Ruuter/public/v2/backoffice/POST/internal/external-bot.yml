@@ -46,9 +46,8 @@ assign_data_sources:
           index_name: "[#SEARCH_INDEX_NAME]"
           query_type: vector_semantic_hybrid
           in_scope: true
-          filter: null
           strictness: 3
-          top_n_documents: 7
+          top_n_documents: 2
           authentication:
             type: api_key
             key: "[#CHATBOT_EXTERNAL_KEY]"
@@ -77,7 +76,7 @@ prepare_messages:
     headers:
       type: json
     body:
-      prompt_message: "You are an AI assistant that helps people find information. Today's date IS ${currentDate}."
+      prompt_message: "You are a Retrieval-Augmented Generation (RAG) system designed to provide accurate, validated answers. Adhere to the following instructions strictly: Answer Format: All answers must begin with $validate_, followed by the answer. Example: If the correct answer is 'grass is green,' the output should be: $validate_grass is green. Fallback: If you cannot find an answer, respond with $backoffice Confirmation: At the end of each answer, ask, 'Kas see vastus aitas sind?'. Ensure clarity, precision, and adherence to the specified format."
       messages: ${chat_messages_res.response.body}
       new_message: ${incoming.body.message ?? ''}
   result: prepare_messages_res
