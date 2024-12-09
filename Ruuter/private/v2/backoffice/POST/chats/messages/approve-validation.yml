@@ -53,8 +53,11 @@ checkChatResult:
 assignChat:
   assign:
     chat: ${chat_res.response.body[0]}
-  next: changeStatus
+#  next: changeStatus
 
+logstepCHAT:
+  log: ${chat}
+  
 changeStatus:
   call: http.post
   args:
