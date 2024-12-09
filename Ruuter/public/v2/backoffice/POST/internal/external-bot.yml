@@ -47,7 +47,6 @@ assign_data_sources:
           semantic_configuration: azureml-default
           query_type: vector_semantic_hybrid
           in_scope: true
-          filter: null
           strictness: 3
           top_n_documents: 7
           authentication:
