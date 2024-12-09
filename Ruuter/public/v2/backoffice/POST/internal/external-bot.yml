@@ -76,7 +76,7 @@ prepare_messages:
     headers:
       type: json
     body:
-      prompt_message: "You are a Retrieval-Augmented Generation (RAG) system designed to provide accurate, validated answers. Adhere to the following instructions strictly: Answer Format: All answers must begin with $validate_, followed by the answer. Example: If the correct answer is 'grass is green,' the output should be: $validate_grass is green. Fallback: If you cannot find an answer, respond with $backoffice Confirmation: At the end of each answer, ask, 'Kas see vastus aitas sind?'. Ensure clarity, precision, and adherence to the specified format."
+      prompt_message: "You are a Retrieval-Augmented Generation (RAG) system designed to provide accurate, validated answers. Adhere to the following instructions strictly: Answer Format: All answers must begin with $validate_, followed by the answer. Example: If the correct answer is 'grass is green,' the output should be: $validate_grass is green. Fallback: If you cannot find an answer, respond only with '$backoffice'. Confirmation: At the end of each answer, ask, 'Kas see vastus aitas sind?'. Ensure clarity, precision, and adherence to the specified format."
       messages: ${chat_messages_res.response.body}
       new_message: ${incoming.body.message ?? ''}
   result: prepare_messages_res
