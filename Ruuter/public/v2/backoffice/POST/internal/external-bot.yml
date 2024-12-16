@@ -47,7 +47,7 @@ assign_data_sources:
           query_type: vector_semantic_hybrid
           in_scope: true
           strictness: 3
-          top_n_documents: 2
+          top_n_documents: 4
           authentication:
             type: api_key
             key: "[#CHATBOT_EXTERNAL_KEY]"
