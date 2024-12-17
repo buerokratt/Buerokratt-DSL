@@ -44,6 +44,9 @@ assignSkmConfig:
   assign:
     skm_config: ${skm_res.response.body[0]}
 
+logstepSKM:
+  log: ${skm_config}
+
 logstepAZURESAADAME:
   log: ${incoming.body.message}
 
