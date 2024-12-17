@@ -60,8 +60,6 @@ assign_data_sources:
           semantic_configuration: azureml-default
           query_type: ${skm_config.queryType}
           in_scope: true
-          role_information: You are an AI assistant that helps people find information.
-          filter: null
           strictness: ${skm_config.range}
           top_n_documents: ${skm_config.documents}
           authentication:
