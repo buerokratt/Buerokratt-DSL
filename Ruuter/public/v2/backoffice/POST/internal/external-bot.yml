@@ -54,11 +54,10 @@ assign_data_sources:
         parameters:
           endpoint: "[#SEARCH_ENDPOINT]"
           index_name: ${skm_config.indexName}
-          semantic_configuration: azureml-default
           query_type: ${skm_config.queryType}
           in_scope: true
-          strictness: ${skm_config.range}
-          top_n_documents: ${skm_config.documents}
+          strictness: ${parseInt(skm_config.range ?? '3')}
+          top_n_documents: ${parseInt(skm_config.documents ?? '5')}
           authentication:
             type: api_key
             key: "[#CHATBOT_EXTERNAL_KEY]"
@@ -110,7 +109,7 @@ post_answer:
       data_sources: ${data_sources}
       messages: ${messages}
       temperature: 0
-      max_tokens: ${skm_config.maxTokens}
+      max_tokens: ${parseInt(skm_config.maxTokens ?? '1000')}
       stream: false
       frequency_penalty: 0
       presence_penalty: 0
