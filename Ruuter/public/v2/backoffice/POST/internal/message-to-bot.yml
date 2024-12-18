@@ -142,7 +142,7 @@ check_for_fallback_bot:
       holidayNames: ${holidayNames}
   result: converted_messages_res
   error: return_bot_error
- # next: check_if_fallback_bot_is_unable_to_reply
+  next: check_if_fallback_bot_is_unable_to_reply
 
 logstepERR:
   log: ${converted_messages_res}
