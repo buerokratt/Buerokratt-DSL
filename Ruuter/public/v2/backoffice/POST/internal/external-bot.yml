@@ -54,6 +54,7 @@ assign_data_sources:
         parameters:
           endpoint: "[#SEARCH_ENDPOINT]"
           index_name: ${skm_config.indexName}
+          semantic_configuration: azureml-default
           query_type: ${skm_config.queryType}
           in_scope: true
           strictness: ${parseInt(skm_config.range ?? '3')}
@@ -131,7 +132,7 @@ check_value:
     - condition: ${correct_value === 'ERROR'}
       next: return_value
     - condition: ${correct_value.map((item) => item.text)[0] === '$backoffice' || correct_value.map((item) => item.text)[0].startsWith('$backoffice')}
-      next: assign_back_office_event  
+      next: assign_back_office_event 
     - condition: ${correct_value.map((item) => item.text)[0].startsWith('$validate_')}
       next: assign_validation_event  
   next: format_messages
@@ -139,6 +140,7 @@ check_value:
 return_value:
   return: ${correct_value}
   next: end
+
 
 assign_validation_event:
   assign:
@@ -176,6 +178,8 @@ assign_unavailable_message:
     event: ""
   next: format_messages
 
+
+
 assign_back_office_event:
   assign:
     correct_value:
@@ -205,7 +209,7 @@ format_messages:
         }
   result: converted_messages_res
   next: return_formatted_value
-
+  
 return_formatted_value:
   return: ${converted_messages_res.response.body}
   next: end 
