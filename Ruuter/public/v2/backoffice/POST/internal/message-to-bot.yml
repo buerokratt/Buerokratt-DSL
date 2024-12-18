@@ -143,8 +143,9 @@ check_for_fallback_bot:
   result: converted_messages_res
   error: return_bot_error
  # next: check_if_fallback_bot_is_unable_to_reply
+
 logstepERR:
-  log: ${result}
+  log: ${converted_messages_res}
 
 check_if_fallback_bot_is_unable_to_reply:
   switch:
