@@ -37,6 +37,12 @@ assign_filename:
     intentFile: ${fileLocations.response.body.response.intents_location + intent + "_nlu.yml"}
     intentTmpFile: ${fileLocations.response.body.response.intents_location + intent + "_nlu.yml.tmp"}
 
+check_if_intent_is_in_model:
+  switch:
+    - condition: ${inModel}
+      next: rename_back_to_tmp_file
+  next: getDomainFile
+
 rename_back_to_tmp_file:
   call: http.post
   args: 
@@ -45,9 +51,6 @@ rename_back_to_tmp_file:
       file_path: "${intentFile}"
       new_path: "${intentTmpFile}"
   result: movedback
-
-
-  
 
 getDomainFile:
   call: http.get
@@ -61,7 +64,6 @@ isInModel:
   switch:
     - condition: ${inModel}
       next: removeFromDomainArray
-#  next: mergeIntents
 
 rename_tmp_file:
   call: http.post
@@ -114,14 +116,6 @@ updateDomainOpenSearch:
     body:
       input: ${domainYaml.response.body.json}
   result: updateSearchResult
-
-getFileLocations:
-  call: http.get
-  args:
-    url: "[#TRAINING_PUBLIC_RUUTER]/internal/return-file-locations"
-    headers:
-      cookie: ${incoming.headers.cookie}
-  result: fileLocations
 
 saveDomainFile:
   call: http.post
