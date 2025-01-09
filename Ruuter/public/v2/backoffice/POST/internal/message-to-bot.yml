@@ -100,7 +100,7 @@ post_message_to_bot:
 
 check_if_bot_is_unable_to_reply:
   switch:
-    - condition: ${post_message_to_bot_result.response.body?.[0]?.text == 'UNKNOWN'}
+    - condition: ${post_message_to_bot_result.response.body?.[0]?.text == 'Kas suunan teid klienditeenindajale? (Jah/Ei)'}
       next: check_for_fallback_bot
     - condition: ${post_message_to_bot_result.response.body?.[0]?.text == 'Suunan teid klienditeenindajale. Varuge natukene kannatust.'}
       next: get_organization_base_config
