@@ -17,12 +17,12 @@ declaration:
       - field: search_display_name_and_csa_title
         type: string
         description: "Body field 'search_display_name_and_csa_title'"
-      - field: sorting
-        type: string
-        description: "Body field 'sorting'"
       - field: search_full_name_and_csa_title
         type: string
         description: "Body field 'search_full_name_and_csa_title'"
+      - field: sorting
+        type: string
+        description: "Body field 'sorting'"
       - field: show_active_only
         type: boolean
         description: "Body field 'show_active_only'"
@@ -41,6 +41,7 @@ extractRequestData:
     search_authority: ${incoming.body.search_authority ?? ""}
     search_display_name_and_csa_title: ${incoming.body.search_display_name_and_csa_title ?? ""}
     search_full_name_and_csa_title: ${incoming.body.search_full_name_and_csa_title ?? ""}
+    search_department: ${incoming.body.search_department ?? ""}
     current_user_id: ${incoming.body.current_user_id ?? ""}
 
 getCustomerSupportAgents:
@@ -60,6 +61,7 @@ getCustomerSupportAgents:
       search_authority: ${search_authority}
       search_display_name_and_csa_title: ${search_display_name_and_csa_title}
       search_full_name_and_csa_title: ${search_full_name_and_csa_title}
+      search_department: ${search_department}
       excluded_users: ${current_user_id}
       roles:
         [
