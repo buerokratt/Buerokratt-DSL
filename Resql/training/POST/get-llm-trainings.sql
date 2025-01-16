@@ -31,6 +31,7 @@ WITH max_ids AS (
     lt.id, lt.model_type,
     CASE 
         WHEN lt.state = 'ACTIVATING' THEN 'ACTIVATING'
+        WHEN lt.state = 'DELETED' THEN 'DELETED'
         ELSE 'READY'
     END AS state,
     lt.trained_date, 
