@@ -37,7 +37,7 @@ check_nonce:
   next: guard_success
 
 authenticate:
-  template: backoffice/check-user-authority
+  template: analytics/check-user-authority
   requestType: templates
   headers:
     cookie: ${incoming.headers.cookie}
