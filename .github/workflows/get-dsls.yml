@@ -15,86 +15,115 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Setup Folder Structures
+      - name: Create and Populate Folder Structure for All Modules
         run: |
-          create_and_check_folder() {
-            FOLDER_PATH=$1
-            if [ ! -d "$FOLDER_PATH" ]; then
-              echo "Creating $FOLDER_PATH..."
-              mkdir -p "$FOLDER_PATH"
-              touch "$FOLDER_PATH/readme.md"
+          # Helper function to handle common operations for multiple services
+          create_and_copy_files() {
+            FOLDER_PATH="$1"
+            SOURCE_REPO="$2"
+            SOURCE_FOLDER="$3"
+            TARGET_FOLDER="$4"
+
+            echo "Setting up folder: $FOLDER_PATH"
+            mkdir -p "$FOLDER_PATH"
+            touch "$FOLDER_PATH/readme.md"
+
+            if [ ! -z "$SOURCE_REPO" ]; then
+              echo "Cloning $SOURCE_REPO ..."
+              git clone --branch=dev "https://github.com/$SOURCE_REPO.git" temp-repo
+              echo "Copying from $SOURCE_FOLDER to $TARGET_FOLDER ..."
+              mkdir -p "$TARGET_FOLDER"
+              cp -R "temp-repo/$SOURCE_FOLDER/." "$TARGET_FOLDER"
+              rm -rf temp-repo
             else
-              echo "$FOLDER_PATH already exists."
+              echo "No repository provided; skipping copy."
             fi
           }
 
-          declare -a paths=("Ruuter/private/v2" "Ruuter/public/v2" "Resql" "DataMapper/v1" "Liquibase" "OpenSearch" "OpenSearch2")
-          for base_path in "${paths[@]}"; do
-            create_and_check_folder "$base_path"
+          # Ruuter v2 private
+          FOLDER_PATH=Ruuter/private/v2/
+          SUBFOLDERS=("analytics" "backoffice" "services" "training")
+          for folder in "${SUBFOLDERS[@]}"; do
+            mkdir -p "$FOLDER_PATH$folder/GET"
+            touch "$FOLDER_PATH$folder/GET/readme.md"
           done
+          create_and_copy_files "$FOLDER_PATH/backoffice" "buerokratt/Buerokratt-Chatbot" "DSL/Ruuter.private/DSL" "$FOLDER_PATH/backoffice"
+          create_and_copy_files "$FOLDER_PATH/analytics" "buerokratt/Analytics-Module" "DSL/Ruuter" "$FOLDER_PATH/analytics"
 
-          # Create Subfolders as needed
-          declare -A subfolders=(
-            ["Ruuter/private/v2"]="analytics backoffice services training"
-            ["Ruuter/public/v2"]="analytics backoffice services training"
-            ["Resql"]="analytics backoffice services training"
-            ["DataMapper/v1"]="analytics hbs/backoffice services training"
-            ["Liquibase"]="analytics backoffice services training"
-            ["OpenSearch"]="services training"
-            ["OpenSearch2"]="services"
-          )
-
-          for base_path in "${!subfolders[@]}"; do
-            for subfolder in ${subfolders[$base_path]}; do
-              create_and_check_folder "$base_path/$subfolder"
-            done
+          # Resql
+          FOLDER_PATH=Resql/
+          SUBFOLDERS=("analytics" "backoffice" "services" "training")
+          for folder in "${SUBFOLDERS[@]}"; do
+            mkdir -p "$FOLDER_PATH$folder/GET"
+            touch "$FOLDER_PATH$folder/GET/readme.md"
           done
+          create_and_copy_files "$FOLDER_PATH/backoffice/POST" "buerokratt/Buerokratt-Chatbot" "DSL/Resql" "$FOLDER_PATH/backoffice/POST"
 
-  copy_dsl_files:
-    runs-on: ubuntu-22.04
-    needs: setup_directories
+          # Datamapper
+          FOLDER_PATH=DataMapper/v1/
+          SUBFOLDERS=("analytics" "hbs/backoffice" "services" "training")
+          for folder in "${SUBFOLDERS[@]}"; do
+            mkdir -p "$FOLDER_PATH$folder"
+            touch "$FOLDER_PATH$folder/readme.md"
+          done
+          create_and_copy_files "$FOLDER_PATH/hbs/backoffice/hbs" "buerokratt/Buerokratt-Chatbot" "DSL/DMapper" "$FOLDER_PATH/hbs/backoffice/hbs"
 
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-
-      - name: Clone and Copy DSLs
-        run: |
-          clone_and_copy() {
-            local repo_url=$1
-            local branch=$2
-            local source_path=$3
-            local dest_path=$4
-
-            echo "Cloning $repo_url ($branch)"
-            git clone --branch="$branch" "$repo_url" tmp_repo
-            if [ -d "tmp_repo/$source_path" ]; then
-              echo "Copying DSLs from $repo_url..."
-              cp -R "tmp_repo/$source_path/." "$dest_path"
+          # OpenSearch
+          FOLDER_PATH=OpenSearch/
+          if [ ! -d "$FOLDER_PATH" ]; then
+            echo "Folder structure does not exist, creating..."
+            mkdir -p "$FOLDER_PATH"
+            touch "$FOLDER_PATH/readme.md"
+          else
+            echo "Folder structure already exists."
+          fi
+          SUBFOLDERS=("services" "training" "Common-Services")
+          for folder in "${SUBFOLDERS[@]}"; do
+            SUBFOLDER_PATH="$FOLDER_PATH$folder"
+            if [ ! -d "$SUBFOLDER_PATH" ]; then
+              echo "Creating $folder folder..."
+              mkdir -p "$SUBFOLDER_PATH"
+              touch "$SUBFOLDER_PATH/readme.md"
             else
-              echo "Source path not found in $repo_url"
+              echo "$folder folder already exists."
             fi
-            rm -rf tmp_repo
-          }
+          done
+          create_and_copy_files "$FOLDER_PATH/services" "buerokratt/Service-Module" "DSL/OpenSearch" "$FOLDER_PATH/services"
+          create_and_copy_files "$FOLDER_PATH/training" "buerokratt/Training-Module" "DSL/OpenSearch" "$FOLDER_PATH/training"
+          create_and_copy_files "$FOLDER_PATH/Common-Services" "buerokratt/Common-Services" "DSL/OpenSearch" "$FOLDER_PATH/Common-Services"
 
-          # Cloning and Copying DSL Files
-          clone_and_copy "https://github.com/buerokratt/Buerokratt-Chatbot.git" "dev" "DSL/Ruuter.private/DSL" "Ruuter/private/v2/backoffice"
-          clone_and_copy "https://github.com/buerokratt/Analytics-Module.git" "dev" "DSL/Ruuter" "Ruuter/private/v2/analytics"
-          clone_and_copy "https://github.com/buerokratt/Service-Module.git" "dev" "DSL/Ruuter" "Ruuter/private/v2/services"
-          clone_and_copy "https://github.com/buerokratt/Training-Module.git" "dev" "DSL/Ruuter.private" "Ruuter/private/v2/training"
+          # OpenSearch2
+          FOLDER_PATH=OpenSearch2/
+          if [ ! -d "$FOLDER_PATH" ]; then
+            echo "Folder structure does not exist, creating..."
+            mkdir -p "$FOLDER_PATH"
+            touch "$FOLDER_PATH/readme.md"
+          else
+            echo "Folder structure already exists."
+          fi
+          SUBFOLDERS=("services")
+          for folder in "${SUBFOLDERS[@]}"; do
+            SUBFOLDER_PATH="$FOLDER_PATH$folder"
+            if [ ! -d "$SUBFOLDER_PATH" ]; then
+              echo "Creating $folder folder..."
+              mkdir -p "$SUBFOLDER_PATH"
+              touch "$SUBFOLDER_PATH/readme.md"
+            else
+              echo "$folder folder already exists."
+            fi
+          done
+          create_and_copy_files "$FOLDER_PATH/services" "buerokratt/Service-Module" "DSL/Opensearch" "$FOLDER_PATH/services"
 
-          # Further repo operations can be added here
+      - name: Clean Up Cloned Repositories
+        run: |
+          rm -rf source-repo-service
+          rm -rf source-repo-training
+          rm -rf source-repo-Common-Services
 
-  cleanup_and_commit:
-    runs-on: ubuntu-22.04
-    needs: copy_dsl_files
-
-    steps:
       - name: Commit and Push Folder Structure with Copied Contents
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
-          
           git reset --hard HEAD
           git pull origin v2.2-alpha-0502 --no-ff --allow-unrelated-histories
           git add -A .
