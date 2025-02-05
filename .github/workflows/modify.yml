@@ -11,6 +11,12 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
+      - name: Print Current Directory
+        run: |
+          echo "Current directory:"
+          pwd
+          echo "Listing contents:"
+          ls -la
       - name: Modify DSL Files and Insert Dynamic Part
         run: |
           FOLDER_PATH="Ruuter/"
