@@ -72,7 +72,7 @@ assignIdCode:
 getUuid:
   call: http.post
   args:
-    url: "[#CHATBOT_DMAPPER]/backoffice/hbs/return_uuid"
+    url: "[#CHATBOT_DMAPPER]/hbs/chat-bot/return_uuid"
     headers:
       type: json
   result: uuid_result
@@ -81,7 +81,7 @@ getUuid:
 assignUuid:
   assign:
     uuid: ${uuid_result.response.body.uuid}
-  next: insertMessage  
+  next: insertMessage
 
 insertMessage:
   call: http.post
@@ -103,11 +103,17 @@ insertMessage:
       forwardedFromCsa: ""
       forwardedToCsa: ""
   result: insertMessageResult
-  next: notify_chats
 
+getMessageById:
+  call: http.post
+  args:
+    url: "[#CHATBOT_RESQL]/get-message-by-id"
+    body:
+      id: ${uuid}
+  result: message_res
 
 notify_chats:
-  template: backoffice/chats/notify
+  template: chats/notify
   requestType: templates
   body:
     chatId: ${chatId}
@@ -115,7 +121,7 @@ notify_chats:
   next: notify_messages
 
 notify_messages:
-  template: backoffice/messages/notify
+  template: messages/notify
   requestType: templates
   body:
     chatId: ${chatId}
@@ -125,7 +131,7 @@ notify_messages:
   next: return_result
 
 return_result:
-  return: "Message Sent Successfully"
+  return: ${message_res.response.body[0]}
   next: end
 
 return_bad_request:
