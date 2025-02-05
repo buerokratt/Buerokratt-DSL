@@ -143,12 +143,18 @@ jobs:
             fi
           done
           create_and_copy_files "$FOLDER_PATH/services" "buerokratt/Service-Module" "DSL/Opensearch" "$FOLDER_PATH/services"
+          # common-services
+          SOURCE_REPO_COMMONSERVICES=buerokratt/Common-Services
+          SOURCE_FOLDER_COMMONSERVICES=DSL/Ruuter.public
+          git clone --branch=dev "https://github.com/$SOURCE_REPO_COMMONSERVICES.git" source-repo-Common-Services
+          cp -R "source-repo-Common-Services/$SOURCE_FOLDER_COMMONSERVICES/." "$FOLDER_PATH/Common-Services"
 
       - name: Clean Up Cloned Repositories
         run: |
           rm -rf source-repo-service
           rm -rf source-repo-training
           rm -rf source-repo-Common-Services
+          rm -rf source-repo-chatbot
 
       - name: Commit and Push Folder Structure with Copied Contents
         run: |
