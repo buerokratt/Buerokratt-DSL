@@ -19,7 +19,7 @@ jobs:
           ls -la
       - name: Modify DSL Files and Insert Dynamic Part
         run: |
-          FOLDER_PATH="Ruuter/"
+          FOLDER_PATH="./Ruuter/"
       
           # Loop through the files and modify those that match the pattern
           find "$FOLDER_PATH" -type f -name "*.dl" | while read -r file; do
