@@ -49,6 +49,36 @@ jobs:
           done
           create_and_copy_files "$FOLDER_PATH/backoffice" "buerokratt/Buerokratt-Chatbot" "DSL/Ruuter.private/DSL" "$FOLDER_PATH/backoffice"
           create_and_copy_files "$FOLDER_PATH/analytics" "buerokratt/Analytics-Module" "DSL/Ruuter" "$FOLDER_PATH/analytics"
+          # Ruuter v2 public
+          FOLDER_PATH=Ruuter/public/v2/
+          if [ ! -d "$FOLDER_PATH" ]; then
+            echo "Folder structure does not exist, creating..."
+            mkdir -p "$FOLDER_PATH"
+            touch "$FOLDER_PATH/readme.md"
+          else
+            echo "Folder structure already exists."
+          fi
+          SUBFOLDERS=("analytics" "backoffice" "services" "training")
+          for folder in "${SUBFOLDERS[@]}"; do
+            SUBFOLDER_PATH="$FOLDER_PATH$folder"
+            if [ ! -d "$SUBFOLDER_PATH" ]; then
+              echo "Creating $folder folder..."
+              mkdir -p "$SUBFOLDER_PATH"
+              touch "$SUBFOLDER_PATH/readme.md"
+            else
+              echo "$folder folder already exists."
+            fi
+          done
+
+          SOURCE_REPO_CHATBOT=buerokratt/Buerokratt-Chatbot
+          SOURCE_FOLDER_CHATBOT=DSL/Ruuter.public/DSL
+          git clone --branch=dev "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
+          cp -R "source-repo-chatbot/$SOURCE_FOLDER_CHATBOT/." "$FOLDER_PATH/backoffice"
+
+          SOURCE_REPO_TRAINING=buerokratt/Training-Module
+          SOURCE_FOLDER_TRAINING=DSL/Ruuter.public
+          git clone --branch=dev "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
+          cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING/." "$FOLDER_PATH/training"
 
           # Resql
           FOLDER_PATH=Resql/
