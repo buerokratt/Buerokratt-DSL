@@ -3,7 +3,7 @@ name: Buerokratt DSL
 on:
   push:
     branches:
-      - v2.2-alpha-services 
+      - v2.2-alpha-0502
     # Remove paths filter to trigger on any change
     paths:
        - '.env'
