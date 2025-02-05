@@ -80,7 +80,7 @@ check_for_service:
   switch:
     - condition: ${content.startsWith("#common_service") || content.startsWith("#service")}
       next: assign_service_content
-  next: post_message_to_bot
+  next: check_for_fallback_bot
 
 assign_service_content:
   assign:
