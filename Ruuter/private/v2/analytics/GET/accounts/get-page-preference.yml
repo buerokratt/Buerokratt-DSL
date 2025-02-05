@@ -23,7 +23,7 @@ extractRequestData:
 getUserPagePreferences:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/get-user-page-preferences"
+    url: "[#ANALYTICS_RESQL]/get-user-page-preferences"
     body:
       user_id: ${user_id}
       page_name: ${page_name}

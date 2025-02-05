@@ -9,7 +9,7 @@ declaration:
 
 assignCronFileLocation:
   assign:
-    cronFileLocation: "/cron-data/DSL/train_bot.yml"
+    cronFileLocation: "/CronManager/train_bot.yml"
 
 getFromDatabase:
   call: http.post
@@ -67,13 +67,14 @@ generateCronExpression:
 createCronJson:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/training/hbs/training/get_cron_shell_execution_file"
+    url: "[#TRAINING_DMAPPER]/hbs/training/get_cron_shell_execution_file"
     headers:
       type: "json"
     body:
       cronExpression: ${cronExpression.response.body.expression}
       type: "exec"
       command: "./scripts/train_bot.sh"
+      allowedEnvs: ["test"]
       startDate: ${cronExpression.response.body.startDate}
   result: cronJson
 

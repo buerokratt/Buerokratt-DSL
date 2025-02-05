@@ -206,7 +206,7 @@ insert_chat_to_back_office_message:
   next: notify_chats
 
 notify_chats:
-  template: backoffice/chats/notify
+  template: chats/notify
   requestType: templates
   body:
     chatId: ${chatId}
@@ -214,7 +214,7 @@ notify_chats:
   next: notify_messages
 
 notify_messages:
-  template: backoffice/messages/notify
+  template: messages/notify
   requestType: templates
   body:
     chatId: ${chatId}

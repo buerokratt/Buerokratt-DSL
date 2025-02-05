@@ -23,7 +23,7 @@ getStoriesWithName:
 mapStoriesData:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/training/hbs/training/get_story_with_name"
+    url: "[#TRAINING_DMAPPER]/hbs/training/get_story_with_name"
     headers:
       type: 'json'
     body:

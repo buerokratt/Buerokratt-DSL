@@ -41,7 +41,7 @@ getDomainFile:
 getIntentsNames:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/training/hbs/training/get_intent_names_from_example_counts"
+    url: "[#TRAINING_DMAPPER]/hbs/training/get_intent_names_from_example_counts"
     headers:
       type: "json"
     body:
@@ -59,7 +59,7 @@ getIntentListLastChanged:
 mapIntentsData:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/training/hbs/training/get_intents_with_examples_count"
+    url: "[#TRAINING_DMAPPER]/hbs/training/get_intents_with_examples_count"
     headers:
       type: "json"
     body:

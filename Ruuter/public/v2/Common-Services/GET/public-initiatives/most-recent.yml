@@ -1,10 +1,38 @@
 declaration:
   call: declare
   version: 0.1
-  description: get 5 most-recent active initiatives
-  method: get
-  returns: json
+  name: "5 most recent active initiatives service"
+  description: "Provides information for 5 most recent active initiatives"
+  method: POST
+  accepts: JSON
+  returns: JSON
   namespace: common-services
+  allowlist:
+    body:
+      - field: chatId
+        type: string
+        description: "The chat ID for the message"
+      - field: authorId
+        type: string
+        description: "The author ID for the message"
+      - field: order
+        type: string
+        description: "The order for the initiatives"
+      - field: distinct
+        type: string
+        description: "The distinct for the initiatives"
+      - field: limit
+        type: string
+        description: "Amount of initiatives"
+      - field: rahvaalgatus
+        type: string
+        description: "The rahvaalgatus API"
+      - field: initiativeEventHeader
+        type: string
+        description: "Official initiative event header"
+      - field: initiativeHeader
+        type: string
+        description: "Official initiative header"
 
 prepareVariables:
   assign:
@@ -25,7 +53,6 @@ getEvents:
     headers:
       Accept: "${initiativeEventHeader}"
   result: events
-  error: returnError
   next: extractIds
 
 extractIds:
@@ -40,7 +67,6 @@ getFirstEvent:
     headers:
       Accept: "${initiativeHeader}"
   result: firstInitiative
-  error: returnError
   next: getSecondEvent
 
 getSecondEvent:
@@ -50,7 +76,6 @@ getSecondEvent:
     headers:
       Accept: "${initiativeHeader}"
   result: secondInitiative
-  error: returnError
   next: getThirdEvent
 
 getThirdEvent:
@@ -60,7 +85,6 @@ getThirdEvent:
     headers:
       Accept: "${initiativeHeader}"
   result: thirdInitiative
-  error: returnError
   next: getFourthEvent
 
 getFourthEvent:
@@ -70,7 +94,6 @@ getFourthEvent:
     headers:
       Accept: "${initiativeHeader}"
   result: fourthInitiative
-  error: returnError
   next: getFifthEvent
 
 getFifthEvent:
@@ -80,17 +103,32 @@ getFifthEvent:
     headers:
       Accept: "${initiativeHeader}"
   result: fifthInitiative
-  error: returnError
   next: assignVariables
 
 assignVariables:
   assign:
-    res:
-      first: ${firstInitiative.response.body}
-      second: ${secondInitiative.response.body}
-      third: ${thirdInitiative.response.body}
-      fourth: ${fourthInitiative.response.body}
-      fifth: ${fifthInitiative.response.body}
+    first: ${firstInitiative.response.body}
+    second: ${secondInitiative.response.body}
+    third: ${thirdInitiative.response.body}
+    fourth: ${fourthInitiative.response.body}
+    fifth: ${fifthInitiative.response.body}
+  next: formatResponse
+
+formatResponse:
+  assign:
+    res: {
+      "result" : "Viis viimast aktiivset rahvaalgatust:\\n
+        1. ${first.title}\\n
+          Kogutud allkirjad: ${first.signatureCount}/ min. allkirjad: ${first.signatureThreshold}\\n\\n
+        2. ${second.title}\\n
+          Kogutud allkirjad: ${second.signatureCount}/ min. allkirjad: ${second.signatureThreshold}\\n\\n
+        3. ${third.title}\\n
+          Kogutud allkirjad: ${third.signatureCount}/ min. allkirjad: ${third.signatureThreshold}\\n\\n
+        4. ${fourth.title}\\n
+          Kogutud allkirjad: ${fourth.signatureCount}/ min. allkirjad: ${fourth.signatureThreshold}\\n\\n
+        5. ${fifth.title}\\n
+          Kogutud allkirjad: ${fifth.signatureCount}/ min. allkirjad: ${fifth.signatureThreshold}"
+    }
   next: formatMessages
 
 formatMessages:
@@ -111,6 +149,8 @@ formatMessages:
           "created": "${new Date().toISOString()}",
         }
   result: formatMessage
+  next: returnResult
 
-return_result:
+returnResult:
   return: ${formatMessage.response.body}
+  next: end

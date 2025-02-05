@@ -10,13 +10,13 @@ declaration:
 assign_step:
   assign:
     locations:
-      rules_location: '/locations/data/rules.yml'
-      stories_location: '/locations/data/stories.yml'
-      domain_location: '/locations/data/domain.yml'
-      test_stories_location: '/locations/tests/test_stories.yml'
-      intents_location: '/locations/data/nlu/'
-      regex_location: '/locations/data/regex/'
-      training_result_location: '/locations/results'
-      config_location: '/locations/data/config.yml'
+      rules_location: "[#DMAPPER_LOCATIONS_PATH]/data/rules.yml"
+      stories_location: "[#DMAPPER_LOCATIONS_PATH]/data/stories.yml"
+      domain_location: "[#DMAPPER_LOCATIONS_PATH]/data/domain.yml"
+      test_stories_location: "[#DMAPPER_LOCATIONS_PATH]/test_stories.yml"
+      intents_location: "[#DMAPPER_LOCATIONS_PATH]/nlu/"
+      regex_location: "[#DMAPPER_LOCATIONS_PATH]/regex"
+      training_result_location: "[#DMAPPER_LOCATIONS_PATH]/results"
+      config_location: "[#DMAPPER_LOCATIONS_PATH]/data/config.yml"
 return_value:
   return: ${locations}

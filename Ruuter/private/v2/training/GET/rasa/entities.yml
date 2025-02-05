@@ -15,7 +15,7 @@ declaration:
       description: "Item number"
     - field: size
       type: string
-      description: "Page size"  
+      description: "Page size"
 
 getEntities:
   call: http.post
@@ -23,13 +23,13 @@ getEntities:
     url: "[#TRAINING_OPENSEARCH]/domain/_search/template"
     body:
       id: "entities-with-pagination"
-      params: ${incoming.params}    
+      params: ${incoming.params}
   result: getEntitiesResult
 
 mapEntitiesData:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/training/hbs/training/get_entities"
+    url: "[#TRAINING_DMAPPER]/hbs/training/get_entities"
     headers:
       type: "json"
     body:
@@ -40,7 +40,7 @@ mapEntitiesData:
 sortEntities:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/training/hbs/training/sort_entities"
+    url: "[#TRAINING_DMAPPER]/hbs/training/sort_entities"
     headers:
       type: "json"
     body:

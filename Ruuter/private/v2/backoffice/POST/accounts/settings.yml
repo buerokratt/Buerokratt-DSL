@@ -65,14 +65,7 @@ check_user_info_response:
 assignIdCode:
   assign:
     idCode: ${res.response.body.idCode}
-#  next: setUserSettingValue  
-
-logstepSETTING:
-  log: ${incoming.body}
-   
-logstepINCOMING:
-  log: ${incoming}
-  next: setUserSettingValue 
+  next: setUserSettingValue  
 
 setUserSettingValue:
   call: http.post
@@ -88,8 +81,6 @@ setUserSettingValue:
       newChatEmailNotifications: ${newChatEmailNotifications}
       useAutocorrect: ${useAutocorrect}
   result: returnSuccess
-
-
 
 returnSuccess:
   return: ${returnSuccess.response.body}

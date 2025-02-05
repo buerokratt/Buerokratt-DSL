@@ -3,19 +3,45 @@ declaration:
   version: 0.1
   name: Member Participation Statistics Service
   description: A service that provides participation statistics for Riigikogu members.
-  method: get
-  returns: json
+  method: POST
+  accepts: JSON
+  returns: JSON
   namespace: common-services
+  allowlist:
+    body:
+      - field: chatId
+        type: string
+        description: "The chat ID for the message"
+      - field: authorId
+        type: string
+        description: "The author ID for the message"
+      - field: endDate
+        type: string
+        description: "The end date for members praticipation"
+      - field: startDate
+        type: string
+        description: "The start date for members participation"
+      - field: year
+        type: string
+        description: "The year for members participation"
+      - field: lang
+        type: string
+        description: "The language for members participation"
+      - field: memberName
+        type: string
+        description: "The member name for members participation"
 
-prepareVariables:
+
+prepare:
   assign:
     chatId: ${incoming.params.chatId}
     authorId: ${incoming.params.authorId}
-    currentDate: ${new Date().toISOString().split('T')[0]} # yyyy-mm-dd
-    endDate: ${ incoming.params.input[0] || currentDate}
-    startDate: ${ incoming.params.input[1] || new Date(new Date(endDate).setMonth(new Date(endDate).getMonth() - 1)).toISOString().split('T')[0] } # yyyy-mm-dd
+
+    endDate: ${new Date().toISOString().split('T')[0]} # yyyy-mm-dd format
+    startDate: ${new Date(new Date().getFullYear(), 0, 1).toISOString().split('T')[0]}  # First day of the current year. yyyy-mm-dd
+    year: ${(new Date().getFullYear()).toString()}
     lang: "ET"
-    memberName: ${incoming.params.input[3]}
+    memberName: "${incoming.params.input.split(',')[0]}"
   next: makeAPIRequest
 
 makeAPIRequest:
@@ -25,16 +51,31 @@ makeAPIRequest:
     headers:
       accept: "application/json"
   result: attendance
-  next: searchMember
+  next: filterResult
 
-searchMember:
+filterResult:
   assign:
-    memberData: ${attendance.response.body.find(member => member.fullName === memberName)}
-  next: assignResponse
+    memberData: ${attendance.response.body.find(member => member.fullName.toLowerCase().includes(memberName.toLowerCase()))}
+  next: checkFilterResult
 
-assignResponse:
+checkFilterResult:
+  switch:
+    - condition: ${memberData === undefined || memberData === null}
+      next: formatNotFound
+  next: formatResult
+
+formatNotFound:
   assign:
-    res: ${memberData.fullName + " on olnud perioodil " + startDate + " - " + endDate + " kohal " + memberData.participated + " korda ja puudunud " + memberData.absent + " korda."}
+    res: {
+      "result": "Riigikogu liiget nimega '${memberName}' ei leitud. Palun proovige uuesti."
+    }
+  next: formatMessages
+
+formatResult:
+  assign:
+    res: {
+      "result": "${memberData.fullName} on ${year}. aastal osalenud ${memberData.participated} istungil ja puudunud ${memberData.absent} korda."
+    }
   next: formatMessages
 
 formatMessages:

@@ -35,7 +35,7 @@ check_nonce:
   next: guard_success
 
 authenticate:
-  template: training/check-user-authority
+  template: check-user-authority
   requestType: templates
   headers:
     cookie: ${incoming.headers.cookie}

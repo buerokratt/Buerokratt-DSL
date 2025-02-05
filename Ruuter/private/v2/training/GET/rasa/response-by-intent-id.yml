@@ -29,7 +29,7 @@ getResponsesWithNameAndText:
 mapResponsesData:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/training/hbs/training/get_response_by_intent_id"
+    url: "[#TRAINING_DMAPPER]/hbs/training/get_response_by_intent_id"
     headers:
       type: "json"
     body:

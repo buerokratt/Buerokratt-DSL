@@ -15,7 +15,7 @@ declaration:
 getRemovableConversations:
   call: http.post
   args:
-    url: "[#CHATBOT_RUUTER_PRIVATE]/backoffice/chats/chat-to-remove"
+    url: "[#CHATBOT_RUUTER_PRIVATE]/chats/chat-to-remove"
     body:
       isAuth: ${incoming.body.isAuth}
   result: res

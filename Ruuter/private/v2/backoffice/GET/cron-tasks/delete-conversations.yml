@@ -19,7 +19,7 @@ assignValue:
 backupConversations:
   call: http.post
   args:
-    url: "[#CHATBOT_RUUTER_PRIVATE]/backoffice/chats/back-up-removable-chats"
+    url: "[#CHATBOT_RUUTER_PRIVATE]/chats/back-up-removable-chats"
     body:
       isAuth: ${isAuth}
   result: chats
@@ -33,7 +33,7 @@ validateResponse:
 emptyMessages:
   call: http.post
   args:
-    url: "[#CHATBOT_RUUTER_PRIVATE]/backoffice/chats/empty-conversations-by-chat-ids"
+    url: "[#CHATBOT_RUUTER_PRIVATE]/chats/empty-conversations-by-chat-ids"
     body:
       chatIds: ${chats.response.body.response}
   result: res

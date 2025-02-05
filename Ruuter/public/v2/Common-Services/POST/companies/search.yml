@@ -2,9 +2,9 @@ declaration:
  call: declare
  version: 0.1
  description: "Search Companies by name"
- method: post
- accepts: json
- returns: json
+ method: POST
+ accepts: JSON
+ returns: JSON
  namespace: common-services
  allowlist:
    params:
@@ -32,7 +32,7 @@ assign_values:
     name: ${input[1]}
     chatId: ${incoming.body.chatId}
     authorId: ${incoming.body.authorId}
-    buttonPrefix: "#common_service, /POST/services/companies/${serviceName}, ("
+    buttonPrefix: "#common_service, /POST/companies/${serviceName}, ("
 
 getCompaniesWithName:
   call: http.post

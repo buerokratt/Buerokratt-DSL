@@ -35,7 +35,7 @@ check_if_bot_is_active:
 insertChatAndMessageWhenBotNotActive:
   call: http.post
   args:
-    url: "[#CHATBOT_RUUTER_PRIVATE_INTERNAL]/backoffice/internal/chat-and-message-when-bot-is-not-active"
+    url: "[#CHATBOT_RUUTER_PRIVATE_INTERNAL]/internal/chat-and-message-when-bot-is-not-active"
   result: insertChatAndMessageWhenBotNotActiveResult
   next: return_result
 

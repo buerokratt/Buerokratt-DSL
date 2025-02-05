@@ -20,7 +20,7 @@ declaration:
 
 assignCronFileLocation:
   assign:
-    cronFileLocation:  "/cron-data/DSL/delete_conversations.yml"
+    cronFileLocation: "/CronManager/delete_conversations.yml"
     expression: ${incoming.body.expression}
     anonEnabled: ${incoming.body.anonEnabled}
     authEnabled: ${incoming.body.authEnabled}
@@ -53,25 +53,23 @@ deleteCronTask:
 createAuthCronJson:
   call: http.post
   args:
-    url: "[#CHATBOT_DMAPPER]/backoffice/hbs/delete_conversations_cron"
+    url: "[#CHATBOT_DMAPPER]/hbs/chat-bot/delete_conversations_cron"
     headers:
       type: "json"
     body:
       cronExpression: ${expression}
-      method: "GET"
-      url: "[#CHATBOT_RUUTER_PRIVATE_INTERNAL]/backoffice/cron-tasks/delete-conversations?isAuth=true&skipAuth=true"
+      command: "./scripts/remove-auth-conversations.sh"
   result: authCronJson
 
 createAnonCronJson:
   call: http.post
   args:
-    url: "[#CHATBOT_DMAPPER]/backoffice/hbs/delete_conversations_cron"
+    url: "[#CHATBOT_DMAPPER]/hbs/chat-bot/delete_conversations_cron"
     headers:
       type: "json"
     body:
       cronExpression: ${expression}
-      method: "GET"
-      url: "[#CHATBOT_RUUTER_PRIVATE_INTERNAL]/backoffice/cron-tasks/delete-conversations?isAuth=false&skipAuth=true"
+      command: "./scripts/remove-anonym-conversations.sh"
   result: anonCronJson
 
 checkAuthConditions:

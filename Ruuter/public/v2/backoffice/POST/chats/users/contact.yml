@@ -41,7 +41,7 @@ insertEmailAndPhone:
   result: notify_messages
 
 notify_messages:
-  template: backoffice/messages/notify
+  template: messages/notify
   requestType: templates
   body:
     chatId: ${chatId}

@@ -17,6 +17,9 @@ declaration:
       - field: page_results
         type: number
         description: "Body field 'page_results'"
+      - field: selected_columns
+        type: number
+        description: "Body field 'select_columns'"
 
 extractRequestData:
   assign:
@@ -24,15 +27,17 @@ extractRequestData:
     page_name: ${incoming.body.page_name}
     page_results: ${incoming.body.page_results}
     created: ${new Date().toISOString()}
+    selected_columns: ${incoming.body.selected_columns}
 
 setUserPagePreferences:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/update-user-page-preferences"
+    url: "[#TRAINING_USERS_RESQL]/update-user-page-preferences"
     body:
       user_id: ${user_id}
       page_name: ${page_name}
       page_results: ${page_results}
+      selected_columns: ${selected_columns}
       created: ${created}
   result: returnSuccess
 

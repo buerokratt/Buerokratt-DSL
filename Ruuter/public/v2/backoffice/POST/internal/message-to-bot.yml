@@ -104,10 +104,6 @@ check_if_bot_is_unable_to_reply:
       next: check_for_fallback_bot
     - condition: ${post_message_to_bot_result.response.body?.[0]?.text == 'Suunan teid klienditeenindajale. Varuge natukene kannatust.'}
       next: get_organization_base_config
-    - condition: ${post_message_to_bot_result.response.body?.[0]?.text == 'Suunan teid klienditeenindajale. Palun oodake.'}
-      next: get_organization_base_config
-    - condition: ${post_message_to_bot_result.response.body?.[0]?.text == 'Suunan vestluse nõustajale. Palun oodake.'}
-      next: get_organization_base_config
     - condition: ${post_message_to_bot_result.response.body?.[0]?.text.startsWith("#common_service") || post_message_to_bot_result.response.body?.[0]?.text.startsWith("#service")}
       next: assign_service_content_from_bot_response
   next: extract_bot_responses
@@ -118,7 +114,7 @@ assign_service_content_from_bot_response:
   next: trigger_service
 
 trigger_service:
-  template: backoffice/chats/trigger-service
+  template: chats/trigger-service
   requestType: templates
   body:
     message: ${service_content}
@@ -312,7 +308,7 @@ extract_bot_responses:
 format_bot_messages:
   call: http.post
   args:
-    url: "[#CHATBOT_DMAPPER]/backoffice/hbs/bot_responses_to_messages"
+    url: "[#CHATBOT_DMAPPER]/hbs/chat-bot/bot_responses_to_messages"
     headers:
       type: json
     body:

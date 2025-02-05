@@ -80,7 +80,7 @@ assignPendingChat:
 getUuid:
   call: http.post
   args:
-    url: "[#CHATBOT_DMAPPER]/backoffice/hbs/return_uuid"
+    url: "[#CHATBOT_DMAPPER]/hbs/chat-bot/return_uuid"
     headers:
       type: json
   result: uuid_result
@@ -114,7 +114,7 @@ insertMessage:
   next: notify_chats
 
 notify_chats:
-  template: backoffice/chats/notify
+  template: chats/notify
   requestType: templates
   body:
     chatId: ${id}
@@ -131,7 +131,7 @@ getRedirectedChat:
   next: notify_messages
 
 notify_messages:
-  template: backoffice/messages/notify
+  template: messages/notify
   requestType: templates
   body:
     chatId: ${activeChat.id ?? uuid}

@@ -20,7 +20,7 @@ getSlots:
 mapSlotsData:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/training/hbs/training/extract_slot_keys"
+    url: "[#TRAINING_DMAPPER]/hbs/training/extract_slot_keys"
     headers:
       type: 'json'
     body:
