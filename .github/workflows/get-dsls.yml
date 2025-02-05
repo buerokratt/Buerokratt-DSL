@@ -20,30 +20,33 @@ jobs:
           set -e  # Exit on any error
 
           create_folders() {
-            echo "Creating structure for $1"
-            mkdir -p "$2"
-            touch "$2/readme.md"
-            for folder in "${3[@]}"; do
-              mkdir -p "$2/$folder"
-              touch "$2/$folder/readme.md"
+            local structure_name="$1"
+            local base_path="$2"
+            shift 2  # Shift arguments so $@ now points to the rest (array elements)
+            echo "Creating structure for $structure_name"
+            mkdir -p "$base_path"
+            touch "$base_path/readme.md"
+            for folder in "$@"; do
+              mkdir -p "$base_path/$folder"
+              touch "$base_path/$folder/readme.md"
             done
           }
 
           copy_and_cleanup() {
-            REPO=$1
-            FOLDER=$2
-            TARGET=$3
+            local REPO="$1"
+            local FOLDER="$2"
+            local TARGET="$3"
             echo "Cloning and copying $REPO..."
             git clone --branch=dev "https://github.com/$REPO.git" "temp-repo"
             cp -R "temp-repo/$FOLDER/." "$TARGET"
             rm -rf temp-repo
           }
 
-          base_dir=( "analytics" "backoffice" "services" "training" )
+          base_dirs=("analytics" "backoffice" "services" "training")
 
           # Ruuter v2 private setup
           ruuter_private_path="Ruuter/private/v2"
-          create_folders "Ruuter v2 private" "$ruuter_private_path" "${base_dir[@]}"
+          create_folders "Ruuter v2 private" "$ruuter_private_path" "${base_dirs[@]}"
           copy_and_cleanup "buerokratt/Buerokratt-Chatbot" "DSL/Ruuter.private/DSL" "$ruuter_private_path/backoffice"
           copy_and_cleanup "buerokratt/Analytics-Module" "DSL/Ruuter" "$ruuter_private_path/analytics"
           copy_and_cleanup "buerokratt/Service-Module" "DSL/Ruuter" "$ruuter_private_path/services"
@@ -51,7 +54,7 @@ jobs:
 
           # Ruuter v2 public setup
           ruuter_public_path="Ruuter/public/v2"
-          create_folders "Ruuter v2 public" "$ruuter_public_path" "${base_dir[@]}"
+          create_folders "Ruuter v2 public" "$ruuter_public_path" "${base_dirs[@]}"
           copy_and_cleanup "buerokratt/Buerokratt-Chatbot" "DSL/Ruuter.public/DSL" "$ruuter_public_path/backoffice"
           copy_and_cleanup "buerokratt/Training-Module" "DSL/Ruuter.public" "$ruuter_public_path/training"
           copy_and_cleanup "buerokratt/Common-Services" "DSL/Ruuter.public" "$ruuter_public_path/Common-Services"
