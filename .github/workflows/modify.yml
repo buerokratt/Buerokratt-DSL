@@ -1,0 +1,37 @@
+name: Buerokratt DSL - modify files
+
+on:
+  push:
+    branches:
+      - v2.2-alpha-0502
+    paths:
+      - '.env.file'
+jobs:
+  setup_directories:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Modify DSL Files and Insert Dynamic Part
+        run: |
+          FOLDER_PATH="Ruuter/public/v2/"
+      
+          # Loop through the files and modify those that match the pattern
+          find "$FOLDER_PATH" -type f -name "*.dl" | while read -r file; do
+            # Check if the file contains the pattern and if so, modify it
+            if grep -q "\[#.*_DMAPPER\]/hbs/" "$file"; then
+              echo "Modifying file: $file"
+              
+              # Replace the dynamic part between hbs/ and the rest of the path
+              sed -i 's/\[#\(.*\)_DMAPPER\]\/hbs\/.*\//\[#\1_DMAPPER\]\/\1\/hbs\//g' "$file"
+            fi
+          done
+
+      - name: Commit and Push Folder Structure with Copied Contents
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          git reset --hard HEAD
+          git pull origin v2.2-alpha-0502 --no-ff --allow-unrelated-histories
+          git add -A .
+          git commit --allow-empty -m "Update"
+          git push
