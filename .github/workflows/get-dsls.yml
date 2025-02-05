@@ -8,60 +8,95 @@ on:
       - '.env'
 
 jobs:
-  process_dsl:
+  setup_directories:
     runs-on: ubuntu-22.04
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Set Up and Process DSL Structures
+      - name: Setup Folder Structures
         run: |
-          set -e  # Exit on any error
+          create_and_check_folder() {
+            FOLDER_PATH=$1
+            if [ ! -d "$FOLDER_PATH" ]; then
+              echo "Creating $FOLDER_PATH..."
+              mkdir -p "$FOLDER_PATH"
+              touch "$FOLDER_PATH/readme.md"
+            else
+              echo "$FOLDER_PATH already exists."
+            fi
+          }
 
-          create_folders() {
-            local structure_name="$1"
-            local base_path="$2"
-            shift 2  # Shift arguments so $@ now points to the rest (array elements)
-            echo "Creating structure for $structure_name"
-            mkdir -p "$base_path"
-            touch "$base_path/readme.md"
-            for folder in "$@"; do
-              mkdir -p "$base_path/$folder"
-              touch "$base_path/$folder/readme.md"
+          declare -a paths=("Ruuter/private/v2" "Ruuter/public/v2" "Resql" "DataMapper/v1" "Liquibase" "OpenSearch" "OpenSearch2")
+          for base_path in "${paths[@]}"; do
+            create_and_check_folder "$base_path"
+          done
+
+          # Create Subfolders as needed
+          declare -A subfolders=(
+            ["Ruuter/private/v2"]="analytics backoffice services training"
+            ["Ruuter/public/v2"]="analytics backoffice services training"
+            ["Resql"]="analytics backoffice services training"
+            ["DataMapper/v1"]="analytics hbs/backoffice services training"
+            ["Liquibase"]="analytics backoffice services training"
+            ["OpenSearch"]="services training"
+            ["OpenSearch2"]="services"
+          )
+
+          for base_path in "${!subfolders[@]}"; do
+            for subfolder in ${subfolders[$base_path]}; do
+              create_and_check_folder "$base_path/$subfolder"
             done
+          done
+
+  copy_dsl_files:
+    runs-on: ubuntu-22.04
+    needs: setup_directories
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Clone and Copy DSLs
+        run: |
+          clone_and_copy() {
+            local repo_url=$1
+            local branch=$2
+            local source_path=$3
+            local dest_path=$4
+
+            echo "Cloning $repo_url ($branch)"
+            git clone --branch="$branch" "$repo_url" tmp_repo
+            if [ -d "tmp_repo/$source_path" ]; then
+              echo "Copying DSLs from $repo_url..."
+              cp -R "tmp_repo/$source_path/." "$dest_path"
+            else
+              echo "Source path not found in $repo_url"
+            fi
+            rm -rf tmp_repo
           }
 
-          copy_and_cleanup() {
-            local REPO="$1"
-            local FOLDER="$2"
-            local TARGET="$3"
-            echo "Cloning and copying $REPO..."
-            git clone --branch=dev "https://github.com/$REPO.git" "temp-repo"
-            cp -R "temp-repo/$FOLDER/." "$TARGET"
-            rm -rf temp-repo
-          }
+          # Cloning and Copying DSL Files
+          clone_and_copy "https://github.com/buerokratt/Buerokratt-Chatbot.git" "dev" "DSL/Ruuter.private/DSL" "Ruuter/private/v2/backoffice"
+          clone_and_copy "https://github.com/buerokratt/Analytics-Module.git" "dev" "DSL/Ruuter" "Ruuter/private/v2/analytics"
+          clone_and_copy "https://github.com/buerokratt/Service-Module.git" "dev" "DSL/Ruuter" "Ruuter/private/v2/services"
+          clone_and_copy "https://github.com/buerokratt/Training-Module.git" "dev" "DSL/Ruuter.private" "Ruuter/private/v2/training"
 
-          base_dirs=("analytics" "backoffice" "services" "training")
+          # Further repo operations can be added here
 
-          # Ruuter v2 private setup
-          ruuter_private_path="Ruuter/private/v2"
-          create_folders "Ruuter v2 private" "$ruuter_private_path" "${base_dirs[@]}"
-          copy_and_cleanup "buerokratt/Buerokratt-Chatbot" "DSL/Ruuter.private/DSL" "$ruuter_private_path/backoffice"
-          copy_and_cleanup "buerokratt/Analytics-Module" "DSL/Ruuter" "$ruuter_private_path/analytics"
-          copy_and_cleanup "buerokratt/Service-Module" "DSL/Ruuter" "$ruuter_private_path/services"
-          copy_and_cleanup "buerokratt/Training-Module" "DSL/Ruuter.private" "$ruuter_private_path/training"
+  cleanup_and_commit:
+    runs-on: ubuntu-22.04
+    needs: copy_dsl_files
 
-          # Ruuter v2 public setup
-          ruuter_public_path="Ruuter/public/v2"
-          create_folders "Ruuter v2 public" "$ruuter_public_path" "${base_dirs[@]}"
-          copy_and_cleanup "buerokratt/Buerokratt-Chatbot" "DSL/Ruuter.public/DSL" "$ruuter_public_path/backoffice"
-          copy_and_cleanup "buerokratt/Training-Module" "DSL/Ruuter.public" "$ruuter_public_path/training"
-          copy_and_cleanup "buerokratt/Common-Services" "DSL/Ruuter.public" "$ruuter_public_path/Common-Services"
-
-          # Commit changes
+    steps:
+      - name: Commit and Push Folder Structure with Copied Contents
+        run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
-          git add -A
-          git commit --allow-empty -m "Update DSL structures"
-          git push origin v2.2-alpha-0502
+          
+          git reset --hard HEAD
+          git pull origin v2.2-alpha-0502 --no-ff --allow-unrelated-histories
+          git add -A .
+          git commit --allow-empty -m "Update"
+          git push
