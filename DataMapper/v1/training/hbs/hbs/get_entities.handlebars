@@ -1,0 +1,13 @@
+{
+    "entities": [
+    {{#each data.hits}}
+        {{#each this.fields.filtered_entities}}
+            {
+                "id": "{{{ this }}}",
+                "name": "{{{ this }}}"
+            }
+            {{#unless @last}},{{/unless}}
+        {{/each}}
+    {{/each}}
+    ]
+}
