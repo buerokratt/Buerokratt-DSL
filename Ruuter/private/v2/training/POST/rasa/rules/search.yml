@@ -91,7 +91,7 @@ getRulesSearchForSlots:
 mapRulesData:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/hbs/training/get_rules"
+    url: "[#TRAINING_DMAPPER]/training/hbs/training/get_rules"
     headers:
       type: 'json'
     body:

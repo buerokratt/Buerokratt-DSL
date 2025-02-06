@@ -53,7 +53,7 @@ deleteCronTask:
 createAuthCronJson:
   call: http.post
   args:
-    url: "[#CHATBOT_DMAPPER]/hbs/chat-bot/delete_conversations_cron"
+    url: "[#CHATBOT_DMAPPER]/backoffice/hbs/delete_conversations_cron"
     headers:
       type: "json"
     body:
@@ -64,7 +64,7 @@ createAuthCronJson:
 createAnonCronJson:
   call: http.post
   args:
-    url: "[#CHATBOT_DMAPPER]/hbs/chat-bot/delete_conversations_cron"
+    url: "[#CHATBOT_DMAPPER]/backoffice/hbs/delete_conversations_cron"
     headers:
       type: "json"
     body:

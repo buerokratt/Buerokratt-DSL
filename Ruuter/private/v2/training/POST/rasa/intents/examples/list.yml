@@ -102,7 +102,7 @@ splitExamples:
 mapIntentsData:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/hbs/training/get_intent_examples"
+    url: "[#TRAINING_DMAPPER]/training/hbs/training/get_intent_examples"
     headers:
       type: 'json'
     body:

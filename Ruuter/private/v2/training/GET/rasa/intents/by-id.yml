@@ -70,7 +70,7 @@ assignResults:
 mapIntentData:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/hbs/training/get_intent_by_id"
+    url: "[#TRAINING_DMAPPER]/training/hbs/training/get_intent_by_id"
     headers:
       type: "json"
     body:

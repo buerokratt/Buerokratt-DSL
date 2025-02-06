@@ -16,7 +16,7 @@ getForms:
 mapFormsData:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/hbs/training/get_forms"
+    url: "[#TRAINING_DMAPPER]/training/hbs/training/get_forms"
     headers:
       type: 'json'
     body:

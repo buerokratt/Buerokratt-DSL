@@ -46,7 +46,7 @@ notify_chats_and_return_chats_and_messages:
 map_open_chats_messages:
   call: http.post
   args:
-    url: "[#CHATBOT_DMAPPER]/hbs/chat-bot/return_open_chats_messages"
+    url: "[#CHATBOT_DMAPPER]/backoffice/hbs/return_open_chats_messages"
     headers:
       type: json
     body:
@@ -56,7 +56,7 @@ map_open_chats_messages:
 map_open_chats_notifications:
   call: http.post
   args:
-    url: "[#CHATBOT_DMAPPER]/hbs/chat-bot/return_open_chats_notifications"
+    url: "[#CHATBOT_DMAPPER]/backoffice/hbs/return_open_chats_notifications"
     headers:
       type: json
     body:

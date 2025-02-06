@@ -37,7 +37,7 @@ get_metrics:
 convert_data:
   call: http.post
   args:
-    url: "[#ANALYTICS_DMAPPER]/hbs/analytics/get-metric-rows"
+    url: "[#CHATBOT_DMAPPER]/analytics/hbs/analytics/get-metric-rows"
     headers:
       type: "json"
     body:

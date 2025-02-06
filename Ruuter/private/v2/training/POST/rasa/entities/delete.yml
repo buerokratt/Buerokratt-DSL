@@ -87,7 +87,7 @@ validateIntentEntities:
 deleteEntity:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/hbs/training/delete_entity"
+    url: "[#TRAINING_DMAPPER]/training/hbs/training/delete_entity"
     headers:
       type: 'json'
     body:

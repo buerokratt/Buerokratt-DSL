@@ -67,7 +67,7 @@ generateCronExpression:
 createCronJson:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/hbs/training/get_cron_shell_execution_file"
+    url: "[#TRAINING_DMAPPER]/training/hbs/training/get_cron_shell_execution_file"
     headers:
       type: "json"
     body:

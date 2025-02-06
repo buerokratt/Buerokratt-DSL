@@ -15,7 +15,7 @@ declaration:
 mapChatIds:
   call: http.post
   args:
-    url: "[#CHATBOT_DMAPPER]/hbs/chat-bot/map_chat_ids"
+    url: "[#CHATBOT_DMAPPER]/backoffice/hbs/map_chat_ids"
     headers:
       type: json
     body:

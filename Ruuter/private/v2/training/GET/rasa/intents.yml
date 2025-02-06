@@ -16,7 +16,7 @@ getIntents:
 mapIntentsData:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/hbs/training/get_intents"
+    url: "[#TRAINING_DMAPPER]/training/hbs/training/get_intents"
     headers:
       type: 'json'
     body:

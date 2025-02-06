@@ -46,7 +46,7 @@ assignExamples:
 mapRegexesData:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/hbs/training/get_regex_details"
+    url: "[#TRAINING_DMAPPER]/training/hbs/training/get_regex_details"
     headers:
       type: "json"
     body:

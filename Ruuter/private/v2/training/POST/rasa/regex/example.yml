@@ -50,7 +50,7 @@ convertYamlToJson:
 mapRegexesData:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/hbs/training/get_regex_with_regex"
+    url: "[#TRAINING_DMAPPER]/training/hbs/training/get_regex_with_regex"
     headers:
       type: 'json'
     body:
@@ -90,7 +90,7 @@ splitExamples:
 mapExamples:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/hbs/training/get_regex_with_example"
+    url: "[#TRAINING_DMAPPER]/training/hbs/training/get_regex_with_example"
     headers:
       type: 'json'
     body:
