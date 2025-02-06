@@ -114,7 +114,7 @@ assign_service_content_from_bot_response:
   next: trigger_service
 
 trigger_service:
-  template: chats/trigger-service
+  template: backoffice/chats/trigger-service
   requestType: templates
   body:
     message: ${service_content}
