@@ -32,7 +32,7 @@ postInitialStatus:
 getTrainbotJobTemplate:
   call: http.post
   args:
-    url: "[#TRAINING_RESQL]/get-train-job"
+    url: "[#TRAINING_RESQL]/train_bot"
     body:
       job_name: ${incoming.body.job_name}
   result: trainbotJobTemplate
