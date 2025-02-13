@@ -36,7 +36,7 @@ getTestbotJobTemplate:
 startTestBot:
   call: http.post
   args:
-    url: "[#CRON_MANAGER]/train_bot" 
+    url: "[#CRON_MANAGER]/train_now" 
     body:
       namespace: ${incoming.body.namespace}
       job: ${testbotJobTemplate.response.body}
