@@ -40,7 +40,7 @@ getTrainbotJobTemplate:
 startTrainBot:
   call: http.post
   args:
-    url: "[#CRON_MANAGER]/train_now"
+    url: "[#CRON_MANAGER]/execute/train_bot/train_now"
     body:
       namespace: ${incoming.body.namespace}
       job: ${trainbotJobTemplate.response.body}
