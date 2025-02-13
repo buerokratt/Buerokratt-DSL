@@ -32,7 +32,7 @@ postInitialStatus:
 getTrainbotJobTemplate:
   call: http.post
   args:
-    url: "[#TRAINING_RESQL]/train_bot"
+    url: "[#TRAINING_RESQL]/get-train-job"
     body:
       job_name: ${incoming.body.job_name}
   result: trainbotJobTemplate
@@ -40,7 +40,7 @@ getTrainbotJobTemplate:
 startTrainBot:
   call: http.post
   args:
-    url: "[#CRON_MANAGER]/process-job"
+    url: "[#CRON_MANAGER]/train_bot"
     body:
       namespace: ${incoming.body.namespace}
       job: ${trainbotJobTemplate.response.body}
