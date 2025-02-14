@@ -52,5 +52,5 @@ postNotificationAboutModel:
 
 returnSuccess:
   return: "Inserted model with CROSS_VALIDATING status. "
-  wrapper: false
+  wrapper: true
   next: end
