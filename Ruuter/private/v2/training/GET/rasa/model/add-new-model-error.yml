@@ -52,5 +52,5 @@ postNotificationAboutModel:
 
 returnSuccess:
   return: "Inserted model with ERROR status. "
-  wrapper: false
+  wrapper: true
   next: end
