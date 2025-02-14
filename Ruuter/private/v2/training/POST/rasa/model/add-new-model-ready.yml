@@ -66,5 +66,5 @@ postNotificationAboutModel:
 
 returnSuccess:
   return: "Inserted model with READY status. "
-  wrapper: false
+  wrapper: true
   next: end
