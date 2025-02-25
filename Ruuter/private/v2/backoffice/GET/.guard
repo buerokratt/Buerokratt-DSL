@@ -30,6 +30,13 @@ check_inline:
   inline: extAuth
   result: extauth
 
+logstep:
+  log: ${extauth}
+logstep2:
+  log: ${nonce_response.response.body}
+logstep3:
+  log: ${nonce_response.response.body[0]}
+
 check_nonce:
   switch:
     - condition: ${ !extauth || (nonce_response.response.body[0] == null) }
