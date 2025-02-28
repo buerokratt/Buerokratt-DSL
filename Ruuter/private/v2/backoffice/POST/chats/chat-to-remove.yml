@@ -25,7 +25,7 @@ getNewNonce:
 getConfigurations:
   call: http.get
   args:
-    url: "[#CHATBOT_RUUTER_PRIVATE_INTERNAL]/configs/delete-conversation-config?skipAuth=true"
+    url: "[#CHATBOT_RUUTER_PRIVATE_INTERNAL]/backoffice/configs/delete-conversation-config?skipAuth=true"
     headers:
       x-ruuter-nonce: ${newNonce.response.body[0].nonce}
   result: configs
