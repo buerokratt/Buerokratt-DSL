@@ -1,0 +1,32 @@
+{
+  "script": {
+    "lang": "mustache",
+    "source": {
+      "size": 10000,
+      "query": {
+        "bool": {
+          "must": [
+            {
+              "query_string": {
+                "query": "*{{response_name}}*",
+                "default_field": "name"
+              }
+            }
+            {{#response_text}},
+            {
+              "query_string": {
+                "query": "*{{response_text}}*",
+                "default_field": "response.text"
+              }
+            }
+            {{/response_text}}
+          ]
+        }
+      }
+    },
+    "params": {
+      "response_name": "",
+      "response_text": ""
+    }
+  }
+}

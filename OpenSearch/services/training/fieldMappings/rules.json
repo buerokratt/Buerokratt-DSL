@@ -1,0 +1,52 @@
+{
+  "mappings" : {
+    "properties" : {
+      "rule" : {
+        "type" : "text"
+      },
+      "conversation_start": {
+        "type" : "boolean"
+      },
+      "wait_for_user_input": {
+        "type" : "boolean"
+      },
+      "condition": {
+        "properties" : {
+          "slot_was_set": {
+            "properties" : {
+              "slot": {
+                "type": "text"
+              }
+            }
+          },
+          "active_loop": {
+            "type": "text"
+          }
+        }
+      },
+      "steps" : {
+        "properties" : {
+          "intent" : {
+            "type" : "text"
+          },
+          "action" : {
+            "type" : "text"
+          },
+          "entities": {
+            "type": "object"
+          },
+          "active_loop": {
+            "type" : "text"
+          },
+          "slot_was_set": {
+            "properties" : {
+              "slot": {
+                "type": "text"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
