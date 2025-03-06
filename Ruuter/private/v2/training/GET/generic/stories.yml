@@ -1,0 +1,22 @@
+declaration:
+  call: declare
+  version: 0.1
+  description: "Decription placeholder for 'STORIES'"
+  method: get
+  accepts: json
+  returns: json
+  namespace: training
+
+getData:
+  call: reflect.mock
+  args:
+    response:
+      data:
+        response:
+          - id: 1
+            story: "happy path"
+  result: reflected_request
+  next: returnData
+
+returnData:
+  return: ${reflected_request.response.body.data}

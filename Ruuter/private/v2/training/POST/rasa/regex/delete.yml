@@ -1,0 +1,74 @@
+declaration:
+  call: declare
+  version: 0.1
+  description: "Decription placeholder for 'DELETE'"
+  method: post
+  accepts: json
+  returns: json
+  namespace: training
+  allowlist:
+    body:
+      - field: regex_name
+        type: string
+        description: "Body field 'regex_name'"
+    headers:
+      - field: cookie
+        type: string
+        description: "Cookie field"
+
+assign_values:
+  assign:
+    parameters: ${incoming.body}
+
+getFileLocations:
+  call: http.get
+  args:
+    url: "[#TRAINING_PUBLIC_RUUTER]/internal/return-file-locations"
+    headers:
+      cookie: ${incoming.headers.cookie}
+  result: fileLocations
+
+assignFilePath:
+  assign:
+    filePath: ${fileLocations.response.body.response.regex_location + parameters.regex_name  + "_nlu.yml"}
+
+checkFileExists:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]/file-manager/exists"
+    body:
+      file_path: ${filePath}
+  result: fileExists
+
+removeFileIfExists:
+  switch:
+    - condition: ${fileExists.response.body.error === false}
+      next: deleteRegexFile
+  next: updateRegexOpenSearch
+
+deleteRegexFile:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]/file-manager/delete"
+    body:
+      file_path: ${filePath}
+  result: fileRemoved
+
+updateRegexOpenSearch:
+  call: http.post
+  args:
+    url: "[#TRAINING_PIPELINE]/delete/regexes/${parameters.regex_name}"
+    body:
+      index: ${parameters.regex_name}
+  result: updatedRegex
+  next: returnSuccess
+
+returnSuccess:
+  return: "Regex deleted"
+  next: end
+
+returnFileNotFound:
+  return: "Not found"
+  wrapper: false
+  status: 409
+  next: end
