@@ -372,6 +372,11 @@ jobs:
         run: |
           rm -rf source-repo-service
 
+      - name: Remove all readme.md files
+        run: |
+          find . -type f -name "readme.md" -exec rm {} +
+
+
       - name: Commit and Push Folder Structure with Copied Contents
         run: |
           git config --local user.email "actions@github.com"
