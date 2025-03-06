@@ -29,7 +29,7 @@ getNewNonce:
 backupConversations:
   call: http.post
   args:
-    url: "[#CHATBOT_RUUTER_PRIVATE]/backoffice/chats/back-up-removable-chats"
+    url: "[#CHATBOT_RUUTER_PRIVATE]/chats/back-up-removable-chats"
     headers:
       x-ruuter-nonce: ${newNonce.response.body[0].nonce}
     body:
@@ -51,7 +51,7 @@ getNewNonceToEmpty:
 emptyMessages:
   call: http.post
   args:
-    url: "[#CHATBOT_RUUTER_PRIVATE]/backoffice/chats/empty-conversations-by-chat-ids"
+    url: "[#CHATBOT_RUUTER_PRIVATE]/chats/empty-conversations-by-chat-ids"
     headers:
       x-ruuter-nonce: ${newNonceToEmpty.response.body[0].nonce}
     body:
