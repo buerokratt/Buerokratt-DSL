@@ -382,7 +382,7 @@ jobs:
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
 
-           git reset --hard HEAD
+          git reset --hard $(git rev-list --max-parents=0 HEAD)
           
           git pull origin project-layer-tmp --no-ff --allow-unrelated-histories
           git add -A .
