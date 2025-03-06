@@ -25,7 +25,7 @@ getNewNonce:
 getRemovableConversations:
   call: http.post
   args:
-    url: "[#CHATBOT_RUUTER_PRIVATE]/backoffice/chats/chat-to-remove"
+    url: "[#CHATBOT_RUUTER_PRIVATE]/chats/chat-to-remove"
     headers:
       x-ruuter-nonce: ${newNonce.response.body[0].nonce}
     body:
