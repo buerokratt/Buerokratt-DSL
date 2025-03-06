@@ -75,7 +75,7 @@ logstepAZUREDS:
 get_chat_messages:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/get-llm-chat-messages"
+    url: "[#CHATBOT_RESQL]/get-chat-messages"
     body:
       chatId: ${sender}
   result: chat_messages_res
@@ -83,7 +83,7 @@ get_chat_messages:
 prepare_messages:
   call: http.post
   args:
-    url: "[#CHATBOT_DMAPPER]/hbs/chat-bot/prepare-llm-messages"
+    url: "[#CHATBOT_DMAPPER]/backoffice/hbs/prepare-llm-messages"
     headers:
       type: json
     body:
@@ -140,7 +140,7 @@ return_value:
 format_messages:
   call: http.post
   args:
-    url: "[#CHATBOT_DMAPPER]/hbs/chat-bot/llm_responses_to_messages"
+    url: "[#CHATBOT_DMAPPER]/backoffice/hbs/llm_responses_to_messages"
     headers:
       type: json
     body:
