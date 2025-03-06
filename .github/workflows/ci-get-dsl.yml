@@ -50,7 +50,7 @@ jobs:
           SOURCE_REPO_ANALYTICS=buerokratt/Analytics-Module
           SOURCE_FOLDER_ANALYTICS=DSL/Ruuter
           git clone  --branch=dev "https://github.com/$SOURCE_REPO_ANALYTICS.git" source-repo-analytics
-          cp -R "source-repo-analytics/$SOURCE_FOLDER_ANALYTICS/." "$FOLDER_PATH/analytics"
+          cp -R "source-repo-analytics/$SOURCE_FOLDER_ANALYTICS/." "$FOLDER_PATH"
 
           SOURCE_REPO_SERVICE=buerokratt/Service-Module
           SOURCE_FOLDER_SERVICE=DSL/Ruuter
