@@ -3,7 +3,7 @@ name: Buerokratt DSL - get ymls
 on:
   push:
     branches:
-      - v2.2-alpha-0502
+      - project-layer-tmp
     paths:
       - '.env'
 
