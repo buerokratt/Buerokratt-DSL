@@ -140,7 +140,7 @@ check_value:
   next: format_messages
   
 return_value:
-  return: ${correct_value}
+  return: "ERROR"
   next: end
 
 assign_validation_event:
