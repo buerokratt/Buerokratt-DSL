@@ -130,8 +130,6 @@ check_value:
   switch:
     - condition: ${correct_value === 'ERROR'}
       next: return_value
-    - condition: ${correct_value.map((item) => item.text)[0] === 'ERROR'}
-      next: return_value
     - condition: ${correct_value.map((item) => item.text)[0] === '$backoffice' || correct_value.map((item) => item.text)[0].startsWith('$backoffice')}
       next: assign_back_office_event  
     - condition: ${correct_value.map((item) => item.text)[0].startsWith('$validate_')}
@@ -139,7 +137,7 @@ check_value:
   next: format_messages
   
 return_value:
-  return: "ERROR"
+  return: ${correct_value}
   next: end
 
 assign_validation_event:
