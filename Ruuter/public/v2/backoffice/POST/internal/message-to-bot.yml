@@ -104,6 +104,8 @@ check_if_bot_is_unable_to_reply:
       next: check_for_fallback_bot
     - condition: ${post_message_to_bot_result.response.body?.[0]?.text == 'Suunan teid klienditeenindajale. Varuge natukene kannatust.'}
       next: get_organization_base_config
+    - condition: ${post_message_to_bot_result.response.body?.[0]?.text == 'Suunan vestluse nõustajale. Palun oodake.'}
+      next: get_organization_base_config
     - condition: ${post_message_to_bot_result.response.body?.[0]?.text.startsWith("#common_service") || post_message_to_bot_result.response.body?.[0]?.text.startsWith("#service")}
       next: assign_service_content_from_bot_response
   next: extract_bot_responses
