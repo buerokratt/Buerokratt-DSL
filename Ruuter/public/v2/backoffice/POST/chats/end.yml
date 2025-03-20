@@ -141,7 +141,7 @@ assign_chat_cookie:
       Domain: "[#DOMAIN]"
       Secure: true
       HttpOnly: true
-      SameSite: "Lax"
+      SameSite: "None"
       Max-Age: 0
   next: blacklist_client_jwt
 
@@ -163,7 +163,7 @@ assign_client_cookie:
       Domain: "[#DOMAIN]"
       Secure: true
       HttpOnly: true
-      SameSite: "Lax"
+      SameSite: "None"
       Max-Age: 0
   next: notify_chats
 
