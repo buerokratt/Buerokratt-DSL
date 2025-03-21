@@ -46,7 +46,7 @@ authenticate:
 get_metrics:
   call: http.post
   args:
-    url: "[#ANALYTICS_RUUTER]/analytics/odp/metrics"
+    url: "[#ANALYTICS_RUUTER]/odp/metrics"
     body:
       metrics: ${incoming.body.metrics}
       start: ${incoming.body.start}
