@@ -80,7 +80,8 @@ saveDomainFile:
       content: ${domainYaml.response.body.json}
   result: fileResult
   next: updateOpenSearch
-
+  
+  
 updateOpenSearch:
   call: http.post
   args:
@@ -88,7 +89,14 @@ updateOpenSearch:
     body:
       input: ${domainYaml.response.body.json}
   result: updateSearchResult
+  next: logstepUPDATE
+
+
+logstepUPDATE:
+  log: ${updateSearchResult}
   next: returnSuccess
+  
+ 
 
 returnSuccess:
   return: "Response updated"
