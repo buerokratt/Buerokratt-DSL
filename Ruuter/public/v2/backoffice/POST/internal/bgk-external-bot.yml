@@ -209,6 +209,6 @@ declaration:
 # return_formatted_value:
 #   return: ${converted_messages_res.response.body}
 #   next: end 
-return_formatted_value:
+return_value:
   return: "ERROR"
   next: end
