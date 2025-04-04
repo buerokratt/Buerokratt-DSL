@@ -28,6 +28,7 @@ point_nps AS (
            ) / COUNT(base_id) * 100) AS int), 0) AS nps
     FROM chat_csas
     GROUP BY date_time
+    ORDER BY date_time
 ),
 period_nps AS (
     SELECT coalesce(CAST(((
