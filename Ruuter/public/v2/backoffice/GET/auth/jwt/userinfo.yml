@@ -36,12 +36,7 @@ assign_user_cookie:
       Domain: "[#DOMAIN]"
       Secure: true
       HttpOnly: true
-      SameSite: "Lax"
-      Max-Age: 0
-  next: remove_cookie
-
-remove_cookie:
-  headers: 
+      SameSite: "None"
     Set-Cookie: ${userCookie}
   return: ${res.response.body}
   next: end
