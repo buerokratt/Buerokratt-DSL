@@ -16,7 +16,7 @@ jobs:
 
       - name: Sync Files
         run: |
-          chmod +x .github/scripts/aggregate-files.sh
+          chmod +x /scripts/aggregate-files.sh
           /scripts/aggregate-files.sh
 
       - name: Commit Changes to Central Repo
