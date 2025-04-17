@@ -1,7 +1,8 @@
 #!/bin/bash
 
-# Set CENTRAL_PATH to the repo root (parent of .github/)
-CENTRAL_PATH="$(dirname "$(dirname "$0")")"
+# Set CENTRAL_PATH to the repo root (parent of scripts/)
+SCRIPT_DIR="$(realpath "$(dirname "$0")")"
+CENTRAL_PATH="$(realpath "$SCRIPT_DIR/..")"
 CHANGELOG="$CENTRAL_PATH/CHANGELOG.md"
 
 # Hardcoded source repos
