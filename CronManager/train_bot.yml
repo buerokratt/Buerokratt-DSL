@@ -1,4 +1,0 @@
-train_bot_now:
-  trigger: off
-  type: exec
-  command: "./scripts/train_bot.sh"
