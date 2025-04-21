@@ -1,0 +1,23 @@
+declaration:
+  call: declare
+  version: 0.1
+  description: "Decription placeholder for 'SLOTS'"
+  method: get
+  accepts: json
+  returns: json
+  namespace: training
+
+getData:
+  call: reflect.mock
+  args:
+    response:
+      data:
+        - id: 1
+          name: "common_teenus_ilm_asukoht"
+        - id: 2
+          name: "affirm_deny"
+  result: reflected_request
+  next: returnData
+
+returnData:
+  return: ${reflected_request.response.body.data}

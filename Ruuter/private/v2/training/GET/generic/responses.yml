@@ -1,0 +1,35 @@
+declaration:
+  call: declare
+  version: 0.1
+  description: "Decription placeholder for 'RESPONSES'"
+  method: get
+  accepts: json
+  returns: json
+  namespace: training
+
+getData:
+  call: reflect.mock
+  args:
+    response:
+      data:
+        - text: "This is the first response."
+          condition:
+            - type: "ConditionType1"
+              name: "ConditionName1"
+              value: null
+            - type: "ConditionType2"
+              name: "ConditionName2"
+              value: null
+        - text: "This is the second response."
+          condition:
+            - type: "ConditionType3"
+              name: "ConditionName3"
+              value: null
+        - text: "Another response without conditions."
+        - text: "Another response 2 without conditions."
+
+  result: reflected_request
+  next: returnData
+
+returnData:
+  return: ${reflected_request.response.body.data}

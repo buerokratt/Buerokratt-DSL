@@ -1,0 +1,17 @@
+declaration:
+  call: declare
+  version: 0.1
+  description: "Decription placeholder for 'TESTING'"
+  method: get
+  accepts: json
+  returns: json
+  namespace: analytics
+
+get_message:
+  call: http.post
+  args:
+    url: "[#ANALYTICS_RESQL]/testing"
+  result: the_message
+
+return_value:
+  return: ${the_message.response.body}
