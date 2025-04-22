@@ -2,6 +2,446 @@
 
 All changes to Buerokratt-DSL from source repos.
 
+# Sync Run - 2025-04-22 06:35:54
+
+## Chatbot Changes
+### Liquibase/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/README.md
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20241227154101-add-table-user-page-preference.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20231116129962-change_csa_active_type.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20240326103230-add-hstore.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20241211105438-add-author-display-name-to-chat-history-comments-table.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20250115142321-insert-is-edit-chat-visible-configuration.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20231116129956-add_organization_config.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20220517193000_add_forwarded_received_to_chat_table.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20230207095500_add_end_user_session_length_to_configuration_table.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20240621171002-remove_message_content_limit.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20250120125533-add-original-base-id-to-message-table.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20220202140000_add_chat_and_message_tables.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20260153791789-add-status-comment-field-to-activity-table.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20220423153000_add_establishment_table.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20230117034500_add_chat_forwarding_info_to_message_table.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20231116129836-add_user_status_enum.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20211221111700_add_status_table.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20220210131500_add_feedback_and_end_user_to_chat.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20240621171004_remove_config_value_limit.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20241210105636-add-created-to-chat-history-comments-table.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20240621171001_add_organization_all_time_config.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20231116129861-change_message_rating_type.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20211103171000_initial_schema.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20221222122800_add_default_widget_config.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20250120125534_add_skm_semantic_config.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/data/authority.csv
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20250103092715-add-burokratt-active-config.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20230104130000_create_allowed_statuses_table.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20211129160400_add_id_field_to_user.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20250103092714-add-department-field-to-user-table.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20230202180000_add_end_user_email_phone_to_chat.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20211130142500_remove_foreign_key_constraint.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20220310163000_add_created_to_configuration.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20230112134000_add_labels_field_to_chat_table.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/data/statuses.csv
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20220202170000_update_user_authority_table.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20220211170000_refactor_user_related_tables.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20240621171002_add_outside_working_hours_config.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20240516062543-change-primary-key-from-use-profile-settings-and-chat-history-coments.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20231116124910-add_default_configurations.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20230111131601_create_chat_history_comments_table.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20240508054605-create_indexes.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20220422180000_add_forwarded_to_received_from_and_external_id_to_chat.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20230106180601_add_profile_settings_fields_to_user_table.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/1731915047_add_request_nonces.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20221207122500_add_title_and_name_visibility_to_default_configuration.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20231116129964-change_user_status_type.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20221129164700_add_title_to_chat_table.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20231116129973-change_chat_feedback_rating_type.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20230208124800_create_temporary_messages_table.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/liquibase.properties
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20240621171005_add_skm_config.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20221129164600_add_title_and_email_to_user_table.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20250120125648-add_organization_bot_answer_config.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20240514054330-add-id-to-message-preview-and-remove-const.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20220217090000_create_customer_support_agent_activity_table.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20221227152000_add_activity_field_to_customer_support_agent_activity_table.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20240621171000-add-options-to-message-table.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/master.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20220125144800_add_config_table.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20231116124800_add_buttons_to_messages.xml
+
+### CronManager/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/backoffice/delete_conversations.yml
+
+### OpenSearch/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/backoffice/fieldMappings/notifications.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/backoffice/fieldMappings/chatqueue.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/backoffice/mock/chatqueue.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/backoffice/deploy-opensearch.sh
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/backoffice/mock/notifications.json
+
+### Resql/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/get-users-with-roles-by-role.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/get-customer-support-activity-by-id-code.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/set-customer-support-status.sql
+
+### Ruuter/public/v2/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/backoffice/POST/auth/login.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/backoffice/GET/auth/tara/login.yml
+
+### Ruuter/private/v2/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/accounts/admin/add.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/accounts/customer-support-activity.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/GET/accounts/logout.yml
+
+### DataMapper/backoffice/hbs
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/backoffice/hbs/return_uuid.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/backoffice/hbs/delete_conversations_cron.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/backoffice/hbs/return_open_chats_messages.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/backoffice/hbs/return_open_chats_notifications.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/backoffice/hbs/extract_trigger_service_info.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/backoffice/hbs/map_chat_ids.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/backoffice/hbs/return_widget_config.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/backoffice/hbs/return_components_health.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/backoffice/hbs/format-messages-for-llm.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/backoffice/hbs/llm_responses_to_messages.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/backoffice/hbs/return_delete_chat_config.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/backoffice/hbs/bot_responses_to_messages.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/backoffice/hbs/return_emergency_notice.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/backoffice/hbs/return_organization_working_time.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/backoffice/hbs/prepare-llm-messages.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/backoffice/hbs/reflect_waiting_time.handlebars
+
+## Training Changes
+### DataMapper/training/hbs
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/get_forms.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/get_intent_file.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/csv_examples_to_array.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/get_examples.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/get_intent_csv.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/execute_command.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/get_story_names.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/get_regex_details.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/new_regex_file.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/get_cron_file.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/check_value_exists.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/get_response_by_intent_id.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/get_intent_names_from_example_counts.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/remove_services_connected_to_intent.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/get_intent_with_name.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/get_entities_with_examples.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/get_rule_names.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/get_entity_with_name.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/get_regex_file.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/get_responses_list.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/get_intents_with_examples_count.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/get_cron_shell_execution_file.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/get_rule_ids.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/get_csv.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/delete_rule.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/get_intent_examples.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/get_test_stories_with_links.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/get_intent_by_id.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/get_regex_example.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/filter.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/get_intent_ids.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/delete_story.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/get_regex_with_example.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/get_entities.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/get_responses_dependencies.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/pdf.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/get_rule_with_name.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/get_form_details.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/sort_entities.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/get_links.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/get_slot_details.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/get_regexes.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/get_forms_search_slots.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/get_slots.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/get_test_stories.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/get_form.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/get_responses_names.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/get_regex_examples.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/get_intent_last_changed.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/extract_slot_keys.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/delete_entity.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/get_rule_by_intent_id.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/get_regex_with_regex.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/get_slots_with_response.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/get_rules.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/get_intent_and_id.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/get_response_dependencies.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/get_regex_with_name.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/get_models.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/get_form_responses.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/home.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/get_responses.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/get_intents.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/get_response_details.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/get_story_with_name.handlebars
+
+### OpenSearch/training
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/training/templates/entity-with-name.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/training/mock/entities.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/training/templates/regex-with-name.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/training/templates/test-story-name.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/training/fieldMappings/entities.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/training/mock/responses.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/training/fieldMappings/regexes.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/training/templates/rule-by-intent.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/training/mock/config.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/training/fieldMappings/notifications.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/training/README.md
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/training/fieldMappings/test-stories.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/training/fieldMappings/rules.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/training/templates/form-with-slot.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/training/mock/forms.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/training/fieldMappings/config.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/training/templates/intents-with-pagination.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/training/fieldMappings/forms.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/training/templates/responses-with-pagination.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/training/fieldMappings/examples-entities.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/training/mock/test-stories.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/training/mock/examples-entities.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/training/mock/notifications.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/training/mock/rules.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/training/fieldMappings/slots.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/training/templates/rule-with-slots.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/training/templates/story-with-slots.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/training/templates/stories-by-responses.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/training/mock/domain.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/training/templates/intents-with-examples-count.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/training/mock/stories.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/training/templates/regexes-with-pagination.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/training/templates/intent-with-name.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/training/templates/response.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/training/templates/rule-with-name.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/training/templates/rules-by-responses.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/training/mock/regexes.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/training/deploy-opensearch.sh
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/training/mock/intents.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/training/fieldMappings/intents.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/training/mock/slots.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/training/templates/rule-with-forms.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/training/templates/story-with-forms.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/training/fieldMappings/stories.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/training/templates/rule-with-responses.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/training/templates/story-with-responses.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/training/templates/domain-objects-with-pagination.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/training/templates/entities-with-examples.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/training/fieldMappings/responses.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/training/templates/response-with-name-and-text.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/training/fieldMappings/domain.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/training/templates/story-with-name.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/training/templates/test-story-with-name.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/training/templates/rules-with-pagination.json
+
+### CronManager/training
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/training/train_bot.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/training/health.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/training/load_trained_model.yml
+
+### Liquibase/training
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/training/README.md
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/training/changelog/1715857582-add_cross_validation_report_to_llm_trainings.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/training/liquibase.properties
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/training/changelog/1715857581-rename_image_version_to_model_version_in_llm_trainings.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/training/changelog/1717050740-add_service_field_to_intents.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/training/changelog/1715857578-llm_trainings_add_columns.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/training/changelog/1709167491-add_service_name_to_service_trigger.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/training/changelog/1708882374-create_service_trigger.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/training/changelog/1715857576-create_llm_trainings_with_defaults.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/training/changelog/1731915047_add_request_nonces.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/training/changelog/1715857577-create_train_settings_with_defaults.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/training/changelog.yaml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/training/changelog/1708882370-create_intent.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/training/changelog/20250103092720_add_column_preference.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/training/changelog/1717050863-add_training_data_checksum_to_llm_trainings.sql
+
+### DataMapper/training/locations
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/nlu/common_service_school_holiday_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/nlu/common_klienditeenindajale_suunamine_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/actions/action_react_to_affirm_deny_in_custom_fallback_form.py
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/tests/test_stories.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/nlu/common_service_companies_contactdetails_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/actions/action_check_confidence.py
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/nlu/common_service_exchange_rate_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/results/Second_Bot/RegexEntityExtractor_confusion_matrix.png
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/results/First_Bot/Cross_Validation/story_report.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/actions/action_react_to_affirm_deny_in_direct_to_customer_support_form.py
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/results/First_Bot/Cross_Validation/failed_test_stories.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/results/First_Bot/failed_test_stories.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/results/Second_Bot/Cross_Validation/failed_test_stories.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/results/Second_Bot/failed_test_stories.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/results/First_Bot/Cross_Validation/RegexEntityExtractor_report.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/results/First_Bot/RegexEntityExtractor_report.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/results/Second_Bot/Cross_Validation/RegexEntityExtractor_report.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/results/Second_Bot/RegexEntityExtractor_report.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/README.md
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/endpoints.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/results/First_Bot/RegexEntityExtractor_confusion_matrix.png
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/nlu/common_service_companies_related_persons_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/domain.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/nlu/common_teenus_nordpool_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/nlu/common_teenus_citizien_initiative_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/results/First_Bot/Cross_Validation/TEDPolicy_report.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/results/First_Bot/TEDPolicy_report.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/results/Second_Bot/Cross_Validation/TEDPolicy_report.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/results/Second_Bot/TEDPolicy_report.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/results/First_Bot/intent_confusion_matrix.png
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/nlu/common_teenus_rk_hääletus_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/nlu/common_service_companies_national_taxes_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/actions/utils.py
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/config.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/nlu/common_hüvasti_jätmine_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/actions/action_ask_custom_fallback_form_affirm_deny.py
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/results/First_Bot/Cross_Validation/intent_confusion_matrix.png
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/results/Second_Bot/intent_histogram.png
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/credentials.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/nlu/common_ask_csa_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/results/First_Bot/Cross_Validation/RegexEntityExtractor_errors.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/results/First_Bot/RegexEntityExtractor_errors.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/results/Second_Bot/Cross_Validation/RegexEntityExtractor_errors.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/results/Second_Bot/RegexEntityExtractor_errors.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/nlu/common_service_nba_results_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/results/Second_Bot/Cross_Validation/intent_errors.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/nlu/common_service_companies_beneficiaries_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/results/Second_Bot/Cross_Validation/RegexEntityExtractor_confusion_matrix.png
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/regex/rk_liige_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/results/First_Bot/Cross_Validation/stories_with_warnings.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/results/First_Bot/stories_with_warnings.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/results/Second_Bot/Cross_Validation/stories_with_warnings.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/results/Second_Bot/stories_with_warnings.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/results/First_Bot/Cross_Validation/intent_report.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/regex/weather_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/results/Second_Bot/Cross_Validation/intent_report.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/nlu/common_service_companies_revenue_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/nlu/common_service_holidays_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/nlu/common_tänamine_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/results/First_Bot/Cross_Validation/TEDPolicy_confusion_matrix.png
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/results/First_Bot/TEDPolicy_confusion_matrix.png
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/results/Second_Bot/Cross_Validation/TEDPolicy_confusion_matrix.png
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/results/Second_Bot/TEDPolicy_confusion_matrix.png
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/nlu/common_tervitus_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/results/Second_Bot/Cross_Validation/intent_confusion_matrix.png
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/results/First_Bot/Cross_Validation/intent_histogram.png
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/results/Second_Bot/intent_report.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/nlu/common_teenus_citizien_initiative_popular_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/results/First_Bot/Cross_Validation/story_confusion_matrix.png
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/results/First_Bot/story_confusion_matrix.png
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/results/Second_Bot/Cross_Validation/story_confusion_matrix.png
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/results/Second_Bot/story_confusion_matrix.png
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/stories.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/results/First_Bot/Cross_Validation/RegexEntityExtractor_confusion_matrix.png
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/regex/holidays_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/actions/action_files/intent_description_mapping.csv
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/nlu/common_teenus_nordpool2_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/nlu/common_kinnitamine_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/actions/action_files/bad_intent_description_mapping.csv
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/nlu/common_teenus_ilm_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/nlu/common_service_motor_vehicle_tax_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/nlu/common_teenus_rk_isiku_kohalolu_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/results/First_Bot/story_report.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/results/First_Bot/Cross_Validation/intent_errors.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/nlu/common_service_CPI_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/nlu/common_eitamine_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/nlu/common_service_unemployment_rate_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/regex/asukoht_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/nlu/common_service_companies_workforce_taxes_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/results/First_Bot/intent_histogram.png
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/nlu/common_service_estimated_subsistence_minimum_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/rules.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/results/First_Bot/intent_report.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/results/Second_Bot/intent_confusion_matrix.png
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/results/Second_Bot/story_report.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/nlu/common_service_companies_lihtandmed_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/results/Second_Bot/Cross_Validation/story_report.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/nlu/common_service_companies_employees_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/results/Second_Bot/Cross_Validation/intent_histogram.png
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/regex/statistics.yml
+
+## Analytics Changes
+### Liquibase/analytics
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/changelog/1675064921-add_intent_to_message.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/changelog/1715774693-remove-reorder-preferences-trigger.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/changelog/1715345741-create_db_indexes.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/changelog/1706744316-add-start-end-to-scheduled-reports.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/changelog/1676271876-change-configuration-value-type.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/liquibase.properties
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/changelog/1674046339-create-user-metric-preference.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/changelog/1715604012-add-deleted-to-scheduled_reports.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/changelog/1706797832-remove-job-id-from-reports.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/changelog/1674138939-create-reorder-preferences-trigger.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/changelog/1674043116-create-overview-metric-enum.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/changelog/1676218580-create-scheduled-reports.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/changelog/1674046350-create-user-metric-defaults-trigger.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/changelog/1674124104-seed-user-metric-preferences.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/changelog.yaml
+
+### DataMapper/analytics/hbs
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/analytics/hbs/array-to-object.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/analytics/hbs/merge-arrays.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/analytics/hbs/get-csa-nps-object.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/analytics/hbs/get-csv.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/analytics/hbs/get-metric-rows.handlebars
+
+### Resql/analytics
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/chat-cif-outside-working-hours.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/chat-count-with-csa-and-chatbot.sql
+
+### CronManager/analytics
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/analytics/health.yml
+
+## Service Changes
+### Liquibase/services
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/services/changelog/1682662304-ruuter-requests-logs.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/services/changelog/1703210973-add-is-common-field.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/services/changelog/1701606558-add-service-id-constraint.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/services/changelog/1701604912-add-service-id.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/services/changelog/1740988965-add-service-slot.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/services/liquibase.properties
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/services/changelog/1677764319-create-services-table.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/services/changelog/1704956597-add-endpoints-to-services.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/services/changelog/1715752150-update-services-settings-sequence.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/services/changelog/1679057602-create-service-types-with-draft.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/services/changelog/1709066018-add-ready-status.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/services/changelog/1678307467-add-ruuter-types.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/services/changelog/1703824288-add-service-structure.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/services/changelog/1703211213-add-deleted-field.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/services/changelog/1684228311-settings.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/services/changelog.yaml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/services/changelog/1683871183-add-env-to-request-logs.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/services/changelog/1715683083-remove-unique-service-id-const.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/services/changelog/1703825178-add-hstore.sql
+
+### DataMapper/services/hbs
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/services/hbs/get-regex-with-name.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/services/hbs/get_regex_with_example.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/services/hbs/get-intents.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/services/hbs/get_rule_names.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/services/hbs/get-csv.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/services/hbs/rename.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/services/hbs/bot_responses_to_messages.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/services/hbs/get-entity-with-name.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/services/hbs/get-regexes.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/services/hbs/get-faults.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/services/hbs/get_regex_with_regex.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/services/hbs/test.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/services/hbs/calculate-date-difference.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/services/hbs/get-entities.handlebars
+
+### OpenSearch/services
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/services/templates/get-faults.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/services/fieldMappings/domain.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/services/deploy-opensearch.sh
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/services/README.md
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/services/fieldMappings/faults.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/services/templates/get-faults-by-level.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/services/mock/domain.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/services/mock/faults.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/services/templates/get-faults-by-request-id.json
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/OpenSearch/services/templates/domain-objects-with-pagination.json
+
+
+
 # Sync Run - 2025-04-21 09:22:11
 
 ## Chatbot Changes
