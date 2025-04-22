@@ -22,42 +22,42 @@ CHATBOT_MAPPINGS=(
   "DSL/Ruuter.private/backoffice:Ruuter/private/v2/backoffice"
   "DSL/Resql/backoffice:Resql/backoffice"
 #  "DSL/Resql:Resql/backoffice"  # Consolidates training into backoffice
-  "DSL/DMapper/backoffice/hbs:dmapper/backoffice/hbs"
-  "DSL/CronManager:cronmanager/backoffice"
-  "DSL/Liquibase:liquibase/backoffice"
-  "DSL/OpenSearch:opensearch/backoffice"
+  "DSL/DMapper/backoffice/hbs:DataMapper/backoffice/hbs"
+  "DSL/CronManager:CronManager/backoffice"
+  "DSL/Liquibase:Liquibase/backoffice"
+  "DSL/OpenSearch:OpenSearch/backoffice"
 )
 
 # Training-Module-specific mappings (training-related)
 TRAINING_MAPPINGS=(
   "DSL/Ruuter.private/training:Ruuter/private/v2/training"
   "DSL/Resql/training:Resql/training"
-  "DSL/DMapper/training/hbs:dmapper/training/hbs"
-  "DSL/DMapper/training/locations:dmapper/training/locations"
-  "DSL/CronManager:cronmanager/training"
-  "DSL/Liquibase:liquibase/training"
+  "DSL/DMapper/training/hbs:DataMapper/training/hbs"
+  "DSL/DMapper/training/locations:DataMapper/training/locations"
+  "DSL/CronManager:CronManager/training"
+  "DSL/Liquibase:Liquibase/training"
   "DSL/Pipelines:pipelines/training"
-  "DSL/OpenSearch:opensearch/training"
+  "DSL/OpenSearch:OpenSearch/training"
 )
 
 # Analytics-Module-specific mappings (analytics-related)
 ANALYTICS_MAPPINGS=(
   "DSL/Ruuter/analytics:Ruuter/private/v2/analytics"
   "DSL/Resql/analytics:Resql/analytics"
-  "DSL/DMapper/analytics/hbs:dmapper/analytics/hbs"
-  "DSL/CronManager:cronmanager/analytics"
-  "DSL/Liquibase:liquibase/analytics"
+  "DSL/DMapper/analytics/hbs:DataMapper/analytics/hbs"
+  "DSL/CronManager:CronManager/analytics"
+  "DSL/Liquibase:Liquibase/analytics"
 )
 
 # Service-Module-specific mappings (services-related)
 SERVICE_MAPPINGS=(
   "DSL/Ruuter/services:Ruuter/private/v2/services"
   "DSL/Resql/services:Resql/services"
-  "DSL/DMapper/services/hbs:dmapper/services/hbs"
-  "DSL/CronManager/services:cronmanager/services"
-  "DSL/Liquibase:liquibase/services"
+  "DSL/DMapper/services/hbs:DataMapper/services/hbs"
+  "DSL/CronManager/services:CronManager/services"
+  "DSL/Liquibase:Liquibase/services"
   "DSL/Pipelines:pipelines/services"
-  "DSL/OpenSearch:opensearch/services"
+  "DSL/OpenSearch:OpenSearch/services"
 )
 
 TEMP_DIR=$(mktemp -d)
