@@ -2,7 +2,7 @@
   "rules": [
     {{#each hits}}
       {
-        "id":"{{this.__source.rule}}"
+        "id":"{{this._source.rule}}"
       }
       {{#unless @last}},{{/unless}}
     {{/each}}
