@@ -71,7 +71,7 @@ assign_cookie:
   assign:
     setCookie:
       customJwtCookie: null
-      Domain: "[#DOMAIN]"
+      Domain: "[#COOKIE_SAME_SITE]"
       Max-Age: 0
       Secure: true
       HttpOnly: true
