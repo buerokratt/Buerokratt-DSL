@@ -21,7 +21,7 @@ COPY Ruuter/public/v2/backoffice /Ruuter/public/backoffice
 COPY Resql/backoffice /Resql/backoffice
 COPY DataMapper/backoffice/hbs /DataMapper/backoffice
 COPY Liquibase/backoffice /Liquibase/backoffice
-COPY Ruuter/public/v2/Common-Services /Ruuter/public/Common-Services
+#COPY Ruuter/public/v2/Common-Services /Ruuter/public/Common-Services
 COPY DataMapper/services/hbs /DataMapper/common-services/hbs
 
 LABEL org.opencontainers.image.description Docker PRE-ALPHA image for Buerokratt-DSL
