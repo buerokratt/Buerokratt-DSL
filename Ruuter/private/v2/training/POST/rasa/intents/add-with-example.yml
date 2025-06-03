@@ -1,0 +1,57 @@
+declaration:
+  call: declare
+  version: 0.1
+  description: "Decription placeholder for 'ADD-WITH-EXAMPLE'"
+  method: post
+  accepts: json
+  returns: json
+  namespace: training
+  allowlist:
+    body:
+      - field: newExamples
+        type: array
+        description: "Body field 'newExamples'"
+      - field: intentName
+        type: string
+        description: "Body field 'intentName'"
+    headers:
+      - field: cookie
+        type: string
+        description: "Cookie field"
+
+validateInputLength:
+  switch:
+    - condition: ${incoming.body.intentName.length > 2}
+      next: assign_values
+  next: returnTooShortError
+
+assign_values:
+  assign:
+    intent: ${incoming.body.intentName.replaceAll(/\s+/g, "_")}
+    example: ${incoming.body.newExamples}
+
+addIntent:
+  call: http.post
+  args:
+    url: "[#TRAINING_PUBLIC_RUUTER]/rasa/intents/add"
+    headers:
+      cookie: ${incoming.headers.cookie}
+    body:
+      name: ${intent}
+  result: newIntent
+
+addIntentExample:
+  call: http.post
+  args:
+    url: "[#TRAINING_PUBLIC_RUUTER]/rasa/intents/examples/add"
+    headers:
+      cookie: ${incoming.headers.cookie}
+    body:
+      intentExamples: []
+      newExamples: ${example}
+      intentName: ${intent}
+  result: newExample
+
+returnSuccess:
+  return: "Intent created"
+  next: end
