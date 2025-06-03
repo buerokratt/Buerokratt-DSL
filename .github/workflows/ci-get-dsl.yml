@@ -3,7 +3,7 @@ name: Buerokratt DSL
 on:
   push:
     branches:
-      - varmo-temp 
+      - fredy-temp 
     paths:
        - '.env'
 
