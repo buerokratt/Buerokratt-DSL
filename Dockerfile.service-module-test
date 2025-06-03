@@ -18,7 +18,7 @@ RUN mkdir -p $APP_DIRS
 
 COPY Ruuter/private/v2/services /Ruuter/services
 COPY Resql/services /Resql/services
-COPY DataMapper/v1/services /DataMapper/services
+COPY DataMapper/services/hbs /DataMapper/services
 COPY Liquibase/services /Liquibase/services
 
 LABEL org.opencontainers.image.description Docker PRE-ALPHA image for Buerokratt-DSL
