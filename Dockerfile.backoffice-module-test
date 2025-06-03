@@ -19,10 +19,10 @@ RUN mkdir -p $APP_DIRS
 COPY Ruuter/private/v2/backoffice /Ruuter/private/backoffice
 COPY Ruuter/public/v2/backoffice /Ruuter/public/backoffice
 COPY Resql/backoffice /Resql/backoffice
-COPY DataMapper/v1/hbs/backoffice/hbs /DataMapper/backoffice
+COPY DataMapper/backoffice/hbs /DataMapper/backoffice
 COPY Liquibase/backoffice /Liquibase/backoffice
 COPY Ruuter/public/v2/Common-Services /Ruuter/public/Common-Services
-COPY DataMapper/v1/Common-Services/hbs /DataMapper/common-services/hbs
+COPY DataMapper/services/hbs /DataMapper/common-services/hbs
 
 LABEL org.opencontainers.image.description Docker PRE-ALPHA image for Buerokratt-DSL
 
