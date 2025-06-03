@@ -3,7 +3,7 @@ name: Docker Build and Push
 on:
   push:
     branches:
-      - varmo-temp
+      - fredy-temp
     paths:
       - '.env.img'
       - 'module_based_image_builder.py'
