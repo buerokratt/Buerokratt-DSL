@@ -1,0 +1,41 @@
+declaration:
+  call: declare
+  version: 0.1
+  description: "Decription placeholder for 'RULES-FILE'"
+  method: get
+  accepts: json
+  returns: json
+  namespace: training
+  allowlist:
+    headers:
+      - field: cookie
+        type: string
+        description: "Cookie field"
+
+getFileLocations:
+  call: http.get
+  args:
+    url: "[#TRAINING_PUBLIC_RUUTER]/internal/return-file-locations"
+    headers:
+      cookie: ${incoming.headers.cookie}
+  result: fileLocations
+
+getRulesFile:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]/file-manager/read-file"
+    body:
+      file_path: ${fileLocations.response.body.response.rules_location}
+  result: rulesFile
+
+convertYamlToJson:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]/conversion/yaml_to_json"
+    body:
+      file: ${rulesFile.response.body.file}
+  result: rulesData
+
+returnSuccess:
+  return: ${rulesData.response.body}
+  next: end

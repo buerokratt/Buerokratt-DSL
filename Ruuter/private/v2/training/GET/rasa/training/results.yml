@@ -1,0 +1,37 @@
+declaration:
+  call: declare
+  version: 0.1
+  description: "Decription placeholder for 'RESULTS'"
+  method: get
+  accepts: json
+  returns: json
+  namespace: training
+  allowlist:
+    headers:
+      - field: cookie
+        type: string
+        description: "Cookie field"
+
+getFileLocations:
+  call: http.get
+  args:
+    url: "[#TRAINING_PUBLIC_RUUTER]/internal/return-file-locations"
+    headers:
+      cookie: ${incoming.headers.cookie}
+  result: fileLocations
+
+getTrainingResultsDirectory:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]/file-manager/read-file-dir"
+    body:
+      file_path: ${fileLocations.response.body.response.training_result_location}
+  result: trainingResults
+
+returnSuccess:
+  return: ${trainingResults.response.body.data}
+  next: end
+
+returnUnauthorized:
+  return: "error: unauthorized"
+  next: end
