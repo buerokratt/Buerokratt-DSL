@@ -2,6 +2,67 @@
 
 All changes to Buerokratt-DSL from source repos.
 
+# Sync Run - 2025-06-05 09:40:07
+
+## Chatbot Changes
+### Ruuter/private/v2/Common-Services
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/Common-Services/README.md
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/Common-Services/backoffice/GET/auth/jwt/blacklist.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/Common-Services/backoffice/POST/chats/estimated-waiting-time.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/Common-Services/backoffice/TEMPLATES/chats/trigger-service.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/Common-Services/backoffice/POST/chats/end.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/Common-Services/backoffice/POST/chats/forwards/remove.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/Common-Services/backoffice/POST/auth/login.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/Common-Services/backoffice/POST/chats/messages/greeting.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/Common-Services/backoffice/POST/chats/init.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/Common-Services/backoffice/TEMPLATES/chats/notify.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/Common-Services/backoffice/POST/chats/messages/preview.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/Common-Services/backoffice/GET/auth/jwt/userinfo.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/Common-Services/backoffice/GET/auth/jwt/extend.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/Common-Services/backoffice/POST/chats/feedbacks/text.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/Common-Services/backoffice/POST/internal/bgk-external-bot.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/Common-Services/backoffice/GET/chats/config/session-length.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/Common-Services/backoffice/GET/auth/tara/login.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/Common-Services/backoffice/POST/internal/message-to-bot.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/Common-Services/backoffice/POST/chats/messages/event.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/Common-Services/backoffice/GET/chats/config/widget.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/Common-Services/backoffice/GET/chats/messages/new.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/Common-Services/backoffice/GET/chats/users/name.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/Common-Services/backoffice/GET/chats/config/title-visibility.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/Common-Services/backoffice/GET/chats/config/is-bot-active.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/Common-Services/backoffice/GET/chats/config/emergency-notice.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/Common-Services/backoffice/POST/chats/download.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/Common-Services/backoffice/POST/chats/forwards/add.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/Common-Services/backoffice/GET/chats/greeting.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/Common-Services/backoffice/TEMPLATES/messages/notify.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/Common-Services/backoffice/GET/chats/config/name-visibility.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/Common-Services/backoffice/GET/agents/available.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/Common-Services/backoffice/GET/chats/get.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/Common-Services/backoffice/TEMPLATES/chats/create-denormalized-chat.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/Common-Services/backoffice/POST/chats/messages/add.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/Common-Services/backoffice/GET/chats/messages/all.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/Common-Services/backoffice/POST/chats/feedbacks/rating.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/Common-Services/backoffice/POST/chats/users/contact.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/Common-Services/backoffice/POST/chats/forwards/forward-to-backoffice.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/Common-Services/backoffice/GET/chats/config/organization-working-time.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/Common-Services/backoffice/POST/internal/client-external-bot.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/Common-Services/backoffice/TEMPLATES/chats/get-chat-messages-by-chat-id-and-active-user.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/Common-Services/backoffice/POST/chats/change-status.yml
+
+## Training Changes
+### Liquibase/training
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/training/changelog.yaml
+
+## Analytics Changes
+### Liquibase/analytics
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/changelog.yaml
+
+## Service Changes
+### Liquibase/services
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/services/changelog.yaml
+
+
+
 # Sync Run - 2025-06-05 08:07:26
 
 ## Chatbot Changes

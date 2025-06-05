@@ -1,0 +1,277 @@
+declaration:
+  call: declare
+  version: 0.1
+  description: "Decription placeholder for 'END'"
+  method: post
+  accepts: json
+  returns: json
+  namespace: backoffice
+  allowlist:
+    body:
+      - field: status
+        type: string
+        description: "Body field 'status'"
+      - field: message
+        type: json
+        description: "Body field 'message'"
+    headers:
+      - field: cookie
+        type: string
+        description: "Cookie field"
+
+extractRequestData:
+  assign:
+    chatId: "${incoming.body.message.chatId}"
+    event: "${incoming.body.message.event}"
+    authorRole: ${incoming.body.message.authorRole}
+    authorTimestamp: "${incoming.body.message.authorTimestamp}"
+    status: "${incoming.body.status}"
+  next: deleteMessagePreview
+
+deleteMessagePreview:
+  call: http.post
+  args:
+    url: "[#CHATBOT_RESQL]/chat/delete_message_preview"
+    body:
+      chatId: ${chatId}
+      content: ""
+  result: res
+  next: getMessageUuid
+
+getMessageUuid:
+  call: http.post
+  args:
+    url: "[#CHATBOT_DMAPPER_HBS]/return_uuid"
+    headers:
+      type: json
+  result: message_uuid_result
+  next: assignMessageUuid
+
+assignMessageUuid:
+  assign:
+    messageUuid: ${message_uuid_result.response.body.uuid}
+  next: get_title_visibility
+
+get_title_visibility:
+  call: http.get
+  args:
+    url: "[#CHATBOT_RESQL]/config/get_configuration"
+    query:
+      key: "is_csa_title_visible"
+  result: title_res
+  next: getActiveChatById
+
+getActiveChatById:
+  call: http.get
+  args:
+    url: "[#CHATBOT_RESQL]/chat/get_chat_active_by_id"
+    query:
+      id: ${chatId}
+      is_csa_title_visible: ${title_res.response.body[0]?.value}
+  result: activeChatRes
+  next: checkActiveChatResult
+
+checkActiveChatResult:
+  switch:
+    - condition: ${activeChatRes.response.body.length > 0}
+      next: assignChat
+  next: return_chat_ended
+
+assignChat:
+  assign:
+    activeChat: ${activeChatRes.response.body[0]}
+  next: postMessage
+
+postMessage:
+  call: http.post
+  args:
+    url: "[#CHATBOT_RESQL]/chat/create_message"
+    body:
+      chatId: ${chatId}
+      messageId: ${messageUuid}
+      content: ""
+      authorTimestamp: ${authorTimestamp}
+      created: "CURRENT_TIMESTAMP"
+      authorId: ""
+      authorFirstName: ""
+      authorLastName: ""
+      authorRole: ${authorRole ?? "buerokratt"}
+      rating: ""
+      event: ${event}
+      forwardedByUser: ""
+      forwardedFromCsa: ""
+      forwardedToCsa: ""
+  result: message_res
+  next: endChat
+
+endChat:
+  call: http.post
+  args:
+    url: "[#CHATBOT_RESQL]/chat/create_chat"
+    body:
+      id: ${activeChat.id}
+      customerSupportId: ${activeChat.customerSupportId ?? ""}
+      customerSupportDisplayName: ${activeChat.customerSupportDisplayName ?? ""}
+      csaTitle: ${activeChat.csaTitle ?? ""}
+      endUserId: ${activeChat.endUserId ?? ""}
+      endUserFirstName: ${activeChat.endUserFirstName ?? ""}
+      endUserLastName: ${activeChat.endUserLastName ?? ""}
+      status: ${status ?? "ENDED"}
+      created: ${activeChat.created ?? "CURRENT_TIMESTAMP"}
+      ended: ${activeChat.ended ?? "CURRENT_TIMESTAMP"
+      feedbackRating: ${activeChat.feedbackRating ?? ""}
+      feedbackText: ${activeChat.feedbackText ?? ""}
+      endUserEmail: ${activeChat.endUserEmail ?? ""}
+      endUserPhone: ${activeChat.endUserPhone ?? ""}
+      endUserOs: ${activeChat.endUserOs ?? ""}
+      endUserUrl: ${activeChat.endUserUrl ?? ""}
+      externalId: ${activeChat.externalId ?? ""}
+      forwardedTo: ${activeChat.forwardedTo ?? ""}
+      forwardedToName: ${activeChat.forwardedToName ?? ""}
+      receivedFrom: ${activeChat.receivedFrom ?? ""}
+      receivedFromName: ${activeChat.receivedFromName ?? ""}
+  result: end_chat_res
+  next: updateDenormalizedChat
+
+updateDenormalizedChat:
+  call: http.post
+  args:
+    url: "[#CHATBOT_RESQL]/chat/update_denormalized_chat_and_message"
+    body:
+      chatId: ${activeChat.id}
+      customerSupportId: ${activeChat.customerSupportId ?? ""}
+      customerSupportDisplayName: ${activeChat.customerSupportDisplayName ?? ""}
+      customerSupportFirstName: "null"
+      customerSupportLastName: "null"
+      csaTitle: ${activeChat.csaTitle ?? ""}
+      endUserId: ${activeChat.endUserId ?? ""}
+      endUserFirstName: ${activeChat.endUserFirstName ?? ""}
+      endUserLastName: ${activeChat.endUserLastName ?? ""}
+      status: ${status ?? "ENDED"}
+      feedbackRating: ${activeChat.feedbackRating ?? ""}
+      feedbackText: ${activeChat.feedbackText ?? ""}
+      endUserEmail: ${activeChat.endUserEmail ?? ""}
+      endUserPhone: ${activeChat.endUserPhone ?? ""}
+      endUserOs: ${activeChat.endUserOs ?? ""}
+      endUserUrl: ${activeChat.endUserUrl ?? ""}
+      externalId: ${activeChat.externalId ?? ""}
+      created: ${activeChat.created ?? end_chat_res.response.body[0].updated}
+      ended: ${activeChat.ended ?? end_chat_res.response.body[0].updated}
+      forwardedTo: ${activeChat.forwardedTo ?? ""}
+      forwardedToName: ${activeChat.forwardedToName ?? ""}
+      receivedFrom: ${activeChat.receivedFrom ?? ""}
+      receivedFromName: ${activeChat.receivedFromName ?? ""}
+      updated: ${end_chat_res.response.body[0].updated}
+      lastMessageTimestamp: ${message_res.response.body[0].updated}
+      isSupportMessage: ${authorRole == "backoffice-user"}
+      isCustomerMessage: ${authorRole == "end-user"}
+      authorTimestamp: ${authorTimestamp}
+      content: ""
+      lastMessageAuthorId: ""
+      lastMessageEvent: ${event}
+  result: updateDenormalizedChatRes
+  next: updateDenormalizedChatMetricsMessageFields
+
+updateDenormalizedChatMetricsMessageFields:
+  call: http.post
+  args:
+    url: "[#CHATBOT_RESQL]/chat/update_denormalized_chat_messages_for_metrics_message_fields_only"
+    body:
+      chatBaseId: ${activeChat.id}
+      messageId: ${message_res.response.body[0].id}
+      messageBaseId: ${message_res.response.body[0].baseId}
+      content: ""
+      lastMessageTimestamp: ${message_res.response.body[0].updated}
+      timestamp: ${message_res.response.body[0].updated}
+      messageCreated: ${message_res.response.body[0].updated}
+      messageUpdated: ${message_res.response.body[0].updated}
+      messageEvent: ${event}
+      messageAuthorRole: ${authorRole ?? "buerokratt"}
+      messageAuthorId: ""
+      messageForwardedFromCsa: ""
+      messageForwardedToCsa: ""
+  result: updateDenormalizedChatMetricsMessageRes
+  next: updateDenormalizedChatMetricsChatFields
+
+updateDenormalizedChatMetricsChatFields:
+  call: http.post
+  args:
+    url: "[#CHATBOT_RESQL]/chat/update_denormalized_chat_messages_for_metrics_chat_fields_only"
+    body:
+      chatBaseId: ${activeChat.id}
+      chatId: ${end_chat_res.response.body[0].id}
+      status: ${status ?? "ENDED"}
+      endUserEmail: ${activeChat.endUserEmail ?? ""}
+      endUserPhone: ${activeChat.endUserPhone ?? ""}
+      feedbackText: ${activeChat.feedbackText ?? ""}
+      feedbackRating: ${activeChat.feedbackRating ?? ""}
+      customerSupportDisplayName: ${activeChat.customerSupportDisplayName ?? ""}
+      customerSupportId: ${activeChat.customerSupportId ?? ""}
+      customerSupportFirstName: "null"
+      customerSupportLastName: "null"
+      externalId: ${activeChat.externalId ?? ""}
+      receivedFrom: ${activeChat.receivedFrom ?? ""}
+      updated: ${end_chat_res.response.body[0].updated}
+      ended: ${activeChat.ended ?? end_chat_res.response.body[0].updated}
+  result: updateDenormalizedChatMetricsRes
+  next: blacklist_chat_jwt
+
+blacklist_chat_jwt:
+  call: http.post
+  args:
+    url: "[#CHATBOT_TIM]/jwt/custom-jwt-blacklist"
+    contentType: plaintext
+    headers:
+      cookie: ${incoming.headers.cookie}
+    plaintext: "chatJwt"
+  result: chat_blacklist_res
+  next: assign_chat_cookie
+
+assign_chat_cookie:
+  assign:
+    chatCookie:
+      chatJwt: null
+      userJwt: null
+      Domain: "[#DOMAIN]"
+      Secure: true
+      HttpOnly: true
+      SameSite: "[#COOKIE_SAME_SITE]"
+      Max-Age: 0
+  next: blacklist_user_jwt
+
+blacklist_user_jwt:
+  call: http.post
+  args:
+    url: "[#CHATBOT_TIM]/jwt/custom-jwt-blacklist"
+    contentType: plaintext
+    headers:
+      cookie: ${incoming.headers.cookie}
+    plaintext: "userJwt"
+  result: client_blacklist_res
+  next: notify_chats
+
+notify_chats:
+  template: "[#CHATBOT_PROJECT_LAYER]/chats/notify"
+  requestType: templates
+  body:
+    chatId: ${chatId}
+  result: chats_notify_res
+
+remove_chat_id_from_queue_notification_node_if_existed:
+  call: http.post
+  args:
+    url: "[#CHATBOT_NOTIFICATIONS]/dequeue"
+    body:
+      id: ${chatId}
+  result: remove_chat_id_from_queue_notification_node_if_existed_res
+
+return_result:
+  headers:
+    Set-Cookie: ${chatCookie}
+  return: "Ended Chat Successfully"
+  next: end
+
+return_chat_ended:
+  return: "Chat Has Ended"
+  status: 400
+  next: end
