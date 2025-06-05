@@ -37,22 +37,31 @@ assignIdCode:
 unassignAllClaimedChats:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/update-chats-assignee-by-user-id"
+    url: "[#CHATBOT_RESQL]/chat/update_chat_assignee_by_user_id"
     body:
       userId: ${idCode}
   result: unclaim_res
+  next: unassignAllClaimedDenormalizedChats
+
+unassignAllClaimedDenormalizedChats:
+  call: http.post
+  args:
+    url: "[#CHATBOT_RESQL]/chat/update_denormalized_chat_assignee_by_user_id"
+    body:
+      userId: ${idCode}
+      updated: ${unclaim_res.response.body[0].updated}
+  result: unclaim_denormalized_res
   next: setCustomerSupportAgentAway
 
 setCustomerSupportAgentAway:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/set-customer-support-status"
+    url: "[#CHATBOT_RESQL]/auth_users/create_customer_support_agent_activity"
     body:
       userIdCode: ${idCode}
       active: false
       status: "offline"
       statusComment: ""
-      created: ${new Date().toISOString()}
   result: set_status_res
   next: blacklistCustomJwt
 

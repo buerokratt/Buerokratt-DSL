@@ -46,12 +46,11 @@ checkContentLength:
 get_chat_info:
   call: http.post
   args:
-   url: "[#CHATBOT_TIM]/jwt/custom-jwt-userinfo"
-   contentType: plaintext
-   headers:
-    cookie: ${cookie}
-   plaintext:
-      "chatJwt"
+    url: "[#CHATBOT_TIM]/jwt/custom-jwt-userinfo"
+    contentType: plaintext
+    headers:
+      cookie: ${cookie}
+    plaintext: "chatJwt"
   result: res
   next: check_chat_info_response
 
@@ -64,16 +63,26 @@ check_chat_info_response:
 assignChatId:
   assign:
     chatId: ${res.response.body.chatId}
+  next: getTitleVisibility
+
+getTitleVisibility:
+  call: http.get
+  args:
+    url: "[#CHATBOT_RESQL]/config/get_configuration"
+    query:
+      key: "is_csa_title_visible"
+  result: title_res
   next: getActiveChatById
 
 getActiveChatById:
-  call: http.post
+  call: http.get
   args:
-    url: "[#CHATBOT_RESQL]/get-active-chat-by-id"
-    body:
+    url: "[#CHATBOT_RESQL]/chat/get_chat_active_by_id"
+    query:
       id: ${chatId}
+      is_csa_title_visible: ${title_res.response.body[0]?.value}
   result: activeChatRes
-  next: checkActiveChatResult    
+  next: checkActiveChatResult
 
 checkActiveChatResult:
   switch:
@@ -93,21 +102,21 @@ getUuid:
 assignUuid:
   assign:
     uuid: ${uuid_result.response.body.uuid}
-  next: insertMessage  
+  next: insertMessage
 
 insertMessage:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/insert-message"
+    url: "[#CHATBOT_RESQL]/chat/create_message"
     body:
       chatId: ${chatId}
       messageId: ${uuid}
       content: ${content}
       authorTimestamp: ${authorTimestamp}
+      created: "CURRENT_TIMESTAMP"
       authorId: ""
       authorFirstName: ""
       authorRole: ${authorRole}
-      created: ${new Date().toISOString()}
       authorLastName: ""
       rating: ""
       event: ${event ?? ""}
@@ -115,6 +124,43 @@ insertMessage:
       forwardedFromCsa: ""
       forwardedToCsa: ""
   result: insertMessageResult
+  next: updateDenormalizedChatMessage
+
+updateDenormalizedChatMessage:
+  call: http.post
+  args:
+    url: "[#CHATBOT_RESQL]/chat/update_denormalized_chat_message_fields_only"
+    body:
+      chatId: ${chatId}
+      lastMessageTimestamp: ${insertMessageResult.response.body[0].updated}
+      isSupportMessage: ${authorRole == 'backoffice-user'}
+      isCustomerMessage: ${authorRole == 'end-user'}
+      authorTimestamp: ${authorTimestamp}
+      content: ${content}
+      lastMessageAuthorId: ""
+      lastMessageEvent: ${event ?? ""}
+  result: updateDenormalizedChatRes
+  next: updateDenormalizedChatMetricsMessageFields
+
+updateDenormalizedChatMetricsMessageFields:
+  call: http.post
+  args:
+    url: "[#CHATBOT_RESQL]/chat/update_denormalized_chat_messages_for_metrics_message_fields_only"
+    body:
+      chatBaseId: ${chatId}
+      messageId: ${insertMessageResult.response.body[0].id}
+      messageBaseId: ${insertMessageResult.response.body[0].baseId}
+      content: ${content}
+      lastMessageTimestamp: ${insertMessageResult.response.body[0].updated}
+      timestamp: ${insertMessageResult.response.body[0].updated}
+      messageCreated: ${insertMessageResult.response.body[0].updated}
+      messageUpdated: ${insertMessageResult.response.body[0].updated}
+      messageEvent: ${event ?? ""}
+      messageAuthorRole: ${authorRole}
+      messageAuthorId: ""
+      messageForwardedFromCsa: ""
+      messageForwardedToCsa: ""
+  result: updateDenormalizedChatMetricsMessageRes
   next: check_skip_bot
 
 check_skip_bot:
@@ -166,12 +212,12 @@ return_result:
 return_chat_ended:
   return: "Chat Has Ended"
   status: 400
-  next: end  
+  next: end
 
 return_bad_request:
   status: 400
   return: "Error: Bad Request"
-  next: end  
+  next: end
 
 return_content_length_exceeded:
   status: 400
@@ -181,4 +227,4 @@ return_content_length_exceeded:
 return_bot_error:
   status: 420
   return: "Bot error"
-  next: end  
+  next: end
