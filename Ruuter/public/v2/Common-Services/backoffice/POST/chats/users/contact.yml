@@ -1,0 +1,93 @@
+declaration:
+  call: declare
+  version: 0.1
+  description: "Decription placeholder for 'CONTACT'"
+  method: post
+  accepts: json
+  returns: json
+  namespace: backoffice
+  allowlist:
+    body:
+      - field: chatId
+        type: string
+        description: "Body field 'chatId'"
+      - field: endUserEmail
+        type: string
+        description: "Body field 'endUserEmail'"
+      - field: endUserPhone
+        type: string
+        description: "Body field 'endUserPhone'"
+
+assignIncoming:
+  assign:
+    chatId: ${incoming.body.chatId}
+    email: ${incoming.body.endUserEmail}
+    phone: ${incoming.body.endUserPhone}
+
+checkChatId:
+  switch:
+    - condition: ${!!chatId && chatId !== "" && chatId !== null}
+      next: insertEmailAndPhone
+  next: returnNoChatId
+
+insertEmailAndPhone:
+  call: http.post
+  args:
+    url: "[#CHATBOT_RESQL]/chat/update_chat_email_and_phone"
+    body:
+      chatId: ${chatId}
+      endUserEmail: "${email ? email : ''}"
+      endUserPhone: "${phone ? phone : ''}"
+  result: insertEmailAndPhoneResult
+
+insertDenormalizedChatEmailAndPhone:
+  call: http.post
+  args:
+    url: "[#CHATBOT_RESQL]/chat/update_denormalized_chat_end_user_email_and_phone"
+    body:
+      chatId: ${chatId}
+      endUserEmail: "${email ? email : ''}"
+      endUserPhone: "${phone ? phone : ''}"
+      updated: ${insertEmailAndPhoneResult.response.body[0].updated}
+  result: insertDenormalizedChatEmailAndPhoneResult
+
+updateDenormalizedChatMetricsChatFields:
+  call: http.post
+  args:
+    url: "[#CHATBOT_RESQL]/chat/update_denormalized_chat_messages_for_metrics_chat_fields_only"
+    body:
+      chatBaseId: ${chatId}
+      chatId: ${insertEmailAndPhoneResult.response.body[0].id}
+      status: "null"
+      endUserEmail: "${email ? email : ''}"
+      endUserPhone: "${phone ? phone : ''}"
+      feedbackText: "null"
+      feedbackRating: "null"
+      customerSupportDisplayName: "null"
+      customerSupportId: "null"
+      customerSupportFirstName: "null"
+      customerSupportLastName: "null"
+      externalId: "null"
+      receivedFrom: "null"
+      updated: ${insertEmailAndPhoneResult.response.body[0].updated}
+      ended: "null"
+  result: updateDenormalizedChatMetricsRes
+  next: returnSuccess
+
+notify_messages:
+  template: "[#CHATBOT_PROJECT_LAYER]/messages/notify"
+  requestType: templates
+  body:
+    chatId: ${chatId}
+    type: "message"
+    messageId: ""
+  result: messages_notify_res
+  next: return_result
+
+return_result:
+  return: Updated ${chatId} with ${email} and ${phone}.
+  next: end
+
+returnNoChatId:
+  return: Missing chatId in request body.
+  next: end

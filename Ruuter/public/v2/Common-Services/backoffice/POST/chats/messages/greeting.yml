@@ -1,0 +1,79 @@
+declaration:
+  call: declare
+  version: 0.1
+  description: "Decription placeholder for 'GREETING'"
+  method: post
+  accepts: json
+  returns: json
+  namespace: backoffice
+  allowlist:
+    body:
+      - field: chatId
+        type: string
+        description: "Body field 'chatId'"
+      - field: clientTimestamp
+        type: string
+        description: "Body field 'clientTimestamp'"
+
+extractRequestData:
+  assign:
+    chatId: "${incoming.body.chatId}"
+    clientTimestamp: "${incoming.body.clientTimestamp}"
+
+getGreetingMessage:
+  call: http.get
+  args:
+    url: "[#CHATBOT_RESQL]/config/get_message_greeting"
+  result: greeting_result
+
+getUuid:
+  call: http.post
+  args:
+    url: "[#CHATBOT_DMAPPER_HBS]/return_uuid"
+    headers:
+      type: json
+  result: uuid_result
+  next: assignUuidAndGreetingMessage
+
+assignUuidAndGreetingMessage:
+  assign:
+    uuid: ${uuid_result.response.body.uuid}
+    greetingMessage: ${greeting_result.response.body[0].est}
+  next: insertGreetingMessage
+
+insertGreetingMessage:
+  call: http.post
+  args:
+    url: "[#CHATBOT_RESQL]/chat/create_message"
+    body:
+      chatId: ${chatId}
+      messageId: ${uuid}
+      content: ${greetingMessage}
+      authorTimestamp: "CURRENT_TIMESTAMP"
+      authorRole: "buerokratt"
+      created: "CURRENT_TIMESTAMP"
+      event: "greeting"
+      authorId: ""
+      authorFirstName: ""
+      authorLastName: ""
+      rating: ""
+      forwardedByUser: ""
+      forwardedFromCsa: ""
+      forwardedToCsa: ""
+  result: insertMessageResult
+  next: assignResult
+
+assignResult:
+  assign:
+    data:
+      {
+        "updated": "${insertMessageResult.response.body[0].updated}",
+        "messageId": "${insertMessageResult.response.body[0].id}",
+        "messageBaseId": "${insertMessageResult.response.body[0].baseId}",
+        "greetingMessage": "${greetingMessage}",
+      }
+  next: returnSuccess
+
+returnSuccess:
+  return: ${data}
+  next: end
