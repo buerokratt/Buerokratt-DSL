@@ -11,6 +11,7 @@ SOURCE_REPOS=(
   "buerokratt/Training-Module:sql-refacto"
   "buerokratt/Analytics-Module:sql-refacto"
   "buerokratt/Service-Module:sql-refacto2"
+  "buerokratt/Common-Services:test"
 )
 
 # Hardcoded version
@@ -18,6 +19,7 @@ VERSION="v2"
 
 # Chatbot-specific mappings (e.g., backoffice-related)
 CHATBOT_MAPPINGS=(
+  "DSL/Ruuter.public:Ruuter/private/v2/Common-Services"
   "DSL/Ruuter.public/backoffice:Ruuter/public/v2/backoffice"
   "DSL/Ruuter.private/backoffice:Ruuter/private/v2/backoffice"
   "DSL/Resql/backoffice:Resql/backoffice"
