@@ -18,7 +18,7 @@ RUN mkdir -p $APP_DIRS
 
 COPY Ruuter/private/v2/training /Ruuter/training
 COPY Resql/training /Resql/training
-COPY DataMapper/training /DataMapper/training
+COPY DataMapper/training /DataMapper/training/hbs
 COPY Liquibase/training /Liquibase/training
 COPY OpenSearch/training /OpenSearch/training
 
