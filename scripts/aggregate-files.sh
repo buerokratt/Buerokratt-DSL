@@ -7,10 +7,10 @@ CHANGELOG="$CENTRAL_PATH/CHANGELOG.md"
 
 # Hardcoded source repos
 SOURCE_REPOS=(
-  "buerokratt/Buerokratt-Chatbot:sql-refacto"
-  "buerokratt/Training-Module:sql-refacto"
-  "buerokratt/Analytics-Module:sql-refacto"
-  "buerokratt/Service-Module:sql-refacto2"
+  "buerokratt/Buerokratt-Chatbot:test"
+  "buerokratt/Training-Module:test"
+  "buerokratt/Analytics-Module:test"
+  "buerokratt/Service-Module:test"
   "buerokratt/Common-Services:test"
 )
 
