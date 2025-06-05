@@ -1,0 +1,72 @@
+/*
+declaration:
+  version: 0.1
+  description: "Fetch the most recent scheduled report for a specific dataset"
+  method: get
+  namespace: reports
+  returns: json
+  allowlist:
+    query:
+      - field: datasetId
+        type: string
+        description: "Identifier of the dataset for which to retrieve the latest scheduled report"
+  response:
+    fields:
+      - field: id
+        type: string
+        description: "Unique identifier of the scheduled report"
+      - field: name
+        type: string
+        description: "Name of the scheduled report"
+      - field: dataset_id
+        type: string
+        description: "Associated dataset ID"
+      - field: period
+        type: string
+        description: "Reporting period"
+      - field: metrics
+        type: string[]
+        description: "List of metrics included in the report"
+      - field: created
+        type: timestamp
+        description: "Timestamp when the report was created"
+      - field: updated
+        type: timestamp
+        description: "Timestamp when the report was last updated"
+      - field: start_date
+        type: date
+        description: "Start date of the reporting range"
+      - field: end_date
+        type: date
+        description: "End date of the reporting range"
+*/
+WITH
+    latest_report AS (
+        SELECT DISTINCT ON (dataset_id)
+            id,
+            name,
+            dataset_id,
+            period,
+            metrics,
+            created,
+            updated,
+            start_date,
+            end_date,
+            deleted
+        FROM analytics.scheduled_reports
+        WHERE dataset_id = :datasetId
+        ORDER BY dataset_id ASC, updated DESC
+    )
+
+SELECT
+    id,
+    name,
+    dataset_id,
+    period,
+    metrics,
+    created,
+    updated,
+    start_date,
+    end_date
+FROM latest_report
+WHERE (deleted IS NULL OR deleted = FALSE);

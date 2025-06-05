@@ -35,17 +35,17 @@ extractRequestData:
     authorFirstName: "${incoming.body.authorFirstName}"
     authorId: "${incoming.body.authorId}"
     authorRole: "${incoming.body.authorRole}"
-  next: deleteMessagePreview  
+  next: deleteMessagePreview
 
 deleteMessagePreview:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/delete-message-preview"
+    url: "[#CHATBOT_RESQL]/chat/delete_message_preview"
     body:
       chatId: ${chatId}
       content: ""
   result: res
-  next: getMessageUuid 
+  next: getMessageUuid
 
 getMessageUuid:
   call: http.post
@@ -59,16 +59,26 @@ getMessageUuid:
 assignMessageUuid:
   assign:
     messageUuid: ${message_uuid_result.response.body.uuid}
-  next: getChatById  
+  next: getTitleVisibility
+
+getTitleVisibility:
+  call: http.get
+  args:
+    url: "[#CHATBOT_RESQL]/config/get_configuration"
+    query:
+      key: "is_csa_title_visible"
+  result: title_res
+  next: getChatById
 
 getChatById:
-  call: http.post
+  call: http.get
   args:
-    url: "[#CHATBOT_RESQL]/get-chat-by-id"
-    body:
+    url: "[#CHATBOT_RESQL]/chat/get_chat_by_id"
+    query:
       id: ${chatId}
+      is_csa_title_visible: ${title_res.response.body[0]?.value}
   result: chatRes
-  next: checkChatResult 
+  next: checkChatResult
 
 checkChatResult:
   switch:
@@ -79,34 +89,34 @@ checkChatResult:
 assignChat:
   assign:
     chat: ${chatRes.response.body[0]}
-  next: postMessage  
+  next: postMessage
 
 postMessage:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/insert-message"
+    url: "[#CHATBOT_RESQL]/chat/create_message"
     body:
       chatId: ${chatId}
       messageId: ${messageUuid}
       content: ""
       authorTimestamp: ${authorTimestamp}
+      created: "CURRENT_TIMESTAMP"
       authorId: ${authorId}
       authorFirstName: ${authorFirstName}
       authorLastName: ""
       authorRole: "backoffice-user"
-      created: ${new Date().toISOString()}
       rating: ""
       event: ${event}
       forwardedByUser: ""
       forwardedFromCsa: ""
       forwardedToCsa: ""
   result: message_res
-  next: postChat  
+  next: postChat
 
 postChat:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/insert-chat"
+    url: "[#CHATBOT_RESQL]/chat/create_chat"
     body:
       id: ${chat.id}
       customerSupportId: ${chat.customerSupportId}
@@ -117,7 +127,7 @@ postChat:
       endUserLastName: ${chat.endUserLastName}
       status: "ENDED"
       created: ${chat.created}
-      ended: ${new Date().toISOString()}
+      ended: ${chat.ended ?? "CURRENT_TIMESTAMP"}
       feedbackRating: ${chat.feedbackRating ?? ""}
       feedbackText: ${chat.feedbackText ?? ""}
       endUserEmail: ${chat.endUserEmail}
@@ -130,7 +140,90 @@ postChat:
       receivedFrom: ${chat.receivedFrom}
       receivedFromName: ${chat.receivedFromName ?? ""}
   result: post_chat_res
-  next: return_result    
+  next: updateDenormalizedChat
+
+updateDenormalizedChat:
+  call: http.post
+  args:
+    url: "[#CHATBOT_RESQL]/chat/update_denormalized_chat_and_message"
+    body:
+      chatId: ${chat.id}
+      customerSupportId: ${chat.customerSupportId}
+      customerSupportDisplayName: ${chat.customerSupportDisplayName}
+      customerSupportFirstName: "null"
+      customerSupportLastName: "null"
+      csaTitle: ${chat.csaTitle ?? ""}
+      endUserId: ${chat.endUserId}
+      endUserFirstName: ${chat.endUserFirstName}
+      endUserLastName: ${chat.endUserLastName}
+      status: "ENDED"
+      endUserEmail: ${chat.endUserEmail}
+      endUserPhone: ${chat.endUserPhone}
+      endUserOs: ${chat.endUserOs}
+      endUserUrl: ${chat.endUserUrl}
+      feedbackRating: ${chat.feedbackRating ?? ""}
+      feedbackText: ${chat.feedbackText ?? ""}
+      externalId: ${chat.externalId}
+      created: ${chat.created}
+      ended: ${chat.ended ?? post_chat_res.response.body[0].updated}
+      forwardedTo: ${chat.forwardedTo}
+      forwardedToName: ${chat.forwardedToName}
+      receivedFrom: ${chat.receivedFrom}
+      receivedFromName: ${chat.receivedFromName}
+      updated: ${post_chat_res.response.body[0].updated}
+      lastMessageTimestamp: ${message_res.response.body[0].updated}
+      isSupportMessage: true
+      isCustomerMessage: false
+      authorTimestamp: ${authorTimestamp}
+      content: ""
+      lastMessageAuthorId: ""
+      lastMessageEvent: ${event}
+  result: updateDenormalizedChatRes
+  next: updateDenormalizedChatMetricsMessageFields
+
+updateDenormalizedChatMetricsMessageFields:
+  call: http.post
+  args:
+    url: "[#CHATBOT_RESQL]/chat/update_denormalized_chat_messages_for_metrics_message_fields_only"
+    body:
+      chatBaseId: ${chat.id}
+      messageId: ${message_res.response.body[0].id}
+      messageBaseId: ${message_res.response.body[0].baseId}
+      content: ""
+      lastMessageTimestamp: ${message_res.response.body[0].updated}
+      timestamp: ${message_res.response.body[0].updated}
+      messageCreated: ${message_res.response.body[0].updated}
+      messageUpdated: ${message_res.response.body[0].updated}
+      messageEvent: ${event}
+      messageAuthorRole: "backoffice-user"
+      messageAuthorId: ${authorId}
+      messageForwardedFromCsa: ""
+      messageForwardedToCsa: ""
+  result: updateDenormalizedChatMetricsMessageRes
+  next: updateDenormalizedChatMetricsChatFields
+
+updateDenormalizedChatMetricsChatFields:
+  call: http.post
+  args:
+    url: "[#CHATBOT_RESQL]/chat/update_denormalized_chat_messages_for_metrics_chat_fields_only"
+    body:
+      chatBaseId: ${chat.id}
+      chatId: ${post_chat_res.response.body[0].id}
+      status: "ENDED"
+      endUserEmail: ${chat.endUserEmail}
+      endUserPhone: ${chat.endUserPhone}
+      feedbackRating: ${chat.feedbackRating ?? ""}
+      feedbackText: ${chat.feedbackText ?? ""}
+      customerSupportId: ${chat.customerSupportId}
+      customerSupportDisplayName: ${chat.customerSupportDisplayName}
+      customerSupportFirstName: "null"
+      customerSupportLastName: "null"
+      externalId: ${chat.externalId}
+      receivedFrom: ${chat.receivedFrom}
+      updated: ${post_chat_res.response.body[0].updated}
+      ended: ${chat.ended ?? post_chat_res.response.body[0].updated}
+  result: updateDenormalizedChatMetricsRes
+  next: return_result
 
 return_result:
   return: "Changed Chat Status Successfully"
@@ -139,4 +232,4 @@ return_result:
 return_chat_found:
   return: "Chat Not Found"
   status: 400
-  next: end  
+  next: end
