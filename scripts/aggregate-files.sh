@@ -11,6 +11,7 @@ SOURCE_REPOS=(
   "buerokratt/Training-Module:sql-refacto"
   "buerokratt/Analytics-Module:sql-refacto"
   "buerokratt/Service-Module:sql-refacto2"
+  "buerokratt/Common-Services:test"
 )
 
 # Hardcoded version
@@ -27,6 +28,9 @@ CHATBOT_MAPPINGS=(
   "DSL/Liquibase:Liquibase/backoffice"
   "DSL/OpenSearch:OpenSearch/backoffice"
 )
+CS_MAPPINGS=(
+ "DSL/Ruuter.public:Ruuter/public/v2/Common-Services"
+}
 
 # Training-Module-specific mappings (training-related)
 TRAINING_MAPPINGS=(
@@ -84,6 +88,9 @@ for repo in "${SOURCE_REPOS[@]}"; do
     CHANGES_ARRAY="ANALYTICS_CHANGES"
   elif [ "$REPO_NAME" = "buerokratt/Service-Module" ]; then
     MAPPINGS=("${SERVICE_MAPPINGS[@]}")
+    CHANGES_ARRAY="SERVICE_CHANGES"
+  elif [ "$REPO_NAME" = "buerokratt/Common-Services" ]; then
+    MAPPINGS=("${CS_MAPPINGS[@]}")
     CHANGES_ARRAY="SERVICE_CHANGES"
   else
     echo "Unknown repo $REPO_NAME - skipping"
