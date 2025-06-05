@@ -8,9 +8,9 @@ declaration:
   namespace: service
 
 updateSettings:
-  call: http.get
+  call: http.post
   args:
-    url: "[#SERVICE_RESQL]/service/list_service_settings"
+    url: "[#SERVICE_RESQL]/get-settings"
   result: results
 
 returnSuccess:

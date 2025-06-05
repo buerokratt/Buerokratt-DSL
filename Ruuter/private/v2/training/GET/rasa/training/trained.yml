@@ -8,9 +8,9 @@ declaration:
   namespace: training
 
 getFromDatabase:
-  call: http.get
+  call: http.post
   args:
-    url: "[#TRAINING_RESQL]/llm/get_latest_ready_model"
+    url: "[#TRAINING_RESQL]/get-latest-ready-model"
   result: dbResult
 
 validateDbRecords:

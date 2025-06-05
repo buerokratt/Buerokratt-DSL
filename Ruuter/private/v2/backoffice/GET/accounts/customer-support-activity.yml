@@ -15,11 +15,12 @@ declaration:
 get_user_info:
   call: http.post
   args:
-    url: "[#CHATBOT_TIM]/jwt/custom-jwt-userinfo"
-    contentType: plaintext
-    headers:
-      cookie: ${incoming.headers.cookie}
-    plaintext: "customJwtCookie"
+   url: "[#CHATBOT_TIM]/jwt/custom-jwt-userinfo"
+   contentType: plaintext
+   headers:
+    cookie: ${incoming.headers.cookie}
+   plaintext: 
+      "customJwtCookie"
   result: res
   next: check_user_info_response
 
@@ -35,10 +36,10 @@ assignIdCode:
   next: getCustomerSupportActivity
 
 getCustomerSupportActivity:
-  call: http.get
+  call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/auth_users/get_customer_support_agent_activity_by_id_code"
-    query:
+    url: "[#CHATBOT_RESQL]/get-customer-support-activity-by-id-code"
+    body:
       customerSupportId: ${idCode}
   result: res
 

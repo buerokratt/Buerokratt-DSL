@@ -15,10 +15,10 @@ check_if_authorized:
   result: authority_result
 
 get_metrics_preferences:
-  call: http.get
+  call: http.post
   args:
-    url: "[#ANALYTICS_RESQL]/overview/list_overview_metric_preferences"
-    query:
+    url: "[#ANALYTICS_RESQL]/overview-metric-preferences"
+    body:
       user_id_code: ${authority_result.idCode}
   result: metrics
 

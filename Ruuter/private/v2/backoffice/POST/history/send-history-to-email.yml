@@ -16,37 +16,20 @@ extractRequestData:
   assign:
     chatId: ${incoming.body.chatId}
 
-getCustomerSupportIdsByChatId:
-  call: http.get
-  args:
-    url: "[#CHATBOT_RESQL]/chat/list_chat_customer_support_ids"
-    query:
-      chatId: ${chatId}
-  result: getCustomerSupportIdsByChatIdResult
-
-mapCustomerSupportIds:
+getUserEmailByChatId:
   call: http.post
   args:
-    url: "[#CHATBOT_DMAPPER_HBS]/map_customer_support_ids"
-    headers:
-      type: json
+    url: "[#CHATBOT_RESQL]/get-user-email-by-chat-id"
     body:
-      chats: ${getCustomerSupportIdsByChatIdResult.response.body}
-  result: customerSupportIdsResult
+      chatId: ${chatId}
+  result: getUserEmailByChatIdResult
 
-getUserEmailByCustomerSupportIds:
-  call: http.get
+getMessagesByChatId:
+  call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/auth_users/get_user_email_by_customer_support_id"
-    query:
-      customerSupportIds: ${customerSupportIdsResult.response.body?.join(',') ?? ''}
-  result: getUserEmailByCustomerSupportIdsResult
-
-getChatMessagesByChatIdAndActiveUser:
-  template: "[#CHATBOT_PROJECT_LAYER]/chats/get-chat-messages-by-chat-id-and-active-user"
-  requestType: templates
-  body:
-    chatId: ${chatId}
+    url: "[#CHATBOT_RESQL]/get-chat-messages"
+    body:
+      chatId: ${chatId}
   result: getMessagesByChatIdResult
 
 sendDataToEmail:
@@ -54,22 +37,21 @@ sendDataToEmail:
   args:
     url: "[#CHATBOT_DMAPPER]/js/email/sendMockEmail"
     body:
-      to: ${getUserEmailByCustomerSupportIdsResult.response.body[0].csaEmail}
+      to: ${getUserEmailByChatIdResult.response.body[0].csaEmail}
       subject: "Chat history"
-      text: ${getMessagesByChatIdResult}
+      text: ${getMessagesByChatIdResult.response.body}
   result: emailResponseData
 
 registerEmailSentEvent:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/chat/create_message"
+    url: "[#CHATBOT_RESQL]/insert-message"
     body:
       chatId: ${chatId}
       messageId: ""
       content: ""
       event: "chat_sent_to_csa_email"
-      authorTimestamp: "CURRENT_TIMESTAMP"
-      created: "CURRENT_TIMESTAMP"
+      authorTimestamp: ${new Date().toISOString()}
       authorId: ""
       authorFirstName: ""
       authorLastName: ""
@@ -78,42 +60,7 @@ registerEmailSentEvent:
       forwardedByUser: ""
       forwardedFromCsa: ""
       forwardedToCsa: ""
-  result: insert_message_res
-
-updateDenormalizedChatMessage:
-  call: http.post
-  args:
-    url: "[#CHATBOT_RESQL]/chat/update_denormalized_chat_message_fields_only"
-    body:
-      chatId: ${chatId}
-      lastMessageTimestamp: ${insert_message_res.response.body[0].updated}
-      isSupportMessage: true
-      isCustomerMessage: false
-      authorTimestamp: ${insert_message_res.response.body[0].updated}
-      content: ""
-      lastMessageAuthorId: ""
-      lastMessageEvent: "chat_sent_to_csa_email"
-  result: updateDenormalizedChatRes
-
-updateDenormalizedChatMetricsMessageFields:
-  call: http.post
-  args:
-    url: "[#CHATBOT_RESQL]/chat/update_denormalized_chat_messages_for_metrics_message_fields_only"
-    body:
-      chatBaseId: ${chatId}
-      messageId: ${insert_message_res.response.body[0].id}
-      messageBaseId: ${insert_message_res.response.body[0].baseId}
-      content: ""
-      lastMessageTimestamp: ${insert_message_res.response.body[0].updated}
-      timestamp: ${insert_message_res.response.body[0].updated}
-      messageCreated: ${insert_message_res.response.body[0].updated}
-      messageUpdated: ${insert_message_res.response.body[0].updated}
-      messageEvent: "chat_sent_to_csa_email"
-      messageAuthorRole: "backoffice-user"
-      messageAuthorId: ""
-      messageForwardedFromCsa: ""
-      messageForwardedToCsa: ""
-  result: updateDenormalizedChatMetricsMessageRes
+      created: ${new Date().toISOString()}
 
 returnSuccess:
   return: "OK"

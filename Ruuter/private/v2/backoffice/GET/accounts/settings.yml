@@ -36,10 +36,10 @@ assignIdCode:
   next: getUserSettings
 
 getUserSettings:
-  call: http.get
+  call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/auth_users/get_user_profile_settings"
-    query:
+    url: "[#CHATBOT_RESQL]/get-user-profile-settings"
+    body:
       userId: ${idCode}
   result: getUserSettingsResult
   next: validateUserSettingsResultExists

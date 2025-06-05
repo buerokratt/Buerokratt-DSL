@@ -43,12 +43,12 @@ extractRequestData:
     csa_email: ${incoming.body.csa_email}
     roles: ${incoming.body.roles}
     department: ${incoming.body.department}
-
+ 
 getUser:
-  call: http.get
+  call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/auth_users/get_user"
-    query:
+    url: "[#CHATBOT_RESQL]/get-user"
+    body:
       userIdCode: ${userIdCode}
   result: res
   next: checkIfUserExists
@@ -62,8 +62,9 @@ checkIfUserExists:
 updateUser:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/auth_users/update_user"
+    url: "[#CHATBOT_RESQL]/update-user"
     body:
+      created: ${new Date().toISOString()}
       status: "active"
       firstName: ${firstName}
       lastName: ${lastName}
@@ -78,17 +79,11 @@ updateUser:
 updateRoles:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/auth_users/create_user_authority"
+    url: "[#CHATBOT_RESQL]/insert-user-role"
     body:
       userIdCode: ${userIdCode}
       roles: ${roles}
-      userStatus: "active"
-      firstName: ${firstName}
-      lastName: ${lastName}
-      displayName: ${displayName}
-      csaTitle: ${csaTitle}
-      csaEmail: ${csa_email}
-      department: ${department}
+      created: ${new Date().toISOString()}
   result: add_roles_res
   next: return_result
 
@@ -101,3 +96,4 @@ return_not_exists:
   return: "error: user does not exist"
   status: 400
   next: end
+

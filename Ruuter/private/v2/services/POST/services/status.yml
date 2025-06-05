@@ -34,10 +34,10 @@ check_for_required_parameters:
   next: get_current_status
 
 get_current_status:
-  call: http.get
+  call: http.post
   args:
-    url: "[#SERVICE_RESQL]/service/get_service_status_by_id"
-    query:
+    url: "[#SERVICE_RESQL]/status"
+    body:
       id: ${id}
   result: status_res
   next: assign_old_status_and_path
@@ -57,7 +57,7 @@ check_status:
 set_status:
   call: http.post
   args:
-    url: "[#SERVICE_RESQL]/service/update_service_status"
+    url: "[#SERVICE_RESQL]/set-status"
     body:
       id: ${id}
       new_state: ${new_state}
@@ -67,7 +67,7 @@ set_status:
 set_plain_status:
   call: http.post
   args:
-    url: "[#SERVICE_RESQL]/service/update_service_status"
+    url: "[#SERVICE_RESQL]/set-status"
     body:
       id: ${id}
       new_state: ${new_state}
@@ -75,10 +75,10 @@ set_plain_status:
   next: return_ok
 
 get_status_name:
-  call: http.get
+  call: http.post
   args:
-    url: "[#SERVICE_RESQL]/service/get-service-name-by-id"
-    query:
+    url: "[#SERVICE_RESQL]/get-service-name-by-id"
+    body:
       id: ${id}
   result: name_res
   next: assign_values
@@ -120,6 +120,18 @@ activate_service:
       file_path: "[#RUUTER_SERVICES_PATH]/${ruuter_type}/[#RUUTER_SERVICES_DIR_PATH]/${old_file_status_path}/${name + old_file_end}"
       new_path: "[#RUUTER_SERVICES_PATH]/${ruuter_type}/[#RUUTER_SERVICES_DIR_PATH]/active/${name}.yml"
   result: activate_service_result
+  next: activate_all_mcq_services
+ 
+activate_all_mcq_services:
+  call: http.post
+  args:
+    url: "[#SERVICE_DMAPPER]/file-manager/move-all-that-starts-with"
+    body:
+      file_path: "[#RUUTER_SERVICES_PATH]/${ruuter_type}/[#RUUTER_SERVICES_DIR_PATH]/${old_file_status_path}"
+      new_path: "[#RUUTER_SERVICES_PATH]/${ruuter_type}/[#RUUTER_SERVICES_DIR_PATH]/active"
+      keyword: "${name}_"
+      format: "yml"
+  result: active_move_results
   next: return_ok
 
 deactivate_service:
@@ -130,6 +142,18 @@ deactivate_service:
       file_path: "[#RUUTER_SERVICES_PATH]/${ruuter_type}/[#RUUTER_SERVICES_DIR_PATH]/${old_file_status_path}/${name + old_file_end}"
       new_path: "[#RUUTER_SERVICES_PATH]/${ruuter_type}/[#RUUTER_SERVICES_DIR_PATH]/inactive/${name}.tmp"
   result: deactivate_service_result
+  next: dactivate_all_mcq_services
+
+dactivate_all_mcq_services:
+  call: http.post
+  args:
+    url: "[#SERVICE_DMAPPER]/file-manager/move-all-that-starts-with"
+    body:
+      file_path: "[#RUUTER_SERVICES_PATH]/${ruuter_type}/[#RUUTER_SERVICES_DIR_PATH]/${old_file_status_path}"
+      new_path: "[#RUUTER_SERVICES_PATH]/${ruuter_type}/[#RUUTER_SERVICES_DIR_PATH]/inactive"
+      keyword: "${name}_"
+      format: "tmp"
+  result: inactive_move_results
   next: return_ok
 
 draft_service:
@@ -140,13 +164,25 @@ draft_service:
       file_path: "[#RUUTER_SERVICES_PATH]/${ruuter_type}/[#RUUTER_SERVICES_DIR_PATH]/${old_file_status_path}/${name + old_file_end}"
       new_path: "[#RUUTER_SERVICES_PATH]/${ruuter_type}/[#RUUTER_SERVICES_DIR_PATH]/draft/${name}.tmp"
   result: draft_service_result
+  next: draft_all_mcq_services
+
+draft_all_mcq_services:
+  call: http.post
+  args:
+    url: "[#SERVICE_DMAPPER]/file-manager/move-all-that-starts-with"
+    body:
+      file_path: "[#RUUTER_SERVICES_PATH]/${ruuter_type}/[#RUUTER_SERVICES_DIR_PATH]/${old_file_status_path}"
+      new_path: "[#RUUTER_SERVICES_PATH]/${ruuter_type}/[#RUUTER_SERVICES_DIR_PATH]/draft"
+      keyword: "${name}_"
+      format: "tmp"
+  result: inactive_move_results
   next: check_for_intent_connection
 
 check_for_intent_connection:
-  call: http.get
+  call: http.post
   args:
-    url: "[#SERVICE_TRAINING_RESQL]/service_management/get_service_trigger_by_id"
-    query:
+    url: "[#SERVICE_TRAINING_RESQL]/get-service-trigger"
+    body:
       serviceId: ${id}
   result: connection_res
   next: check_is_connected_to_intents_or_has_requests
@@ -173,7 +209,7 @@ unlink_service_from_intent_in_rasa_domain:
 delete_intent_connection:
   call: http.post
   args:
-    url: "[#SERVICE_TRAINING_RESQL]/service_management/create_service_trigger"
+    url: "[#SERVICE_TRAINING_RESQL]/add-service-trigger"
     body:
       serviceId: ${id}
       intent: ${connection_res.response.body[0].intent}

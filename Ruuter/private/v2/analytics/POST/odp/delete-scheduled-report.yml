@@ -13,10 +13,10 @@ declaration:
         description: "Body field 'datasetId'"
 
 getJobDetails:
-  call: http.get
+  call: http.post
   args:
-    url: "[#ANALYTICS_RESQL]/reports/get_scheduled_report"
-    query:
+    url: "[#ANALYTICS_RESQL]/get-scheduled-report"
+    body:
       datasetId: ${incoming.body.datasetId}
   result: jobDetails
 
@@ -31,7 +31,7 @@ removeCronjobIfExists:
 deleteScheduledReport:
   call: http.post
   args:
-    url: "[#ANALYTICS_RESQL]/reports/delete_scheduled_report"
+    url: "[#ANALYTICS_RESQL]/delete-scheduled-report"
     body:
       id: ${incoming.body.datasetId}
   result: delete

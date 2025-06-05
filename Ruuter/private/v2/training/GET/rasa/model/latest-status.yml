@@ -8,9 +8,9 @@ declaration:
   namespace: training
 
 getLatestStatus:
-  call: http.get
+  call: http.post
   args:
-    url: "[#TRAINING_RESQL]/llm/get_latest_llm_training_status"
+    url: "[#TRAINING_RESQL]/get-latest-llm-training-status"
   result: res
 
 check_response:
@@ -25,5 +25,5 @@ return_result:
   next: end
 
 return_error:
-  return: "Error"
+  return: 'Error'
   next: end

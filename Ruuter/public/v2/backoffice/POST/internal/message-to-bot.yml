@@ -30,10 +30,10 @@ extractRequestData:
   next: check_bot_is_active
 
 check_bot_is_active:
-  call: http.get
+  call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/config/get_configuration"
-    query:
+    url: "[#CHATBOT_RESQL]/get-configuration"
+    body:
       key: "is_bot_active"
   result: is_bot_active_result
   next: check_bot_activity_result
@@ -45,10 +45,10 @@ check_bot_activity_result:
   next: return_bot_is_not_active
 
 get_bot_name:
-  call: http.get
+  call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/config/get_configuration"
-    query:
+    url: "[#CHATBOT_RESQL]/get-configuration"
+    body:
       key: "bot_institution_id"
     error: return_bad_request
   result: get_bot_name_result
@@ -57,25 +57,15 @@ get_bot_name:
 check_if_bot_name_exists:
   switch:
     - condition: ${get_bot_name_result.response.body[0]?.value != null}
-      next: get_title_visibility
+      next: get_chat
   next: return_bot_name_does_not_exist
 
-get_title_visibility:
-  call: http.get
-  args:
-    url: "[#CHATBOT_RESQL]/config/get_configuration"
-    query:
-      key: "is_csa_title_visible"
-  result: title_res
-  next: get_chat
-
 get_chat:
-  call: http.get
+  call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/chat/get_chat_by_id"
-    query:
+    url: "[#CHATBOT_RESQL]/get-chat-by-id"
+    body:
       id: ${chatId}
-      is_csa_title_visible: ${title_res.response.body[0]?.value}
   result: get_chat_result
   error: return_bad_request
   next: check_chat_belongs_to_bot
@@ -208,9 +198,9 @@ check_if_user_wants_csa:
   next: check_for_post_message_to_bot_result
 
 get_organization_base_config:
-  call: http.get
+  call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/config/get_configuration_organization"
+    url: "[#CHATBOT_RESQL]/get-organization-base-config"
   result: org_base_config_res
   next: assign_organization_base_config
 
@@ -226,12 +216,13 @@ check_if_organization_is_available_all_time:
   next: get_organization_working_details
 
 get_organization_working_details:
-  call: http.get
+  call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/config/get_organization_availability"
-    query:
+    url: "[#CHATBOT_RESQL]/get-is-organization-available"
+    body:
       holidays: ${holidays}
       holiday_names: ${holidayNames}
+      current_timestamp: ${new Date().toISOString()}
   result: org_res
   next: assign_organization_details
 
@@ -253,111 +244,41 @@ check_if_organization_is_available:
 return_is_a_holiday:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/chat/create_message_bot"
+    url: "[#CHATBOT_RESQL]/insert-bot-message"
     body:
       messages:
         - chatId: ${chatId}
           content: ${org_details.holidayMessage}
+          authorTimestamp: ${new Date().toISOString()}
           event: "${base_config.outsideWorkingHoursAskForContacts === 'true' ? 'unavailable_holiday_ask_contacts' : 'unavailable_holiday'}"
           authorId: ${get_bot_name_result.response.body[0].value}
           authorFirstName: ""
           authorLastName: ""
+          created: ${new Date().toISOString()}
   result: is_a_holiday_result
-  next: updateDenormalizedChatMessageHolidayBot
-
-updateDenormalizedChatMessageHolidayBot:
-  call: http.post
-  args:
-    url: "[#CHATBOT_RESQL]/chat/update_denormalized_chat_message_fields_only"
-    body:
-      chatId: ${chatId}
-      lastMessageTimestamp: ${is_a_holiday_result.response.body[0].updated}
-      isSupportMessage: false
-      isCustomerMessage: false
-      authorTimestamp: ${is_a_holiday_result.response.body[0].updated}
-      content: ${org_details.holidayMessage}
-      lastMessageAuthorId: ${get_bot_name_result.response.body[0].value}
-      lastMessageEvent: "${base_config.outsideWorkingHoursAskForContacts === 'true' ? 'unavailable_holiday_ask_contacts' : 'unavailable_holiday'}"
-  result: updateDenormalizedChatMessageCsasNotAvailableBotRes
-  next: updateDenormalizedChatMetricsMessageFieldsHoliday
-
-updateDenormalizedChatMetricsMessageFieldsHoliday:
-  call: http.post
-  args:
-    url: "[#CHATBOT_RESQL]/chat/update_denormalized_chat_messages_for_metrics_message_fields_only"
-    body:
-      chatBaseId: ${chatId}
-      messageId: ${is_a_holiday_result.response.body[0].id}
-      messageBaseId: ${is_a_holiday_result.response.body[0].baseId}
-      content: ${org_details.holidayMessage}
-      lastMessageTimestamp: ${is_a_holiday_result.response.body[0].updated}
-      timestamp: ${is_a_holiday_result.response.body[0].updated}
-      messageCreated: ${is_a_holiday_result.response.body[0].updated}
-      messageUpdated: ${is_a_holiday_result.response.body[0].updated}
-      messageEvent: "${base_config.outsideWorkingHoursAskForContacts === 'true' ? 'unavailable_holiday_ask_contacts' : 'unavailable_holiday'}"
-      messageAuthorRole: "buerokratt"
-      messageAuthorId: ${get_bot_name_result.response.body[0].value}
-      messageForwardedFromCsa: ""
-      messageForwardedToCsa: ""
-  result: updateDenormalizedChatMetricsMessageFieldsHolidayRes
   next: return_is_holiday
 
 return_organization_is_not_available:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/chat/create_message_bot"
+    url: "[#CHATBOT_RESQL]/insert-bot-message"
     body:
       messages:
         - chatId: ${chatId}
           content: ${base_config.outsideWorkingHoursMessage}
+          authorTimestamp: ${new Date().toISOString()}
           event: "${base_config.outsideWorkingHoursAskForContacts === 'true' ? 'unavailable_organization_ask_contacts' : 'unavailable_organization'}"
           authorId: ${get_bot_name_result.response.body[0].value}
           authorFirstName: ""
           authorLastName: ""
+          created: ${new Date().toISOString()}
   result: organization_is_not_available_result
-  next: updateDenormalizedChatOrganizationNotAvailableBot
-
-updateDenormalizedChatOrganizationNotAvailableBot:
-  call: http.post
-  args:
-    url: "[#CHATBOT_RESQL]/chat/update_denormalized_chat_message_fields_only"
-    body:
-      chatId: ${chatId}
-      lastMessageTimestamp: ${organization_is_not_available_result.response.body[0].updated}
-      isSupportMessage: false
-      isCustomerMessage: false
-      authorTimestamp: ${organization_is_not_available_result.response.body[0].updated}
-      content: ${base_config.outsideWorkingHoursMessage}
-      lastMessageAuthorId: ${get_bot_name_result.response.body[0].value}
-      lastMessageEvent: "${base_config.outsideWorkingHoursAskForContacts === 'true' ? 'unavailable_organization_ask_contacts' : 'unavailable_organization'}"
-  result: updateDenormalizedChatMessageCsasNotAvailableBotRes
-  next: updateDenormalizedChatMetricsMessageFieldsOrganization
-
-updateDenormalizedChatMetricsMessageFieldsOrganization:
-  call: http.post
-  args:
-    url: "[#CHATBOT_RESQL]/chat/update_denormalized_chat_messages_for_metrics_message_fields_only"
-    body:
-      chatBaseId: ${chatId}
-      messageId: ${organization_is_not_available_result.response.body[0].id}
-      messageBaseId: ${organization_is_not_available_result.response.body[0].baseId}
-      content: ${base_config.outsideWorkingHoursMessage}
-      lastMessageTimestamp: ${organization_is_not_available_result.response.body[0].updated}
-      timestamp: ${organization_is_not_available_result.response.body[0].updated}
-      messageCreated: ${organization_is_not_available_result.response.body[0].updated}
-      messageUpdated: ${organization_is_not_available_result.response.body[0].updated}
-      messageEvent: "${base_config.outsideWorkingHoursAskForContacts === 'true' ? 'unavailable_organization_ask_contacts' : 'unavailable_organization'}"
-      messageAuthorRole: "buerokratt"
-      messageAuthorId: ${get_bot_name_result.response.body[0].value}
-      messageForwardedFromCsa: ""
-      messageForwardedToCsa: ""
-  result: updateDenormalizedChatMetricsMessageFieldsOrganizationRes
   next: return_organization_is_not_available_res
 
 get_all_available_csas:
-  call: http.get
+  call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/auth_users/list_customer_support_agent_activities_online_agents"
+    url: "[#CHATBOT_RESQL]/get-all-available-customer-support-agents"
   result: csas_res
   next: assign_available_csas
 
@@ -375,59 +296,24 @@ check_if_csas_are_available:
 send_csas_not_available_message:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/chat/create_message_bot"
+    url: "[#CHATBOT_RESQL]/insert-bot-message"
     body:
       messages:
         - chatId: ${chatId}
           content: ${base_config.noCsaMessage}
+          authorTimestamp: ${new Date().toISOString()}
           event: "${base_config.askForContacts === 'true' ? 'unavailable_csas_ask_contacts' : 'unavailable_csas'}"
           authorId: ${get_bot_name_result.response.body[0].value}
           authorFirstName: ""
           authorLastName: ""
+          created: ${new Date().toISOString()}
   result: csas_not_available_message_result
-  next: updateDenormalizedChatCsasNotAvailableBot
-
-updateDenormalizedChatCsasNotAvailableBot:
-  call: http.post
-  args:
-    url: "[#CHATBOT_RESQL]/chat/update_denormalized_chat_message_fields_only"
-    body:
-      chatId: ${chatId}
-      lastMessageTimestamp: ${csas_not_available_message_result.response.body[0].updated}
-      isSupportMessage: false
-      isCustomerMessage: false
-      authorTimestamp: ${csas_not_available_message_result.response.body[0].updated}
-      content: ${base_config.noCsaMessage}
-      lastMessageAuthorId: ${get_bot_name_result.response.body[0].value}
-      lastMessageEvent: "${base_config.askForContacts === 'true' ? 'unavailable_csas_ask_contacts' : 'unavailable_csas'}"
-  result: updateDenormalizedChatMessageCsasNotAvailableBotRes
-  next: updateDenormalizedChatMetricsMessageFieldsCSAs
-
-updateDenormalizedChatMetricsMessageFieldsCSAs:
-  call: http.post
-  args:
-    url: "[#CHATBOT_RESQL]/chat/update_denormalized_chat_messages_for_metrics_message_fields_only"
-    body:
-      chatBaseId: ${chatId}
-      messageId: ${csas_not_available_message_result.response.body[0].id}
-      messageBaseId: ${csas_not_available_message_result.response.body[0].baseId}
-      content: ${base_config.noCsaMessage}
-      lastMessageTimestamp: ${csas_not_available_message_result.response.body[0].updated}
-      timestamp: ${csas_not_available_message_result.response.body[0].updated}
-      messageCreated: ${csas_not_available_message_result.response.body[0].updated}
-      messageUpdated: ${csas_not_available_message_result.response.body[0].updated}
-      messageEvent: "${base_config.askForContacts === 'true' ? 'unavailable_csas_ask_contacts' : 'unavailable_csas'}"
-      messageAuthorRole: "buerokratt"
-      messageAuthorId: ${get_bot_name_result.response.body[0].value}
-      messageForwardedFromCsa: ""
-      messageForwardedToCsa: ""
-  result: updateDenormalizedChatMetricsMessageFieldsCSAsRes
   next: return_csa_is_not_available
 
 redirect_chat_to_back_office:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/chat/update_chat_remove_agent"
+    url: "[#CHATBOT_RESQL]/remove_cs_agent_from_chat"
     body:
       chatId: ${chatId}
   result: redirect_chat_to_back_office_result
@@ -485,53 +371,10 @@ add_bot_message_to_db:
 do_add_bot_message_to_db:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/chat/create_message_bot"
+    url: "[#CHATBOT_RESQL]/insert-bot-message"
     body:
       messages: ${converted_messages_res}
   result: add_bot_message_to_bot_result
-  next: format_bot_messages_text
-
-format_bot_messages_text:
-  call: http.post
-  args:
-    url: "[#CHATBOT_DMAPPER_HBS]/parse_all_messages_text"
-    headers:
-      type: json
-    body:
-      data: ${botMsg}
-  result: all_msgs_result
-  next: updateDenormalizedChatDoAddMessagesToDb
-
-updateDenormalizedChatDoAddMessagesToDb:
-  call: http.post
-  args:
-    url: "[#CHATBOT_RESQL]/chat/update_denormalized_chat_messages_fields_only_with_all_messages"
-    body:
-      chatId: ${chatId}
-      lastMessageTimestamp: ${add_bot_message_to_bot_result.response.body[0].updated}
-      isSupportMessage: false
-      isCustomerMessage: false
-      authorTimestamp: ${add_bot_message_to_bot_result.response.body[0].updated}
-      content: ${all_msgs_result.response.body[all_msgs_result.response.body.length - 1]}
-      lastMessageAuthorId: ${get_bot_name_result.response.body[0].value}
-      lastMessageEvent: ""
-      messages: ${all_msgs_result.response.body}
-  result: updateDenormalizedChatMessageCsasNotAvailableBotRes
-  next: updateDenormalizedChatMetricsMessageFieldsBot
-
-updateDenormalizedChatMetricsMessageFieldsBot:
-  call: http.post
-  args:
-    url: "[#CHATBOT_RESQL]/chat/update_bulk_denormalized_chat_messages_for_metrics_message_fields"
-    body:
-      chatBaseId: ${chatId}
-      messages: ${add_bot_message_to_bot_result.response.body}
-      messageEvent: ""
-      messageAuthorRole: "buerokratt"
-      messageAuthorId: ${get_bot_name_result.response.body[0].value}
-      messageForwardedFromCsa: ""
-      messageForwardedToCsa: ""
-  result: updateDenormalizedChatMetricsMessageFieldsBotRes
   next: return_message_sent
 
 return_ok:

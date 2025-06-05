@@ -26,6 +26,9 @@ declaration:
       - field: type
         type: string
         description: "Body field 'type'"
+      - field: updateServiceDb
+        type: boolean
+        description: "Body field 'updateServiceDb'"    
     params:
       - field: id
         type: string
@@ -40,6 +43,22 @@ extract_request_data:
     type: ${incoming.body.type}
     content: ${incoming.body.content}
     structure: ${incoming.body.structure}
+
+check_for_update_service_db:
+  switch:
+    - condition: ${incoming.body.updateServiceDb === true}
+      next: delete_all_mcq_files
+  next: check_for_content
+
+delete_all_mcq_files:
+  call: http.post
+  args:
+    url: "[#SERVICE_DMAPPER]/file-manager/delete-all-that-starts-with"
+    body:
+      path: "[#RUUTER_SERVICES_PATH]/${type}/services/draft"
+      keyword: "${name}-"
+  result: deleteRes
+  next: check_for_content
 
 check_for_content:
   switch:
@@ -97,11 +116,17 @@ check_type:
     - condition: ${type !== 'GET' && type !== 'POST'}
       next: return_incorrect_request
 
+check_if_update_service_db:
+  switch:
+    - condition: ${incoming.body.updateServiceDb === true}
+      next: get_service_by_id
+  next: return_ok
+
 get_service_by_id:
-  call: http.get
+  call: http.post
   args:
-    url: "[#SERVICE_RESQL]/service/get_service_by_id"
-    query:
+    url: "[#SERVICE_RESQL]/get-service-by-id"
+    body:
       id: ${id}
   result: old_service_result
 
@@ -146,7 +171,7 @@ check_result:
 service_edit:
   call: http.post
   args:
-    url: "[#SERVICE_RESQL]/service/update_service"
+    url: "[#SERVICE_RESQL]/edit"
     body:
       id: ${id}
       name: ${name}

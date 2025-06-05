@@ -17,10 +17,10 @@ extractRequestData:
     chatId: ${incoming.body.chatId}
 
 getUnavailableEndedChats:
-  call: http.get
+  call: http.post
   args:
-    url: "[#TRAINING_USERS_RESQL]/chat/list_chat_messages"
-    query:
+    url: "[#TRAINING_USERS_RESQL]/get-chat-messages"
+    body:
       chatId: ${chatId}
   result: res
 

@@ -21,10 +21,10 @@ extractRequestData:
     endDate: "${incoming.body.endDate}"
 
 getEndedChats:
-  call: http.get
+  call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/chat/get_chats_ended_count"
-    query:
+    url: "[#CHATBOT_RESQL]/get-cs-all-ended-chats-count"
+    body:
       start: ${startDate}
       end: ${endDate}
   result: res

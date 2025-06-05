@@ -13,10 +13,10 @@ declaration:
         description: "Parameter 'id'"
 
 get_status:
-  call: http.get
+  call: http.post
   args:
-    url: "[#SERVICE_RESQL]/service/get_service_status_by_id"
-    query:
+    url: "[#SERVICE_RESQL]/status"
+    body:
       id: ${incoming.params.id}
   result: res
 

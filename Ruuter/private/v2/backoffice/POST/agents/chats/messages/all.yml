@@ -16,12 +16,13 @@ extractRequestData:
   assign:
     chatId: ${incoming.body.chatId}
 
-getChatMessagesByChatIdAndActiveUser:
-  template: "[#CHATBOT_PROJECT_LAYER]/chats/get-chat-messages-by-chat-id-and-active-user"
-  requestType: templates
-  body:
-    chatId: ${chatId}
+getUnavailableEndedChats:
+  call: http.post
+  args:
+    url: "[#CHATBOT_RESQL]/get-chat-messages"
+    body:
+      chatId: ${chatId}
   result: res
 
 return_result:
-  return: ${res}
+  return: ${res.response.body}

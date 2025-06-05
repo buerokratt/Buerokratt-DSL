@@ -21,9 +21,9 @@ extractRequestData:
     clientTimestamp: "${incoming.body.clientTimestamp}"
 
 getGreetingMessage:
-  call: http.get
+  call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/config/get_message_greeting"
+    url: "[#CHATBOT_RESQL]/get-greeting-message"
   result: greeting_result
 
 getUuid:
@@ -39,19 +39,19 @@ assignUuidAndGreetingMessage:
   assign:
     uuid: ${uuid_result.response.body.uuid}
     greetingMessage: ${greeting_result.response.body[0].est}
-  next: insertGreetingMessage
+  next: insertGreetingMessage  
 
 insertGreetingMessage:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/chat/create_message"
+    url: "[#CHATBOT_RESQL]/insert-message"
     body:
       chatId: ${chatId}
       messageId: ${uuid}
       content: ${greetingMessage}
-      authorTimestamp: "CURRENT_TIMESTAMP"
+      authorTimestamp: ${new Date().toISOString()}
       authorRole: "buerokratt"
-      created: "CURRENT_TIMESTAMP"
+      created: ${new Date().toISOString()}
       event: "greeting"
       authorId: ""
       authorFirstName: ""
@@ -61,19 +61,8 @@ insertGreetingMessage:
       forwardedFromCsa: ""
       forwardedToCsa: ""
   result: insertMessageResult
-  next: assignResult
-
-assignResult:
-  assign:
-    data:
-      {
-        "updated": "${insertMessageResult.response.body[0].updated}",
-        "messageId": "${insertMessageResult.response.body[0].id}",
-        "messageBaseId": "${insertMessageResult.response.body[0].baseId}",
-        "greetingMessage": "${greetingMessage}",
-      }
-  next: returnSuccess
+  next: returnSuccess  
 
 returnSuccess:
-  return: ${data}
+  return: "Greeting Message Sent Successfully"
   next: end

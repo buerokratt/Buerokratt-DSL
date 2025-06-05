@@ -29,12 +29,12 @@ declaration:
       - field: event
         type: string
         description: "Body field 'event'"
-      - field: id
+      - field: originalBaseId
         type: string
-        description: "Body field 'id'"
-      - field: created
+        description: "Body field 'originalBaseId'"
+      - field: originalCreated
         type: string
-        description: "Body field 'created'"
+        description: "Body field 'originalCreated'"
     headers:
       - field: cookie
         type: string
@@ -49,19 +49,20 @@ extractRequestData:
     authorTimestamp: ${incoming.body.authorTimestamp}
     content: ${incoming.body.content}
     event: ${incoming.body.event}
-    id: ${incoming.body.id}
-    created: ${incoming.body.created}
+    originalBaseId: ${incoming.body.originalBaseId}
+    originalCreated: ${incoming.body.originalCreated}
     cookie: ${incoming.headers.cookie}
   next: get_user_info
 
 get_user_info:
   call: http.post
   args:
-    url: "[#CHATBOT_TIM]/jwt/custom-jwt-userinfo"
-    contentType: plaintext
-    headers:
-      cookie: ${cookie}
-    plaintext: "customJwtCookie"
+   url: "[#CHATBOT_TIM]/jwt/custom-jwt-userinfo"
+   contentType: plaintext
+   headers:
+    cookie: ${cookie}
+   plaintext: 
+      "customJwtCookie"
   result: res
   next: check_user_info_response
 
@@ -74,20 +75,33 @@ check_user_info_response:
 assignIdCode:
   assign:
     idCode: ${res.response.body.idCode}
-  next: check_is_edited_message
+  next: getUuid
+
+getUuid:
+  call: http.post
+  args:
+    url: "[#CHATBOT_DMAPPER_HBS]/return_uuid"
+    headers:
+      type: json
+  result: uuid_result
+  next: assignUuid
+
+assignUuid:
+  assign:
+    uuid: ${uuid_result.response.body.uuid}
 
 check_is_edited_message:
   switch:
-    - condition: ${id != null}
+    - condition: ${originalBaseId != null}
       next: getOriginalMessageById
   next: return_bad_request
 
 getOriginalMessageById:
-  call: http.get
+  call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/chat/get_message"
-    query:
-      id: ${id}
+    url: "[#CHATBOT_RESQL]/get-message-by-id"
+    body:
+      id: ${originalBaseId}
   result: original_message
 
 check_message_belongs_to_author:
@@ -97,9 +111,9 @@ check_message_belongs_to_author:
   next: return_bad_request
 
 getBotConfig:
-  call: http.get
+  call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/config/get_configuration_bot"
+    url: "[#CHATBOT_RESQL]/get-bot-config"
   result: configRes
 
 check_is_editing_Allowed:
@@ -111,68 +125,32 @@ check_is_editing_Allowed:
 insertEditedMessage:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/chat/create_message_edited"
+    url: "[#CHATBOT_RESQL]/insert-edited-message"
     body:
       chatId: ${chatId}
-      messageId: ${id}
+      messageId: ${uuid}
       content: ${content ?? ""}
-      authorTimestamp: ${authorTimestamp ?? "CURRENT_TIMESTAMP"}
+      authorTimestamp: ${authorTimestamp ?? new Date().toISOString()}
       authorId: ${idCode}
       authorFirstName: ${authorFirstName ?? ""}
       authorRole: ${authorRole ?? "backoffice-user"}
-      created: ${created}
+      created: ${originalCreated}
       authorLastName: ""
       rating: ""
       event: ${event ?? ""}
       forwardedByUser: ""
       forwardedFromCsa: ""
       forwardedToCsa: ""
+      originalBaseId: ${originalBaseId}
   result: insertMessageResult
-  next: updateDenormalizedChatMessage
-
-updateDenormalizedChatMessage:
-  call: http.post
-  args:
-    url: "[#CHATBOT_RESQL]/chat/update_denormalized_chat_message_fields_only"
-    body:
-      chatId: ${chatId}
-      lastMessageTimestamp: ${insertMessageResult.response.body[0].updated}
-      isSupportMessage: ${authorRole == "backoffice-user"}
-      isCustomerMessage: ${authorRole == "end-user"}
-      authorTimestamp: ${authorTimestamp ?? insertMessageResult.response.body[0].updated}
-      content: ${content ?? ""}
-      lastMessageAuthorId: ${idCode}
-      lastMessageEvent: ${event ?? ""}
-  result: updateDenormalizedChatRes
-  next: updateDenormalizedChatMetricsMessageFields
-
-updateDenormalizedChatMetricsMessageFields:
-  call: http.post
-  args:
-    url: "[#CHATBOT_RESQL]/chat/update_denormalized_chat_messages_for_metrics_message_fields_only"
-    body:
-      chatBaseId: ${chatId}
-      messageId: ${insertMessageResult.response.body[0].id}
-      messageBaseId: ${insertMessageResult.response.body[0].baseId}
-      content: ${content ?? ""}
-      lastMessageTimestamp: ${created}
-      timestamp: ${insertMessageResult.response.body[0].updated}
-      messageCreated: ${created}
-      messageUpdated: ${insertMessageResult.response.body[0].updated}
-      messageEvent: ${event ?? ""}
-      messageAuthorRole: ${authorRole ?? "backoffice-user"}
-      messageAuthorId: ${idCode}
-      messageForwardedFromCsa: ""
-      messageForwardedToCsa: ""
-  result: updateDenormalizedChatMetricsMessageRes
   next: getMessageById
 
 getMessageById:
-  call: http.get
+  call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/chat/get_message"
-    query:
-      id: ${id}
+    url: "[#CHATBOT_RESQL]/get-message-by-id"
+    body:
+      id: ${uuid}
   result: message_res
 
 notify_chats:
@@ -189,7 +167,7 @@ notify_messages:
   body:
     chatId: ${chatId}
     type: "message"
-    messageId: ${id}
+    messageId: ${uuid}
   result: messages_notify_res
   next: return_result
 
@@ -200,9 +178,10 @@ return_result:
 return_bad_request:
   status: 400
   return: false
-  next: end
+  next: end  
 
 return_message_edit_not_allowed:
   status: 409
   return: "Message editing not allowed."
-  next: end
+  next: end  
+

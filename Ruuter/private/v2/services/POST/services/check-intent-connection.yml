@@ -17,10 +17,10 @@ extract_request_data:
     serviceId: ${incoming.body.serviceId}
 
 check_for_intent_connection:
-  call: http.get
+  call: http.post
   args:
-    url: "[#SERVICE_TRAINING_RESQL]/service_management/get_service_trigger_by_id"
-    query:
+    url: "[#SERVICE_TRAINING_RESQL]/get-service-trigger"
+    body:
       serviceId: ${serviceId}
   result: res
 

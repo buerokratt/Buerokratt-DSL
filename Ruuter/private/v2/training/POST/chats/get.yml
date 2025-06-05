@@ -16,23 +16,14 @@ extractRequestData:
   assign:
     chatId: ${incoming.body.chatId}
 
-getTitleVisibility:
-  call: http.get
-  args:
-    url: "[#TRAINING_USERS_RESQL]/config/get_configuration"
-    query:
-      key: "is_csa_title_visible"
-  result: title_res
-
 getChatById:
-  call: http.get
+  call: http.post
   args:
-    url: "[#TRAINING_USERS_RESQL]/chat/get_chat_by_id"
-    is_csa_title_visible: ${title_res.response.body[0]?.value}
-    query:
+    url: "[#TRAINING_USERS_RESQL]/get-chat-by-id"
+    body:
       id: ${chatId}
   result: res
 
 return_result:
-  return: ${res.response.body[0]}
-  next: end
+   return: ${res.response.body[0]}  
+   next: end

@@ -28,9 +28,9 @@ declaration:
         description: "Body field 'start'"
 
 getKey:
-  call: http.get
+  call: http.post
   args:
-    url: "[#ANALYTICS_RESQL]/config/get_odp_settings"
+    url: "[#ANALYTICS_RESQL]/get-odp-settings"
   result: settings
   next: authenticate
 

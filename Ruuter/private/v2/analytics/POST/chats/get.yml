@@ -17,10 +17,10 @@ extractRequestData:
     chatId: ${incoming.body.chatId}
 
 getChatById:
-  call: http.get
+  call: http.post
   args:
-    url: "[#ANALYTICS_RESQL]/chat/get_chat_by_id"
-    query:
+    url: "[#ANALYTICS_RESQL]/get-chat-by-id"
+    body:
       id: ${chatId}
   result: res
 
