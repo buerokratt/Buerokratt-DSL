@@ -30,7 +30,7 @@ CHATBOT_MAPPINGS=(
 )
 CS_MAPPINGS=(
  "DSL/Ruuter.public:Ruuter/public/v2/Common-Services"
-}
+)
 
 # Training-Module-specific mappings (training-related)
 TRAINING_MAPPINGS=(
