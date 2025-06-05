@@ -2,6 +2,122 @@
 
 All changes to Buerokratt-DSL from source repos.
 
+# Sync Run - 2025-06-05 10:30:52
+
+## Chatbot Changes
+No changes detected.
+
+## Training Changes
+### Liquibase/training
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/training/changelog.yaml
+
+## Analytics Changes
+### Liquibase/analytics
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/changelog.yaml
+
+## Service Changes
+### Liquibase/services
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/services/changelog.yaml
+
+### Ruuter/public/v2/Common-Services
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/GET/calendar/national-holidays/mock/previous.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/legacy/rahvaalgatus/initiative-events-popular.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/GET/riigikogu/members-participation.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/GET/calendar/national-holidays/mock/today.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/legacy/parnu/README.md
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/POST/weather/mock/EE.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/legacy/POST/rahvaalgatus/initiative-events-latest.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/GET/electricity/mock/highest-price.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/GET/electricity/lowest-price.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/GET/calendar/school-holidays/find/by-month.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/GET/calendar/national-holidays/mock/find/by-name.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/POST/companies/mock/national-taxes.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/GET/electricity/mock/time-period.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/POST/companies/mock/detailed-company-data.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/POST/companies/mock/simple-company-data.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/POST/companies/mock/company-beneficial-owners.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/GET/calendar/national-holidays/mock/find/by-month.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/legacy/business-register/simple-company-data.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/legacy/DSL/POST/services/companies/revenue.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/legacy/DSL/GET/reload.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/GET/electricity/mock/lowest-price.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/GET/statistics-estonia/mock/consumer-price-index.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/GET/electricity/time-period.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/GET/public-initiatives/mock/most-recent.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/GET/calendar/national-holidays/find/by-name.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/GET/statistics-estonia/mock/estimated-subsistence-minimum.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/GET/electricity/highest-price.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/POST/companies/national-taxes.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/legacy/business-register/company-related-persons.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/GET/calendar/school-holidays/school-holidays.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/GET/population-register/right-to-vote.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/GET/riigikogu/mock/members-participation.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/GET/riigikogu/mock/five-most-recent.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/legacy/DSL/POST/services/companies/national-taxes.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/GET/motor-vehicle-tax/mock/registration-number.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/GET/calendar/national-holidays/next.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/POST/companies/company-beneficial-owners.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/legacy/POST/riigikogu/riigikogu-viimane-haaletus.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/GET/calendar/school-holidays/next.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/POST/companies/mock/search.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/GET/riigikogu/recent-voting.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/POST/companies/mock/work-force-taxes.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/legacy/riigikogu/riigikogu-five-latest-votings.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/legacy/buerokratt/README.md
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/GET/calendar/school-holidays/ytd.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/legacy/DSL/POST/services/companies/search.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/GET/calendar/national-holidays/mock/eoy.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/legacy/estonian-statistics/README.md
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/GET/statistics-estonia/mock/unemployment-rate.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/GET/statistics-estonia/unemployment-rate.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/GET/electricity/current-price.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/GET/calendar/national-holidays/eoy.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/GET/calendar/school-holidays/eoy.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/POST/companies/revenue.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/GET/riigikogu/five-most-recent.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/GET/population-register/residence-information.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/GET/motor-vehicle-tax/registration-number.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/legacy/elering/README.md
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/GET/calendar/school-holidays/previous.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/GET/calendar/national-holidays/ytd.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/GET/population-register/findUsage.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/POST/companies/mock/company-related-persons.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/legacy/DSL/POST/services/companies/work-force-taxes.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/legacy/DSL/POST/services/riigikogu/riigikogu-attendance.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/README.md
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/GET/calendar/national-holidays/previous.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/POST/companies/employees.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/GET/riigikogu/mock/recent-voting.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/POST/companies/search.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/GET/calendar/national-holidays/mock/national-holidays.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/POST/companies/mock/employees.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/GET/calendar/national-holidays/mock/next.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/POST/companies/company-related-persons.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/GET/public-initiatives/most-recent.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/GET/calendar/national-holidays/today.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/legacy/business-register/detailed-company-data.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/GET/calendar/national-holidays/find/by-month.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/legacy/DSL/POST/services/companies/employees.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/GET/calendar/school-holidays/today.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/GET/statistics-estonia/estimated-subsistence-minimum.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/POST/companies/mock/revenue.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/GET/statistics-estonia/consumer-price-index.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/POST/weather/EE.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/GET/public-initiatives/mock/most-popular.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/GET/calendar/national-holidays/mock/ytd.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/POST/companies/detailed-company-data.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/GET/calendar/school-holidays/find/by-name.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/GET/population-register/election-information.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/GET/electricity/mock/current-price.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/legacy/business-register/company-beneficial-owners.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/GET/public-initiatives/most-popular.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/POST/companies/simple-company-data.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/GET/calendar/school-holidays/mock/school-holidays.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/POST/companies/work-force-taxes.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/Common-Services/GET/calendar/national-holidays/national-holidays.yml
+
+
+
 # Sync Run - 2025-06-05 09:45:14
 
 ## Chatbot Changes
