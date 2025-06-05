@@ -19,7 +19,7 @@ VERSION="v2"
 
 # Chatbot-specific mappings (e.g., backoffice-related)
 CHATBOT_MAPPINGS=(
-  "DSL/Ruuter.public:Ruuter/private/v2/Common-Services"
+  "DSL/Ruuter.public:Ruuter/public/v2/Common-Services"
   "DSL/Ruuter.public/backoffice:Ruuter/public/v2/backoffice"
   "DSL/Ruuter.private/backoffice:Ruuter/private/v2/backoffice"
   "DSL/Resql/backoffice:Resql/backoffice"
