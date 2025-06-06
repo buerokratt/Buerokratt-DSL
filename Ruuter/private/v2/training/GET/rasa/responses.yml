@@ -61,7 +61,7 @@ getRules:
 mapResponsesData:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/hbs/training/get_responses_dependencies"
+    url: "[#TRAINING_DMAPPER_HBS]/training/get_responses_dependencies"
     headers:
       type: "json"
     body:
