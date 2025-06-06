@@ -2,6 +2,48 @@
 
 All changes to Buerokratt-DSL from source repos.
 
+# Sync Run - 2025-06-06 05:42:29
+
+## Chatbot Changes
+No changes detected.
+
+## Training Changes
+No changes detected.
+
+## Analytics Changes
+###  CronManager/analytics
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/ CronManager/analytics/health.yml
+
+## Service Changes
+### Resql/services
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/endpoints/delete_endpoints_by_service_id.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/endpoints/delete_endpoint.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/add.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/get-approved-tiggers.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/endpoints/update_endpoint.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/get-common-services-list.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/set-status.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/get-requested-service-triggers.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/add-service-trigger.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/get-service-by-id.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/delete-service-trigger.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/get-service-trigger.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/edit.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/endpoints/get_service_ids_by_endpoint_id.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/get-active-services-list.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/get-settings.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/get-available-intents.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/update-settings.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/delete-service.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/get-service-name-by-id.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/services/get_services_by_ids.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/get-services-list.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/status.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/endpoints/create_endpoint.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/endpoints/get_endpoints_by_service_id.sql
+
+
+
 # Sync Run - 2025-06-06 05:36:08
 
 ## Chatbot Changes
