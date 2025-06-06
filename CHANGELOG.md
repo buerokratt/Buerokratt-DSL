@@ -2,6 +2,35 @@
 
 All changes to Buerokratt-DSL from source repos.
 
+# Sync Run - 2025-06-06 05:36:08
+
+## Chatbot Changes
+No changes detected.
+
+## Training Changes
+### Liquibase/training
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/training/changelog.yaml
+
+## Analytics Changes
+### Liquibase/analytics
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/changelog.yaml
+
+## Service Changes
+### Liquibase/services
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/services/changelog.yaml
+
+### Resql/services
+Deleted: POST/get-service-trigger.sql
+POST/get-requested-service-triggers.sql
+POST/get-available-intents.sql
+POST/get-approved-tiggers.sql
+POST/delete-service-trigger.sql
+POST/add-service-trigger.sql Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/get-configuration.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/get-user-by-login.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/is-user-roles-allowed.sql
+
+
+
 # Sync Run - 2025-06-05 12:34:06
 
 ## Chatbot Changes
