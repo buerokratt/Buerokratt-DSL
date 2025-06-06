@@ -57,6 +57,8 @@ ANALYTICS_MAPPINGS=(
 SERVICE_MAPPINGS=(
   "DSL/Ruuter/services:Ruuter/private/v2/services"
   "DSL/Resql/services:Resql/services"
+  "DSL/Resql/training:Resql/services"
+  "DSL/Resql/users:Resql/services"
   "DSL/DMapper/services/hbs:DataMapper/services/hbs"
   "DSL/CronManager/services:CronManager/services"
   "DSL/Liquibase:Liquibase/services"
