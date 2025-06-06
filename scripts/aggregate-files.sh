@@ -17,12 +17,11 @@ SOURCE_REPOS=(
 # Hardcoded version
 VERSION="v2"
 
-# Chatbot-specific mappings (e.g., backoffice-related)
+# Chatbot-specific mappings
 CHATBOT_MAPPINGS=(
   "DSL/Ruuter.public/backoffice:Ruuter/public/v2/backoffice"
   "DSL/Ruuter.private/backoffice:Ruuter/private/v2/backoffice"
   "DSL/Resql/backoffice:Resql/backoffice"
-#  "DSL/Resql:Resql/backoffice"  # Consolidates training into backoffice
   "DSL/DMapper/backoffice/hbs:DataMapper/backoffice/hbs"
   "DSL/CronManager:CronManager/backoffice"
   "DSL/Liquibase:Liquibase/backoffice"
@@ -32,7 +31,6 @@ CS_MAPPINGS=(
  "DSL/Ruuter.public:Ruuter/public/v2/Common-Services"
 )
 
-# Training-Module-specific mappings (training-related)
 TRAINING_MAPPINGS=(
   "DSL/Ruuter.private/training:Ruuter/private/v2/training"
   "DSL/Resql/training:Resql/training"
@@ -44,21 +42,19 @@ TRAINING_MAPPINGS=(
   "DSL/OpenSearch:OpenSearch/training"
 )
 
-# Analytics-Module-specific mappings (analytics-related)
 ANALYTICS_MAPPINGS=(
   "DSL/Ruuter/analytics:Ruuter/private/v2/analytics"
   "DSL/Resql/analytics:Resql/analytics"
   "DSL/DMapper/analytics/hbs:DataMapper/analytics/hbs"
-  "DSL/CronManager:CronManager/analytics"
+  "DSL/CronManager: CronManager/analytics"
   "DSL/Liquibase:Liquibase/analytics"
 )
 
-# Service-Module-specific mappings (services-related)
 SERVICE_MAPPINGS=(
-  "DSL/Ruuter/services:Ruuter/private/v2/services"
   "DSL/Resql/services:Resql/services"
   "DSL/Resql/training:Resql/services"
   "DSL/Resql/users:Resql/services"
+  "DSL/Ruuter/services:Ruuter/private/v2/services"
   "DSL/DMapper/services/hbs:DataMapper/services/hbs"
   "DSL/CronManager/services:CronManager/services"
   "DSL/Liquibase:Liquibase/services"
@@ -98,13 +94,26 @@ for repo in "${SOURCE_REPOS[@]}"; do
     echo "Unknown repo $REPO_NAME - skipping"
     continue
   fi
-  
+
   for mapping in "${MAPPINGS[@]}"; do
     SOURCE_FOLDER="${mapping%%:*}"
     DEST_FOLDER="${mapping##*:}"
     FULL_SOURCE="$REPO_DIR/$SOURCE_FOLDER/"
     FULL_DEST="$CENTRAL_PATH/$DEST_FOLDER/"
-    
+
+    # Special handling for Resql/services - merge multiple into staging first
+    if [[ "$DEST_FOLDER" == "Resql/services" ]]; then
+      STAGING_DEST="$TEMP_DIR/staging_Resql_services"
+      mkdir -p "$STAGING_DEST"
+      if [ -d "$FULL_SOURCE" ]; then
+        rsync -av "$FULL_SOURCE" "$STAGING_DEST/"
+        echo "Staged $FULL_SOURCE into $STAGING_DEST"
+      else
+        echo "No $FULL_SOURCE found in $REPO_NAME"
+      fi
+      continue
+    fi
+
     if [ -d "$FULL_SOURCE" ]; then
       mkdir -p "$FULL_DEST"
       BEFORE_FILE=$(mktemp)
@@ -113,7 +122,7 @@ for repo in "${SOURCE_REPOS[@]}"; do
       RSYNC_OUTPUT=$(rsync -av --delete "$FULL_SOURCE" "$FULL_DEST" 2>&1)
       echo "Synced $FULL_SOURCE to $FULL_DEST"
       find "$FULL_DEST" -type f -exec sha256sum {} + 2>/dev/null | sort -k 3 > "$AFTER_FILE"
-      
+
       CHANGES=""
       if echo "$RSYNC_OUTPUT" | grep -qE "^deleting "; then
         CHANGES+="Deleted: $(echo "$RSYNC_OUTPUT" | grep "^deleting " | sed 's/^deleting //')"
@@ -122,9 +131,9 @@ for repo in "${SOURCE_REPOS[@]}"; do
       if [ -n "$ADDED_MODIFIED" ]; then
         CHANGES+=" Added/Modified: $ADDED_MODIFIED"
       fi
-      
+
       rm "$BEFORE_FILE" "$AFTER_FILE"
-      
+
       if [ -n "$CHANGES" ]; then
         eval "$CHANGES_ARRAY['$DEST_FOLDER']='$CHANGES'"
       fi
@@ -132,6 +141,34 @@ for repo in "${SOURCE_REPOS[@]}"; do
       echo "No $FULL_SOURCE found in $REPO_NAME"
     fi
   done
+
+  # Finalize merged Resql/services sync
+  if [[ -d "$TEMP_DIR/staging_Resql_services" ]]; then
+    FINAL_DEST="$CENTRAL_PATH/Resql/services/"
+    mkdir -p "$FINAL_DEST"
+    BEFORE_FILE=$(mktemp)
+    AFTER_FILE=$(mktemp)
+    find "$FINAL_DEST" -type f -exec sha256sum {} + 2>/dev/null | sort -k 3 > "$BEFORE_FILE"
+    RSYNC_OUTPUT=$(rsync -av --delete "$TEMP_DIR/staging_Resql_services/" "$FINAL_DEST")
+    echo "Merged staged Resql/services into $FINAL_DEST"
+    find "$FINAL_DEST" -type f -exec sha256sum {} + 2>/dev/null | sort -k 3 > "$AFTER_FILE"
+
+    CHANGES=""
+    if echo "$RSYNC_OUTPUT" | grep -qE "^deleting "; then
+      CHANGES+="Deleted: $(echo "$RSYNC_OUTPUT" | grep "^deleting " | sed 's/^deleting //')"
+    fi
+    ADDED_MODIFIED=$(comm -13 "$BEFORE_FILE" "$AFTER_FILE" | cut -c 67-)
+    if [ -n "$ADDED_MODIFIED" ]; then
+      CHANGES+=" Added/Modified: $ADDED_MODIFIED"
+    fi
+
+    rm "$BEFORE_FILE" "$AFTER_FILE"
+
+    if [ -n "$CHANGES" ]; then
+      SERVICE_CHANGES["Resql/services"]="$CHANGES"
+    fi
+  fi
+
 done
 
 # Generate summary
@@ -147,7 +184,7 @@ for block in "Chatbot" "Training" "Analytics" "Service"; do
     "Analytics") CHANGES_ARRAY="ANALYTICS_CHANGES" ;;
     "Service") CHANGES_ARRAY="SERVICE_CHANGES" ;;
   esac
-  
+
   eval "changes_count=\${#$CHANGES_ARRAY[@]}"
   if [ "$changes_count" -eq 0 ]; then
     SUMMARY+="No changes detected.\n\n"
@@ -164,16 +201,14 @@ done
 echo -e "\n=== Sync Confirmation Summary ==="
 echo -e "$SUMMARY"
 
-# Update changelog with newest first
+# Update changelog
 TEMP_CHANGELOG=$(mktemp)
 echo -e "$SUMMARY" > "$TEMP_CHANGELOG"
 
 if [ -f "$CHANGELOG" ]; then
-  # Extract existing content after header
-  tail -n +4 "$CHANGELOG" >> "$TEMP_CHANGELOG"  # Skip "# Changelog\n\nAll changes...\n"
+  tail -n +4 "$CHANGELOG" >> "$TEMP_CHANGELOG"
 fi
 
-# Write back with header
 {
   echo -e "# Changelog\n"
   echo -e "All changes to Buerokratt-DSL from source repos.\n"
