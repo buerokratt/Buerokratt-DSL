@@ -25,8 +25,7 @@ extractRequestData:
   assign:
     chatId: ${incoming.body.chatId}
     content: ${incoming.body.content ?? ""}
-    holidays: ${["2025-06-10"]}
-    #holidays: ${incoming.body.holidays}
+    holidays: ${incoming.body.holidays}
     holidayNames: ${incoming.body.holidayNames}
   next: check_bot_is_active
 
