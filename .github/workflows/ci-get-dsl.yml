@@ -3,7 +3,7 @@ name: Buerokratt DSL
 on:
   push:
     branches:
-      - sql-refacto
+      - sql-refacto2
     paths:
        - '.env'
 
