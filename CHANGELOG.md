@@ -2,6 +2,78 @@
 
 All changes to Buerokratt-DSL from source repos.
 
+# Sync Run - 2025-06-12 05:45:13
+
+## Chatbot Changes
+### Liquibase/backoffice
+Deleted: test.yml
+master.yml
+changelog/1715774693-remove-reorder-preferences-trigger.sql
+changelog/1715604012-add-deleted-to-scheduled_reports.sql
+changelog/1715345741-create_db_indexes.sql
+changelog/1706797832-remove-job-id-from-reports.sql
+changelog/1706744316-add-start-end-to-scheduled-reports.sql
+changelog/1676271876-change-configuration-value-type.sql
+changelog/1676218580-create-scheduled-reports.sql
+changelog/1675064921-add_intent_to_message.sql
+changelog/1674138939-create-reorder-preferences-trigger.sql
+changelog/1674124104-seed-user-metric-preferences.sql
+changelog/1674046350-create-user-metric-defaults-trigger.sql
+changelog/1674046339-create-user-metric-preference.sql
+changelog/1674043116-create-overview-metric-enum.sql Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/1731915047_add_request_nonces.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/test.yaml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/liquibase.properties
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog.yaml
+
+## Training Changes
+### Liquibase/training
+Deleted: test.yml
+changelog/20250531013556-create-request-nonce-table-indexes.sql.xml
+changelog/20250530152957-rollback.sql
+changelog/20250530152957-add-copy-row-with-modifications-function.xml
+changelog/20250530152957-add-copy-row-with-modifications-function.sql Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/training/liquibase.properties
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/training/changelog/20250424191943-add-copy-row-with-modifications-function.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/training/test_data_changelog/20250529170956-load-test-fixtures-llm-training.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/training/test_data_changelog/20250529180956-load-test-fixtures-request-nonces.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/training/test_data_changelog/20250529190956-load-test-fixtures-service-trigger.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/training/test.yaml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/training/changelog/20250424191943-add-copy-row-with-modifications-function.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/training/changelog/20250531013556-create-request-nonce-table-indexes.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/training/test_data_changelog/20250529160956-load-test-fixtures-intent.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/training/changelog/20250424191943-rollback.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/training/changelog.yaml
+
+## Analytics Changes
+### Liquibase/analytics
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/changelog/20250524122754-rollback.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/changelog/1675064921-add_intent_to_message.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/changelog/1715774693-remove-reorder-preferences-trigger.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/changelog/1715345741-create_db_indexes.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/changelog/1706744316-add-start-end-to-scheduled-reports.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/changelog/1676271876-change-configuration-value-type.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/changelog/1674046339-create-user-metric-preference.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/changelog/1715604012-add-deleted-to-scheduled_reports.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/changelog/1706797832-remove-job-id-from-reports.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/changelog/1674138939-create-reorder-preferences-trigger.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/changelog/1674043116-create-overview-metric-enum.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/changelog/1676218580-create-scheduled-reports.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/changelog/1674046350-create-user-metric-defaults-trigger.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/changelog/1674124104-seed-user-metric-preferences.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/changelog.yaml
+
+## Service Changes
+### Liquibase/services
+Deleted: test.yml Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/services/liquibase.properties
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/services/changelog/20250424191943-add-copy-row-with-modifications-function.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/services/test_data_changelog/20250529150956-load-test-fixtures-services.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/services/test.yaml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/services/changelog/20250424191943-add-copy-row-with-modifications-function.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/services/test_data_changelog/20250529152947-load-test-fixtures-request-logs.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/services/changelog/20250424191943-rollback.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/services/changelog.yaml
+
+
+
 # Sync Run - 2025-06-05 10:30:52
 
 ## Chatbot Changes
