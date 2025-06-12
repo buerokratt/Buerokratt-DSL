@@ -124,6 +124,8 @@ databaseChangeLog:
   - include:
       file: changelog/20241227154101-add-table-user-page-preference.xml
   - include:
+      file: changelog/20250103092720_add_column_preference.sql
+  - include:
       file: changelog/20250103092714-add-department-field-to-user-table.sql
   - include:
       file: changelog/20250103092715-add-burokratt-active-config.xml
