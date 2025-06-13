@@ -2,6 +2,28 @@
 
 All changes to Buerokratt-DSL from source repos.
 
+# Sync Run - 2025-06-13 08:46:57
+
+## Chatbot Changes
+No changes detected.
+
+## Training Changes
+### Ruuter/private/v2/training
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/GET/internal/return-file-locations.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/GET/rasa/responses.yml
+
+## Analytics Changes
+No changes detected.
+
+## Service Changes
+### Liquibase/services
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/services/changelog.yaml
+
+### Ruuter/private/v2/services
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/services/POST/services/update-endpoint.yml
+
+
+
 # Sync Run - 2025-06-06 05:42:29
 
 ## Chatbot Changes

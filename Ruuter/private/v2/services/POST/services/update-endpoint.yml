@@ -40,9 +40,6 @@ check_for_type:
     - condition: ${id == null}
       next: return_no_type_error
 
-logstep:
-  log: ${incoming.params.id}
-
 update_endpoint:
   call: http.post
   args:
