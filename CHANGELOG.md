@@ -2,6 +2,24 @@
 
 All changes to Buerokratt-DSL from source repos.
 
+# Sync Run - 2025-06-13 11:12:26
+
+## Chatbot Changes
+No changes detected.
+
+## Training Changes
+### Resql/training
+Deleted: POST/check-if-service-trigger-exists.sql
+
+## Analytics Changes
+### Ruuter/private/v2/analytics
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/feedbacks/buerokratt-chats-nps.yml
+
+## Service Changes
+No changes detected.
+
+
+
 # Sync Run - 2025-06-13 08:46:57
 
 ## Chatbot Changes
