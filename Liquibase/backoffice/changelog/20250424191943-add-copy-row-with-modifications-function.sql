@@ -27,8 +27,8 @@ BEGIN
     SELECT ARRAY_AGG(column_name)
     INTO columns
     FROM information_schema.columns
-    WHERE table_schema = schema_name 
-      AND table_name = table_name_only 
+    WHERE table_schema = schema_name
+      AND table_name = table_name_only
       AND column_name <> id_column_name;
 
     FOR i IN 1..array_length(modifications, 1) BY 3
