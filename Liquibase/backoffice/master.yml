@@ -296,8 +296,6 @@ databaseChangeLog:
   - include:
       file: changelog/20250528144815-add_indices_for_query_performance.xml
   - include:
-      file: changelog/20250528235814-create-separate-schemas.sql
-  - include:
       file: changelog/20250528235814-create-separate-schemas.xml
   - include:
       file: changelog/20250528235814-rollback.sql
@@ -339,6 +337,8 @@ databaseChangeLog:
       file: changelog/20250529152204-rollback.sql
   - include:
       file: changelog/20250529165345-convert-varchar-column-type-to-text.sql
+  - include:
+      file: changelog/20250528235814-create-separate-schemas.sql
   - include:
       file: changelog/20250529165345-convert-varchar-column-type-to-text.xml
   - include:
