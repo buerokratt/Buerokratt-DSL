@@ -2,6 +2,52 @@ databaseChangeLog:
   - include:
       file: changelog/20211103171000_initial_schema.xml
   - include:
+      file: changelog/20211129160400_add_id_field_to_user.xml
+  - include:
+      file: changelog/20211130142500_remove_foreign_key_constraint.xml
+  - include:
+      file: changelog/20211221111700_add_status_table.xml
+  - include:
+      file: changelog/20220125144800_add_config_table.xml
+  - include:
+      file: changelog/20220202140000_add_chat_and_message_tables.xml
+  - include:
+      file: changelog/20220202170000_update_user_authority_table.xml
+  - include:
+      file: changelog/20220210131500_add_feedback_and_end_user_to_chat.xml
+  - include:
+      file: changelog/20220211170000_refactor_user_related_tables.xml
+  - include:
+      file: changelog/20220217090000_create_customer_support_agent_activity_table.xml
+  - include:
+      file: changelog/20220310163000_add_created_to_configuration.xml
+  - include:
+      file: changelog/20220422180000_add_forwarded_to_received_from_and_external_id_to_chat.xml
+  - include:
+      file: changelog/20220423153000_add_establishment_table.xml
+  - include:
+      file: changelog/20220517193000_add_forwarded_received_to_chat_table.xml
+  - include:
+      file: changelog/20221129164600_add_title_and_email_to_user_table.xml
+  - include:
+      file: changelog/20221129164700_add_title_to_chat_table.xml
+  - include:
+      file: changelog/20221207122500_add_title_and_name_visibility_to_default_configuration.xml
+  - include:
+      file: changelog/20221222122800_add_default_widget_config.xml
+  - include:
+      file: changelog/20221227152000_add_activity_field_to_customer_support_agent_activity_table.xml
+  - include:
+      file: changelog/20230104130000_create_allowed_statuses_table.xml
+  - include:
+      file: changelog/20230106180601_add_profile_settings_fields_to_user_table.xml
+  - include:
+      file: changelog/20230111131601_create_chat_history_comments_table.xml
+  - include:
+      file: changelog/20230112134000_add_labels_field_to_chat_table.xml
+  - include:
+      file: changelog/20230117034500_add_chat_forwarding_info_to_message_table.xml
+  - include:
       file: changelog/1674043116-create-overview-metric-enum.sql
   - include:
       file: changelog/1674046339-create-user-metric-preference.sql
@@ -13,6 +59,12 @@ databaseChangeLog:
       file: changelog/1674138939-create-reorder-preferences-trigger.sql
   - include:
       file: changelog/1675064921-add_intent_to_message.sql
+  - include:
+      file: changelog/20230202180000_add_end_user_email_phone_to_chat.xml
+  - include:
+      file: changelog/20230207095500_add_end_user_session_length_to_configuration_table.xml
+  - include:
+      file: changelog/20230208124800_create_temporary_messages_table.xml
   - include:
       file: changelog/1676218580-create-scheduled-reports.sql
   - include:
@@ -83,58 +135,6 @@ databaseChangeLog:
       file: changelog/1731915047_add_request_nonces.sql
   - include:
       file: changelog/1740988965-add-service-slot.sql
-  - include:
-      file: changelog/20211129160400_add_id_field_to_user.xml
-  - include:
-      file: changelog/20211130142500_remove_foreign_key_constraint.xml
-  - include:
-      file: changelog/20211221111700_add_status_table.xml
-  - include:
-      file: changelog/20220125144800_add_config_table.xml
-  - include:
-      file: changelog/20220202140000_add_chat_and_message_tables.xml
-  - include:
-      file: changelog/20220202170000_update_user_authority_table.xml
-  - include:
-      file: changelog/20220210131500_add_feedback_and_end_user_to_chat.xml
-  - include:
-      file: changelog/20220211170000_refactor_user_related_tables.xml
-  - include:
-      file: changelog/20220217090000_create_customer_support_agent_activity_table.xml
-  - include:
-      file: changelog/20220310163000_add_created_to_configuration.xml
-  - include:
-      file: changelog/20220422180000_add_forwarded_to_received_from_and_external_id_to_chat.xml
-  - include:
-      file: changelog/20220423153000_add_establishment_table.xml
-  - include:
-      file: changelog/20220517193000_add_forwarded_received_to_chat_table.xml
-  - include:
-      file: changelog/20221129164600_add_title_and_email_to_user_table.xml
-  - include:
-      file: changelog/20221129164700_add_title_to_chat_table.xml
-  - include:
-      file: changelog/20221207122500_add_title_and_name_visibility_to_default_configuration.xml
-  - include:
-      file: changelog/20221222122800_add_default_widget_config.xml
-  - include:
-      file: changelog/20221227152000_add_activity_field_to_customer_support_agent_activity_table.xml
-  - include:
-      file: changelog/20230104130000_create_allowed_statuses_table.xml
-  - include:
-      file: changelog/20230106180601_add_profile_settings_fields_to_user_table.xml
-  - include:
-      file: changelog/20230111131601_create_chat_history_comments_table.xml
-  - include:
-      file: changelog/20230112134000_add_labels_field_to_chat_table.xml
-  - include:
-      file: changelog/20230117034500_add_chat_forwarding_info_to_message_table.xml
-  - include:
-      file: changelog/20230202180000_add_end_user_email_phone_to_chat.xml
-  - include:
-      file: changelog/20230207095500_add_end_user_session_length_to_configuration_table.xml
-  - include:
-      file: changelog/20230208124800_create_temporary_messages_table.xml
   - include:
       file: changelog/20231116124800_add_buttons_to_messages.xml
   - include:
@@ -296,10 +296,6 @@ databaseChangeLog:
   - include:
       file: changelog/20250528144815-add_indices_for_query_performance.xml
   - include:
-      file: changelog/20250528235814-create-separate-schemas.xml
-  - include:
-      file: changelog/20250528235814-rollback.sql
-  - include:
       file: changelog/20250529142801-create-llm-trainings-table-indexes.sql
   - include:
       file: changelog/20250529142801-create-llm-trainings-table-indexes.xml
@@ -338,9 +334,13 @@ databaseChangeLog:
   - include:
       file: changelog/20250529165345-convert-varchar-column-type-to-text.sql
   - include:
+      file: changelog/20250529165345-convert-varchar-column-type-to-text.xml
+  - include:
+      file: changelog/20250528235814-create-separate-schemas.xml
+  - include:
       file: changelog/20250528235814-create-separate-schemas.sql
   - include:
-      file: changelog/20250529165345-convert-varchar-column-type-to-text.xml
+      file: changelog/20250528235814-rollback.sql
   - include:
       file: changelog/20250530152658-create-separate-schemas.sql
   - include:
