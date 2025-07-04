@@ -35,10 +35,8 @@ extractRequestData:
     holidayNames: ${incoming.body.holidayNames}
     cookie: ${incoming.headers.cookie}
     silent: ${incoming.body.silent}
-  #next: checkContentLength
-logstep:
-  log: ${incoming.body}
-  
+  next: checkContentLength
+
 checkContentLength:
   switch:
     - condition: ${content.length > 3000}
