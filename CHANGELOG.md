@@ -2,6 +2,23 @@
 
 All changes to Buerokratt-DSL from source repos.
 
+# Sync Run - 2025-07-18 12:32:17
+
+## Chatbot Changes
+No changes detected.
+
+## Training Changes
+### Ruuter/private/v2/training
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/GET/internal/return-file-locations.yml
+
+## Analytics Changes
+No changes detected.
+
+## Service Changes
+No changes detected.
+
+
+
 # Sync Run - 2025-07-17 08:44:55
 
 ## Chatbot Changes
