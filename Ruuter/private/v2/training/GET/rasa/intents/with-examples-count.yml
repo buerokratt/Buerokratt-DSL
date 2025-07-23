@@ -61,7 +61,7 @@ assignIntentsList:
 
 assignEmptyList:
   assign:
-    intentsList: ""
+    intentsList: ''
   next: getIntentListLastChanged
 
 getIntentListLastChanged:
