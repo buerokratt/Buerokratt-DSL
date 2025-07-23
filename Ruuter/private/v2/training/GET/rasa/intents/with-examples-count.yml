@@ -48,6 +48,9 @@ getIntentsNames:
       hits: ${getIntentsResult.response.body.aggregations.hot.buckets}
   result: getIntentsNamesResult
 
+logstep:
+  log: ${getIntentsNamesResult.response.body}
+
 check_if_intent_list_is_empty:
   switch:
     - condition: ${getIntentsNamesResult.response.body.intents.length > 0}
