@@ -91,7 +91,7 @@ logstep:
   log: ${results}
 
 logstep2:
-  log ${results.response.body}
+  log: ${results.response.body}
 
 assign_outside_working_hours:
   assign: 
