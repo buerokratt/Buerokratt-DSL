@@ -62,7 +62,7 @@ get_organization_working_hours:
   #next: outside_working_hours
 
 logstep: 
-  log: ${result}
+  log: ${org_working_hours_result}
 
 outside_working_hours:
   call: http.get
