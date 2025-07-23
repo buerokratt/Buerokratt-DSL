@@ -59,8 +59,11 @@ get_organization_working_hours:
   args:
     url: "[#ANALYTICS_RESQL]/config/get_configuration_org_working_hours"
   result: org_working_hours_result
- # next: outside_working_hours
-  next: logstep2
+  #next: outside_working_hours
+
+
+logstep2:
+  log: ${results.response.body}
 
 outside_working_hours:
   call: http.get
@@ -88,8 +91,6 @@ outside_working_hours:
       saturdayWorkingTimeEnd: ${org_working_hours_result.response.body[0]?.saturdayWorkingTimeEnd}
   result: results
 
-logstep2:
-  log: ${results.response.body}
 
 assign_outside_working_hours:
   assign: 
