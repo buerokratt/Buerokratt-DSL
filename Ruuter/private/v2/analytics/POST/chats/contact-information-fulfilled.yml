@@ -59,7 +59,7 @@ get_organization_working_hours:
   args:
     url: "[#ANALYTICS_RESQL]/config/get_configuration_org_working_hours"
   result: org_working_hours_result
-  next: outside_working_hours
+ # next: outside_working_hours
 
 outside_working_hours:
   call: http.get
