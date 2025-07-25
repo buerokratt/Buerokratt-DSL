@@ -2,6 +2,64 @@
 
 All changes to Buerokratt-DSL from source repos.
 
+# Sync Run - 2025-07-25 09:12:22
+
+## Chatbot Changes
+### Liquibase/backoffice
+Deleted: changelog/1731915047_add_request_nonces.sql Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20250211094822-add-smax-account-id-to-user-table.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20250210145003-create-chat-smax-syncrhonization-table.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20250211084322-add-request-nonces.sql
+
+### CronManager/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/backoffice/create_smax_request.yml
+
+### Resql/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/get-smax-synchronization.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/update-user.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/get-users-with-roles-by-role.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/get-user-smax-id-by-chat-csi.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/delete-user.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/insert-chat-smax-synchronization.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/get-smax-chat.sql
+
+### Ruuter/public/v2/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/backoffice/POST/chats/init.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/backoffice/POST/auth/authenticate-smax-user.yml
+
+### Ruuter/private/v2/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/accounts/admin/edit.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/GET/smax/chats/sync.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/accounts/admin/smax-connection.yml
+
+## Training Changes
+### Ruuter/private/v2/training
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/GET/internal/return-file-locations.yml
+
+## Analytics Changes
+No changes detected.
+
+## Service Changes
+### Liquibase/services
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/services/changelog/migrations/20250516152342_change_service_ids_to_service_id.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/services/changelog/20250516152342_change_service_ids_to_service_id.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/services/changelog/migrations/rollback/20250516152342_rollback.sql
+
+### Resql/services
+Deleted: POST/endpoints/remove_service_from_common_endpoints.sql
+POST/endpoints/get_service_ids_by_endpoint_id.sql Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/endpoints/delete_endpoint.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/endpoints/create_endpoint.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/endpoints/get_endpoints_by_service_id.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/endpoints/update_endpoint.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/endpoints/delete_endpoints_by_service_id.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/services/check_name_exist.sql
+
+### Ruuter/private/v2/services
+Deleted: GET/services-by-endpoint-id.yml Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/services/POST/services/edit.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/services/POST/services/delete.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/services/POST/services/add.yml
+
+
+
 # Sync Run - 2025-07-23 12:30:57
 
 ## Chatbot Changes
