@@ -94,7 +94,7 @@ outside_working_hours:
 
 assign_outside_working_hours:
   assign: 
-    outside_working_hours_result: ${org_working_hours_result.response.body}
+    outside_working_hours_result: ${results.response.body}
 
 check_long_waiting_time:
   switch:
