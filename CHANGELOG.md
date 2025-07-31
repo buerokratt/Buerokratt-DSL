@@ -2,6 +2,78 @@
 
 All changes to Buerokratt-DSL from source repos.
 
+# Sync Run - 2025-07-31 10:55:51
+
+## Chatbot Changes
+### Resql/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/get-cs-all-ended-chats.sql
+
+## Training Changes
+### Ruuter/private/v2/training
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/GET/internal/return-file-locations.yml
+
+## Analytics Changes
+No changes detected.
+
+## Service Changes
+### Liquibase/services
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/services/changelog/migrations/rollback/20250516152343_rollback.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/services/changelog/migrations/20250516152343-remove_file_name_from_endpoints.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/services/changelog/20250516152343-remove_file_name_from_endpoints.xml
+
+### Resql/services
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/endpoints/get_common_endpoints.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/endpoints/get_endpoints_by_service_id.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/get-common-services-list.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/endpoints/update_endpoint.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/endpoints/create_endpoint.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/endpoints/delete_endpoints_by_service_id.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/endpoints/delete_endpoint.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/get-services-list.sql
+
+### Ruuter/private/v2/services
+Deleted: GET/services/endpoints/info/common/service-endpoint-test-info.yml
+GET/services/endpoints/info/common/service-endpoint-prod-info.yml
+GET/services/endpoints/info/common/
+GET/services/endpoints/info/service-endpoint-test-info.yml
+GET/services/endpoints/info/service-endpoint-prod-info.yml
+GET/services/endpoints/info/
+GET/services/endpoints/configs/common/service-endpoint-test-configs.yml
+GET/services/endpoints/configs/common/service-endpoint-prod-configs.yml
+GET/services/endpoints/configs/common/
+GET/services/endpoints/configs/service-endpoint-test-configs.yml
+GET/services/endpoints/configs/service-endpoint-prod-configs.yml
+GET/services/endpoints/configs/
+GET/services/endpoints/common/common-endpoint.yml
+GET/services/endpoints/common/
+GET/services/endpoints/service-endpoint.yml
+GET/services/endpoints/.guard
+GET/services/endpoints/
+POST/services/endpoints/info/common/service-endpoint-test-info.yml
+POST/services/endpoints/info/common/service-endpoint-prod-info.yml
+POST/services/endpoints/info/common/
+POST/services/endpoints/info/service-endpoint-test-info.yml
+POST/services/endpoints/info/service-endpoint-prod-info.yml
+POST/services/endpoints/info/
+POST/services/endpoints/configs/common/service-endpoint-test-configs.yml
+POST/services/endpoints/configs/common/service-endpoint-prod-configs.yml
+POST/services/endpoints/configs/common/
+POST/services/endpoints/configs/service-endpoint-test-configs.yml
+POST/services/endpoints/configs/service-endpoint-prod-configs.yml
+POST/services/endpoints/configs/
+POST/services/endpoints/common/common-endpoint.yml
+POST/services/endpoints/common/
+POST/services/endpoints/service-endpoint.yml
+POST/services/endpoints/.guard
+POST/services/endpoints/
+POST/services/delete-endpoint-files.yml Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/services/POST/services/delete-endpoint.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/services/POST/services/create-endpoint.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/services/POST/services/delete.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/services/POST/services/update-endpoint.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/services/POST/services/edit.yml
+
+
+
 # Sync Run - 2025-07-25 09:12:22
 
 ## Chatbot Changes
