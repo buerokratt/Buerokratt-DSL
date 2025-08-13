@@ -88,8 +88,10 @@ trigger_post_service:
       chatId: ${chatId}
   error: return_service_error
   result: res
-  next: return_result
+  #next: return_result
 
+logstep:
+  log: ${res}
 return_result:
   return: ${res.response.body.response}
   next: end
