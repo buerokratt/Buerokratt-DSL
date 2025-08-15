@@ -25,10 +25,7 @@ declaration:
         description: "Body field 'indexName'"
       - field: queryType
         type: string
-        description: "Body field 'queryType'"
-      - field: semanticConfiguration
-        type: string
-        description: "Body field 'semanticConfiguration'"    
+        description: "Body field 'queryType'"    
 
 extractRequestData:
   assign:

@@ -14,9 +14,6 @@ declaration:
       - field: customerSupportStatus
         type: string
         description: "Body field 'customerSupportStatus'"
-      - field: statusComment
-        type: string
-        description: "Body field 'statusComment'"  
       - field: userIdCode
         type: string
         description: "Body field 'userIdCode'"
