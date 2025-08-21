@@ -16,7 +16,7 @@ declaration:
         description: "Body field 'story'"
       - field: steps
         type: object
-        description: "Body field 'steps'"
+        description: "Body field 'steps'"  
     header:
       - field: cookie
         type: string
