@@ -2,6 +2,27 @@
 
 All changes to Buerokratt-DSL from source repos.
 
+# Sync Run - 2025-08-22 11:45:48
+
+## Chatbot Changes
+No changes detected.
+
+## Training Changes
+### Ruuter/private/v2/training
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/GET/internal/return-file-locations.yml
+
+### DataMapper/training/locations
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/nlu/common_service_holidays_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/domain.yml
+
+## Analytics Changes
+No changes detected.
+
+## Service Changes
+No changes detected.
+
+
+
 # Sync Run - 2025-08-21 12:31:29
 
 ## Chatbot Changes
