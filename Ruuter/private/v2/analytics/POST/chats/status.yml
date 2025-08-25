@@ -23,6 +23,9 @@ declaration:
       - field: start_date
         type: string
         description: "Body field 'start_date'"
+      - field: urls
+        type: array
+        description: "Body field 'urls'"
 
 assign_step:
   assign:
