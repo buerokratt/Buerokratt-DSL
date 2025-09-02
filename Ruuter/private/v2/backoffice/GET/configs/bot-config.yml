@@ -17,7 +17,7 @@ assignValues:
     domain: ${incoming.params.domain}
 
 logstepDOMAIN:
-  log: ${incoming.params}
+  log: ${incoming}
 
 checkForDomain:
   switch:
