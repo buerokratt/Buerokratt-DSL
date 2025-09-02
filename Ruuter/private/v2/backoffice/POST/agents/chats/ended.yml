@@ -42,6 +42,9 @@ extractRequestData:
     endDate: "${incoming.body.endDate}"
     urls: ${incoming.body.urls}
 
+logstepLOGSTEP:
+  log: ${incoming.body}
+
 getEndedChats:
   call: http.post
   args:
