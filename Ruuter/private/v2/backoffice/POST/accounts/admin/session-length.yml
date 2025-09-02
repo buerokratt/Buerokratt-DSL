@@ -32,6 +32,9 @@ extractRequestData:
     autoCloseConversation: ${incoming.body.autoCloseConversation}
     autoCloseText: ${incoming.body.autoCloseText}
 
+logstep1:
+  log: ${incoming.body}
+
 setConfigurationValue:
   call: http.post
   args:
