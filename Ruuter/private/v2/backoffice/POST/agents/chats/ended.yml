@@ -32,6 +32,9 @@ declaration:
       - field: urls
         type: array
         description: "Body field 'urls'"
+      - field: csaId
+        type: string
+        description: "Body field 'csaId'"
 
 extractRequestData:
   assign:
