@@ -32,18 +32,12 @@ declaration:
       - field: urls
         type: array
         description: "Body field 'urls'"
-      - field: csaId
-        type: string
-        description: "Body field 'csaId'"
 
 extractRequestData:
   assign:
     startDate: "${incoming.body.startDate}"
     endDate: "${incoming.body.endDate}"
     urls: ${incoming.body.urls}
-
-logstepLOGSTEP:
-  log: ${incoming.body}
 
 getEndedChats:
   call: http.post

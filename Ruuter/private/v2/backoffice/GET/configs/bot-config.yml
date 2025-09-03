@@ -16,9 +16,6 @@ assignValues:
   assign:
     domain: ${incoming.params.domain}
 
-logstepDOMAIN:
-  log: ${incoming}
-
 checkForDomain:
   switch:
     - condition: ${domain === 'none'}

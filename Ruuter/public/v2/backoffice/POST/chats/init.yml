@@ -47,9 +47,6 @@ extractRequestData:
     holidayNames: ${incoming.body.holidayNames}
     domain: ${incoming.body.domain}
 
-logstepDOMAIN:
-  log: ${incoming.body.domain}
-
 checkIncomingCookie:
   switch:
     - condition: ${incoming.headers.cookie == null}
