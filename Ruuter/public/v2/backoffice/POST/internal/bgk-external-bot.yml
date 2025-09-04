@@ -68,7 +68,7 @@ assign_data_sources:
           index_name: ${index_name}
           semantic_configuration: ${semantic_configuration}
           query_type: ${query_type}
-          in_scope: true
+          in_scope: false
           strictness: ${parseInt(strictness ?? '3')}
           top_n_documents: ${parseInt(documents ?? '5')}
           authentication:
