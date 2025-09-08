@@ -9,7 +9,7 @@ CHANGELOG="$CENTRAL_PATH/CHANGELOG.md"
 SOURCE_REPOS=(
   "buerokratt/Buerokratt-Chatbot:test"
   "buerokratt/Training-Module:test"
-  "buerokratt/Analytics-Module:test"
+  "buerokratt/Analytics-Module:dev"
   "buerokratt/Service-Module:test"
   "buerokratt/Common-Services:test"
 )
