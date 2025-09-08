@@ -2,6 +2,92 @@
 
 All changes to Buerokratt-DSL from source repos.
 
+# Sync Run - 2025-09-08 07:05:19
+
+## Chatbot Changes
+No changes detected.
+
+## Training Changes
+No changes detected.
+
+## Analytics Changes
+### Ruuter/private/v2/analytics
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/chats/idle-count.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/agents/chats/messages/all.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/odp/metrics.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/bots/pct-correctly-understood.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/xlsx.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/auth/login.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/GET/accounts/widget-data.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/odp/settings.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/chats/contact-information-fulfilled.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/agents/chats/forwards.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/generic/login-user.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/GET/overview/preferences.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/GET/metrics/intents.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/reload.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/bots/avg-response-speed.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/GET/testing.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/odp/download.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/chats/byk-ended-count.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/accounts/update-page-preference.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/GET/generic/accounts/user-role.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/feedbacks/negative.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/chats/status.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/chats/avg-num-of-messages.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/feedbacks/avg.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/GET/generic/accounts/customer-support-activity.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/feedbacks/buerokratt-chats-nps.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/feedbacks/agents/nps.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/odp/dataset.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/agents/chats/total.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/agents/chats/avg-time-picking-up.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/odp/delete-cron-job-task.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/TEMPLATES/check-user-authority.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/csv.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/agents/chats/ended.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/chats/get.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/bots/intents.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/GET/odp/scheduled-reports.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/feedbacks/buerokratt-chats-distribution.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/feedbacks/csa-chats-distribution.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/agents/messages-by-id.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/odp/delete-scheduled-report.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/auth/.guard
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/GET/generic/csa/active-chats.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/chats/total-count.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/odp/update-scheduled-report.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/GET/accounts/get-page-preference.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/saveJsonToYml.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/chats/avg-median-waiting-time.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/overview/preferences.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/bots/avg-sessions-time.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/odp/upload-scheduled-report.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/agents/chats/avg-time.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/chats/avg-duration.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/GET/.guard
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/.guard
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/GET/odp/settings.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/GET/generic/userinfo.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/GET/generic/accounts/user-profile-settings.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/agents/avg-active.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/odp/upload.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/GET/odp/values.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/comments/history.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/feedbacks/add-comment.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/accounts/customer-support-agents.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/GET/odp/dataset.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/GET/negative-feedback.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/GET/overview/metrics.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/feedbacks/nps.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/odp/delete-settings.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/accounts/edit-user-domains.yml
+
+## Service Changes
+No changes detected.
+
+
+
 # Sync Run - 2025-09-08 07:02:23
 
 ## Chatbot Changes
