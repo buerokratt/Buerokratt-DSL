@@ -17,7 +17,7 @@ declaration:
       - field: showIdleWarning
         type: string
         description: "Body field 'showIdleWarning'"
-      - field: autoCloseConversation
+      - field: showIdleWarning
         type: string
         description: "Body field 'autoCloseConversation'"
       - field: autoCloseText
@@ -31,9 +31,6 @@ extractRequestData:
     showIdleWarning: ${incoming.body.showIdleWarning}
     autoCloseConversation: ${incoming.body.autoCloseConversation}
     autoCloseText: ${incoming.body.autoCloseText}
-
-logstepLOG:
-  log: ${incoming.body}
 
 setConfigurationValue:
   call: http.post
