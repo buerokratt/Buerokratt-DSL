@@ -12,6 +12,9 @@ declaration:
         type: string
         description: "Cookie field"
 
+logstepCOOKIE:
+  log: ${incoming.headers.cookie}
+
 get_cookie_info:
   call: http.post
   args:
