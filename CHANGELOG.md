@@ -2,6 +2,75 @@
 
 All changes to Buerokratt-DSL from source repos.
 
+# Sync Run - 2025-09-12 08:06:21
+
+## Chatbot Changes
+### Liquibase/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20250901152400-rename-test-to-istest.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20250211084322-add-request-nonces.sql
+
+### Resql/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/set-domain-organization-working-time.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/get-is-organization-available.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/get-domain-organization-working-time.sql
+
+### Ruuter/private/v2/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/configs/organization-working-time.yml
+
+## Training Changes
+### Ruuter/private/v2/training
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/GET/internal/return-file-locations.yml
+
+### Liquibase/training
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/training/changelog.yaml
+
+## Analytics Changes
+### Ruuter/private/v2/analytics
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/chats/byk-ended-count.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/odp/metrics.yml
+
+### Liquibase/analytics
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/liquibase.properties
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/changelog.yaml
+
+### Resql/analytics
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/csa-avg-chat-time.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/chat-count-only-chatbot.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/status-csa-chats.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/get-avg-messages.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/status-all-chats.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/chat-avg-num-of-messages.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/overview-total-chats-no-csa.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/overview-total-chats.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/chat-count-with-csa-and-chatbot.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/overview-avg-waiting-time.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/chat-avg-waiting-time.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/chat-count-with-csa.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/get-users-with-roles-by-role.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/get-avg-response-time.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/chat-avg-duration.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/overview-avg-chats.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/get-avg-session-length-csa.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/get-avg-session-length-no-csa.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/overview-avg-chats-no-csa.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/chat-cif-outside-working-hours.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/chat-cif-long-waiting-time.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/byk-ended-count.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/chat-idle-count.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/chat-median-waiting-time.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/csa-avg-time-picking-up-chats.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/get-avg-waiting-time.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/overview-total-forwarded-chats.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/chat-cif-all-csas-away.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/overview-chat-activity-chart.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/csa-chat-forwards.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/get-cs-all-ended-chats.sql
+
+## Service Changes
+No changes detected.
+
+
+
 # Sync Run - 2025-09-11 11:48:27
 
 ## Chatbot Changes
