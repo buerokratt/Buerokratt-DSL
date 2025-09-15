@@ -17,7 +17,7 @@ assignValues:
     domain: ${incoming.params.domain}
 
 LOGSTEP1:
-  log: ${incoming}
+  log: ${incoming.params}
 
 logstep2:
   log: ${incoming.params.domain}
