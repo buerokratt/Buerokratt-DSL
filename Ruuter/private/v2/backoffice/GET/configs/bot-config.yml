@@ -16,6 +16,9 @@ assignValues:
   assign:
     domain: ${incoming.params.domain}
 
+logstepBODY:
+  log: ${incoming}
+
 LOGSTEP1:
   log: ${incoming.params}
 
