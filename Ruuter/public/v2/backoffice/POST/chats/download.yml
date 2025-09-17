@@ -15,6 +15,18 @@ declaration:
         type: string
         description: "Body field 'email'"
 
+
+LOGSTEP1:
+  log: ${incoming}
+LOGSTEP2:
+  log: ${incoming.body}
+LOGSTEP3:
+  log: ${incoming.body.chatId}
+LOGSTEP4:
+  log: ${incoming.body.email}
+
+
+
 extractRequestData:
   assign:
     chatId: ${incoming.body.chatId}
