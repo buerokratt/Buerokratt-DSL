@@ -37,7 +37,6 @@ updateUserSelection:
       userId: ${userId}
       domains: ${domains}
       selected: ${selected}
-  result: test
 
 return_result:
   return: "User selection updated successfully"

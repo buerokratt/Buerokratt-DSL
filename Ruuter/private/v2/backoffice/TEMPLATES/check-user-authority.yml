@@ -12,9 +12,6 @@ declaration:
         type: string
         description: "Cookie field"
 
-logstepCOOKIE:
-  log: ${incoming.headers.cookie}
-
 get_cookie_info:
   call: http.post
   args:
@@ -24,10 +21,7 @@ get_cookie_info:
       cookie: ${incoming.headers.cookie}
     plaintext: "customJwtCookie"
   result: res
-  #next: check_cookie_info_response
-
-logstepAUTH:
-  log: ${res.response.body}
+  next: check_cookie_info_response
 
 check_cookie_info_response:
   switch:
@@ -37,7 +31,8 @@ check_cookie_info_response:
 
 check_user_authority:
   switch:
-    - condition: ${res.response.body.authorities.includes("ROLE_ADMINISTRATOR") || res.response.body.authorities.includes("ROLE_CUSTOMER_SUPPORT_AGENT")} # || res.response.body.authorities.includes("ROLE_CHATBOT_TRAINER") || res.response.body.authorities.includes("ROLE_ANALYST") || res.response.body.authorities.includes("ROLE_SERVICE_MANAGER")}
+    - condition: ${res.response.body.authorities.includes("ROLE_ADMINISTRATOR") || res.response.body.authorities.includes("ROLE_CUSTOMER_SUPPORT_AGENT") || res.response.body.authorities.includes("ROLE_CHATBOT_TRAINER") || res.response.body.authorities.includes("ROLE_ANALYST") || res.response.body.authorities.includes("ROLE_SERVICE_MANAGER")}
+      next: return_authorized
   next: return_unauthorized
 
 return_authorized:
