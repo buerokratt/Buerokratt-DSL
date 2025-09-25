@@ -26,11 +26,11 @@ get_cookie_info:
   result: res
   next: log_1405_step_res
 
-log_1405_res:
+log_1405_step_res:
   log: ${res}
   next: log_1405_step_res_body
 
-log_1405_res_body:
+log_1405_step_res_body:
   log: ${res.response.body}
   next: check_cookie_info_response
 
