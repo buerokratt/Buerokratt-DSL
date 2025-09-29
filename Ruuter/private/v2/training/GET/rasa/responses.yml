@@ -29,7 +29,7 @@ getResponses:
 mapResponsesNames:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/hbs/get_responses_names"
+    url: "[#TRAINING_DMAPPER_HBS]/get_responses_names"
     headers:
       type: "json"
     body:
