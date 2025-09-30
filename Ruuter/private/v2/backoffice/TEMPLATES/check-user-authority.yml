@@ -12,9 +12,6 @@ declaration:
         type: string
         description: "Cookie field"
 
-log_1405_cookie:
-  log: ${incoming.headers.cookie}
-
 get_cookie_info:
   call: http.post
   args:
@@ -24,14 +21,6 @@ get_cookie_info:
       cookie: ${incoming.headers.cookie}
     plaintext: "customJwtCookie"
   result: res
-  next: log_1405_step_res
-
-log_1405_step_res:
-  log: ${res}
-  next: log_1405_step_res_body
-
-log_1405_step_res_body:
-  log: ${res.response.body}
   next: check_cookie_info_response
 
 check_cookie_info_response:
@@ -59,4 +48,3 @@ return_bad_request:
   status: 400
   return: false
   next: end
- 

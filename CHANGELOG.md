@@ -2,6 +2,63 @@
 
 All changes to Buerokratt-DSL from source repos.
 
+# Sync Run - 2025-09-30 09:15:00
+
+## Chatbot Changes
+### Liquibase/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20250103092720_add_column_preference.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20250211084322-add-request-nonces.sql
+
+### Ruuter/public/v2/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/backoffice/POST/internal/bgk-external-bot.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/backoffice/POST/internal/client-external-bot.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/backoffice/POST/internal/message-to-bot.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/backoffice/POST/chats/messages/llm.yml
+
+### Ruuter/private/v2/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/TEMPLATES/check-user-authority.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/accounts/edit-user-domains.yml
+
+## Training Changes
+### Resql/training
+Deleted: POST/mark-intent-for-service.sql Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/training/POST/get-intents-list-last-changed.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/training/POST/get-intent-last-changed.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/training/POST/update-intent.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/training/POST/add-intent.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/training/POST/update-intents-status.sql
+
+### Ruuter/private/v2/training
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/POST/rasa/intents/examples/update.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/POST/rasa/intents/add.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/POST/rasa/responses/update.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/POST/rasa/intents/examples/delete.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/POST/rasa/responses/add.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/POST/rasa/intents/examples/add.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/POST/rasa/rules/update.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/GET/rasa/intents/mark-for-service.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/POST/rasa/model/trained-model.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/GET/internal/return-file-locations.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/POST/rasa/rules/add.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/GET/rasa/intents/by-id.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/POST/rasa/rules/delete.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/POST/rasa/intents/update.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/GET/rasa/intent-ids.yml
+
+### Liquibase/training
+Deleted: changelog/20250103092720_add_column_preference.sql Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/training/changelog/20250905124512_update_intent_status_active_to_trained.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/training/liquibase.properties
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/training/changelog/rollback/20250905124512_rollback.sql
+
+## Analytics Changes
+### Liquibase/analytics
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/liquibase.properties
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/changelog.yaml
+
+## Service Changes
+No changes detected.
+
+
+
 # Sync Run - 2025-09-25 08:49:50
 
 ## Chatbot Changes
