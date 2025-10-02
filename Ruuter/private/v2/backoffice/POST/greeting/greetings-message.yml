@@ -14,7 +14,7 @@ declaration:
       - field: est
         type: string
         description: "Body field 'est'"
-      - field: domain
+      - field: domains
         type: string
         description: "Body field 'domainUUID'"
 
