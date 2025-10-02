@@ -14,10 +14,11 @@ declaration:
       - field: est
         type: string
         description: "Body field 'est'"
-      - field: domains
+      - field: domainUUID
         type: string
         description: "Body field 'domainUUID'"
-
+logstep:
+  log: ${incoming.body}
 extractRequestData:
   assign:
     isActive: ${incoming.body.isActive}
