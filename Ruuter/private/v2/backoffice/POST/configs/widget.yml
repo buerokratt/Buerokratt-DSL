@@ -42,7 +42,7 @@ extractRequestData:
 
 checkForDomains:
   switch:
-    - condition: ${domains && domains.length > 0}
+    - condition: ${domains.length > 0}
       next: setDomainWidgetConfig
   next: setWidgetConfig
 
