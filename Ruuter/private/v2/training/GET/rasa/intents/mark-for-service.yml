@@ -29,6 +29,7 @@ assign_values:
   assign:
     intent: ${incoming.params.name.replaceAll(/\s+/g, "_")}
     isForService: ${incoming.params.isForService === 'true'}
+    status: 
 
 getIntentList:
   call: http.get
@@ -53,7 +54,6 @@ updateInDatabase:
     body:
       intent: ${intent}
       isForService: ${isForService}
-      status: ${status}
   result: addIntentResult
 
 returnSuccess:
