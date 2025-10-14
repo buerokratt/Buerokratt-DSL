@@ -10,14 +10,6 @@ intents:
   - common_tervitus
   - common_klienditeenindajale_suunamine
 
-entities: []
-  
-slots: []
-
-forms: []
-
-actions: []
-
 responses:
   utter_fallback:
   - text: "Ma ei tea ju."
