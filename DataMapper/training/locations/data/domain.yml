@@ -16,7 +16,11 @@ slots: []
 
 forms: []
 
-actions: []
+actions:
+- action_ask_custom_fallback_form_affirm_deny
+- action_check_confidence
+- action_react_to_affirm_deny_in_custom_fallback_form
+- action_react_to_affirm_deny_in_direct_to_customer_support_form
 
 responses:
   utter_fallback:
