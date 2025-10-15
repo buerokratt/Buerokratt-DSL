@@ -2,6 +2,90 @@
 
 All changes to Buerokratt-DSL from source repos.
 
+# Sync Run - 2025-10-15 09:35:20
+
+## Chatbot Changes
+No changes detected.
+
+## Training Changes
+### Resql/training
+Deleted: POST/update-intents-status.sql
+POST/update-intent.sql
+POST/update-intent-name.sql Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/training/POST/mark-intent-for-service.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/training/POST/get-intents-list-last-changed.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/training/POST/get-intent-last-changed.sql
+
+### Ruuter/private/v2/training
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/POST/rasa/rules/add.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/POST/rasa/intents/update.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/POST/rasa/rules/update.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/POST/rasa/intents/add.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/GET/rasa/intent-ids.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/POST/rasa/responses/update.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/POST/rasa/rules/delete.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/GET/rasa/intents/mark-for-service.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/POST/rasa/intents/examples/delete.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/POST/rasa/responses/add.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/POST/rasa/model/trained-model.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/GET/internal/return-file-locations.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/GET/rasa/intents/by-id.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/POST/rasa/intents/examples/add.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/POST/rasa/intents/examples/update.yml
+
+### Liquibase/training
+Deleted: changelog/rollback/20250905124512_rollback.sql
+changelog/rollback/
+changelog/20250905124512_update_intent_status_active_to_trained.sql Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/training/liquibase.properties
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/training/changelog.yaml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/training/changelog/20250103092720_add_column_preference.sql
+
+## Analytics Changes
+No changes detected.
+
+## Service Changes
+### Resql/services
+Deleted: POST/services/get_services_by_ids.sql
+POST/services/check_name_exist.sql
+POST/services/
+POST/endpoints/update_endpoint.sql
+POST/endpoints/remove_service_endpoints_from_preferences.sql
+POST/endpoints/remove_endpoint_from_preferences.sql
+POST/endpoints/get_endpoints_by_service_id.sql
+POST/endpoints/get_common_endpoints.sql
+POST/endpoints/delete_endpoints_by_service_id.sql
+POST/endpoints/delete_endpoint.sql
+POST/endpoints/create_endpoint.sql
+POST/endpoints/
+POST/update-user-step-preferences.sql
+POST/update-settings.sql
+POST/status.sql
+POST/set-status.sql
+POST/seed-user-step-preferences.sql
+POST/is-user-roles-allowed.sql
+POST/get-user-step-preferences.sql
+POST/get-user-by-login.sql
+POST/get-settings.sql
+POST/get-services-list.sql
+POST/get-service-trigger.sql
+POST/get-service-name-by-id.sql
+POST/get-service-by-id.sql
+POST/get-requested-service-triggers.sql
+POST/get-configuration.sql
+POST/get-common-services-list.sql
+POST/get-available-intents.sql
+POST/get-approved-tiggers.sql
+POST/get-active-services-list.sql
+POST/edit.sql
+POST/delete-service.sql
+POST/delete-service-trigger.sql
+POST/add.sql
+POST/add-service-trigger.sql
+POST/
+GET/empty.sql
+GET/
+
+
+
 # Sync Run - 2025-10-15 08:01:41
 
 ## Chatbot Changes
