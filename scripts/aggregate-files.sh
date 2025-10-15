@@ -7,11 +7,11 @@ CHANGELOG="$CENTRAL_PATH/CHANGELOG.md"
 
 # Hardcoded source repos
 SOURCE_REPOS=(
-  "buerokratt/Buerokratt-Chatbot:test"
-  "buerokratt/Training-Module:test"
-  "buerokratt/Analytics-Module:test"
-  "buerokratt/Service-Module:test"
-  "buerokratt/Common-Services:test"
+  "buerokratt/Buerokratt-Chatbot:revert-test"
+  "buerokratt/Training-Module:revert-test"
+  "buerokratt/Analytics-Module:revert-test"
+  "buerokratt/Service-Module:revert-test"
+  "buerokratt/Common-Services:revert-test"
 )
 
 # Hardcoded version
