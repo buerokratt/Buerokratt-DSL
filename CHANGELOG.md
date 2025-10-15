@@ -2,6 +2,65 @@
 
 All changes to Buerokratt-DSL from source repos.
 
+# Sync Run - 2025-10-15 08:01:41
+
+## Chatbot Changes
+### Liquibase/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20250211084322-add-request-nonces.sql
+
+### Resql/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/set-user-profile-settings.sql
+
+## Training Changes
+### Ruuter/private/v2/training
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/GET/internal/return-file-locations.yml
+
+### Liquibase/training
+Deleted: changelog/1760425555-increase_intent_status_column_length.sql
+
+### DataMapper/training/locations
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/nlu/common_service_school_holiday_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/nlu/common_service_companies_contactdetails_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/domain.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/nlu/common_service_exchange_rate_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/nlu/common_service_holidays_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/nlu/common_service_companies_related_persons_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/nlu/common_teenus_nordpool_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/nlu/common_teenus_citizien_initiative_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/nlu/common_teenus_rk_hääletus_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/nlu/common_service_companies_national_taxes_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/nlu/common_ask_csa_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/nlu/common_service_nba_results_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/nlu/common_service_companies_beneficiaries_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/regex/rk_liige_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/regex/weather_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/nlu/common_service_companies_revenue_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/nlu/common_teenus_citizien_initiative_popular_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/regex/holidays_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/nlu/common_teenus_nordpool2_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/nlu/common_teenus_ilm_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/nlu/common_service_motor_vehicle_tax_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/nlu/common_teenus_rk_isiku_kohalolu_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/nlu/common_service_CPI_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/nlu/common_service_unemployment_rate_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/regex/asukoht_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/nlu/common_service_companies_workforce_taxes_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/nlu/common_service_estimated_subsistence_minimum_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/nlu/common_service_companies_lihtandmed_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/nlu/common_service_companies_employees_nlu.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/rules.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/locations/data/regex/statistics.yml
+
+## Analytics Changes
+### Liquibase/analytics
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/liquibase.properties
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/changelog.yaml
+
+## Service Changes
+No changes detected.
+
+
+
 # Sync Run - 2025-10-13 09:17:29
 
 ## Chatbot Changes
