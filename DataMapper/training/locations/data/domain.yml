@@ -12,9 +12,22 @@ intents:
 
 entities: []
 
-slots: []
+slots:
+  affirm_deny:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: custom_fallback_form
+        requested_slot: affirm_deny
+      - active_loop: direct_to_customer_support_form
+        requested_slot: affirm_deny
 
-forms: []
+forms:
+  custom_fallback_form:
+    required_slots:
+        - affirm_deny
 
 actions:
 - action_ask_custom_fallback_form_affirm_deny
