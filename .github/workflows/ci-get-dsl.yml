@@ -3,7 +3,7 @@ name: Buerokratt DSL
 on:
   push:
     branches:
-      - fredy-temp2
+      - image-build
     paths:
        - '.env'
 
