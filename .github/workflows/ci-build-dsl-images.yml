@@ -3,7 +3,7 @@ name: Docker Build and Push
 on:
   push:
     branches:
-      - fredy-temp2
+      - image-build
     paths:
       - '.env.img'
       - 'module_based_image_builder.py'
