@@ -1,0 +1,39 @@
+version: "3.0"
+nlu:
+- intent: common_service_holidays
+  examples: |
+    - Millal on selle aasta riigipühad?
+    - Millal on selle aasta riigipühad?
+    - Millised on selle aasta riigipühade kuupäevad?
+    - Kuidas jagunevad selle aasta riigipühad?
+    - Mis kuupäevadel on selle aasta riigipühad?
+    - Kas sa tead, millal on selle aasta riigipühad?
+    - Kuidas sel aastal riigipühad ajaliselt paiknevad?
+    - Millal sel aastal riigipühasid tähistatakse?
+    - Millised on 2024. aasta riigipühad?
+    - Millal langevad selle aasta riigipühad?
+    - Mis on [järgmised](next_holidays) tähtsad riigipühad sel aastal?
+    - Millised on [järgmised](next_holidays) riigipühad sel aastal?
+    - Mis on [järgmised](next_holidays) pühad, mis on veel ees?
+    - Mis on olnud [eelmised](last_holidays) riigipühad sel aastal?
+    - Millised [eelmised](last_holidays) riigipühad on sel aastal möödas?
+    - Mis on sel aastal [eelmised](last_holidays) möödunud riigipühad?
+    - Mis on olnud [eelmised](last_holidays) riiklikud pühad sel aastal?
+    - Millal olid [eelmised](last_holidays) riigipühad sel aastal?
+    - Mis kuupäeval oli [eelmine](last_holiday) ametlik tähtpäev?
+    - Mis oli [viimati](last_holiday) tähistatud ametlik püha?
+    - Milline tähtpäev oli [eelmine](last_holiday) kord riiklikult?
+    - Millal oli [eelmine](last_holiday) tähtpäev riigipüha?
+    - Milline päev langeb [järgmine](next_holiday) riigipühale järgmisel nädalal?
+    - Mis kuupäeval toimub [järgmine](next_holiday) tähtpäev riigipühana, kas sa tead?
+    - Millal on riigipühadest [järgmine](next_holiday), kas sa tead?
+    - Kas [täna](today) on riigipüha?
+    - On [täna](today) riigipüha?
+    - Kas [täna](today) päev on riigipüha?
+    - Kas [täna](today) on riigipüha, mille tähistamiseks on vaja valmistuda?
+    - Millal on [HOL2](by_name)?
+    - Mis kuupäeval on [HOL2](by_name)?
+    - Millal toimub [HOL2](by_name)?
+    - Millised riigipühad on [HOL3](by_month)?
+    - Kas on riigipühad [HOL3](by_month)?
+    - Millised kuupäevad on [HOL3](by_month) riigipühade- 
