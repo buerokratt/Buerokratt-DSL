@@ -1,0 +1,17 @@
+declaration:
+  call: declare
+  version: 0.1
+  description: "Test ruuter endpoint"
+  method: post
+  accepts: json
+  returns: json
+  namespace: training
+  allowlist:
+    body:
+      - field: name
+        type: string
+        description: "Body field 'name'"
+
+returnSuccess:
+  return: Hello ${incoming.body.name}
+  next: end
