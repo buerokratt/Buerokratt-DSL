@@ -39,7 +39,24 @@ extractRequestData:
     cookie: ${incoming.headers.cookie}
     silent: ${incoming.body.silent}
     domain: ${incoming.body.domain}
+#  next: checkForCookie
+
+checkV33:
+  log: ${incoming.headers.cookie}
+
+checkV34:
+  log: ${incoming.body.message}
+
+checkForCookie:
+  switch:
+    - condition: ${incoming.headers.cookie === 'nonce'}
+      next: assignMessageChatId
   next: checkContentLength
+
+assignMessageChatId:
+  assign:
+    chatId: ${incoming.body.message.chatId}
+  next: getActiveChatById
 
 checkContentLength:
   switch:
@@ -186,4 +203,4 @@ return_content_length_exceeded:
 return_bot_error:
   status: 420
   return: "Bot error"
-  next: end  
+  next: end
