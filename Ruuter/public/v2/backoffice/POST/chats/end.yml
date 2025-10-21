@@ -72,6 +72,9 @@ assignChat:
     activeChat: ${activeChatRes.response.body[0]}
     lastDate: ${activeChat.lastMessageTimestamp}
 
+checkV33:
+  log: ${lastDate}
+
 postMessage:
   call: http.post
   args:
@@ -86,6 +89,7 @@ postMessage:
       authorLastName: ""
       authorRole: ${authorRole ?? "buerokratt"}
       created: ${lastDate}
+      updated: ${lastDate}
       rating: ""
       event: ${event}
       forwardedByUser: ""
@@ -108,6 +112,7 @@ endChat:
       endUserLastName: ${activeChat.endUserLastName ?? ""}
       status: ${status ?? "ENDED"}
       created: ${lastDate}
+      updated: ${lastDate}
       ended: ${lastDate}
       feedbackRating: ${activeChat.feedbackRating ?? ""}
       feedbackText: ${activeChat.feedbackText ?? ""}
