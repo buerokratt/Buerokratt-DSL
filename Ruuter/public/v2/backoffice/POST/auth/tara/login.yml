@@ -2,50 +2,27 @@ declaration:
   call: declare
   version: 0.1
   description: "Decription placeholder for 'LOGIN'"
-  method: post
+  method: get
   accepts: json
   returns: json
   namespace: backoffice
   allowlist:
-    body:
-      - field: login
+    header:
+      - field: cookie
         type: string
-        description: "Body field 'login'"
-      - field: password
-        type: string
-        description: "Body field 'password'"
+        description: "Cookie field"
 
-getIsPasswordAuthEnabled:
-  assign:
-    isPasswordAuthEnabled: "[#PASSWORD_AUTH_ENABLED]"
-
-checkPasswordLoginEnabled:
-  switch:
-    - condition: ${isPasswordAuthEnabled === true || isPasswordAuthEnabled.toLowerCase() === "true"}
-      next: extractRequestData
-  next: return_password_login_disabled
-
-extractRequestData:
-  assign:
-    login: ${incoming.body.login}
-    password: ${incoming.body.password}
-  next: getUserWithRole
-
-getUserWithRole:
-  call: http.post
+get_tara_user_info:
+  call: http.get
   args:
-    url: "[#CHATBOT_RESQL]/get-user-with-roles"
-    body:
-      login: ${login}
-      password: ${password}
-  result: user_result
-  next: check_user_result
-
-check_user_result:
-  switch:
-    - condition: "${user_result.response.body.length > 0}"
-      next: get_session_length
-  next: return_user_not_found 
+   url: "[#CHATBOT_TIM]/jwt/userinfo"
+   contentType: plaintext
+   headers:
+    cookie: ${incoming.headers.cookie}
+   plaintext: 
+      "JWTTOKEN"
+  result: tara_info
+  next: get_session_length
 
 get_session_length:
   call: http.post
@@ -54,7 +31,27 @@ get_session_length:
     body:
       key: "session_length"
   result: session_result
-  next: generate_cookie
+  next: getUser
+
+getUser:
+  call: http.post
+  args:
+    url: "[#CHATBOT_RESQL]/get-user-with-roles-by-id-code"
+    body:
+      userIdCode: ${tara_info.response.body.personalCode}
+  result: user_info
+  next: checkIfUserExists
+
+checkIfUserExists:
+  switch:
+    - condition: "${user_info.response.body.length > 0}"
+      next: assignUser
+  next: return_not_exists
+
+assignUser:
+  assign:
+    user: ${user_info.response.body[0]}
+  next: generate_cookie  
 
 generate_cookie:
   call: http.post
@@ -63,7 +60,18 @@ generate_cookie:
     body:
       JWTName: "customJwtCookie"
       expirationInMinutes: ${session_result.response.body[0]?.value ?? '120'}
-      content: ${user_result.response.body[0]}
+      content: {
+        "idCode": "${user.idCode}",
+        "login": "${user.idCode}",
+        "displayName": "${user.displayName}",
+        "firstName": "${user.firstName}",
+        "lastName": "${user.lastName}",
+        "csaEmail": "${user.csaEmail}",
+        "csaTitle": "${user.csaTitle}",
+        "authorities": "${user.authorities}",
+        "authMethod": "${tara_info.response.body.authMethod}",
+        "fullName": "${tara_info.response.body.fullName}"
+      }
   result: cookie_result
   next: assign_cookie
 
@@ -83,12 +91,12 @@ setCustomerSupportAgentAway:
     url: "[#CHATBOT_RESQL]/set-customer-support-status"
     body:
       active: false
-      userIdCode: ${login}
+      userIdCode: ${tara_info.response.body.personalCode}
       created: ${new Date().toISOString()}
       status: "offline"
       statusComment: ""
   result: setCustomerSupportAgentAwayResult
-  next: return_value
+  next: return_value  
 
 return_value:
   headers:
@@ -96,12 +104,6 @@ return_value:
   return: ${cookie_result.response.body.token}
   next: end 
 
-return_user_not_found:
-  status: 400
-  return: "User Not Found"
-  next: end
-
-return_password_login_disabled:
-  status: 400
-  return: "Password login is disabled"
+return_not_exists:
+  return: "User does not exist"
   next: end
