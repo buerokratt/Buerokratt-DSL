@@ -13,7 +13,7 @@ declaration:
         description: "Cookie field"
 
 get_tara_user_info:
-  call: http.get
+  call: http.post
   args:
    url: "[#CHATBOT_TIM]/jwt/custom-jwt-userinfo"
    contentType: plaintext
