@@ -96,6 +96,7 @@ trigger_ai_stream:
     url: "[#CHATBOT_NOTIFICATIONS]/channels/${sender}/stream"
     headers:
       Content-Type: application/json
+      api-key: ${chatbot_external_api_key}
     body:
       messages: ${messages}
       options:
