@@ -13,9 +13,9 @@ declaration:
         description: "Cookie field"
 
 get_tara_user_info:
-  call: http.post
+  call: http.get
   args:
-   url: "[#CHATBOT_TIM]/jwt/custom-jwt-userinfo"
+   url: "[#CHATBOT_TIM]/jwt/userinfo"
    contentType: plaintext
    headers:
     cookie: ${incoming.headers.cookie}
