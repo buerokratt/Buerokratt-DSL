@@ -42,7 +42,10 @@ get_chat_info:
    plaintext:
       "chatJwt"
   result: infoRes
-  next: check_chat_info_response
+  #next: check_chat_info_response
+
+logstepCHAT:
+  log: ${infoRes.response.body}
 
 check_chat_info_response:
   switch:
