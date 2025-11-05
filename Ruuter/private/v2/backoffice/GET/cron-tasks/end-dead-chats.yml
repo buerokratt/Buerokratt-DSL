@@ -35,6 +35,12 @@ checkTimIds:
 check_deadKeys:
   log: ${deadKeys}
 
+check_deadKeys2:
+  log: ${deadKeys.response}
+
+check_deadKeys3:
+  log: ${deadKeys.response.body}
+
 returnSuccess:
   return: ${JSON.parse(deadKeys.response.body)}
   next: end
