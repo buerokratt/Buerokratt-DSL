@@ -31,18 +31,9 @@ checkTimIds:
     body:
       keys: ${deadChats.response.body[0].baseIds?.join(',')}
   result: deadKeys
-  
-check_deadKeys:
-  log: ${deadKeys}
-
-check_deadKeys2:
-  log: ${deadKeys.response}
-
-check_deadKeys3:
-  log: ${deadKeys.response.body}
 
 returnSuccess:
-  return: ${JSON.parse(deadKeys.response.body)}
+  return: ${deadKeys.response.body}
   next: end
 
 return_not_found:
