@@ -8,4 +8,4 @@ FROM (
      ) latest
 WHERE latest.status IS NOT NULL
   AND latest.status <> 'ENDED'
-  AND latest.ended IS NOT NULL;
+  AND latest.ended IS NULL;
