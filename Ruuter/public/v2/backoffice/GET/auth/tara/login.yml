@@ -20,7 +20,7 @@ checkA:
   log: ${wholeCookie}
   
 checkC:
-  log: ${Object.fromEntries(wholeCookie.split('; ').map(c => c.split('=')).customJwtCookie}
+  log: ${wholeCookie.split(";")[1].trim()}
 
 get_tara_user_info:
   call: http.get
