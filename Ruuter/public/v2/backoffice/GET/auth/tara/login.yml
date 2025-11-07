@@ -21,9 +21,6 @@ checkB:
 checkC:
   log: ${incoming.headers.cookie}
 
-checkD:
-  log: ${incoming.headers.set-cookie}
-
 get_tara_user_info:
   call: http.get
   args:
