@@ -13,7 +13,7 @@ declaration:
         description: "Cookie field"
 
 checkA:
-  log: ${incoming.headers.cookie}
+  log: ${incoming.headers.cookie.customJwtCookie}
 
 get_tara_user_info:
   call: http.get
@@ -76,9 +76,7 @@ generate_cookie:
         "fullName": "${tara_info.response.body.fullName}"
       }
   result: cookie_result
-
-checkB:
-  log: ${cookie_result.response.body.token}
+  next: assign_cookie
 
 assign_cookie:
   assign:
