@@ -22,6 +22,20 @@ checkA:
 checkC:
   log: ${wholeCookie.split(";")[1].trim()}
 
+get_old_user:
+  call: http.post
+  args:
+    url: "[#CHATBOT_TIM]/jwt/custom-jwt-userinfo"
+    contentType: plaintext
+    headers:
+      cookie: ${incoming.headers.cookie}
+    plaintext:
+      "customJwtCookie"
+  result: res
+  
+checkF:
+  log: ${res.response.body}
+
 get_tara_user_info:
   call: http.get
   args:
@@ -63,7 +77,9 @@ checkIfUserExists:
 assignUser:
   assign:
     user: ${user_info.response.body[0]}
-  next: generate_cookie  
+
+checkE:
+  log: ${user.idCode}
 
 generate_cookie:
   call: http.post
