@@ -12,6 +12,9 @@ declaration:
         type: string
         description: "Cookie field"
 
+checkA:
+  log: ${incoming.headers.cookie}
+
 get_tara_user_info:
   call: http.get
   args:
@@ -73,7 +76,9 @@ generate_cookie:
         "fullName": "${tara_info.response.body.fullName}"
       }
   result: cookie_result
-  next: assign_cookie
+
+checkB:
+  log: ${cookie_result.response.body.token}
 
 assign_cookie:
   assign:
