@@ -11,14 +11,7 @@ declaration:
       - field: cookie
         type: string
         description: "Cookie field"
-
-assignValues:
-  assign:
-    wholeCookie: ${incoming.headers.cookie}
     
-checkA:
-  log: ${wholeCookie}
-
 get_old_user:
   call: http.post
   args:
@@ -28,10 +21,7 @@ get_old_user:
       cookie: ${incoming.headers.cookie}
     plaintext:
       "customJwtCookie"
-  result: res
-  
-checkF:
-  log: ${res.response.body}
+  result: oldLogin
 
 get_tara_user_info:
   call: http.get
@@ -43,9 +33,6 @@ get_tara_user_info:
    plaintext: 
       "JWTTOKEN"
   result: tara_info
-
-checkD:
-  log: ${tara_info.response.body}
 
 get_session_length:
   call: http.post
@@ -75,8 +62,23 @@ assignUser:
   assign:
     user: ${user_info.response.body[0]}
 
-checkE:
-  log: ${user.idCode}
+checkIfNewLogin:
+  switch:
+    - condition: ${oldLogin.response.body != null && oldLogin.response.body.idCode !== user.idCode}
+      next: logOutOldUser
+  next: generate_cookie
+
+logOutOldUser:
+  call: http.post
+  args:
+    url: "[#CHATBOT_RESQL]/set-customer-support-status"
+    body:
+      active: ${false}
+      userIdCode: ${oldLogin.response.body.idCode}
+      status: ${"offline"}
+      statusComment: ${""}
+      created: ${new Date().toISOString()}
+  result: res
 
 generate_cookie:
   call: http.post
