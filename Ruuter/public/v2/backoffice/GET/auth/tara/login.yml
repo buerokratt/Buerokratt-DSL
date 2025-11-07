@@ -12,6 +12,9 @@ declaration:
         type: string
         description: "Cookie field"
 
+checkB:
+  log: ${incoming}
+
 get_tara_user_info:
   call: http.get
   args:
