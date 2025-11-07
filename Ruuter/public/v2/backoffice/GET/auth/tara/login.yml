@@ -18,9 +18,6 @@ assignValues:
     
 checkA:
   log: ${wholeCookie}
-  
-checkC:
-  log: ${wholeCookie.split(";")[1].trim()}
 
 get_old_user:
   call: http.post
