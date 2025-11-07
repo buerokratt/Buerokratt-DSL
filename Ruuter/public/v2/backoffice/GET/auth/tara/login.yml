@@ -11,9 +11,18 @@ declaration:
       - field: cookie
         type: string
         description: "Cookie field"
+      - field: set-cookie
+        type: string
+        description: "Set-Cookie field"
 
 checkB:
   log: ${incoming}
+
+checkC:
+  log: ${incoming.headers.cookie}
+
+checkD:
+  log: ${incoming.headers.set-cookie}
 
 get_tara_user_info:
   call: http.get
