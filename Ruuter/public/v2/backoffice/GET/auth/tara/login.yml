@@ -12,8 +12,15 @@ declaration:
         type: string
         description: "Cookie field"
 
+assignValues:
+  assign:
+    wholeCookie: ${incoming.headers.cookie}
+    
 checkA:
-  log: ${incoming.headers.cookie.customJwtCookie}
+  log: ${wholeCookie}
+  
+checkC:
+  log: ${Object.fromEntries(wholeCookie.split('; ').map(c => c.split('=')).customJwtCookie}
 
 get_tara_user_info:
   call: http.get
@@ -25,7 +32,9 @@ get_tara_user_info:
    plaintext: 
       "JWTTOKEN"
   result: tara_info
-  next: get_session_length
+
+checkD:
+  log: ${tara_info.response.body}
 
 get_session_length:
   call: http.post
