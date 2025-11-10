@@ -11,7 +11,12 @@ declaration:
       - field: cookie
         type: string
         description: "Cookie field"
-    
+
+assignValues:
+  assign:
+    wholeCookie: ${incoming.headers.cookie}
+
+
 get_old_user:
   call: http.post
   args:
@@ -33,6 +38,7 @@ get_tara_user_info:
    plaintext: 
       "JWTTOKEN"
   result: tara_info
+  next: get_session_length
 
 get_session_length:
   call: http.post
