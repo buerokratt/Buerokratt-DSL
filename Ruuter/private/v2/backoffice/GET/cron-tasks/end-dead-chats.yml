@@ -32,6 +32,12 @@ checkTimIds:
       keys: ${deadChats.response.body[0].baseIds?.join(',')}
   result: deadKeys
 
+deadkey_log:
+ log: ${deadKeys.response.body}
+
+deadkey_log2:
+ log: ${deadKeys.response}
+
 returnSuccess:
   return: ${deadKeys.response.body}
   next: end
