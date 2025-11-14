@@ -24,6 +24,15 @@ extend_cookie:
   result: cookie_result
   next: assign_cookie
 
+COOKIE_LOG:
+  log: ${cookie_result.response.body.token}
+COOKIE_LOG2:
+  log: ${cookie_result.response.body}
+COOKIE_LOG3:
+  log: ${cookie_result.response}
+COOKIE_LOG4:
+  log: ${cookie_result}
+
 assign_cookie:
   assign:
     setCookie:
