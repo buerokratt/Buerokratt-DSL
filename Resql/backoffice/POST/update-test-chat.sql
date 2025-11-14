@@ -23,7 +23,7 @@ SELECT base_id,
        received_from,
        received_from_name,
        csa_title,
-       :test
+       ::isTest
 FROM chat
 WHERE base_id = :chatId
 ORDER BY updated DESC
