@@ -44,7 +44,7 @@ assignBgkConfig:
     message: ${incoming.body.message ?? ''}
 
 log_dooomain:
-  log: "Domain received: ${incoming.body.message}"
+  log: "Domain received: ${incoming.body.domain}"
   
 check_if_anonymizer_is_active:
   switch:
