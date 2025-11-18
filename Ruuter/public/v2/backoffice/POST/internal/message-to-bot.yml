@@ -24,6 +24,9 @@ declaration:
         type: string
         description: "Body field 'domain'"
 
+log_dooomain_msgbot:
+  log: "Domain received: ${incoming.body.domain}"  
+
 extractRequestData:
   assign:
     chatId: ${incoming.body.chatId}
