@@ -22,16 +22,7 @@ extend_cookie:
     plaintext: 
       "chatJwt"
   result: cookie_result
- # next: assign_cookie
-
-COOKIE_LOG4:
-  log: ${cookie_result}
-COOKIE_LOG3:
-  log: ${cookie_result.response}
-COOKIE_LOG2:
-  log: ${cookie_result.response.body}
-COOKIE_LOG:
-  log: ${cookie_result.response.body.token}
+  next: assign_cookie
 
 assign_cookie:
   assign:
