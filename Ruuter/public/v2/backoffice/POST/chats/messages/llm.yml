@@ -82,6 +82,7 @@ trigger_bgk_bot:
     body:
       sender: ${sender}
       message: ${message.content ?? ''}
+      domain: ${domain}
   result: bgk_bot_response
   error: return_bad_request
   next: end
@@ -235,7 +236,7 @@ assign_back_office_event:
       - recipient_id: ${sender}
         text: ${bot_answer_config.askToForwardToCsaMessage}
         context: ${context}
-    event: "${bot_answer_config.isAskToForwardToCsa === 'true' && isOrgAvailable === true ? 'ask_to_forward_to_csa' : ''}"
+    event: "${isOrgAvailable === true ? 'ask_to_forward_to_csa' : ''}"
   next: format_messages
 
 assign_organization_does_not_use_csa:
