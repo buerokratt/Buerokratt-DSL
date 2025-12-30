@@ -282,7 +282,9 @@ get_organization_bot_answer_config:
 assign_organization_bot_answer_config:
   assign:
     bot_answer_config: ${bot_answer_config_res.response.body[0]}
-  next: assign_back_office_event
+#  next: assign_back_office_event
+stepA:
+  log: ${base_config} 
 
 assign_back_office_event:
   assign:
