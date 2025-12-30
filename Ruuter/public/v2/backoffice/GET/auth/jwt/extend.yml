@@ -42,6 +42,6 @@ return_value:
   next: end 
 
 return_extend_fail:
-  return: "Failed to extend JWT Cookie"
+  return: "Failed to extend JWT Cookie A"
   status: 400
   next: end
