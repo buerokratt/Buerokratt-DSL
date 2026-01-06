@@ -2,7 +2,7 @@ declaration:
   call: declare
   version: 0.1
   description: "Decription placeholder for 'EXTEND'"
-  method: get
+  method: post
   accepts: json
   returns: json
   namespace: backoffice
@@ -20,28 +20,26 @@ extend_cookie:
     headers:
       cookie: ${incoming.headers.cookie}
     plaintext: 
-      "chatJwt"
+      "customJwtCookie"
   result: cookie_result
-  error: return_extend_fail
+  error: return_extend_fail_private
   next: assign_cookie
 
 assign_cookie:
   assign:
     setCookie:
-      chatJwt: ${cookie_result.response.body.token}
+      customJwtCookie: ${cookie_result.response.body.token}
       Domain: "[#DOMAIN]"
       Secure: true
       HttpOnly: true
       SameSite: "[#COOKIE_SAME_SITE]"
-  next: return_value
 
-return_value:
+return_result:
   headers:
     Set-Cookie: ${setCookie}
   return: ${cookie_result.response.body.token}
-  next: end 
 
-return_extend_fail:
+return_extend_fail_private:
   return: "Failed to extend JWT Cookie"
   status: 400
   next: end
