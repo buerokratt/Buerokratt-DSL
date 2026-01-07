@@ -61,7 +61,7 @@ SERVICE_MAPPINGS=(
 )
 
 CRONMANAGER_MAPPINGS=(
-  "DSL/CronManager:CronManager"
+  "DSL:CronManager"
 )
 
 TEMP_DIR=$(mktemp -d)
