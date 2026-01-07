@@ -12,6 +12,7 @@ SOURCE_REPOS=(
   "buerokratt/Analytics-Module:test"
   "buerokratt/Service-Module:test"
   "buerokratt/Common-Services:test"
+  "buerokratt/CronManager:test"
 )
 
 # Hardcoded version
@@ -23,12 +24,12 @@ CHATBOT_MAPPINGS=(
   "DSL/Ruuter.private/backoffice:Ruuter/private/v2/backoffice"
   "DSL/Resql/backoffice:Resql/backoffice"
   "DSL/DMapper/backoffice/hbs:DataMapper/backoffice/hbs"
-  "DSL/CronManager:CronManager/backoffice"
   "DSL/Liquibase:Liquibase/backoffice"
   "DSL/OpenSearch:OpenSearch/backoffice"
 )
+
 CS_MAPPINGS=(
- "DSL/Ruuter.public:Ruuter/public/v2/Common-Services"
+  "DSL/Ruuter.public:Ruuter/public/v2/Common-Services"
 )
 
 TRAINING_MAPPINGS=(
@@ -36,7 +37,6 @@ TRAINING_MAPPINGS=(
   "DSL/Resql/training:Resql/training"
   "DSL/DMapper/training/hbs:DataMapper/training/hbs"
   "DSL/DMapper/training/locations:DataMapper/training/locations"
-  "DSL/CronManager:CronManager/training"
   "DSL/Liquibase:Liquibase/training"
   "DSL/Pipelines:pipelines/training"
   "DSL/OpenSearch:OpenSearch/training"
@@ -46,7 +46,6 @@ ANALYTICS_MAPPINGS=(
   "DSL/Ruuter/analytics:Ruuter/private/v2/analytics"
   "DSL/Resql/analytics:Resql/analytics"
   "DSL/DMapper/analytics/hbs:DataMapper/analytics/hbs"
-  "DSL/CronManager: CronManager/analytics"
   "DSL/Liquibase:Liquibase/analytics"
 )
 
@@ -56,25 +55,28 @@ SERVICE_MAPPINGS=(
   "DSL/Resql/users:Resql/services"
   "DSL/Ruuter/services:Ruuter/private/v2/services"
   "DSL/DMapper/services/hbs:DataMapper/services/hbs"
-  "DSL/CronManager/services:CronManager/services"
   "DSL/Liquibase:Liquibase/services"
   "DSL/Pipelines:pipelines/services"
   "DSL/OpenSearch:OpenSearch/services"
 )
 
+CRONMANAGER_MAPPINGS=(
+  "DSL:CronManager"
+)
+
 TEMP_DIR=$(mktemp -d)
 trap 'rm -rf "$TEMP_DIR"' EXIT
 
-declare -A CHATBOT_CHANGES TRAINING_CHANGES ANALYTICS_CHANGES SERVICE_CHANGES
+declare -A CHATBOT_CHANGES TRAINING_CHANGES ANALYTICS_CHANGES SERVICE_CHANGES CRONMANAGER_CHANGES
 
 for repo in "${SOURCE_REPOS[@]}"; do
   REPO_NAME="${repo%%:*}"
   REPO_BRANCH="${repo##*:}"
   REPO_DIR="$TEMP_DIR/$(basename "$REPO_NAME")"
-  
+
   echo "Cloning $REPO_NAME into $REPO_DIR"
   git clone --depth 1 --branch "$REPO_BRANCH" "https://github.com/$REPO_NAME.git" "$REPO_DIR"
-  
+
   if [ "$REPO_NAME" = "buerokratt/Buerokratt-Chatbot" ]; then
     MAPPINGS=("${CHATBOT_MAPPINGS[@]}")
     CHANGES_ARRAY="CHATBOT_CHANGES"
@@ -90,6 +92,9 @@ for repo in "${SOURCE_REPOS[@]}"; do
   elif [ "$REPO_NAME" = "buerokratt/Common-Services" ]; then
     MAPPINGS=("${CS_MAPPINGS[@]}")
     CHANGES_ARRAY="SERVICE_CHANGES"
+  elif [ "$REPO_NAME" = "buerokratt/CronManager" ]; then
+    MAPPINGS=("${CRONMANAGER_MAPPINGS[@]}")
+    CHANGES_ARRAY="CRONMANAGER_CHANGES"
   else
     echo "Unknown repo $REPO_NAME - skipping"
     continue
@@ -101,7 +106,6 @@ for repo in "${SOURCE_REPOS[@]}"; do
     FULL_SOURCE="$REPO_DIR/$SOURCE_FOLDER/"
     FULL_DEST="$CENTRAL_PATH/$DEST_FOLDER/"
 
-    # Special handling for Resql/services - merge multiple into staging first
     if [[ "$DEST_FOLDER" == "Resql/services" ]]; then
       STAGING_DEST="$TEMP_DIR/staging_Resql_services"
       mkdir -p "$STAGING_DEST"
@@ -118,6 +122,7 @@ for repo in "${SOURCE_REPOS[@]}"; do
       mkdir -p "$FULL_DEST"
       BEFORE_FILE=$(mktemp)
       AFTER_FILE=$(mktemp)
+
       find "$FULL_DEST" -type f -exec sha256sum {} + 2>/dev/null | sort -k 3 > "$BEFORE_FILE"
       RSYNC_OUTPUT=$(rsync -av --delete "$FULL_SOURCE" "$FULL_DEST" 2>&1)
       echo "Synced $FULL_SOURCE to $FULL_DEST"
@@ -127,6 +132,7 @@ for repo in "${SOURCE_REPOS[@]}"; do
       if echo "$RSYNC_OUTPUT" | grep -qE "^deleting "; then
         CHANGES+="Deleted: $(echo "$RSYNC_OUTPUT" | grep "^deleting " | sed 's/^deleting //')"
       fi
+
       ADDED_MODIFIED=$(comm -13 "$BEFORE_FILE" "$AFTER_FILE" | cut -c 67-)
       if [ -n "$ADDED_MODIFIED" ]; then
         CHANGES+=" Added/Modified: $ADDED_MODIFIED"
@@ -142,21 +148,22 @@ for repo in "${SOURCE_REPOS[@]}"; do
     fi
   done
 
-  # Finalize merged Resql/services sync
   if [[ -d "$TEMP_DIR/staging_Resql_services" ]]; then
     FINAL_DEST="$CENTRAL_PATH/Resql/services/"
     mkdir -p "$FINAL_DEST"
+
     BEFORE_FILE=$(mktemp)
     AFTER_FILE=$(mktemp)
+
     find "$FINAL_DEST" -type f -exec sha256sum {} + 2>/dev/null | sort -k 3 > "$BEFORE_FILE"
     RSYNC_OUTPUT=$(rsync -av --delete "$TEMP_DIR/staging_Resql_services/" "$FINAL_DEST")
-    echo "Merged staged Resql/services into $FINAL_DEST"
     find "$FINAL_DEST" -type f -exec sha256sum {} + 2>/dev/null | sort -k 3 > "$AFTER_FILE"
 
     CHANGES=""
     if echo "$RSYNC_OUTPUT" | grep -qE "^deleting "; then
       CHANGES+="Deleted: $(echo "$RSYNC_OUTPUT" | grep "^deleting " | sed 's/^deleting //')"
     fi
+
     ADDED_MODIFIED=$(comm -13 "$BEFORE_FILE" "$AFTER_FILE" | cut -c 67-)
     if [ -n "$ADDED_MODIFIED" ]; then
       CHANGES+=" Added/Modified: $ADDED_MODIFIED"
@@ -168,28 +175,26 @@ for repo in "${SOURCE_REPOS[@]}"; do
       SERVICE_CHANGES["Resql/services"]="$CHANGES"
     fi
   fi
-
 done
 
 # Generate summary
 TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
 SUMMARY="# Sync Run - $TIMESTAMP\n\n"
-ANY_CHANGES=0
 
-for block in "Chatbot" "Training" "Analytics" "Service"; do
+for block in "Chatbot" "Training" "Analytics" "Service" "CronManager"; do
   SUMMARY+="## $block Changes\n"
   case "$block" in
     "Chatbot") CHANGES_ARRAY="CHATBOT_CHANGES" ;;
     "Training") CHANGES_ARRAY="TRAINING_CHANGES" ;;
     "Analytics") CHANGES_ARRAY="ANALYTICS_CHANGES" ;;
     "Service") CHANGES_ARRAY="SERVICE_CHANGES" ;;
+    "CronManager") CHANGES_ARRAY="CRONMANAGER_CHANGES" ;;
   esac
 
   eval "changes_count=\${#$CHANGES_ARRAY[@]}"
   if [ "$changes_count" -eq 0 ]; then
     SUMMARY+="No changes detected.\n\n"
   else
-    ANY_CHANGES=1
     eval "for dest in \"\${!$CHANGES_ARRAY[@]}\"; do
       SUMMARY+=\"### \$dest\n\"
       SUMMARY+=\"\${$CHANGES_ARRAY[\$dest]}\n\n\"
@@ -197,11 +202,9 @@ for block in "Chatbot" "Training" "Analytics" "Service"; do
   fi
 done
 
-# Print to console
 echo -e "\n=== Sync Confirmation Summary ==="
 echo -e "$SUMMARY"
 
-# Update changelog
 TEMP_CHANGELOG=$(mktemp)
 echo -e "$SUMMARY" > "$TEMP_CHANGELOG"
 
