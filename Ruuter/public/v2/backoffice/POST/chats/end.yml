@@ -21,11 +21,12 @@ declaration:
 
 extractRequestData:
   assign:
-    chatId: ${incoming.body.message.chatId}
-    event: "CLIENT_LEFT_FOR_UNKNOWN_REASONS"
-    authorRole: "end-user"
-    authorTimestamp: ${incoming.body.message.authorTimestamp}
-    status: "ENDED"
+    cookie: ${incoming.headers.cookie ?? "nonce"}
+    chatId: "${incoming.body.message.chatId}"
+    event: "${incoming.body.message.event}"
+    authorRole: ${incoming.body.message.authorRole}
+    authorTimestamp: "${incoming.body.message.authorTimestamp}"
+    status: "${incoming.body.status}"
   next: deleteMessagePreview
 
 deleteMessagePreview:
@@ -70,10 +71,7 @@ checkActiveChatResult:
 assignChat:
   assign:
     activeChat: ${activeChatRes.response.body[0]}
-    lastDate: ${activeChat.lastMessageTimestamp}
-
-checkV33:
-  log: ${lastDate}
+  next: postMessage
 
 postMessage:
   call: http.post
@@ -83,13 +81,12 @@ postMessage:
       chatId: ${chatId}
       messageId: ${messageUuid}
       content: ""
-      authorTimestamp: ${lastDate}
+      authorTimestamp: ${authorTimestamp}
       authorId: ""
       authorFirstName: ""
       authorLastName: ""
       authorRole: ${authorRole ?? "buerokratt"}
-      created: ${lastDate}
-      updated: ${lastDate}
+      created: ${new Date().toISOString()}
       rating: ""
       event: ${event}
       forwardedByUser: ""
@@ -111,9 +108,8 @@ endChat:
       endUserFirstName: ${activeChat.endUserFirstName ?? ""}
       endUserLastName: ${activeChat.endUserLastName ?? ""}
       status: ${status ?? "ENDED"}
-      created: ${lastDate}
-      updated: ${lastDate}
-      ended: ${lastDate}
+      created: ${activeChat.created ?? new Date().toISOString()}
+      ended: ${new Date().toISOString()}
       feedbackRating: ${activeChat.feedbackRating ?? ""}
       feedbackText: ${activeChat.feedbackText ?? ""}
       endUserEmail: ${activeChat.endUserEmail ?? ""}
@@ -126,7 +122,21 @@ endChat:
       receivedFrom: ${activeChat.receivedFrom ?? ""}
       receivedFromName: ${activeChat.receivedFromName ?? ""}
   result: end_chat_res
+  next: checkForCookie
+
+checkForCookie:
+  switch:
+    - condition: ${cookie === "nonce"}
+      next: notify_chats_final
   next: blacklist_chat_jwt
+
+notify_chats_final:
+  template: "[#CHATBOT_PROJECT_LAYER]/chats/notify"
+  requestType: templates
+  body:
+    chatId: ${chatId}
+  result: chats_notify_res
+  next: return_empty_result
 
 blacklist_chat_jwt:
   call: http.post
@@ -134,7 +144,7 @@ blacklist_chat_jwt:
     url: "[#CHATBOT_TIM]/jwt/custom-jwt-blacklist"
     contentType: plaintext
     headers:
-      cookie: ${incoming.headers.cookie}
+      cookie: ${cookie}
     plaintext: "chatJwt"
   result: chat_blacklist_res
   next: assign_chat_cookie
@@ -157,7 +167,7 @@ blacklist_user_jwt:
     url: "[#CHATBOT_TIM]/jwt/custom-jwt-blacklist"
     contentType: plaintext
     headers:
-      cookie: ${incoming.headers.cookie}
+      cookie: ${cookie}
     plaintext: "userJwt"
   result: client_blacklist_res
   next: notify_chats
@@ -180,6 +190,10 @@ remove_chat_id_from_queue_notification_node_if_existed:
 return_result:
   headers:
     Set-Cookie: ${chatCookie}
+  return: "Ended Chat Successfully"
+  next: end
+
+return_empty_result:
   return: "Ended Chat Successfully"
   next: end
 

@@ -38,8 +38,8 @@ WHERE
     'organizationNoCsaAvailableMessage',
     'organizationOutsideWorkingHoursAskForContacts',
     'organizationOutsideWorkingHoursMessage',
-    'organizationBotCannotAnswerAskToForwardToCSA',
     'organizationBotCannotAnswerMessage',
+    'organizationRedirectIfBotCannotAnswerMessage',
     'organizationUseCSA'
     )
   AND c.deleted = FALSE
@@ -84,8 +84,8 @@ FROM (
     ('organizationNoCsaAvailableMessage',               :organizationNoCsaAvailableMessage),
     ('organizationOutsideWorkingHoursAskForContacts',   :organizationOutsideWorkingHoursAskForContacts),
     ('organizationOutsideWorkingHoursMessage',          :organizationOutsideWorkingHoursMessage),
-    ('organizationBotCannotAnswerAskToForwardToCSA',    :organizationBotCannotAnswerAskToForwardToCSA),
     ('organizationBotCannotAnswerMessage',              :organizationBotCannotAnswerMessage),
+    ('organizationRedirectIfBotCannotAnswerMessage',    :organizationRedirectIfBotCannotAnswerMessage),
     ('organizationUseCSA',                          :organizationUseCSA)
     ) AS v(key, value)
     )

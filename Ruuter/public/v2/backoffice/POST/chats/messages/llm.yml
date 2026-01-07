@@ -68,15 +68,11 @@ check_value:
     - condition: ${correct_value === 'ERROR'}
       next: return_value
     - condition: ${correct_value.map((item) => item.text)[0] === '$backoffice' || correct_value.map((item) => item.text)[0].startsWith('$backoffice')}
-      next: get_organization_base_config
+      next: check_base_config_domain
     - condition: ${correct_value.map((item) => item.text)[0].startsWith('$validate_')}
       next: assign_validation_event
     - condition: ${correct_value.map((item) => item.text)[0] === '$general_knowledge' || correct_value.map((item) => item.text)[0].startsWith('$general_knowledge')}
       next: trigger_bgk_bot  
-    - condition: ${correct_value.map((item) => item.text)[0] === 'The requested information is not found in the retrieved data. Please try another query or topic.'}
-      next: assign_unavailable_info_message
-    - condition: ${correct_value.map((item) => item.text)[0] === 'The requested information is not available in the retrieved data. Please try another query or topic.'}
-      next: assign_unavailable_info_message
   next: format_messages
 
 trigger_bgk_bot:
@@ -85,10 +81,41 @@ trigger_bgk_bot:
     url: "[#CHATBOT_RUUTER_PUBLIC_INTERNAL]/internal/bgk-external-bot"
     body:
       sender: ${sender}
-      message: ${message}
+      message: ${message.content ?? ''}
+      domain: ${domain}
   result: bgk_bot_response
   error: return_bad_request
   next: end
+
+check_base_config_domain:
+  switch:
+    - condition: ${domain === 'none'}
+      next: get_organization_base_config
+  next: getDomainUUID
+
+getDomainUUID:
+  call: http.post
+  args:
+    url: "[#CHATBOT_RESQL]/get-domain-uuid"
+    body:
+      domainUrl: ${domain + '%'}
+  result: domainUuid
+  next: validate_domain_res
+
+validate_domain_res:
+  switch:
+    - condition: ${domainUuid.response.body.length > 0}
+      next: get_domain_organization_base_config
+  next: get_organization_base_config
+
+get_domain_organization_base_config:
+  call: http.post
+  args:
+    url: "[#CHATBOT_RESQL]/get-domain-organization-base-config"
+    body:
+      domainUUID: ${domainUuid.response.body[0].domainId}
+  result: org_base_config_res
+  next: assign_organization_base_config
 
 get_organization_base_config:
   call: http.post
@@ -112,7 +139,31 @@ check_if_organization_is_available_all_time:
   switch:
     - condition: ${base_config.isAvailableAllTime === 'true'}
       next: get_all_available_csas
+  next: check_domain_organization_working_hours
+
+check_domain_organization_working_hours:
+  switch:
+    - condition: ${domain === 'none'}
+      next: get_organization_working_details
+  next: validate_domain
+
+validate_domain:
+  switch:
+    - condition: ${domainUuid.response.body.length > 0}
+      next: get_domain_organization_working_details
   next: get_organization_working_details
+
+get_domain_organization_working_details:
+  call: http.post
+  args:
+    url: "[#CHATBOT_RESQL]/get-is-domain-organization-available"
+    body:
+      holidays: ${holidays}
+      holiday_names: ${holidayNames}
+      current_timestamp: ${new Date().toISOString()}
+      domain: ${domainUuid.response.body[0].domainId}
+  result: org_res
+  next: assign_organization_details
 
 get_organization_working_details:
   call: http.post
@@ -135,10 +186,10 @@ check_if_organization_is_available:
     - condition: ${org_details.isWithinWorkingTime === true && org_details.isWithinWorkingDays === true && org_details.isAllowedToWorkAtHolidays === true}
       next: get_all_available_csas
     - condition: ${org_details.isWithinWorkingTime === true && org_details.isWithinWorkingDays === true && org_details.isAllowedToWorkAtHolidays === false && org_details.isHoliday == true}
-      next: get_organization_bot_answer_config
+      next: assign_outside_working_hours
     - condition: ${org_details.isWithinWorkingTime === true && org_details.isWithinWorkingDays === true && org_details.isAllowedToWorkAtHolidays === false && org_details.isHoliday == false}
       next: get_all_available_csas
-  next: get_organization_bot_answer_config
+  next: assign_outside_working_hours
 
 get_all_available_csas:
   call: http.post
@@ -155,8 +206,26 @@ assign_available_csas:
 check_if_csas_are_available:
   switch:
     - condition: ${available_csas == 0}
-      next: get_organization_bot_answer_config
+      next: assign_no_csas_available
   next: assign_organization_available
+
+assign_no_csas_available:
+  assign:
+    correct_value:
+      - recipient_id: ${sender}
+        text: ${base_config.noCsaMessage}
+        context: ${context}
+    event: "${base_config.askForContacts === 'true' ? 'unavailable_csas_ask_contacts' : 'unavailable_csas'}"
+  next: format_messages
+
+assign_outside_working_hours:
+  assign:
+    correct_value:
+      - recipient_id: ${sender}
+        text: ${base_config.outsideWorkingHoursMessage}
+        context: ${context}
+    event: "${base_config.outsideWorkingHoursAskForContacts === 'true' ? 'unavailable_organization_ask_contacts' : 'unavailable_organization'}"
+  next: format_messages  
 
 assign_organization_available:
   assign:
@@ -219,18 +288,9 @@ assign_back_office_event:
   assign:
     correct_value:
       - recipient_id: ${sender}
-        text: ${bot_answer_config.askToForwardToCsaMessage}
+        text: ${base_config.redirectIfBotCannotAnswerMessage}
         context: ${context}
-    event: "${bot_answer_config.isAskToForwardToCsa === 'true' && isOrgAvailable === true ? 'ask_to_forward_to_csa' : ''}"
-  next: format_messages
-
-assign_unavailable_info_message:
-  assign:
-    correct_value:
-      - recipient_id: ${sender}
-        text: "Mulle kättesaadavates andmetes puudub teie küsimusele vastav info. Palun täpsustage oma küsimust."
-        context: ${context}
-    event: ""
+    event: "${isOrgAvailable === true ? 'ask_to_forward_to_csa' : ''}"
   next: format_messages
 
 assign_organization_does_not_use_csa:

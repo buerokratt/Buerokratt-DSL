@@ -61,8 +61,37 @@ get_bot_name:
 check_if_bot_name_exists:
   switch:
     - condition: ${get_bot_name_result.response.body[0]?.value != null}
-      next: get_chat
+      next: assign_bot_name
   next: return_bot_name_does_not_exist
+
+assign_bot_name:
+  assign:
+    chat_bot_name: ${get_bot_name_result.response.body[0].value}
+  next: check_for_intent
+
+check_for_intent:
+  call: http.post
+  args:
+    url: "[#CHATBOT_RUUTER_PUBLIC_INTERNAL]/internal/intent_detection"
+    body:
+      sender: ${chatId}
+      message: ${content}
+      domain: ${domain}
+  result: llm_service_response
+  next: check_service_result
+
+check_service_result:
+  switch:
+    - condition: ${llm_service_response.response.body.response === 'skip'}
+      next: get_chat
+  next: assign_service_response
+
+assign_service_response:
+  assign:
+    botMsg:
+      - recipient_id: ${chatId}
+        text: ${llm_service_response.response.body.response}
+  next: format_bot_messages
 
 get_chat:
   call: http.post
@@ -76,7 +105,7 @@ get_chat:
 
 check_chat_belongs_to_bot:
   switch:
-    - condition: ${get_chat_result.response.body[0].customerSupportId == get_bot_name_result.response.body[0].value}
+    - condition: ${get_chat_result.response.body[0].customerSupportId == chat_bot_name}
       next: check_for_service
   next: return_chat_does_not_belong_to_bot
 
@@ -107,13 +136,13 @@ check_if_bot_is_unable_to_reply:
     - condition: ${post_message_to_bot_result.response.body?.[0]?.text == 'UNKNOWN'}
       next: check_if_client_bot_is_active
     - condition: ${post_message_to_bot_result.response.body?.[0]?.text == 'Suunan teid klienditeenindajale. Varuge natukene kannatust.'}
-      next: get_organization_base_config
+      next: check_base_config_domain
     - condition: ${post_message_to_bot_result.response.body?.[0]?.text == 'Suunan vestluse nõustajale. Palun oodake.'}
-      next: get_organization_base_config
+      next: check_base_config_domain
     - condition: ${post_message_to_bot_result.response.body?.[0]?.text == 'Suunan teid klienditeenindajale. Palun oodake.'}
-      next: get_organization_base_config
+      next: check_base_config_domain
     - condition: ${post_message_to_bot_result.response.body?.[0]?.text == 'Suunan teid riigiinfo konsultandile. Varuge natukene kannatust.'}
-      next: get_organization_base_config
+      next: check_base_config_domain
     - condition: ${post_message_to_bot_result.response.body?.[0]?.text.startsWith("#common_service") || post_message_to_bot_result.response.body?.[0]?.text.startsWith("#service")}
       next: assign_service_content_from_bot_response
   next: extract_bot_responses
@@ -129,7 +158,7 @@ trigger_service:
   body:
     message: ${service_content}
     chatId: ${chatId}
-    authorId: ${get_bot_name_result.response.body[0].value}
+    authorId: ${chat_bot_name}
   result: converted_messages_res
   error: return_bot_error
   next: check_for_trigger_service_response
@@ -173,6 +202,7 @@ check_for_bgk_bot:
     body:
       sender: ${chatId}
       message: ${content}
+      domain: ${domain}
   result: converted_messages_res
   error: return_bot_error
   next: check_if_bgk_bot_is_unable_to_reply
@@ -200,6 +230,36 @@ check_if_user_wants_csa:
   result: post_message_to_bot_result
   next: check_for_post_message_to_bot_result
 
+check_base_config_domain:
+  switch:
+    - condition: ${domain === 'none'}
+      next: get_organization_base_config
+  next: getDomainUUID
+
+getDomainUUID:
+  call: http.post
+  args:
+    url: "[#CHATBOT_RESQL]/get-domain-uuid"
+    body:
+      domainUrl: ${domain + '%'}
+  result: domainUuid
+  next: validate_domain_res
+
+validate_domain_res:
+  switch:
+    - condition: ${domainUuid.response.body.length > 0}
+      next: get_domain_organization_base_config
+  next: get_organization_base_config
+
+get_domain_organization_base_config:
+  call: http.post
+  args:
+    url: "[#CHATBOT_RESQL]/get-domain-organization-base-config"
+    body:
+      domainUUID: ${domainUuid.response.body[0].domainId}
+  result: org_base_config_res
+  next: assign_organization_base_config
+
 get_organization_base_config:
   call: http.post
   args:
@@ -222,7 +282,31 @@ check_if_organization_is_available_all_time:
   switch:
     - condition: ${base_config.isAvailableAllTime === 'true'}
       next: get_all_available_csas
+  next: check_domain_organization_working_hours
+
+check_domain_organization_working_hours:
+  switch:
+    - condition: ${domain === 'none'}
+      next: get_organization_working_details
+  next: validate_domain
+
+validate_domain:
+  switch:
+    - condition: ${domainUuid.response.body.length > 0}
+      next: get_domain_organization_working_details
   next: get_organization_working_details
+
+get_domain_organization_working_details:
+  call: http.post
+  args:
+    url: "[#CHATBOT_RESQL]/get-is-domain-organization-available"
+    body:
+      holidays: ${holidays}
+      holiday_names: ${holidayNames}
+      current_timestamp: ${new Date().toISOString()}
+      domain: ${domainUuid.response.body[0].domainId}
+  result: org_res
+  next: assign_organization_details
 
 get_organization_working_details:
   call: http.post
@@ -260,7 +344,7 @@ return_is_a_holiday:
           content: ${org_details.holidayMessage}
           authorTimestamp: ${new Date().toISOString()}
           event: "${base_config.outsideWorkingHoursAskForContacts === 'true' ? 'unavailable_holiday_ask_contacts' : 'unavailable_holiday'}"
-          authorId: ${get_bot_name_result.response.body[0].value}
+          authorId: ${chat_bot_name}
           authorFirstName: ""
           authorLastName: ""
           created: ${new Date().toISOString()}
@@ -277,7 +361,7 @@ return_organization_is_not_available:
           content: ${base_config.outsideWorkingHoursMessage}
           authorTimestamp: ${new Date().toISOString()}
           event: "${base_config.outsideWorkingHoursAskForContacts === 'true' ? 'unavailable_organization_ask_contacts' : 'unavailable_organization'}"
-          authorId: ${get_bot_name_result.response.body[0].value}
+          authorId: ${chat_bot_name}
           authorFirstName: ""
           authorLastName: ""
           created: ${new Date().toISOString()}
@@ -294,7 +378,7 @@ return_organization_does_not_use_csa:
           content: ${base_config.botCannotAnswerMessage}
           authorTimestamp: ${new Date().toISOString()}
           event: "unavailable_organization"
-          authorId: ${get_bot_name_result.response.body[0].value}
+          authorId: ${chat_bot_name}
           authorFirstName: ""
           authorLastName: ""
           created: ${new Date().toISOString()}
@@ -329,7 +413,7 @@ send_csas_not_available_message:
           content: ${base_config.noCsaMessage}
           authorTimestamp: ${new Date().toISOString()}
           event: "${base_config.askForContacts === 'true' ? 'unavailable_csas_ask_contacts' : 'unavailable_csas'}"
-          authorId: ${get_bot_name_result.response.body[0].value}
+          authorId: ${chat_bot_name}
           authorFirstName: ""
           authorLastName: ""
           created: ${new Date().toISOString()}
@@ -374,7 +458,7 @@ format_bot_messages:
         {
           "botMessages": "${botMsg}",
           "chatId": "${chatId}",
-          "authorId": "${get_bot_name_result.response.body[0].value}",
+          "authorId": "${chat_bot_name}",
           "authorFirstName": "",
           "authorLastName": "",
           "authorTimestamp": "${new Date().toISOString()}",

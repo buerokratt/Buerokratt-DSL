@@ -2,6 +2,253 @@
 
 All changes to Buerokratt-DSL from source repos.
 
+# Sync Run - 2026-01-07 09:32:35
+
+## Chatbot Changes
+### Liquibase/backoffice
+Deleted: changelog/20250103092720_add_column_preference.sql Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20241231131146-create-chat-jira-syncrhonization-table.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20250102161913-add-jira-account-id-to-user-table.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20250211084322-add-request-nonces.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20260153791910-add-anonymizer-config.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20260153791920_add_organization_bot_answer_ redirect_config.xml
+
+### CronManager/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/backoffice/delete_conversations.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/backoffice/create_smax_request.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/backoffice/create_jira_issue.yml
+
+### Resql/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/get-users-with-roles-by-role.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/get-domain-anonymizer-config.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/get-domain-feedback-config.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/get-organization-working-time.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/set-domain-anonymizer-config.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/insert-chat-jira-synchronization.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/get-organization-base-config.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/get-domain-skm-config.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/delete-user.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/get-widget-domains.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/get-organization-bot-answer-config.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/get-domain-greeting-message.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/get-dead-chat-ids.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/get-domain-organization-working-time.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/get-domain-emergency-notice.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/get-domain-bot-config.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/get-user-jira-id-by-chat-csi.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/get-domain-uuid.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/get-jira-chat.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/set-domain-organization-working-time.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/get-domain-widget-config.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/insert-message.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/set-domain-feedback-config.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/get-domain-organization-base-config.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/get-is-domain-organization-available.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/get-jira-synchronization.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/set-domain-skm-config.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/insert-user-role-domains.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/get-cs-all-ended-chats.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/set-anonymizer-config.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/get-anonymizer-config.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/insert-chat.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/set-organization-working-time.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/update-user.sql
+
+### Ruuter/public/v2/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/backoffice/POST/internal/message-to-bot.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/backoffice/TEMPLATES/chats/trigger-llm-service.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/backoffice/GET/auth/jwt/extend.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/backoffice/GET/chats/get.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/backoffice/POST/chats/messages/llm.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/backoffice/POST/chats/messages/add.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/backoffice/POST/chats/end.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/backoffice/GET/auth/tara/login.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/backoffice/POST/internal/intent_detection.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/backoffice/POST/chats/messages/stop-stream.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/backoffice/POST/internal/client-external-bot.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/backoffice/GET/chats/config/widget.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/backoffice/POST/internal/bgk-external-bot.yml
+
+### Ruuter/private/v2/backoffice
+Deleted: GET/agents/admin/title-visibility.yml
+GET/agents/admin/name-visibility.yml
+GET/agents/admin/.guard
+GET/agents/admin/
+POST/agents/admin/title-visibility.yml
+POST/agents/admin/name-visibility.yml
+POST/agents/admin/.guard
+POST/agents/admin/ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/GET/configs/feedback.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/accounts/admin/smax-connection.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/accounts/admin/add.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/GET/jira/chats/sync.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/configs/widget.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/GET/configs/skm-config.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/GET/cron-tasks/end-dead-chats.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/extend.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/accounts/admin/edit.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/TEMPLATES/check-csa-authority.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/configs/emergency-notice.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/configs/organization-working-time.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/GET/agents/csa/is-chat-editable.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/GET/agents/csa/.guard
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/configs/bot-config.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/chats/end.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/GET/configs/anonymizer.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/anonymizer/anonymize.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/configs/skm-config.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/chats/ended/download.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/configs/anonymizer.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/configs/feedback.yml
+
+### DataMapper/backoffice/hbs
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/backoffice/hbs/return_anonymizer_config.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/backoffice/hbs/return_organization_working_time.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/backoffice/hbs/prepare_anonymizer_config.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/backoffice/hbs/intent_detection_message.handlebars
+
+## Training Changes
+### DataMapper/training/hbs
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/training/hbs/get_models.handlebars
+
+### Resql/training
+Deleted: POST/update-intents-status.sql
+POST/update-intent.sql
+POST/update-intent-name.sql Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/training/POST/get-last-processing-model.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/training/POST/add-intent.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/training/POST/get-intents-list-last-changed.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/training/POST/get-llm-model-by-filename.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/training/POST/get-intent-last-changed.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/training/POST/get-llm-trainings.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/training/POST/get-last-deployed-model.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/training/POST/add-llm-trainings.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/training/POST/get-latest-ready-model.sql
+
+### Ruuter/private/v2/training
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/POST/rasa/rules/add.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/POST/rasa/rules/update.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/POST/rasa/intents/examples/add.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/GET/rasa/model/add-new-model-cross-validating.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/GET/rasa/intent-ids.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/POST/rasa/responses/update.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/POST/rasa/rules/delete.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/POST/rasa/intents/update.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/POST/rasa/model/add-new-model-ready.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/GET/rasa/model/add-new-model-error.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/POST/rasa/model/add-model-description.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/GET/rasa/intents/mark-for-service.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/POST/rasa/intents/delete.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/POST/rasa/intents/examples/update.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/POST/rasa/intents/add.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/POST/rasa/responses/add.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/POST/rasa/model/add-new-model-deployed.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/POST/rasa/intents/examples/delete.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/GET/rasa/model/add-new-model-testing.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/GET/rasa/model/add-new-model-processing.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/GET/internal/return-file-locations.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/GET/rasa/intents/by-id.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/GET/rasa/model/add-new-model-already-trained.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/POST/rasa/model/trained-model.yml
+
+### CronManager/training
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/training/train_bot.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/training/health.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/training/load_trained_model.yml
+
+### Liquibase/training
+Deleted: changelog/rollback/20250905124512_rollback.sql
+changelog/rollback/
+changelog/20250905124512_update_intent_status_active_to_trained.sql Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/training/changelog/20250103092721_add_description_to_llm_trainings.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/training/liquibase.properties
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/training/changelog.yaml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/training/changelog/20250103092720_add_column_preference.sql
+
+## Analytics Changes
+### Ruuter/private/v2/analytics
+Deleted: GET/overview/metrics.yml Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/overview/preferences.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/overview/metrics.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/accounts/edit-user-domains.yml
+
+### Liquibase/analytics
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/liquibase.properties
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/changelog.yaml
+
+### Resql/analytics
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/feedback-avg-feedback-to-buerokratt-chats.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/chat-cif-outside-working-hours.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/get-avg-session-length-no-csa.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/byk-avg-sessions-time-chatbot.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/get-avg-session-length-csa.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/chat-avg-num-of-messages.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/status-all-chats.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/chat-count-with-csa.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/get-avg-messages.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/byk-modified-intents.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/csa-chat-forwards.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/chat-idle-count.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/get-avg-time-csa.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/get-avg-response-time.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/csa-chats-count.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/overview-avg-waiting-time.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/overview-total-chats.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/get-cs-all-ended-chats.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/chat-cif-all-csas-away.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/csa-avg-chat-time.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/feedback-csa-chats-feedback-nps.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/csa-avg-time-picking-up-chats.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/byk-avg-intents.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/csa-avg-present-number.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/feedback-chats-with-negative-feedback.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/update-metric-preferences.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/chat-median-waiting-time.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/get-avg-session-length-client-left.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/get-avg-time.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/overview-total-chats-no-csa.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/feedback-chats-distribution.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/feedback-buerokratt-chats-nps.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/get-chat-count-no-csa.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/get-avg-waiting-time.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/byk-avg-response-speed.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/get-pct-correctly-understood.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/chat-count-only-chatbot.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/chat-avg-waiting-time.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/chat-cif-long-waiting-time.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/byk-ended-count.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/chat-count-with-csa-and-chatbot.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/get-period-times.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/overview-total-forwarded-chats.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/byk-new-intents.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/overview-avg-chats-no-csa.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/byk-intents-count.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/byk-avg-sessions-time-customer.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/overview-avg-chats.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/overview-chat-activity-chart.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/status-csa-chats.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/chat-avg-duration.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/get-chat-count-total.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/feedback-selected-csa-feedback-nps.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/get-intent.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/byk-pct-correctly-understood.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/byk-avg-sessions-time-csa.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/get-chat-count-csa.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/get-intents.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/get-avg-time-no-csa.sql
+
+###  CronManager/analytics
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/ CronManager/analytics/health.yml
+
+## Service Changes
+### Resql/services
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/edit.sql
+
+### DataMapper/services/hbs
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/services/hbs/bot_responses_to_messages.handlebars
+
+### Ruuter/private/v2/services
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/services/POST/services/requests/explain.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/services/GET/service-by-id.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/services/POST/services/edit.yml
+
+
+
 # Sync Run - 2025-10-20 10:20:29
 
 ## Chatbot Changes

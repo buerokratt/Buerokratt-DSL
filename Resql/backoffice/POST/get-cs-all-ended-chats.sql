@@ -74,7 +74,7 @@ SELECT MAX(id) AS maxId
 FROM chat
 WHERE ended IS NOT NULL
   AND status <> 'IDLE'
-  AND ended::date BETWEEN :start::timestamp with time zone AND :end::timestamp with time zone
+  AND ended::timestamptz BETWEEN :start::timestamptz AND :end::timestamptz
   AND (array_length(ARRAY[:urls]::TEXT[], 1) IS NULL
     OR chat.end_user_url LIKE ANY(ARRAY[:urls]::TEXT[]))
 GROUP BY base_id
@@ -249,7 +249,9 @@ ORDER BY
     CASE WHEN :sorting = 'endUserEmail asc' THEN c.end_user_email END ASC,
     CASE WHEN :sorting = 'endUserEmail desc' THEN c.end_user_email END DESC,
     CASE WHEN :sorting = 'endUserId asc' THEN c.end_user_id END ASC,
-    CASE WHEN :sorting = 'endUserId desc' THEN c.end_user_id END desc,
+    CASE WHEN :sorting = 'endUserId desc' THEN c.end_user_id END DESC,
+    CASE WHEN :sorting = 'www asc' THEN c.end_user_url END ASC,
+    CASE WHEN :sorting = 'www desc' THEN c.end_user_url END DESC,
     CASE WHEN :sorting = 'contactsMessage asc' THEN ContactsMessage.content END ASC,
     CASE WHEN :sorting = 'contactsMessage desc' THEN ContactsMessage.content END DESC,
     CASE WHEN :sorting = 'comment asc' THEN s.comment END ASC,
