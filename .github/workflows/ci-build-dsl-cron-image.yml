@@ -3,9 +3,9 @@ name: Docker Build and Push
 on:
   push:
     branches:
-      - v2.2-alpha-services
+      - end-chats
     paths:
-      - '.env.k8s'
+      - '.env.img'
       - 'module_based_image_builder.py'
 
 jobs:
