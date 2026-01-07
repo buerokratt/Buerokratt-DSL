@@ -12,6 +12,7 @@ SOURCE_REPOS=(
   "buerokratt/Analytics-Module:test"
   "buerokratt/Service-Module:test"
   "buerokratt/Common-Services:test"
+  "buerokratt/CronManager:test"
 )
 
 # Hardcoded version
@@ -23,7 +24,7 @@ CHATBOT_MAPPINGS=(
   "DSL/Ruuter.private/backoffice:Ruuter/private/v2/backoffice"
   "DSL/Resql/backoffice:Resql/backoffice"
   "DSL/DMapper/backoffice/hbs:DataMapper/backoffice/hbs"
-  "DSL/CronManager:CronManager/backoffice"
+  #"DSL/CronManager:CronManager/backoffice"
   "DSL/Liquibase:Liquibase/backoffice"
   "DSL/OpenSearch:OpenSearch/backoffice"
 )
@@ -36,7 +37,7 @@ TRAINING_MAPPINGS=(
   "DSL/Resql/training:Resql/training"
   "DSL/DMapper/training/hbs:DataMapper/training/hbs"
   "DSL/DMapper/training/locations:DataMapper/training/locations"
-  "DSL/CronManager:CronManager/training"
+  #"DSL/CronManager:CronManager/training"
   "DSL/Liquibase:Liquibase/training"
   "DSL/Pipelines:pipelines/training"
   "DSL/OpenSearch:OpenSearch/training"
@@ -46,7 +47,7 @@ ANALYTICS_MAPPINGS=(
   "DSL/Ruuter/analytics:Ruuter/private/v2/analytics"
   "DSL/Resql/analytics:Resql/analytics"
   "DSL/DMapper/analytics/hbs:DataMapper/analytics/hbs"
-  "DSL/CronManager: CronManager/analytics"
+  #"DSL/CronManager: CronManager/analytics"
   "DSL/Liquibase:Liquibase/analytics"
 )
 
@@ -56,16 +57,20 @@ SERVICE_MAPPINGS=(
   "DSL/Resql/users:Resql/services"
   "DSL/Ruuter/services:Ruuter/private/v2/services"
   "DSL/DMapper/services/hbs:DataMapper/services/hbs"
-  "DSL/CronManager/services:CronManager/services"
+  #"DSL/CronManager/services:CronManager/services"
   "DSL/Liquibase:Liquibase/services"
   "DSL/Pipelines:pipelines/services"
   "DSL/OpenSearch:OpenSearch/services"
 )
 
+CRONMANAGER_MAPPINGS=(
+ "DSL/CronManager:CronManager"
+)
+
 TEMP_DIR=$(mktemp -d)
 trap 'rm -rf "$TEMP_DIR"' EXIT
 
-declare -A CHATBOT_CHANGES TRAINING_CHANGES ANALYTICS_CHANGES SERVICE_CHANGES
+declare -A CHATBOT_CHANGES TRAINING_CHANGES ANALYTICS_CHANGES SERVICE_CHANGES CRONMANAGER_CHANGES
 
 for repo in "${SOURCE_REPOS[@]}"; do
   REPO_NAME="${repo%%:*}"
@@ -90,6 +95,9 @@ for repo in "${SOURCE_REPOS[@]}"; do
   elif [ "$REPO_NAME" = "buerokratt/Common-Services" ]; then
     MAPPINGS=("${CS_MAPPINGS[@]}")
     CHANGES_ARRAY="SERVICE_CHANGES"
+  elif [ "$REPO_NAME" = "buerokratt/CronManager" ]; then
+    MAPPINGS=("${CS_MAPPINGS[@]}")
+    CHANGES_ARRAY="CRONMANAGER_CHANGES"
   else
     echo "Unknown repo $REPO_NAME - skipping"
     continue
