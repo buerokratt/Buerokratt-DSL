@@ -2,6 +2,54 @@
 
 All changes to Buerokratt-DSL from source repos.
 
+# Sync Run - 2026-01-09 09:01:58
+
+## Chatbot Changes
+### Liquibase/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20250211084322-add-request-nonces.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20260153791921_add_user_profile_settings_user_id_constraint.sql
+
+## Training Changes
+### Ruuter/private/v2/training
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/GET/internal/return-file-locations.yml
+
+### Liquibase/training
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/training/changelog.yaml
+
+## Analytics Changes
+### Liquibase/analytics
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/liquibase.properties
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/changelog.yaml
+
+## Service Changes
+### Resql/services
+Deleted: POST/get-active-service-by-name.sql
+
+## CronManager Changes
+### CronManager
+Deleted: training/train_bot.yml
+training/load_trained_model.yml
+training/health.yml
+training/
+backoffice/delete_conversations.yml
+backoffice/create_smax_request.yml
+backoffice/create_jira_issue.yml
+backoffice/
+analytics/health.yml
+analytics/ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/chat_generation.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/train_bot.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/create_smax_request.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/load_trained_model.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/import_companies_data.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/end-dead-chats.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/devops.yaml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/import_municipalities_data.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/shell_command_example.yaml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/create_jira_issue.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/example.yaml
+
+
+
 # Sync Run - 2026-01-06 10:21:00
 
 ## Chatbot Changes
