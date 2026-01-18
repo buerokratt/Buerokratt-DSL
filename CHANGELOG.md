@@ -2,6 +2,87 @@
 
 All changes to Buerokratt-DSL from source repos.
 
+# Sync Run - 2026-01-18 19:02:54
+
+## Chatbot Changes
+### Liquibase/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20250211084322-add-request-nonces.sql
+
+### Ruuter/private/v2/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/extend.yml
+
+## Training Changes
+### Ruuter/private/v2/training
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/GET/internal/return-file-locations.yml
+
+### Liquibase/training
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/training/changelog.yaml
+
+## Analytics Changes
+### Liquibase/analytics
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/liquibase.properties
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/changelog.yaml
+
+## Service Changes
+### Liquibase/services
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/services/changelog/21111321831-add-examples-keywords-to-services.sql
+
+### Resql/services
+Deleted: POST/get-service-trigger.sql
+POST/get-requested-service-triggers.sql
+POST/get-common-services-list.sql
+POST/get-available-intents.sql
+POST/get-approved-tiggers.sql
+POST/get-active-service-by-name.sql
+POST/delete-service-trigger.sql
+POST/add-service-trigger.sql Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/get-services-list.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/services/get_services_by_ids.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/edit.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/update-user-step-preferences.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/update-settings.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/endpoints/remove_service_endpoints_from_preferences.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/services/check_name_exist.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/status.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/add-services.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/get-service-name-by-id.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/endpoints/remove_endpoint_from_preferences.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/get-settings.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/add.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/endpoints/get_common_endpoints.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/get-import-names.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/delete-service.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/endpoints/update_endpoint.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/endpoints/delete_endpoints_by_service_id.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/get-user-step-preferences.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/endpoints/get_endpoints_by_service_id.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/endpoints/delete_endpoint.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/get-service-by-id.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/set-status.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/seed-user-step-preferences.sql
+
+### DataMapper/services/hbs
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/services/hbs/service_declaration.handlebars
+
+### Ruuter/private/v2/services
+Deleted: POST/common-services.yml
+POST/services/respond-to-connection-request.yml
+POST/services/request-service-intent-connection.yml
+POST/services/connection-requests.yml
+POST/services/check-intent-connection.yml
+POST/services/available-intents.yml Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/services/POST/services/status.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/services/POST/services/add.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/services/POST/services/import-services.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/services/GET/service-by-id.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/services/GET/steps/preferences.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/services/POST/services.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/services/POST/services/delete.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/services/POST/services/edit.yml
+
+## CronManager Changes
+No changes detected.
+
+
+
 # Sync Run - 2026-01-16 14:29:28
 
 ## Chatbot Changes
