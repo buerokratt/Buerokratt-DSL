@@ -2,6 +2,51 @@
 
 All changes to Buerokratt-DSL from source repos.
 
+# Sync Run - 2026-02-02 13:14:18
+
+## Chatbot Changes
+### Liquibase/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20260153792622_add_anonymize_recording_to_anonymizer_cofig.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20250211084322-add-request-nonces.sql
+
+### Resql/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/set-domain-anonymizer-config.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/get-domain-anonymizer-config.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/get-anonymizer-config.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/set-anonymizer-config.sql
+
+### Ruuter/public/v2/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/backoffice/POST/chats/messages/add.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/backoffice/POST/chats/init.yml
+
+### Ruuter/private/v2/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/agents/chats/ended.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/configs/anonymizer.yml
+
+### DataMapper/backoffice/hbs
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/backoffice/hbs/return_anonymizer_config.handlebars
+
+## Training Changes
+### Ruuter/private/v2/training
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/GET/internal/return-file-locations.yml
+
+### Liquibase/training
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/training/changelog.yaml
+
+## Analytics Changes
+### Liquibase/analytics
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/liquibase.properties
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/changelog.yaml
+
+## Service Changes
+### Resql/services
+Deleted: POST/get-active-service-by-name.sql
+
+## CronManager Changes
+No changes detected.
+
+
+
 # Sync Run - 2026-01-29 11:07:55
 
 ## Chatbot Changes
