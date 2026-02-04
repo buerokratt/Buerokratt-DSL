@@ -2,6 +2,26 @@
 
 All changes to Buerokratt-DSL from source repos.
 
+# Sync Run - 2026-02-04 10:58:49
+
+## Chatbot Changes
+No changes detected.
+
+## Training Changes
+No changes detected.
+
+## Analytics Changes
+### Liquibase/analytics
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/changelog.yaml
+
+## Service Changes
+No changes detected.
+
+## CronManager Changes
+No changes detected.
+
+
+
 # Sync Run - 2026-02-04 10:46:47
 
 ## Chatbot Changes
