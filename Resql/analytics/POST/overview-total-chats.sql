@@ -36,11 +36,12 @@ SELECT ts.ended,
 FROM (
     SELECT date_trunc(:group_period, period) AS ended
     FROM generate_series(
-        date_trunc(:group_period, (current_date AT TIME ZONE :timezone - concat('1 ', :group_period)::INTERVAL)),
-        date_trunc(:group_period, (current_date AT TIME ZONE :timezone)),
+        date_trunc(:group_period, (NOW() AT TIME ZONE :timezone) - concat('1 ', :group_period)::INTERVAL),
+        date_trunc(:group_period, (NOW() AT TIME ZONE :timezone)),
         concat('1 ', :group_period)::INTERVAL
     ) AS period
 ) ts
 LEFT JOIN chats c ON c.ended = ts.ended
 GROUP BY ts.ended
 ORDER BY ts.ended DESC;
+ 
