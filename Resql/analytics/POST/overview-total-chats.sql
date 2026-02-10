@@ -44,4 +44,3 @@ FROM (
 LEFT JOIN chats c ON c.ended = ts.ended
 GROUP BY ts.ended
 ORDER BY ts.ended DESC;
- 
