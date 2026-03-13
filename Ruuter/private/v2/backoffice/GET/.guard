@@ -4,7 +4,7 @@ process_request:
       next: verify_header_nonce
     - condition: ${ incoming.params['ruuter-nonce'] != null }
       next: verify_param_nonce
-    - condition: ${incoming.headers == null || incoming.headers.cookie == null}
+    - condition: ${ incoming.headers == null || incoming.headers.cookie == null }
       next: guard_fail
   next: authenticate
 
@@ -13,7 +13,7 @@ verify_header_nonce:
   args:
     url: "[#TRAINING_RESQL]/use-nonce"
     body:
-      updated_nonce: ${incoming.headers['x-ruuter-nonce']}
+      updated_nonce: ${ incoming.headers['x-ruuter-nonce'] }
   result: nonce_response
   next: check_inline
 
@@ -22,17 +22,18 @@ verify_param_nonce:
   args:
     url: "[#TRAINING_RESQL]/use-nonce"
     body:
-      updated_nonce: ${incoming.params['ruuter-nonce']}
+      updated_nonce: ${ incoming.params['ruuter-nonce'] }
   result: nonce_response
   next: check_inline
 
 check_inline:
   inline: extAuth
   result: extauth
+  next: check_nonce
 
 check_nonce:
   switch:
-    - condition: ${ !extauth || (nonce_response.response.body[0] == null) }
+    - condition: ${ !extauth || nonce_response == null || nonce_response.response == null || nonce_response.response.body == null || nonce_response.response.body[0] == null }
       next: guard_fail
   next: guard_success
 
@@ -40,13 +41,13 @@ authenticate:
   template: "[#CHATBOT_PROJECT_LAYER]/check-user-authority"
   requestType: templates
   headers:
-    cookie: ${incoming.headers.cookie}
+    cookie: ${ incoming.headers.cookie }
   result: authority_result
   next: check_authority_result
 
 check_authority_result:
   switch:
-    - condition: ${authority_result !== "false"}
+    - condition: ${ authority_result !== "false" }
       next: guard_success
   next: guard_fail
 
