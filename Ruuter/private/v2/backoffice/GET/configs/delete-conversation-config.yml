@@ -12,8 +12,11 @@ getConfig:
   args:
     url: "[#CHATBOT_RESQL]/get-conversation-delete-settings"
   result: res
-  next: validate_response
-
+#  next: validate_response
+  
+checkVal:
+ log: ${res.response.body}
+ 
 validate_response:
   switch:
     - condition: "${res.response.body.length > 0}"
