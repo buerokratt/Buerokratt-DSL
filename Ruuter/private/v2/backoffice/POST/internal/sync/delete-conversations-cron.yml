@@ -120,7 +120,7 @@ saveFile:
 refreshCronManager:
   call: http.post
   args:
-    url: "[#CHATBOT_CRON_MANAGER]/reload/delete_conversations"
+    url: "[#CRON_MANAGER]/reload/delete_conversations"
   result: cronResult
   next: returnSuccess
 
