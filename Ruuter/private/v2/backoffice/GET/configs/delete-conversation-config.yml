@@ -15,7 +15,10 @@ getConfig:
 #  next: validate_response
   
 checkVal:
- log: ${res.response.body}
+ log: ${res}
+
+checkVal2:
+ log: ${res.response}
  
 validate_response:
   switch:
