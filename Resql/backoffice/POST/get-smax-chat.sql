@@ -1,18 +1,7 @@
-SELECT
-    *
-FROM
-    chat AS c
-WHERE
-    c.created > COALESCE((
-        SELECT
-            created
-        FROM
-            chat
-        WHERE
-            base_id = :chatBaseId AND
-            status = 'ENDED'
-    ), '1970-01-01') AND
-    c.status = 'ENDED'
-ORDER BY
-    created ASC
+SELECT *
+FROM chat c
+WHERE c.base_id = :chatBaseId
+  AND c.status = 'ENDED'
+  AND c.created > :lastCreated
+ORDER BY c.created ASC
 LIMIT 1;
