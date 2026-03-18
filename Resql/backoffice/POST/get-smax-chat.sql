@@ -1,16 +1,15 @@
 SELECT
     c.*
 FROM
-    chat AS c
+    chat c
 WHERE
-    c.base_id = :chatBaseId
-    AND c.created > COALESCE((
-        SELECT MAX(created)
-        FROM chat
-        WHERE base_id = :chatBaseId
-          AND status = 'ENDED'
-    ), TIMESTAMP '1970-01-01 00:00:00')
-    AND c.status = 'ENDED'
+    c.status = 'ENDED'
+    AND NOT EXISTS (
+        SELECT 1
+        FROM chat_smax_synchronization s
+        WHERE s.chat_base_id = c.base_id
+          AND s.status = 'SUCCESS'
+    )
 ORDER BY
     c.created ASC
 LIMIT 1;
