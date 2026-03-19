@@ -20,7 +20,7 @@ declaration:
 
 assignCronFileLocation:
   assign:
-    cronFileLocation: "/cron-data/delete_conversations.yml"
+    cronFileLocation: "/rasa/cron-data/delete_conversations.yml"
     expression: ${incoming.body.expression}
     anonEnabled: ${incoming.body.anonEnabled}
     authEnabled: ${incoming.body.authEnabled}
