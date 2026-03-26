@@ -22,8 +22,8 @@ MaxChats AS (
     FROM chat c
     WHERE c.ended IS NOT NULL
       AND c.status <> 'IDLE'
-      AND c.ended >= :start::timestamptz
-      AND c.ended < :end::timestamptz
+      AND c.ended >= CAST(:start AS timestamptz)
+      AND c.ended < CAST(:end AS timestamptz)
       AND (
             array_length(ARRAY[:urls]::TEXT[], 1) IS NULL
             OR c.end_user_url LIKE ANY(ARRAY[:urls]::TEXT[])
@@ -257,7 +257,7 @@ SELECT
     c.test AS isTest,
     nps,
     CSAFullNames.all_csa_names AS all_csa,
-    CEIL(COUNT(*) OVER() / :page_size::DECIMAL) AS total_pages
+    CEIL(COUNT(*) OVER() / CAST(:page_size AS DECIMAL)) AS total_pages
 FROM EndedChatMessages AS c
 JOIN Messages AS m
     ON c.base_id = m.chat_base_id
@@ -355,5 +355,5 @@ ORDER BY
     CASE WHEN :sorting = 'id asc' THEN c.base_id END ASC,
     CASE WHEN :sorting = 'id desc' THEN c.base_id END DESC,
     c.base_id ASC
-OFFSET ((GREATEST(:page, 1) - 1) * :page_size)
-LIMIT :page_size;
+OFFSET ((GREATEST(CAST(:page AS int), 1) - 1) * CAST(:page_size AS int))
+LIMIT CAST(:page_size AS int);
