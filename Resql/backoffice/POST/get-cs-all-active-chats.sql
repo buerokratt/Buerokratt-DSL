@@ -15,6 +15,8 @@ TitleVisibility AS (
     ORDER BY id DESC
     LIMIT 1
 ),
+
+/* 1) Kõigepealt filtreeritud ended chatid */
 MaxChats AS (
     SELECT DISTINCT ON (c.base_id)
         c.id AS maxId,
@@ -22,8 +24,8 @@ MaxChats AS (
     FROM chat c
     WHERE c.ended IS NOT NULL
       AND c.status <> 'IDLE'
-      AND c.ended >= CAST(:start AS timestamptz)
-      AND c.ended < CAST(:end AS timestamptz)
+      AND c.ended::timestamptz >= :start::timestamptz
+      AND c.ended::timestamptz < :end::timestamptz
       AND (
             array_length(ARRAY[:urls]::TEXT[], 1) IS NULL
             OR c.end_user_url LIKE ANY(ARRAY[:urls]::TEXT[])
@@ -61,6 +63,8 @@ FilteredBaseIds AS (
     SELECT base_id
     FROM EndedChatMessages
 ),
+
+/* 2) User lookup */
 ChatUser AS (
     SELECT DISTINCT ON (u.id_code)
         u.id_code,
@@ -70,8 +74,11 @@ ChatUser AS (
     FROM "user" u
     ORDER BY u.id_code, u.id DESC
 ),
+
 MaxChatHistoryComments AS (
-    SELECT chc.chat_id, MAX(chc.id) AS maxId
+    SELECT
+        chc.chat_id,
+        MAX(chc.id) AS maxId
     FROM chat_history_comments chc
     JOIN FilteredBaseIds f ON f.base_id = chc.chat_id
     GROUP BY chc.chat_id
@@ -85,6 +92,7 @@ ChatHistoryComments AS (
     FROM chat_history_comments chc
     JOIN MaxChatHistoryComments mchc ON mchc.maxId = chc.id
 ),
+
 MessageWithContent AS (
     SELECT
         m.chat_base_id,
@@ -97,15 +105,21 @@ MessageWithContent AS (
     GROUP BY m.chat_base_id
 ),
 FirstContentMessage AS (
-    SELECT m.created, m.chat_base_id
+    SELECT
+        m.created,
+        m.chat_base_id
     FROM message m
     JOIN MessageWithContent mwc ON m.id = mwc.minId
 ),
 LastContentMessage AS (
-    SELECT m.content, m.chat_base_id
+    SELECT
+        m.content,
+        m.chat_base_id
     FROM message m
     JOIN MessageWithContent mwc ON m.id = mwc.maxId
 ),
+
+/* 5) Viimane message ainult filtrisse jäänud chatidele */
 MaxMessages AS (
     SELECT
         m.chat_base_id,
@@ -123,6 +137,7 @@ Messages AS (
     FROM message m
     JOIN MaxMessages mm ON m.id = mm.maxId
 ),
+
 FulfilledMessages AS (
     SELECT
         m.chat_base_id,
@@ -139,6 +154,7 @@ ContactsMessage AS (
     FROM message m
     JOIN FulfilledMessages fm ON m.id = fm.maxId
 ),
+
 RatedChats AS (
     SELECT
         CASE
@@ -177,6 +193,7 @@ NPS AS (
     CROSS JOIN Promoters
     CROSS JOIN Detractors
 ),
+
 LatestOpenChat AS (
     SELECT DISTINCT ON (c.base_id)
         c.base_id,
@@ -218,6 +235,7 @@ CSAFullNames AS (
     LEFT JOIN LatestOpenChat lo ON lo.base_id = c2.base_id
     GROUP BY c2.base_id
 )
+
 SELECT
     c.base_id AS id,
     c.customer_support_id,
@@ -257,7 +275,7 @@ SELECT
     c.test AS isTest,
     nps,
     CSAFullNames.all_csa_names AS all_csa,
-    CEIL(COUNT(*) OVER() / CAST(:page_size AS DECIMAL)) AS total_pages
+    CEIL(COUNT(*) OVER() / :page_size::DECIMAL) AS total_pages
 FROM EndedChatMessages AS c
 JOIN Messages AS m
     ON c.base_id = m.chat_base_id
@@ -355,5 +373,5 @@ ORDER BY
     CASE WHEN :sorting = 'id asc' THEN c.base_id END ASC,
     CASE WHEN :sorting = 'id desc' THEN c.base_id END DESC,
     c.base_id ASC
-OFFSET ((GREATEST(CAST(:page AS int), 1) - 1) * CAST(:page_size AS int))
-LIMIT CAST(:page_size AS int);
+OFFSET ((GREATEST(:page, 1) - 1) * :page_size)
+LIMIT :page_size;
