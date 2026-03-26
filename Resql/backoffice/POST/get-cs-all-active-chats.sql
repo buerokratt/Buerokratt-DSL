@@ -1,137 +1,359 @@
-WITH BotName AS (
-  SELECT value
-  FROM configuration
-  WHERE NOT deleted AND key = 'bot_institution_id'
-  ORDER BY id DESC
-  LIMIT 1
+WITH rating_config AS (
+    SELECT value AS is_five_rating_scale
+    FROM configuration
+    WHERE key = 'isFiveRatingScale'
+      AND "domain" IS NULL
+      AND NOT deleted
+    ORDER BY id DESC
+    LIMIT 1
 ),
 TitleVisibility AS (
-  SELECT value
-  FROM configuration
-  WHERE NOT deleted AND key = 'is_csa_title_visible'
-  ORDER BY id DESC
-  LIMIT 1
+    SELECT value
+    FROM configuration
+    WHERE key = 'is_csa_title_visible'
+      AND NOT deleted
+    ORDER BY id DESC
+    LIMIT 1
 ),
 MaxChats AS (
-  SELECT MAX(id) maxId
-  FROM chat
-  GROUP BY base_id
+    SELECT DISTINCT ON (c.base_id)
+        c.id AS maxId,
+        c.base_id
+    FROM chat c
+    WHERE c.ended IS NOT NULL
+      AND c.status <> 'IDLE'
+      AND c.ended >= :start::timestamptz
+      AND c.ended < :end::timestamptz
+      AND (
+            array_length(ARRAY[:urls]::TEXT[], 1) IS NULL
+            OR c.end_user_url LIKE ANY(ARRAY[:urls]::TEXT[])
+      )
+    ORDER BY c.base_id, c.id DESC
 ),
-FulfilledMessages AS (
-  SELECT MAX(id) maxId
-  FROM message
-  WHERE event = 'contact-information-fulfilled'
-  GROUP BY chat_base_id
+EndedChatMessages AS (
+    SELECT
+        c.base_id,
+        c.customer_support_id,
+        c.customer_support_display_name,
+        c.csa_title,
+        c.end_user_id,
+        c.end_user_first_name,
+        c.end_user_last_name,
+        c.end_user_email,
+        c.end_user_phone,
+        c.end_user_os,
+        c.end_user_url,
+        c.status,
+        c.updated,
+        c.ended,
+        c.forwarded_to_name,
+        c.received_from,
+        c.labels,
+        c.created,
+        c.feedback_text,
+        c.test,
+        c.feedback_rating,
+        c.feedback_rating_five
+    FROM chat c
+    JOIN MaxChats mc ON mc.maxId = c.id
+),
+FilteredBaseIds AS (
+    SELECT base_id
+    FROM EndedChatMessages
+),
+ChatUser AS (
+    SELECT DISTINCT ON (u.id_code)
+        u.id_code,
+        u.display_name,
+        u.first_name,
+        u.last_name
+    FROM "user" u
+    ORDER BY u.id_code, u.id DESC
+),
+MaxChatHistoryComments AS (
+    SELECT chc.chat_id, MAX(chc.id) AS maxId
+    FROM chat_history_comments chc
+    JOIN FilteredBaseIds f ON f.base_id = chc.chat_id
+    GROUP BY chc.chat_id
+),
+ChatHistoryComments AS (
+    SELECT
+        chc.comment,
+        chc.chat_id,
+        chc.created,
+        chc.author_display_name
+    FROM chat_history_comments chc
+    JOIN MaxChatHistoryComments mchc ON mchc.maxId = chc.id
 ),
 MessageWithContent AS (
-  SELECT MAX(id) AS maxId
-  FROM message
-  WHERE content <> ''
-  GROUP BY chat_base_id
+    SELECT
+        m.chat_base_id,
+        MAX(m.id) AS maxId,
+        MIN(m.id) AS minId
+    FROM message m
+    JOIN FilteredBaseIds f ON f.base_id = m.chat_base_id
+    WHERE m.content <> ''
+      AND m.content <> 'message-read'
+    GROUP BY m.chat_base_id
 ),
-MessageWithContentAndNotRatingOrForward AS (
-  SELECT MAX(id) AS maxId
-  FROM message
-  WHERE event <> 'rating'
-  AND event <> 'requested-chat-forward'
-  AND content <> ''
-  AND content <> 'message-read'
-  GROUP BY chat_base_id
-),
-MessagaeNotRatingOrForwardEvents AS (
-  SELECT MAX(id) AS maxId
-  FROM message
-  WHERE event <> 'rating'
-  AND event <> 'requested-chat-forward'
-  GROUP BY chat_base_id
-),
-ActiveChats AS (
-  SELECT
-      base_id,
-      customer_support_id,
-      customer_support_display_name,
-      csa_title,
-      end_user_id,
-      end_user_first_name,
-      end_user_last_name,
-      status,
-      created,
-      updated,
-      ended,
-      end_user_email,
-      end_user_phone,
-      end_user_os,
-      end_user_url,
-      external_id,
-      forwarded_to,
-      forwarded_to_name,
-      received_from,
-      received_from_name
-  FROM chat
-  CROSS JOIN BotName
-  JOIN MaxChats ON id = maxId
-  AND ended IS NULL
-  AND customer_support_id != BotName.value
-  AND status != 'VALIDATING'
-),
-ContactsMessage AS (
-  SELECT chat_base_id, content
-  FROM message
-  JOIN FulfilledMessages ON id = maxId
-),
-LastEventMessage AS (
-  SELECT event, chat_base_id
-  FROM message
-  JOIN MessageWithContent ON id = maxId
+FirstContentMessage AS (
+    SELECT m.created, m.chat_base_id
+    FROM message m
+    JOIN MessageWithContent mwc ON m.id = mwc.minId
 ),
 LastContentMessage AS (
-  SELECT content, chat_base_id
-  FROM message
-  JOIN MessageWithContentAndNotRatingOrForward ON id = maxId
+    SELECT m.content, m.chat_base_id
+    FROM message m
+    JOIN MessageWithContent mwc ON m.id = mwc.maxId
 ),
-MessagesUpdateTime AS (
-  SELECT updated, chat_base_id
-  FROM message
-  JOIN MessagaeNotRatingOrForwardEvents ON id = maxId
+MaxMessages AS (
+    SELECT
+        m.chat_base_id,
+        MAX(m.id) AS maxId
+    FROM message m
+    JOIN FilteredBaseIds f ON f.base_id = m.chat_base_id
+    GROUP BY m.chat_base_id
 ),
-CustomerMessages AS (
-    SELECT chat_base_id, COUNT(id) AS messages_count
-    FROM message
-    WHERE message.author_role = 'end-user'
-    AND (message.event = '' OR message.event IS NULL)
-    GROUP BY chat_base_id
+Messages AS (
+    SELECT
+        m.event,
+        m.updated,
+        m.chat_base_id,
+        m.author_id
+    FROM message m
+    JOIN MaxMessages mm ON m.id = mm.maxId
+),
+FulfilledMessages AS (
+    SELECT
+        m.chat_base_id,
+        MAX(m.id) AS maxId
+    FROM message m
+    JOIN FilteredBaseIds f ON f.base_id = m.chat_base_id
+    WHERE m.event = 'contact-information-fulfilled'
+    GROUP BY m.chat_base_id
+),
+ContactsMessage AS (
+    SELECT
+        m.chat_base_id,
+        m.content
+    FROM message m
+    JOIN FulfilledMessages fm ON m.id = fm.maxId
+),
+RatedChats AS (
+    SELECT
+        CASE
+            WHEN (SELECT COALESCE(is_five_rating_scale, 'false') = 'true' FROM rating_config)
+                THEN MAX(c.feedback_rating_five)
+            ELSE MAX(c.feedback_rating)
+        END AS rating
+    FROM chat c
+    WHERE CASE
+            WHEN (SELECT COALESCE(is_five_rating_scale, 'false') = 'true' FROM rating_config)
+                THEN c.feedback_rating_five IS NOT NULL
+            ELSE c.feedback_rating IS NOT NULL
+          END
+    GROUP BY c.base_id
+),
+RatedChatsCount AS (
+    SELECT COUNT(rating) AS total
+    FROM RatedChats
+),
+Promoters AS (
+    SELECT COUNT(rating) AS p
+    FROM RatedChats
+    WHERE rating >= 9
+),
+Detractors AS (
+    SELECT COUNT(rating) AS d
+    FROM RatedChats
+    WHERE rating <= 6
+),
+NPS AS (
+    SELECT ROUND(
+        ((p / (GREATEST(total, 1) * 1.0)) - (d / (GREATEST(total, 1) * 1.0))) * 100.0,
+        2
+    ) AS nps
+    FROM RatedChatsCount
+    CROSS JOIN Promoters
+    CROSS JOIN Detractors
+),
+LatestOpenChat AS (
+    SELECT DISTINCT ON (c.base_id)
+        c.base_id,
+        c.customer_support_id AS latest_open_csa
+    FROM chat c
+    JOIN FilteredBaseIds f ON f.base_id = c.base_id
+    WHERE c.status = 'OPEN'
+    ORDER BY c.base_id, c.id DESC
+),
+CSAFullNames AS (
+    SELECT
+        c2.base_id,
+        ARRAY_AGG(
+            DISTINCT TRIM(
+                CASE
+                    WHEN c2.customer_support_id = :csaId
+                        THEN c2.customer_support_display_name
+                    ELSE COALESCE(
+                        NULLIF(TRIM(cu.first_name || ' ' || cu.last_name), ''),
+                        cu.display_name
+                    )
+                END
+            )
+        ) FILTER (
+            WHERE NOT (
+                c2.customer_support_id = :csaId
+                AND (lo.latest_open_csa IS NULL OR lo.latest_open_csa <> :csaId)
+            )
+        ) AS all_csa_names,
+        ARRAY_AGG(DISTINCT c2.customer_support_id) FILTER (
+            WHERE NOT (
+                c2.customer_support_id = :csaId
+                AND (lo.latest_open_csa IS NULL OR lo.latest_open_csa <> :csaId)
+            )
+        ) AS all_csa_ids
+    FROM chat c2
+    JOIN FilteredBaseIds f ON f.base_id = c2.base_id
+    LEFT JOIN ChatUser cu ON cu.id_code = c2.customer_support_id
+    LEFT JOIN LatestOpenChat lo ON lo.base_id = c2.base_id
+    GROUP BY c2.base_id
 )
-SELECT c.base_id AS id,
-      c.customer_support_id,
-      c.customer_support_display_name,
-      (CASE WHEN TitleVisibility.value = 'true' THEN c.csa_title ELSE '' END) AS csa_title,
-      c.end_user_id,
-      c.end_user_first_name,
-      c.end_user_last_name,
-      c.status,
-      c.created,
-      c.updated,
-      c.ended,
-      c.end_user_email,
-      c.end_user_phone,
-      c.end_user_os,
-      c.end_user_url,
-      c.external_id,
-      c.forwarded_to,
-      c.forwarded_to_name,
-      c.received_from,
-      c.received_from_name,
-      CustomerMessages.messages_count AS customer_messages,
-      LastContentMessage.content AS last_message,
-      ContactsMessage.content AS contacts_message,
-      MessagesUpdateTime.updated AS last_message_timestamp,
-      LastEventMessage.event AS last_message_event
-FROM ActiveChats AS c
-LEFT JOIN MessagesUpdateTime ON c.base_id = MessagesUpdateTime.chat_base_id
-LEFT JOIN LastContentMessage ON c.base_id = LastContentMessage.chat_base_id
-LEFT JOIN LastEventMessage ON c.base_id = LastEventMessage.chat_base_id
-LEFT JOIN ContactsMessage ON ContactsMessage.chat_base_id = c.base_id
-LEFT JOIN CustomerMessages ON CustomerMessages.chat_base_id = c.base_id
+SELECT
+    c.base_id AS id,
+    c.customer_support_id,
+    c.customer_support_display_name,
+    (CASE WHEN TitleVisibility.value = 'true' THEN c.csa_title ELSE '' END) AS csa_title,
+    c.end_user_id,
+    c.end_user_first_name,
+    c.end_user_last_name,
+    c.end_user_email,
+    c.end_user_phone,
+    c.end_user_os,
+    c.end_user_url,
+    c.status,
+    FirstContentMessage.created,
+    c.updated,
+    c.ended,
+    c.forwarded_to_name,
+    c.received_from,
+    c.labels,
+    s.comment,
+    s.created AS comment_added_date,
+    s.author_display_name AS comment_author,
+    mu.display_name AS user_display_name,
+    cu.first_name AS customer_support_first_name,
+    cu.last_name AS customer_support_last_name,
+    LastContentMessage.content AS last_message,
+    (CASE WHEN m.event = '' THEN NULL ELSE LOWER(m.event) END) AS last_message_event,
+    ContactsMessage.content AS contacts_message,
+    m.updated AS last_message_timestamp,
+    c.feedback_text,
+    COALESCE(c.feedback_rating_five, c.feedback_rating) AS feedback_rating,
+    CASE
+        WHEN c.feedback_rating_five IS NOT NULL THEN 'true'
+        WHEN c.feedback_rating IS NOT NULL THEN 'false'
+        ELSE NULL
+    END AS is_five_rating_scale,
+    c.test AS isTest,
+    nps,
+    CSAFullNames.all_csa_names AS all_csa,
+    CEIL(COUNT(*) OVER() / :page_size::DECIMAL) AS total_pages
+FROM EndedChatMessages AS c
+JOIN Messages AS m
+    ON c.base_id = m.chat_base_id
+LEFT JOIN ChatHistoryComments AS s
+    ON s.chat_id = c.base_id
+LEFT JOIN ChatUser AS mu
+    ON mu.id_code = m.author_id
+LEFT JOIN ChatUser AS cu
+    ON cu.id_code = c.customer_support_id
+JOIN LastContentMessage
+    ON c.base_id = LastContentMessage.chat_base_id
+JOIN FirstContentMessage
+    ON c.base_id = FirstContentMessage.chat_base_id
+LEFT JOIN ContactsMessage
+    ON ContactsMessage.chat_base_id = c.base_id
+LEFT JOIN CSAFullNames
+    ON CSAFullNames.base_id = c.base_id
 CROSS JOIN TitleVisibility
-ORDER BY created ASC
-LIMIT :limit;
+CROSS JOIN NPS
+WHERE (
+    (
+        COALESCE(:customerSupportIds, '') = ''
+        OR EXISTS (
+            SELECT 1
+            FROM unnest(COALESCE(CSAFullNames.all_csa_ids, ARRAY[]::text[])) AS id
+            WHERE id = ANY(string_to_array(:customerSupportIds, ','))
+        )
+        OR (
+            '-' = ANY(string_to_array(:customerSupportIds, ','))
+            AND array_length(CSAFullNames.all_csa_ids, 1) = 1
+            AND CSAFullNames.all_csa_ids[1] = ''
+        )
+    )
+    AND (
+        :search IS NULL
+        OR :search = ''
+        OR LOWER(c.customer_support_display_name) LIKE LOWER('%' || :search || '%')
+        OR LOWER(c.end_user_first_name) LIKE LOWER('%' || :search || '%')
+        OR LOWER(ContactsMessage.content) LIKE LOWER('%' || :search || '%')
+        OR LOWER(s.comment) LIKE LOWER('%' || :search || '%')
+        OR LOWER(c.status) LIKE LOWER('%' || :search || '%')
+        OR LOWER(m.event) LIKE LOWER('%' || :search || '%')
+        OR LOWER(c.base_id) LIKE LOWER('%' || :search || '%')
+        OR TO_CHAR(FirstContentMessage.created, 'DD.MM.YYYY HH24:MI:SS') LIKE '%' || :search || '%'
+        OR TO_CHAR(c.ended, 'DD.MM.YYYY HH24:MI:SS') LIKE '%' || :search || '%'
+        OR EXISTS (
+            SELECT 1
+            FROM message AS msg
+            WHERE msg.chat_base_id = c.base_id
+              AND LOWER(msg.content) LIKE LOWER('%' || :search || '%')
+        )
+    )
+)
+ORDER BY
+    CASE WHEN :sorting = 'created asc' THEN FirstContentMessage.created END ASC,
+    CASE WHEN :sorting = 'created desc' THEN FirstContentMessage.created END DESC,
+    CASE WHEN :sorting = 'ended asc' THEN c.ended END ASC,
+    CASE WHEN :sorting = 'ended desc' THEN c.ended END DESC,
+    CASE WHEN :sorting = 'customerSupportDisplayName asc' THEN c.customer_support_display_name END ASC,
+    CASE WHEN :sorting = 'customerSupportDisplayName desc' THEN c.customer_support_display_name END DESC,
+    CASE WHEN :sorting = 'endUserName asc' THEN c.end_user_first_name END ASC,
+    CASE WHEN :sorting = 'endUserName desc' THEN c.end_user_first_name END DESC,
+    CASE WHEN :sorting = 'endUserEmail asc' THEN c.end_user_email END ASC,
+    CASE WHEN :sorting = 'endUserEmail desc' THEN c.end_user_email END DESC,
+    CASE WHEN :sorting = 'endUserId asc' THEN c.end_user_id END ASC,
+    CASE WHEN :sorting = 'endUserId desc' THEN c.end_user_id END DESC,
+    CASE WHEN :sorting = 'www asc' THEN c.end_user_url END ASC,
+    CASE WHEN :sorting = 'www desc' THEN c.end_user_url END DESC,
+    CASE WHEN :sorting = 'contactsMessage asc' THEN ContactsMessage.content END ASC,
+    CASE WHEN :sorting = 'contactsMessage desc' THEN ContactsMessage.content END DESC,
+    CASE WHEN :sorting = 'comment asc' THEN s.comment END ASC,
+    CASE WHEN :sorting = 'comment desc' THEN s.comment END DESC,
+    CASE WHEN :sorting = 'labels asc' THEN c.labels END ASC,
+    CASE WHEN :sorting = 'labels desc' THEN c.labels END DESC,
+    CASE WHEN :sorting = 'status asc'
+        THEN CASE WHEN m.event IS NULL OR m.event = '' THEN NULL ELSE m.event END
+    END ASC NULLS LAST,
+    CASE WHEN :sorting = 'status desc'
+        THEN CASE WHEN m.event IS NULL OR m.event = '' THEN NULL ELSE m.event END
+    END DESC NULLS LAST,
+    CASE WHEN :sorting = 'feedbackRating desc' THEN COALESCE(c.feedback_rating_five, c.feedback_rating) END DESC NULLS LAST,
+    CASE WHEN :sorting = 'feedbackRating asc' THEN COALESCE(c.feedback_rating_five, c.feedback_rating) END ASC NULLS LAST,
+    CASE WHEN :sorting = 'customerSupportFullName asc'
+        THEN COALESCE(
+            NULLIF(array_to_string(CSAFullNames.all_csa_names, ', '), ''),
+            CASE WHEN c.customer_support_id = 'chatbot' THEN 'Bürokratt' END
+        )
+    END ASC NULLS LAST,
+    CASE WHEN :sorting = 'customerSupportFullName desc'
+        THEN COALESCE(
+            NULLIF(array_to_string(CSAFullNames.all_csa_names, ', '), ''),
+            CASE WHEN c.customer_support_id = 'chatbot' THEN 'Bürokratt' END
+        )
+    END DESC NULLS LAST,
+    CASE WHEN :sorting = 'id asc' THEN c.base_id END ASC,
+    CASE WHEN :sorting = 'id desc' THEN c.base_id END DESC,
+    c.base_id ASC
+OFFSET ((GREATEST(:page, 1) - 1) * :page_size)
+LIMIT :page_size;
