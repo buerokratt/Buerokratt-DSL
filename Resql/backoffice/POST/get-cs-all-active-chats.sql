@@ -3,9 +3,13 @@ WITH rating_config AS (
     FROM configuration
     WHERE key = 'isFiveRatingScale'
       AND "domain" IS NULL
+      AND id IN (
+          SELECT max(id)
+          FROM configuration
+          WHERE key = 'isFiveRatingScale'
+            AND "domain" IS NULL
+      )
       AND NOT deleted
-    ORDER BY id DESC
-    LIMIT 1
 ),
 TitleVisibility AS (
     SELECT value
@@ -16,65 +20,61 @@ TitleVisibility AS (
     LIMIT 1
 ),
 
-/* 1) Kõigepealt filtreeritud ended chatid */
 MaxChats AS (
-    SELECT DISTINCT ON (c.base_id)
-        c.id AS maxId,
-        c.base_id
-    FROM chat c
-    WHERE c.ended IS NOT NULL
-      AND c.status <> 'IDLE'
-      AND c.ended::timestamptz >= :start::timestamptz
-      AND c.ended::timestamptz < :end::timestamptz
+    SELECT MAX(id) AS maxId
+    FROM chat
+    WHERE ended IS NOT NULL
+      AND status <> 'IDLE'
+      AND ended::timestamptz BETWEEN :start::timestamptz AND :end::timestamptz
       AND (
             array_length(ARRAY[:urls]::TEXT[], 1) IS NULL
-            OR c.end_user_url LIKE ANY(ARRAY[:urls]::TEXT[])
+            OR chat.end_user_url LIKE ANY(ARRAY[:urls]::TEXT[])
       )
-    ORDER BY c.base_id, c.id DESC
+    GROUP BY base_id
 ),
+
 EndedChatMessages AS (
     SELECT
-        c.base_id,
-        c.customer_support_id,
-        c.customer_support_display_name,
-        c.csa_title,
-        c.end_user_id,
-        c.end_user_first_name,
-        c.end_user_last_name,
-        c.end_user_email,
-        c.end_user_phone,
-        c.end_user_os,
-        c.end_user_url,
-        c.status,
-        c.updated,
-        c.ended,
-        c.forwarded_to_name,
-        c.received_from,
-        c.labels,
-        c.created,
-        c.feedback_text,
-        c.test,
-        c.feedback_rating,
-        c.feedback_rating_five
-    FROM chat c
-    JOIN MaxChats mc ON mc.maxId = c.id
+        base_id,
+        customer_support_id,
+        customer_support_display_name,
+        csa_title,
+        end_user_id,
+        end_user_first_name,
+        end_user_last_name,
+        end_user_email,
+        end_user_phone,
+        end_user_os,
+        end_user_url,
+        status,
+        updated,
+        ended,
+        forwarded_to_name,
+        received_from,
+        labels,
+        created,
+        feedback_text,
+        test,
+        feedback_rating,
+        feedback_rating_five
+    FROM chat
+    RIGHT JOIN MaxChats ON id = maxId
 ),
+
 FilteredBaseIds AS (
     SELECT base_id
     FROM EndedChatMessages
 ),
 
-/* 2) User lookup */
 ChatUser AS (
-    SELECT DISTINCT ON (u.id_code)
-        u.id_code,
-        u.display_name,
-        u.first_name,
-        u.last_name
-    FROM "user" u
-    ORDER BY u.id_code, u.id DESC
+    SELECT DISTINCT ON (id_code)
+        id_code,
+        display_name,
+        first_name,
+        last_name
+    FROM "user"
+    ORDER BY id_code, id DESC
 ),
-
 MaxChatHistoryComments AS (
     SELECT
         chc.chat_id,
@@ -90,7 +90,7 @@ ChatHistoryComments AS (
         chc.created,
         chc.author_display_name
     FROM chat_history_comments chc
-    JOIN MaxChatHistoryComments mchc ON mchc.maxId = chc.id
+    JOIN MaxChatHistoryComments mchc ON chc.id = mchc.maxId
 ),
 
 MessageWithContent AS (
@@ -119,7 +119,6 @@ LastContentMessage AS (
     JOIN MessageWithContent mwc ON m.id = mwc.maxId
 ),
 
-/* 5) Viimane message ainult filtrisse jäänud chatidele */
 MaxMessages AS (
     SELECT
         m.chat_base_id,
@@ -159,16 +158,16 @@ RatedChats AS (
     SELECT
         CASE
             WHEN (SELECT COALESCE(is_five_rating_scale, 'false') = 'true' FROM rating_config)
-                THEN MAX(c.feedback_rating_five)
-            ELSE MAX(c.feedback_rating)
+                THEN MAX(feedback_rating_five)
+            ELSE MAX(feedback_rating)
         END AS rating
-    FROM chat c
+    FROM chat
     WHERE CASE
             WHEN (SELECT COALESCE(is_five_rating_scale, 'false') = 'true' FROM rating_config)
-                THEN c.feedback_rating_five IS NOT NULL
-            ELSE c.feedback_rating IS NOT NULL
+                THEN feedback_rating_five IS NOT NULL
+            ELSE feedback_rating IS NOT NULL
           END
-    GROUP BY c.base_id
+    GROUP BY base_id
 ),
 RatedChatsCount AS (
     SELECT COUNT(rating) AS total
@@ -194,6 +193,7 @@ NPS AS (
     CROSS JOIN Detractors
 ),
 
+/* ainult filtrisse jäänud base_id-de CSA info */
 LatestOpenChat AS (
     SELECT DISTINCT ON (c.base_id)
         c.base_id,
