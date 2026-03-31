@@ -20,7 +20,7 @@ declaration:
 
 assignCronFileLocation:
   assign:
-    cronFileLocation: "/cron-data/delete_conversations.yml"
+    cronFileLocation: "/CronManager/delete_conversations.yml"
     expression: ${incoming.body.expression}
     anonEnabled: ${incoming.body.anonEnabled}
     authEnabled: ${incoming.body.authEnabled}
@@ -120,7 +120,7 @@ saveFile:
 refreshCronManager:
   call: http.post
   args:
-    url: "[#CRON_MANAGER]/reload/delete_conversations"
+    url: "[#CHATBOT_CRON_MANAGER]/reload/delete_conversations"
   result: cronResult
   next: returnSuccess
 
