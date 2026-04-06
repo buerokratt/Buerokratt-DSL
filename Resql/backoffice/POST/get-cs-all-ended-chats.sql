@@ -30,12 +30,11 @@ ChatHistoryComments AS (
     JOIN MaxChatHistoryComments ON id = maxId
 ),
 MessageWithContent AS (
-    SELECT
-        MAX(id) AS maxId,
-        MIN(id) AS minId
+    SELECT 
+        MIN(id) AS minId,
+        MAX(id) AS maxId
     FROM message
-    WHERE content <> ''
-      AND content <> 'message-read'
+    WHERE content NOT IN ('', 'message-read')
     GROUP BY chat_base_id
 ),
 FirstContentMessage AS (
@@ -82,10 +81,13 @@ MaxChats AS (
     FROM chat
     WHERE ended IS NOT NULL
       AND status <> 'IDLE'
-      AND ended::timestamptz BETWEEN :start::timestamptz AND :end::timestamptz
+      AND ended BETWEEN :start::timestamptz AND :end::timestamptz
       AND (array_length(ARRAY[:urls]::TEXT[], 1) IS NULL
         OR chat.end_user_url LIKE ANY(ARRAY[:urls]::TEXT[]))
     GROUP BY base_id
+    ORDER BY MAX(id) DESC
+    OFFSET ((GREATEST(1, :page) - 1) * :page_size)
+    LIMIT :page_size
 ),
 EndedChatMessages AS (
     SELECT
@@ -152,7 +154,7 @@ LatestOpenChat AS (
     WHERE status = 'OPEN'
     ORDER BY base_id, id DESC
 ),
-CSAFullNames AS (
+CSAFullNames AS MATERIALIZED (
     SELECT
         c2.base_id,
         ARRAY_AGG(DISTINCT TRIM(
@@ -321,3 +323,5 @@ ORDER BY
     CASE WHEN :sorting = 'id desc' THEN c.base_id END DESC,
     c.base_id ASC
 OFFSET ((GREATEST(:page, 1) - 1) * :page_size) LIMIT :page_size;
+
+ 
