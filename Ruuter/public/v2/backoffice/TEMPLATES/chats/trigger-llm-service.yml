@@ -37,7 +37,7 @@ assign_data:
     isCommon: ${incoming.body.isCommon}
     serviceMethod: ${incoming.body.ruuterType}
     serviceName: ${incoming.body.serviceName}
-    servicePath: "${'/services/active' + serviceName}"
+    servicePath: "${'/services/active/' + serviceName}"
     serviceInput: ${incoming.body.entities}
     baseUrl: "${isCommon === true ? '[#CHATBOT_RUUTER_PUBLIC_INTERNAL_CS]' : '[#CHATBOT_RUUTER_PUBLIC_INTERNAL_SERVICE]'}"
 
@@ -78,7 +78,7 @@ validate_response:
   next: return_result
 
 return_result:
-  return: ${res.response.body.response[0].content}
+  return: ${res.response.body.response[0]}
   next: end
 
 return_service_error:

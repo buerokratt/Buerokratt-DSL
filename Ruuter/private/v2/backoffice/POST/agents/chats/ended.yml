@@ -53,7 +53,6 @@ getEndedChats:
       customerSupportIds: ${incoming.body.customerSupportIds?.join(',') ?? ''}
       csaId: ${"chatbot"}
       urls: ${urls}
-      limit: 20971520
   result: res
 
 returnSuccess:

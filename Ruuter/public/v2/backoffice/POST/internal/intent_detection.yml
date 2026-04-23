@@ -42,22 +42,6 @@ assignParameters:
     message: ${incoming.body.message ?? ''}
     botName: ${get_bot_name_result.response.body[0].value}
 
-get_system_input:
-  call: http.post
-  args:
-    url: "[#CHATBOT_RESQL]/get-configuration"
-    body:
-      key: "id_system_message"
-    error: return_error
-  result: llm_configuration
-  next: check_system_input
-
-check_system_input:
-  switch:
-    - condition: ${llm_configuration.response.body[0]?.value != null}
-      next: assign_config
-  next: return_skip
-
 assign_config:
   assign:
     strictness: "[#ID_STRICTNESS]"
@@ -65,7 +49,7 @@ assign_config:
     documents: "[#ID_DOCUMENTS]"
     index_name: "[#ID_INDEX_NAME]"
     query_type: "[#ID_QUERY_TYPE]"
-    system_message: ${llm_configuration.response.body[0].value}
+    system_message: "[#ID_BGK_SYSTEM_MESSAGE]"
     search_endpoint: "[#ID_SEARCH_ENDPOINT]"
     completion_endpoint: "[#ID_COMPLETION_ENDPOINT]"
     chatbot_external_key: "[#ID_CHATBOT_EXTERNAL_KEY]"
@@ -112,7 +96,7 @@ prepare_messages:
     headers:
       type: json
     body:
-      prompt_message: "${system_message} The current date is ${currentDate}"
+      prompt_message: ${system_message}
       new_message: ${message}
   result: prepare_messages_res
 
@@ -130,7 +114,22 @@ checkForPassedDomain:
   switch:
     - condition: ${domain === 'none'}
       next: getAnonymizerConfig
-  next: getDomainAnonymizerConfig
+  next: getDomainUUID
+
+getDomainUUID:
+  call: http.post
+  args:
+    url: "[#CHATBOT_RESQL]/get-domain-uuid"
+    body:
+      domainUrl: ${domain + '%'}
+  result: domainUuid
+  next: validate_domain_res
+
+validate_domain_res:
+  switch:
+    - condition: ${domainUuid.response.body.length > 0}
+      next: getDomainAnonymizerConfig
+  next: getAnonymizerConfig
 
 getAnonymizerConfig:
   call: http.post
@@ -144,7 +143,7 @@ getDomainAnonymizerConfig:
   args:
     url: "[#CHATBOT_RESQL]/get-domain-anonymizer-config"
     body:
-      domainUUID: ${domain}
+      domainUUID: ${domainUuid.response.body[0].domainId}
   result: anonymizer_configs_res
   next: assignAnonymizerConfigs
 
@@ -157,7 +156,7 @@ check_if_anonymize_before_llm:
   switch:
     - condition: ${anonymizer_configs.isAnonymizationBeforeLlm === 'true'}
       next: prepareAnonymizerConfig
-  next: trigger_ai_stream
+  next: detect_intent
 
 prepareAnonymizerConfig:
   call: http.post
@@ -275,7 +274,7 @@ trigger_service:
 
 check_for_llm_trigger_service_response:
   switch:
-    - condition: ${service_response.startsWith('ERROR:')}
+    - condition: ${(service_response?.content ?? (service_response + '')).startsWith('ERROR:')}
       next: return_error
   next: return_message
 
