@@ -23,7 +23,9 @@ extract_request_data:
   assign:
     id: ${incoming.body.id}
     search: ${incoming.body.search}
-
+logstep:
+  log: ${incoming.body}
+  
 get_user_info:
   call: http.post
   args:
