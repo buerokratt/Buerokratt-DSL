@@ -20,7 +20,7 @@ declaration:
 
 assignCronFileLocation:
   assign:
-    cronFileLocation: "/cron-data/DSL/delete_conversations.yml"
+    cronFileLocation: "/CronManager/delete_conversations.yml"
     expression: ${incoming.body.expression}
     anonEnabled: ${incoming.body.anonEnabled}
     authEnabled: ${incoming.body.authEnabled}
@@ -58,7 +58,7 @@ createAuthCronJson:
       type: "json"
     body:
       cronExpression: ${expression}
-      command: "../app/scripts/remove-auth-conversations.sh"
+      command: "./scripts/remove-auth-conversations.sh"
   result: authCronJson
 
 createAnonCronJson:
@@ -69,7 +69,7 @@ createAnonCronJson:
       type: "json"
     body:
       cronExpression: ${expression}
-      command: "../app/scripts/remove-anonym-conversations.sh"
+      command: "./scripts/remove-anonym-conversations.sh"
   result: anonCronJson
 
 checkAuthConditions:

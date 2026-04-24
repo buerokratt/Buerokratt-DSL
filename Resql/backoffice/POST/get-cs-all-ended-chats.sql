@@ -147,7 +147,7 @@ LatestOpenChat AS (
     WHERE chat.status = 'OPEN'
     ORDER BY chat.base_id, chat.id DESC
 ),
-CSAFullNames AS MATERIALIZED (
+CSAFullNames AS (
     SELECT
         c2.base_id,
         ARRAY_AGG(DISTINCT TRIM(
@@ -318,4 +318,3 @@ ORDER BY
     c.ended DESC,
     c.base_id ASC
 OFFSET ((GREATEST(:page, 1) - 1) * :page_size) LIMIT :page_size;
- 
