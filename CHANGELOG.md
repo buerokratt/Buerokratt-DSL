@@ -2,6 +2,69 @@
 
 All changes to Buerokratt-DSL from source repos.
 
+# Sync Run - 2026-04-27 13:34:48
+
+## Chatbot Changes
+### Liquibase/backoffice
+Deleted: changelog/20260424111000-add-index-chat-ended-status.sql Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20260424100000-add-preserve-to-chats-table.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20250211084322-add-request-nonces.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20260424110000-add-index-chat-ended-status.sql
+
+### Resql/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/get-anonym-chats-to-remove.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/get-cs-all-ended-chats.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/get-auth-chats-to-remove.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/update-preserve-chat.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/update-test-chat.sql
+
+### Ruuter/private/v2/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/internal/sync/delete-conversations-cron.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/chats/mark-preserve.yml
+
+## Training Changes
+### Ruuter/private/v2/training
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/GET/internal/return-file-locations.yml
+
+## Analytics Changes
+### Ruuter/private/v2/analytics
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/chats/mark-preserve.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/analytics/POST/chats/mark-test.yml
+
+### Liquibase/analytics
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/liquibase.properties
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/changelog.yaml
+
+### Resql/analytics
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/get-cs-all-ended-chats.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/update-preserve-chat.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/update-test-chat.sql
+
+## Service Changes
+### Liquibase/services
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/services/changelog/migrations/20260417121000_add-endpoint-test-fields.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/services/changelog/migrations/rollback/20260417121000_add-endpoint-test-fields_rollback.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/services/changelog/20260421121000_make_service_id_nullable_in_endpoint_table.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/services/changelog/migrations/rollback/20260421121000_make_service_id_nullable_in_endpoint_table_rollback.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/services/changelog/20260417121000_add-endpoint-test-fields.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/services/changelog/migrations/20260421121000_make_service_id_nullable_in_endpoint_table.sql
+
+### Resql/services
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/endpoints/get_common_endpoints.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/endpoints/create_endpoint.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/endpoints/test_endpoint.sql
+
+### DataMapper/services/hbs
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/services/hbs/bot_responses_to_messages.handlebars
+
+### Ruuter/private/v2/services
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/services/POST/endpoints/common.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/services/POST/services/test-endpoint.yml
+
+## CronManager Changes
+No changes detected.
+
+
+
 # Sync Run - 2026-04-24 09:38:19
 
 ## Chatbot Changes
