@@ -45,10 +45,6 @@ extractRequestData:
     endDate: "${incoming.body.endDate}"
     urls: ${incoming.body.urls}
 
-return_resss:
-  return: "hello"
-  next: end
-
 initializeState:
   assign:
     page: 1
@@ -150,7 +146,12 @@ get_xlsx_data:
 assign_s3_filepath:
   assign:
     s3FilePath: ${'history/' + xlsxData.response.body.filePath.split('/').pop()}
-  next: copy_xlsx_to_s3
+  next: return_we_reached_s3
+  # next: copy_xlsx_to_s3
+
+return_we_reached_s3:
+  return: ${s3FilePath}
+  next: end
 
 copy_xlsx_to_s3:
   call: http.post
@@ -161,7 +162,7 @@ copy_xlsx_to_s3:
       destinationConfigKey: "chats"
       destinationFilePath: ${s3FilePath}
       sourceStorageType: "FS"
-      sourceConfigKey: "chats"
+      sourceConfigKey: "default"
       sourceFilePath: ${xlsxData.response.body.filePath}
   result: s3FileCopy
   next: get_signed_url
@@ -188,3 +189,4 @@ return_empty:
   return: ''
   next: end
   status: 200
+ 
