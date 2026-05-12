@@ -174,7 +174,7 @@ get_signed_url:
   result: signedUrlResponse
 
 return_success:
-  wrapper: false
+  #wrapper: false
   return: ${signedUrlResponse.response.body}
   next: end
   status: 200
