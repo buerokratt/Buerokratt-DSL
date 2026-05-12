@@ -45,6 +45,10 @@ extractRequestData:
     endDate: "${incoming.body.endDate}"
     urls: ${incoming.body.urls}
 
+return_resss:
+  return: "hello"
+  next: end
+
 initializeState:
   assign:
     page: 1
