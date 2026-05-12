@@ -173,10 +173,6 @@ get_signed_url:
       filePath: ${s3FilePath}
   result: signedUrlResponse
 
-return_result:
-  return: "finished downloading"
-  next: end
-
 return_success:
   wrapper: false
   return: ${signedUrlResponse.response.body}
