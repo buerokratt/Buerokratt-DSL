@@ -157,7 +157,7 @@ copy_xlsx_to_s3:
       destinationConfigKey: "chats"
       destinationFilePath: ${s3FilePath}
       sourceStorageType: "FS"
-      sourceConfigKey: "chats"
+      sourceConfigKey: "default"
       sourceFilePath: ${xlsxData.response.body.filePath}
   result: s3FileCopy
   next: get_signed_url
@@ -174,14 +174,11 @@ get_signed_url:
   result: signedUrlResponse
 
 return_success:
-  #wrapper: false
   return: ${signedUrlResponse.response.body}
   next: end
   status: 200
 
 return_empty:
-  wrapper: false
   return: ''
   next: end
   status: 200
- 
