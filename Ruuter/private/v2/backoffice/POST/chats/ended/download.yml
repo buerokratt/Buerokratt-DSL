@@ -146,12 +146,7 @@ get_xlsx_data:
 assign_s3_filepath:
   assign:
     s3FilePath: ${'history/' + xlsxData.response.body.filePath.split('/').pop()}
-  next: return_we_reached_s3
-  # next: copy_xlsx_to_s3
-
-return_we_reached_s3:
-  return: ${s3FilePath}
-  next: end
+  next: copy_xlsx_to_s3
 
 copy_xlsx_to_s3:
   call: http.post
@@ -165,7 +160,11 @@ copy_xlsx_to_s3:
       sourceConfigKey: "default"
       sourceFilePath: ${xlsxData.response.body.filePath}
   result: s3FileCopy
-  next: get_signed_url
+  # next: get_signed_url
+
+return_ssss:
+  return: ${s3FileCopy.response.body}
+  next: end
 
 get_signed_url:
   call: http.post
