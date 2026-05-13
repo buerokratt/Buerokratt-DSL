@@ -2,6 +2,58 @@
 
 All changes to Buerokratt-DSL from source repos.
 
+# Sync Run - 2026-05-13 12:56:58
+
+## Chatbot Changes
+### Liquibase/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20250211084322-add-request-nonces.sql
+
+### Ruuter/private/v2/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/GET/configs/skm-config.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/chats/ended/download.yml
+
+### DataMapper/backoffice/hbs
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/backoffice/hbs/bot_responses_to_messages.handlebars
+
+## Training Changes
+### Ruuter/private/v2/training
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/GET/internal/return-file-locations.yml
+
+### Liquibase/training
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/training/changelog.yaml
+
+## Analytics Changes
+### Liquibase/analytics
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/liquibase.properties
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/changelog.yaml
+
+## Service Changes
+### Liquibase/services
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/services/changelog/20260428120000_add-description-to-endpoints.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/services/changelog/migrations/20260428120000_add-description-to-endpoints.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/services/changelog/migrations/rollback/20260428120000_add-description-to-endpoints_rollback.sql
+
+### Resql/services
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/endpoints/update_endpoint.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/endpoints/get_endpoints_by_service_id.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/endpoints/get_all_endpoints.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/endpoints/create_endpoint.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/endpoints/get_common_endpoints.sql
+
+### DataMapper/services/hbs
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/services/hbs/bot_responses_to_messages.handlebars
+
+### Ruuter/private/v2/services
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/services/POST/services/update-endpoint.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/services/POST/services/edit.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/services/POST/services/create-endpoint.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/services/POST/service-by-id.yml
+
+## CronManager Changes
+No changes detected.
+
+
+
 # Sync Run - 2026-05-12 11:33:22
 
 ## Chatbot Changes
