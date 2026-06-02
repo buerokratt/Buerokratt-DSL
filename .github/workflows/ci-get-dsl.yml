@@ -3,7 +3,7 @@ name: Buerokratt DSL
 on:
   push:
     branches:
-      - jira-smax
+      - v3.3.0
     paths:
        - '.env'
 
