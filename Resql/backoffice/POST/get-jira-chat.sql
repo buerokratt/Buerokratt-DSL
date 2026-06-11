@@ -4,7 +4,7 @@ WHERE c.created > COALESCE(
     (
         SELECT MAX(c2.created)
         FROM chat c2
-        WHERE c2.base_id = :baseId
+        WHERE c2.base_id = :chatBaseId
           AND c2.status = 'ENDED'
     ),
     TIMESTAMP '1970-01-01 00:00:00'
