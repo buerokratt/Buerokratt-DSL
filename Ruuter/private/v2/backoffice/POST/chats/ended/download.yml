@@ -32,6 +32,30 @@ declaration:
       - field: urls
         type: array
         description: "Body field 'urls'"
+      - field: feedbackRatings
+        type: array
+        description: "Body field 'feedbackRatings'"
+      - field: isTest
+        type: array
+        description: "Body field 'isTest'"
+      - field: isPreserve
+        type: array
+        description: "Body field 'isPreserve'"
+      - field: authenticatedChats
+        type: array
+        description: "Body field 'authenticatedChats'"
+      - field: status
+        type: array
+        description: "Body field 'status'"
+      - field: responseQuality
+        type: array
+        description: "Body field 'responseQuality'"
+      - field: followUpStatus
+        type: array
+        description: "Body field 'followUpStatus'"
+      - field: theme
+        type: array
+        description: "Body field 'theme'"
       - field: columnIds
         type: object
         description: "Body field 'columnIds'"
@@ -44,6 +68,14 @@ extractRequestData:
     startDate: "${incoming.body.startDate}"
     endDate: "${incoming.body.endDate}"
     urls: ${incoming.body.urls}
+    feedbackRatings: ${incoming.body.feedbackRatings ?? []}
+    isTest: ${incoming.body.isTest ?? []}
+    isPreserve: ${incoming.body.isPreserve ?? []}
+    authenticatedChats: ${incoming.body.authenticatedChats ?? []}
+    status: ${incoming.body.status ?? []}
+    responseQuality: ${incoming.body.responseQuality ?? []}
+    followUpStatus: ${incoming.body.followUpStatus ?? []}
+    theme: ${incoming.body.theme ?? []}
 
 initializeState:
   assign:
@@ -68,6 +100,15 @@ fetchPage:
       customerSupportIds: ${incoming.body.customerSupportIds?.join(',') ?? ''}
       csaId: ${"chatbot"}
       urls: ${urls}
+      feedbackRatings: ${feedbackRatings}
+      isTest: ${isTest}
+      isPreserve: ${isPreserve}
+      authenticatedChats: ${authenticatedChats}
+      status: ${status}
+      responseQuality: ${responseQuality}
+      followUpStatus: ${followUpStatus}
+      theme: ${theme}
+      isChatAnalysisEnabled: ${true}
   result: pageResult
   next: savePageBody
 
