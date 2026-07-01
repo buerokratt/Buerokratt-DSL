@@ -2,6 +2,61 @@
 
 All changes to Buerokratt-DSL from source repos.
 
+# Sync Run - 2026-07-01 11:46:23
+
+## Chatbot Changes
+### Liquibase/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20271351142952_add_llm_module_active_config.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20281882419419_add_skm_agentic_config.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20250211084322-add-request-nonces.sql
+
+### Resql/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/get-domain-skm-config.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/get-bot-config.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/get-skm-config.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/set-skm-config.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/set-domain-skm-config.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/get-domain-bot-config.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/set-bot-config.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/set-domain-bot-config.sql
+
+### Ruuter/public/v2/backoffice
+Deleted: POST/smax/chats/sync.yml
+POST/smax/chats/
+POST/smax/ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/backoffice/POST/internal/client-external-bot.yml
+
+### Ruuter/private/v2/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/configs/transfer/skm-config.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/configs/bot-config.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/configs/transfer/bot-config.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/smax/chats/sync.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/GET/.guard
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/configs/skm-config.yml
+
+## Training Changes
+### Ruuter/private/v2/training
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/GET/internal/return-file-locations.yml
+
+### Liquibase/training
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/training/changelog.yaml
+
+## Analytics Changes
+### Liquibase/analytics
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/liquibase.properties
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/changelog.yaml
+
+## Service Changes
+### Liquibase/services
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/services/liquibase.properties
+
+### Resql/services
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/services/POST/get-new-nonce.sql
+
+## CronManager Changes
+No changes detected.
+
+
+
 # Sync Run - 2026-06-17 07:41:39
 
 ## Chatbot Changes
