@@ -19,6 +19,11 @@ jobs:
           chmod +x $GITHUB_WORKSPACE/scripts/aggregate-files.sh
           $GITHUB_WORKSPACE/scripts/aggregate-files.sh
 
+      - name: Apply Local Fixes
+        run: |
+          chmod +x $GITHUB_WORKSPACE/scripts/apply-changes.sh
+          $GITHUB_WORKSPACE/scripts/apply-changes.sh
+
       - name: Commit Changes to Central Repo
         run: |
           git config user.name "GitHub Action"
