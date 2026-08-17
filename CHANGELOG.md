@@ -2,6 +2,51 @@
 
 All changes to Buerokratt-DSL from source repos.
 
+# Sync Run - 2026-08-17 11:02:48
+
+## Chatbot Changes
+### Liquibase/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20250211084322-add-request-nonces.sql
+
+### Resql/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/get-domain-greeting-message.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/get-greeting-message.sql
+
+### Ruuter/public/v2/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/backoffice/TEMPLATES/chats/trigger-llm-service.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/backoffice/TEMPLATES/chats/trigger-service.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/backoffice/POST/internal/message-to-bot.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/backoffice/POST/chats/init-greeting-service.yml
+
+### Ruuter/private/v2/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/GET/.guard
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/cron-tasks/chat-generation/feedback-config.yml
+
+## Training Changes
+### Ruuter/private/v2/training
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/GET/internal/return-file-locations.yml
+
+### Liquibase/training
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/training/changelog.yaml
+
+## Analytics Changes
+### Liquibase/analytics
+Deleted: changelog/1676271876-change-configuration-value-type.sql Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/liquibase.properties
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/changelog.yaml
+
+### Resql/analytics
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/feedback-chats-with-negative-feedback.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/analytics/POST/get-cs-all-ended-chats.sql
+
+## Service Changes
+### Liquibase/services
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/services/liquibase.properties
+
+## CronManager Changes
+No changes detected.
+
+
+
 # Sync Run - 2026-08-12 11:56:23
 
 ## Chatbot Changes
