@@ -7,12 +7,12 @@ CHANGELOG="$CENTRAL_PATH/CHANGELOG.md"
 
 # Hardcoded source repos
 SOURCE_REPOS=(
-  "buerokratt/Buerokratt-Chatbot:v3.3.1"
-  "buerokratt/Training-Module:v3.3.1"
-  "buerokratt/Analytics-Module:v3.3.1"
-  "buerokratt/Service-Module:v3.3.1"
-  "buerokratt/Common-Services:v3.3.1"
-  "buerokratt/CronManager:v3.3.1"
+  "buerokratt/Buerokratt-Chatbot:main"
+  "buerokratt/Training-Module:main"
+  "buerokratt/Analytics-Module:main"
+  "buerokratt/Service-Module:main"
+  "buerokratt/Common-Services:main"
+  "buerokratt/CronManager:main"
 )
 
 # Hardcoded version
