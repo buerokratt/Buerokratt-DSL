@@ -10,7 +10,7 @@ CHANGELOG="$CENTRAL_PATH/CHANGELOG.md"
 # Source repos
 SOURCE_REPOS=(
   "buerokratt/Buerokratt-Chatbot:v3.3.2"
-  "buerokratt/Training-Module:v3.3.2"
+  "buerokratt/Training-Module:v3.3.1"
   "buerokratt/Analytics-Module:v3.3.2"
   "buerokratt/Service-Module:v3.3.2"
   "buerokratt/Common-Services:v3.3.2"
