@@ -8,11 +8,12 @@ CHANGELOG="$CENTRAL_PATH/CHANGELOG.md"
 # Hardcoded source repos
 SOURCE_REPOS=(
   "buerokratt/Buerokratt-Chatbot:v3.3.2"
-  "buerokratt/Training-Module:v3.3.2"
+  "buerokratt/Training-Module:v3.3.1"
   "buerokratt/Analytics-Module:v3.3.2"
   "buerokratt/Service-Module:v3.3.2"
-  "buerokratt/Common-Services:v3.3.2"
-  "buerokratt/CronManager:v3.3.2"
+  "buerokratt/Common-Services:v3.3.1"
+  "buerokratt/CronManager:v3.3.1"
+  "buerokratt/Common-Knowledge:wip"
 )
 
 # Hardcoded version
@@ -64,10 +65,20 @@ CRONMANAGER_MAPPINGS=(
   "DSL:CronManager"
 )
 
+# Common Knowledge / CKB mappings
+CKB_MAPPINGS=(
+  "DSL/Ruuter/ckb:Ruuter/public/v2/ckb"
+  "DSL/Ruuter.internal/ckb:Ruuter/private/v2/ckb"
+  "DSL/Resql/ckb:Resql/ckb"
+  "DSL/Resql/users:Resql/users"
+  "DSL/DMapper/ckb/hbs:DataMapper/ckb/hbs"
+  "DSL/Liquibase:Liquibase/ckb"
+)
+
 TEMP_DIR=$(mktemp -d)
 trap 'rm -rf "$TEMP_DIR"' EXIT
 
-declare -A CHATBOT_CHANGES TRAINING_CHANGES ANALYTICS_CHANGES SERVICE_CHANGES CRONMANAGER_CHANGES
+declare -A CHATBOT_CHANGES TRAINING_CHANGES ANALYTICS_CHANGES SERVICE_CHANGES CRONMANAGER_CHANGES CKB_CHANGES
 
 for repo in "${SOURCE_REPOS[@]}"; do
   REPO_NAME="${repo%%:*}"
@@ -95,6 +106,9 @@ for repo in "${SOURCE_REPOS[@]}"; do
   elif [ "$REPO_NAME" = "buerokratt/CronManager" ]; then
     MAPPINGS=("${CRONMANAGER_MAPPINGS[@]}")
     CHANGES_ARRAY="CRONMANAGER_CHANGES"
+  elif [ "$REPO_NAME" = "buerokratt/Common-Knowledge" ]; then
+    MAPPINGS=("${CKB_MAPPINGS[@]}")
+    CHANGES_ARRAY="CKB_CHANGES"
   else
     echo "Unknown repo $REPO_NAME - skipping"
     continue
@@ -181,7 +195,7 @@ done
 TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
 SUMMARY="# Sync Run - $TIMESTAMP\n\n"
 
-for block in "Chatbot" "Training" "Analytics" "Service" "CronManager"; do
+for block in "Chatbot" "Training" "Analytics" "Service" "CronManager" "CKB"; do
   SUMMARY+="## $block Changes\n"
   case "$block" in
     "Chatbot") CHANGES_ARRAY="CHATBOT_CHANGES" ;;
@@ -189,6 +203,7 @@ for block in "Chatbot" "Training" "Analytics" "Service" "CronManager"; do
     "Analytics") CHANGES_ARRAY="ANALYTICS_CHANGES" ;;
     "Service") CHANGES_ARRAY="SERVICE_CHANGES" ;;
     "CronManager") CHANGES_ARRAY="CRONMANAGER_CHANGES" ;;
+    "CKB") CHANGES_ARRAY="CKB_CHANGES" ;;
   esac
 
   eval "changes_count=\${#$CHANGES_ARRAY[@]}"
