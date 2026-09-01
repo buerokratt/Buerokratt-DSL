@@ -1,0 +1,12 @@
+[
+  {{#each agencies}}
+    {
+      "agencyDataHash": "{{this.agencyDataHash}}",
+      {{#if (eq (getObjectKeyFromObjectArray ../downloadUrls "path" this.path "download_url") null) }}
+        "signedS3Url": null
+      {{else}}
+        "signedS3Url": "{{{getObjectKeyFromObjectArray ../downloadUrls "path" this.path "download_url"}}}"
+      {{/if}}
+    }{{#unless @last}},{{/unless}}
+  {{/each}}
+]

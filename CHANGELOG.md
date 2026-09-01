@@ -2,6 +2,277 @@
 
 All changes to Buerokratt-DSL from source repos.
 
+# Sync Run - 2026-09-01 10:42:21
+
+## Chatbot Changes
+### Liquibase/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20250211084322-add-request-nonces.sql
+
+### Ruuter/private/v2/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/GET/.guard
+
+## Training Changes
+### Ruuter/private/v2/training
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/GET/internal/return-file-locations.yml
+
+### Liquibase/training
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/training/changelog.yaml
+
+## Analytics Changes
+### Liquibase/analytics
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/liquibase.properties
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/changelog.yaml
+
+## Service Changes
+### Liquibase/services
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/services/liquibase.properties
+
+## CronManager Changes
+No changes detected.
+
+## CKB Changes
+### Ruuter/public/v2/ckb
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/POST/agency/remove.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/GET/.guard
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/GET/source/get.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/TEMPLATES/tara.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/GET/get-download-url.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/GET/agency/get.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/GET/source-file/all.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/POST/source-file/add-uploaded-files.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/TEMPLATES/pipeline/trigger-scrapper-entire-source.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/POST/source-file/refresh.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/POST/source/add-with-url-list.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/POST/auth/login.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/POST/source/file/create-source-if-not-exists-and-upload-urls.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/GET/reports/logs.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/TEMPLATES/pipeline/trigger-scrapper-eesti-api-source.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/GET/accounts/customer-support-activity.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/POST/source/file/get-upload-urls-for-existing-source.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/POST/reports/remove.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/GET/accounts/widget-data.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/POST/source/start-cleaning.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/POST/source/add.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/TEMPLATES/pipeline/trigger-scrapper-specified-pages.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/GET/accounts/logout.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/POST/source-file/exclude.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/POST/source-file/get-upload-urls.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/POST/source-file/bulk-exclude.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/POST/source-file/edit-file.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/TEMPLATES/pipeline/trigger-scrapper-sitemap-collect.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/POST/source/edit-scrape-interval.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/POST/source-file/refresh-multiple.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/POST/source-file/upload-metadata.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/README.md
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/POST/.guard
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/GET/source/api/all.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/GET/auth/tara/login.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/TEMPLATES/check-user-authority.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/POST/source/refresh.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/GET/auth/jwt/userinfo.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/POST/auth/.guard
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/GET/accounts/settings.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/TEMPLATES/pipeline/trigger-uploaded-files-task.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/GET/accounts/user-role.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/GET/agency/all.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/POST/source/stop.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/POST/source/edit-subsector.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/TEMPLATES/pipeline/update-next-rendered-timestamp.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/POST/source-file/remove.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/TEMPLATES/source_file/upload-metadata.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/TEMPLATES/pipeline/trigger-scrapper-eesti-api-specified-files.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/GET/reports/all.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/POST/agency/edit.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/POST/source/remove.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/POST/agency/add.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/POST/source-file/bulk-remove.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/TEMPLATES/pipeline/clean-file.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/GET/reports/logs/all.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/ckb/GET/source/all.yml
+
+### Resql/ckb
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/GET/source/list_agency_sources.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/GET/reports/get_latest_source_run_report_by_source_base_id.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/GET/reports/list_source_run_reports.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/GET/source_file/get_source_file.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/POST/source/update_source_scrape_interval.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/POST/source_run_page/delete_source_run_pages.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/GET/agency/get_dirty_agency.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/POST/source/update_source_next_run_timestamp.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/POST/source_file/update_source_files_to_scraping_by_source_base_id.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/POST/agency/update_agency_zip_and_data_hash.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/GET/source_file/get_source_file_exists_by_url.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/POST/source_file/update_source_file_scraped_stop.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/POST/reports/update_source_run_report.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/GET/source_file/list_excluded_source_files_by_agency.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/GET/source_file/list_scraped_source_files_by_ids.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/GET/agency/list_agencies.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/POST/source_file/create_multiple_source_files.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/POST/source_file/create_scraped_source_file.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/GET/agency/list_agency_data_hash.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/POST/source_file/update_source_file_to_scraping_by_source_file_base_id.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/GET/source/get_source_not_scheduled.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/POST/source_file/delete_source_file.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/POST/source_file/update_source_files_to_scraping_by_base_ids.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/GET/source_file/list_in_review_source_files.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/POST/source_file/update_source_files_exclude_batch.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/POST/source_file/check_duplicate_file_names.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/GET/source/get_source_by_content.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/GET/source/get_source_exists.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/GET/source/get_source_to_run_exists.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/POST/source_file/update_source_file_cleaned.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/POST/source_file/update_source_file_status.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/GET/reports/get_source_report_logs.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/GET/source_run_page/list_source_run_pages.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/POST/source/update_source_subsector.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/GET/source/get_source.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/POST/source_file/update_source_file_scraped.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/POST/source_run_page/create_source_run_page.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/GET/agency/check_agency_exists.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/POST/reports/update_source_run_report_increment_errors.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/POST/reports/create_source_run_report.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/POST/reports/delete_source_run_report.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/POST/source/update_source_is_running.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/POST/source_file/create_uploaded_source_files.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/POST/source/update_source_set_stopping_flag.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/GET/source/get_source_not_scheduled_exists.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/GET/source_file/list_uploaded_source_files_by_ids.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/POST/agency/reset_agency_is_zipping.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/POST/agency/create_agency.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/GET/source/list_api_sources.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/POST/source/create_source.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/POST/source_file/update_source_file_to_scraping_by_source_base_id.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/POST/source_file/update_source_file_exclude.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/POST/agency/update_agency_dirty.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/POST/agency/update_agency_zipping.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/POST/source_file/update_source_file_edited_data_url.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/POST/source/delete_source.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/POST/source_file/update_source_file_cleaned_data_url.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/GET/source_file/list_scraped_source_files.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/POST/agency/update_agency.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/POST/source/update_source_status.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/POST/agency/delete_agency.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/GET/agency/list_agency_data_hash_and_url.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/GET/agency/get_agency.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/GET/agency/check_name_exists.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/GET/agency/list_agency_data_available.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/GET/source_file/list_uploaded_source_files.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/ckb/POST/source_file/delete_source_files_batch.sql
+
+### Liquibase/ckb
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/ckb/changelog/20260519000000-rollback.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/ckb/changelog/20260518120000-remove-agency-external-id.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/ckb/changelog/20260518120000-rollback.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/ckb/data/test-fixtures/source.csv
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/ckb/test_data_changelog/20250717133553-load-test-angencies.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/ckb/changelog/20260312182956-add-quality-control.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/ckb/data/test-fixtures/source_file.csv
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/ckb/changelog/20260312182956-rollback.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/ckb/changelog/20260318054000-add-pre-selected-urls-source-type.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/ckb/changelog/20260225-in_review-cleaning_status.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/ckb/changelog/20250806202019-add-indexes.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/ckb/changelog/20251021071904-add-uploaded-by-and-file-size.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/ckb/test_data_changelog/20250806200523-load-test-source_run_report.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/ckb/data/test-fixtures/source_run_report.csv
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/ckb/changelog/20260519000000-add-extract-images.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/ckb/changelog/20260312182956-add-quality-control.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/ckb/changelog/20250806202019-rollback.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/ckb/data/test-fixtures/source_run_page.csv
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/ckb/changelog/20250424191943-add-copy-row-with-modifications-function.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/ckb/test_data_changelog/20250717135738-load-test-sources.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/ckb/data/test-fixtures/agency.csv
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/ckb/changelog/20250624225925-initial_schema.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/ckb/changelog/20260318054000-add-pre-selected-urls-source-type.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/ckb/changelog/20250730125816-rollback.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/ckb/test_data_changelog/20250721131921-load-test-source_files.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/ckb/test_data_changelog/20250806200837-load-test-source_run_page.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/ckb/changelog/20250821160758-implement-schema-001.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/ckb/changelog/20251021071904-add-uploaded-by-and-file-size.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/ckb/changelog/20260318054000-add-pre-selected-urls-source-type-rollback.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/ckb/changelog/20260519000000-add-extract-images.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/ckb/test.yaml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/ckb/changelog/20250730125816-create-arva-api-source.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/ckb/changelog/20251021071904-rollback.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/ckb/changelog/20250624225925-initial_schema.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/ckb/changelog/20250424191943-add-copy-row-with-modifications-function.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/ckb/changelog/20250821160758-implement-schema-001.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/ckb/changelog/20250730125816-create-arva-api-source.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/ckb/changelog/20250624225925-rollback.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/ckb/changelog/20250806202019-add-indexes.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/ckb/changelog/20260518120000-remove-agency-external-id.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/ckb/liquibase.properties
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/ckb/changelog/20250821160758-rollback.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/ckb/changelog/20250424191943-rollback.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/ckb/changelog.yaml
+
+### Ruuter/private/v2/ckb
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/POST/agency/update-zip-dirty.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/GET/source/get.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/TEMPLATES/tara.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/GET/agency/get.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/TEMPLATES/pipeline/trigger-scrapper-entire-source.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/TEMPLATES/agency/zip.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/GET/pipeline/trigger-pipeline-for-sceduled-sources.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/GET/pipeline/zip.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/POST/source-file/update-scrapped-file.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/POST/pipeline/upload-file-sync.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/GET/source-file/get-one-source-file-to-scrape.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/POST/source-file/add-scrapped-file.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/TEMPLATES/pipeline/trigger-scrapper-eesti-api-source.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/POST/reports/update.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/GET/pipeline/scheduler-check-for-unscheduled-records.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/POST/agency/reset-is-zipping.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/GET/client/data/exist.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/POST/pipeline/delete-file-sync.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/README.md
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/TEMPLATES/pipeline/trigger-scrapper-sitemap-collect.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/POST/source-file/update-scrapped-file-stop-scrapping.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/POST/reports/logs/add.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/POST/source-file/upload-metadata.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/TEMPLATES/pipeline/update-next-rendered-timestamp.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/POST/agency/update-data-hash.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/GET/source-file/get-source-file-exists-by-url.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/GET/client/data/new.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/POST/pipeline/clean-scraped-file.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/POST/reports/add.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/TEMPLATES/source_file/upload-metadata.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/TEMPLATES/pipeline/trigger-scrapper-specified-pages.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/POST/source/update-status.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/POST/source-file/update-cleaned-file.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/GET/client/data/import.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/TEMPLATES/pipeline/clean-file.yml
+
+### Resql/users
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/users/POST/get-user-profile-settings.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/users/POST/get-widget-domains.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/users/POST/get-user-domains.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/users/GET/auth_users/get_user_by_login.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/users/POST/get-customer-support-activity-by-id-code.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/users/POST/empty.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/users/GET/config/get_configuration.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/users/GET/auth_users/get_user_is_allowed_by_user_role.sql
+
+### DataMapper/ckb/hbs
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/ckb/hbs/enrich_file_names_with_subsector.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/ckb/hbs/generate_source_file_metadata.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/ckb/hbs/merge_upload_urls_with_metadata.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/ckb/hbs/transform_source_files_to_s3_paths.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/ckb/hbs/prepare_document.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/ckb/hbs/generate_source_file_ids.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/ckb/hbs/enrich_files_with_uploaded_by.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/ckb/hbs/transform_source_files_to_exclude_paths.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/ckb/hbs/generate_source_file_paths.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/ckb/hbs/transform_source_files_to_include_paths.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/ckb/hbs/map_paths.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/ckb/hbs/extract_file_names.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/ckb/hbs/format_excluded_folders_for_zip.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/ckb/hbs/map_paths_for_source_file.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/ckb/hbs/transform_source_files_to_search_deletes.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/ckb/hbs/enrich_signed_urls.handlebars
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/ckb/hbs/prepare_delete_files.handlebars
+
+
+
 # Sync Run - 2026-08-28 07:15:10
 
 ## Chatbot Changes
