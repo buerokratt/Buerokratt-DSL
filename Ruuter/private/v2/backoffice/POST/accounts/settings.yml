@@ -29,7 +29,7 @@ declaration:
       - field: useAutocorrect
         type: boolean
         description: "Body field 'useAutocorrect'"
-    headers:
+    header:
       - field: cookie
         type: string
         description: "Cookie field"
@@ -87,5 +87,5 @@ returnSuccess:
   next: end
 
 return_bad_request:
-  return: "error: bad request"
+  return: "bad_request"
   next: end

@@ -15,37 +15,93 @@ declaration:
       - field: sender
         type: string
         description: Body field 'sender'
-      - field: authorId
+      - field: domain
         type: string
-        description: "Parameter 'authorId'"
-      - field: holidayNames
-        type: string
-        description: "Body field 'holidayNames'"
-      - field: holidays
-        type: string
-        description: "Body field 'holidays'"  
+        description: "Body field 'domain'"
 
 extract_data:
   assign:
     currentDate: ${new Date().toISOString().split('T')[0]}
     sender: ${incoming.body.sender}
-    authorId: ${incoming.body.authorId}
-    holidays: ${incoming.body.holidays}
-    holidayNames: ${incoming.body.holidayNames}
-    event: ""
+    domain: ${incoming.body.domain}
+    stream: "[#SKM_STREAM]"
+    raw_response: "[#SKM_RAW_RESPONSE]"
+    message: ${incoming.body.message ?? ''}
+
+checkForDomain:
+  switch:
+    - condition: ${domain === 'none'}
+      next: getSkmConfig
+  next: getDomainUUID
+
+getDomainUUID:
+  call: http.post
+  args:
+    url: "[#CHATBOT_RESQL]/get-domain-uuid"
+    body:
+      domainUrl: ${domain + '%'}
+  result: domainUuid
+  next: validate_domain_res
+
+validate_domain_res:
+  switch:
+    - condition: ${domainUuid.response.body.length > 0}
+      next: getDomainSkmConfig
+  next: getSkmConfig
+
+getDomainSkmConfig:
+  call: http.post
+  args:
+    url: "[#CHATBOT_RESQL]/get-domain-skm-config"
+    body:
+      domainUUID: ${domainUuid.response.body[0].domainId}
+  result: skm_res
+  next: assignSkmConfig
 
 getSkmConfig:
   call: http.post
   args:
     url: "[#CHATBOT_RESQL]/get-skm-config"
   result: skm_res
+  next: assignSkmConfig
 
 assignSkmConfig:
   assign:
     skm_config: ${skm_res.response.body[0]}
+    use_agentic: ${skm_config.useAgentic}
+    agent_name: ${skm_config.azureAgentName}
+    agent_type: ${skm_config.azureAgentType}
+    azure_client_id: ""
+    azure_client_secret: ""
 
-logstepAZURESAADAME:
-  log: ${incoming.body.message}
+checkForAgenticCredentials:
+  switch:
+    - condition: ${use_agentic.toLowerCase() === 'true' && skm_config.azureClientIdIsSet === 'true'}
+      next: fetchAzureClientId
+  next: assign_data_sources
+
+fetchAzureClientId:
+  call: http.get
+  args:
+    url: "[#VAULT_AGENT_BACKOFFICE]/v1/secret/data/backoffice/${domain === 'none' ? 'global' : domainUuid.response.body[0].domainId}/azure-agentic-client-id"
+  result: vault_id_res
+  next: assignAzureClientId
+
+assignAzureClientId:
+  assign:
+    azure_client_id: ${vault_id_res.response.body.data.data.client_id}
+  next: fetchAzureClientSecret
+
+fetchAzureClientSecret:
+  call: http.get
+  args:
+    url: "[#VAULT_AGENT_BACKOFFICE]/v1/secret/data/backoffice/${domain === 'none' ? 'global' : domainUuid.response.body[0].domainId}/azure-agentic"
+  result: vault_res
+  next: assignAzureClientSecret
+
+assignAzureClientSecret:
+  assign:
+    azure_client_secret: ${vault_res.response.body.data.data.client_secret}
 
 assign_data_sources:
   assign:
@@ -56,7 +112,7 @@ assign_data_sources:
           index_name: ${skm_config.indexName}
           semantic_configuration: ${skm_config.semanticConfiguration ?? 'azureml-default'}
           query_type: ${skm_config.queryType}
-          in_scope: true
+          in_scope: ${skm_config.inScope === 'true' ?? true}
           strictness: ${parseInt(skm_config.range ?? '3')}
           top_n_documents: ${parseInt(skm_config.documents ?? '5')}
           authentication:
@@ -68,9 +124,6 @@ assign_data_sources:
             authentication:
               type: api_key
               key: "[#CHATBOT_EXTERNAL_API_KEY]"
-
-logstepAZUREDS:
-  log: ${data_sources}
 
 get_chat_messages:
   call: http.post
@@ -89,142 +142,117 @@ prepare_messages:
     body:
       prompt_message: "${skm_config.systemMessage} The current date is ${currentDate}"
       messages: ${chat_messages_res.response.body}
-      new_message: ${incoming.body.message ?? ''}
+      new_message: ${message}
   result: prepare_messages_res
 
 assign_messages:
   assign:
     messages: ${prepare_messages_res.response.body}
 
-logstepAZUREMSG:
-  log: ${messages}
+check_if_anonymizer_is_active:
+  switch:
+    - condition: ${[#ANONYMIZER_ENABLED] === true}
+      next: checkForPassedDomain
+  next: trigger_ai_stream
 
-post_answer:
+checkForPassedDomain:
+  switch:
+    - condition: ${domain === 'none'}
+      next: getAnonymizerConfig
+  next: getDomainAnonymizerConfig
+
+getAnonymizerConfig:
   call: http.post
   args:
-    url: "[#CHATBOT_EXTERNAL_BOT_URL]"
+    url: "[#CHATBOT_RESQL]/get-anonymizer-config"
+  result: anonymizer_configs_res
+  next: assignAnonymizerConfigs
+
+getDomainAnonymizerConfig:
+  call: http.post
+  args:
+    url: "[#CHATBOT_RESQL]/get-domain-anonymizer-config"
+    body:
+      domainUUID: ${domainUuid.response.body[0].domainId}
+  result: anonymizer_configs_res
+  next: assignAnonymizerConfigs
+
+assignAnonymizerConfigs:
+  assign:
+    anonymizer_configs: ${anonymizer_configs_res.response.body[0]}
+  next: check_if_anonymize_before_llm
+
+check_if_anonymize_before_llm:
+  switch:
+    - condition: ${anonymizer_configs.isAnonymizationBeforeLlm === 'true'}
+      next: prepareAnonymizerConfig
+  next: trigger_ai_stream
+
+prepareAnonymizerConfig:
+  call: http.post
+  args:
+    url: "[#CHATBOT_DMAPPER_HBS]/prepare_anonymizer_config"
+    headers:
+      type: json
+    body:
+      texts: ${messages.filter(i => i.role === 'user').map(i => i.content)}
+      approach: ${anonymizer_configs.anonymizerSelectedApproach}
+      entities: ${anonymizer_configs.anonymizerSelectedEntities.split(',')}
+      allowlist: ${anonymizer_configs.anonymizerAllowlist.split(',')}
+      denylist: ${anonymizer_configs.anonymizerDenylist.split(',')}
+      hash_type: "[#ANONYMIZER_HASH_TYPE]"
+  result: preparedAnonymizerConfigs
+  next: assignPreparedAnonymizerConfigs
+
+assignPreparedAnonymizerConfigs:
+  assign:
+    preparedAnonymizerConfigs: ${preparedAnonymizerConfigs.response.body}
+  next: anonymizeText
+
+anonymizeText:
+  call: http.post
+  args:
+    url: "[#CHATBOT_ANONYMIZER]/anonymize"
+    body:
+      texts: ${preparedAnonymizerConfigs.texts}
+      anonymizers: ${preparedAnonymizerConfigs.anonymizers}
+      entities: ${preparedAnonymizerConfigs.entities}
+      allowlist: ${preparedAnonymizerConfigs.allowlist}
+      denylist: ${preparedAnonymizerConfigs.denylist}
+  result: anonymize_res
+  next: assign_anonymized_messages
+
+assign_anonymized_messages:
+  assign:
+    anonymizedMessages: ${anonymize_res.response.body.results}
+    messages: "$=messages.map((m, i) => m.role === 'user' ? {...m, content: anonymizedMessages[messages.slice(0, i).filter(msg => msg.role === 'user').length].text} : m)="
+
+trigger_ai_stream:
+  call: http.post
+  args:
+    url: "[#CHATBOT_NOTIFICATIONS]/channels/${sender}/stream"
     headers:
       Content-Type: application/json
       api-key: "[#CHATBOT_EXTERNAL_API_KEY]"
     body:
-      data_sources: ${data_sources}
+      use_agentic: ${use_agentic.toLowerCase() === 'true'}
+      agent_name: ${agent_name}
+      agent_type: ${agent_type}
+      azure_client_id: ${azure_client_id}
+      azure_client_secret: ${azure_client_secret}
+      azure_agentic_max_output_tokens: ${parseInt(skm_config.azureAgenticMaxOutputTokens ?? '4000')}
+      raw_response: ${raw_response.toLowerCase() === 'true'}
       messages: ${messages}
-      temperature: 0
-      max_tokens: ${parseInt(skm_config.maxTokens ?? '1000')}
-      stream: false
-      frequency_penalty: 0
-      presence_penalty: 0
-  result: test
-  
-logstepAZUREBOT:
-  log: ${test}
+      options:
+        data_sources: ${data_sources}
+        max_tokens: ${parseInt(skm_config.maxTokens ?? '1000')}
+        temperature: 0
+        top_p: 1
+        stream: ${stream.toLowerCase() === 'true'}
+        frequency_penalty: 0
+        presence_penalty: 0
+  result: stream_response
 
-assign_value:
-  assign:
-    correct_value:
-      - recipient_id: ${sender}
-        text: ${test.response.body.choices[0].message.content.replace(/\n/g,"\\n").replace(" \. ", ". ")}
-        context: ${test.response.body.choices[0].message.context}
-  next: check_value
-
-check_value:
-  switch:
-    - condition: ${correct_value === 'ERROR'}
-      next: return_value
-    - condition: ${correct_value.map((item) => item.text)[0] === 'ERROR'}
-      next: return_bot_error
-    - condition: ${correct_value.map((item) => item.text)[0] === '$backoffice' || correct_value.map((item) => item.text)[0].startsWith('$backoffice')}
-      next: get_organization_bot_answer_config  
-    - condition: ${correct_value.map((item) => item.text)[0].startsWith('$validate_')}
-      next: assign_validation_event  
-  next: format_messages
-  
-return_value:
-  return: ${correct_value}
+return_result:
+  return: "stream triggered"
   next: end
-
-return_bot_error:
-  return: "ERROR"
-  next: end
-
-assign_validation_event:
-  assign:
-    correct_value:
-      - recipient_id: ${sender}
-        text: ${correct_value.map((item) => item.text)[0].replace('$validate_', '')}
-        context: ${test.response.body.choices[0].message.context}
-    event: "waiting_validation"
-  next: change_chat_status 
-
-change_chat_status:
-  call: http.post
-  args:
-    url: "[#CHATBOT_RUUTER_PUBLIC]/chats/change-status"
-    body:
-      chatId: ${sender}
-      status: "VALIDATING"
-      holidays: ${holidays}
-      holidayNames: ${holidayNames}
-  result: change_chat_status_res
-  next: check_chat_status_result
-
-check_chat_status_result:
-  switch:
-    - condition: ${change_chat_status_res.response.body.response === "Status Changed Successfully"}
-      next: format_messages
-  next: assign_unavailable_message
-
-assign_unavailable_message:
-  assign:
-    correct_value:
-      - recipient_id: ${sender}
-        text: "Edasine lahendamine toimub vastavalt pöördumiste protsessile väljaspool AI-assistendi lahendust."
-        context: ${test.response.body.choices[0].message.context}
-    event: ""
-  next: format_messages
-
-get_organization_bot_answer_config:
-  call: http.post
-  args:
-    url: "[#CHATBOT_RESQL]/get-organization-bot-answer-config"
-  result: bot_answer_config_res
-  next: assign_organization_bot_answer_config
-
-assign_organization_bot_answer_config:
-  assign:
-    bot_answer_config: ${bot_answer_config_res.response.body[0]}
-  next: assign_back_office_event
-
-assign_back_office_event:
-  assign:
-    correct_value:
-      - recipient_id: ${sender}
-        text: ${bot_answer_config.askToForwardToCsaMessage}
-        context: ${test.response.body.choices[0].message.context}
-    event: "${bot_answer_config.isAskToForwardToCsa === 'true' ? 'ask_to_forward_to_csa' : ''}"
-  next: format_messages
-
-format_messages:
-  call: http.post
-  args:
-    url: "[#CHATBOT_DMAPPER_HBS]/llm_responses_to_messages"
-    headers:
-      type: json
-    body:
-      data:
-        {
-          "botMessages": "${correct_value}",
-          "chatId": "${sender}",
-          "authorId": "${authorId}",
-          "authorFirstName": "",
-          "authorLastName": "",
-          "event": "${event ?? ''}",
-          "authorTimestamp": "${new Date().toISOString()}",
-          "created": "${new Date().toISOString()}",
-        }
-  result: converted_messages_res
-  next: return_formatted_value
-
-return_formatted_value:
-  return: ${converted_messages_res.response.body}
-  next: end 

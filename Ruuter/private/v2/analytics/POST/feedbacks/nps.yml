@@ -17,6 +17,12 @@ declaration:
       - field: start_date
         type: string
         description: "Body field 'start_date'"
+      - field: urls
+        type: array
+        description: "Body field 'urls'"
+      - field: showTest
+        type: boolean
+        description: "Body field 'showTest'"
 
 check_for_required_parameters:
   switch:
@@ -32,17 +38,19 @@ post_step:
       metric: ${incoming.body.metric}
       start: ${incoming.body.start_date}
       end: ${incoming.body.end_date}
+      urls: ${incoming.body.urls}
+      showTest: ${incoming.body.showTest}
   result: result
 
 get_nps_object:
   call: http.post
   args:
-    url: "[#ANALYTICS_DMAPPER]/hbs/analytics/get-csa-nps-object"
+    url: "[#ANALYTICS_DMAPPER_HBS]/get-csa-nps-object"
     headers:
       type: "json"
     body:
       pointNps: ${JSON.parse(result.response.body[0].result.value).pointNps ?? []}
-      periodNps: ${JSON.parse(result.response.body[0].result.value).periodNps}
+      periodNps: ${JSON.parse(result.response.body[0].result.value).periodNps ?? 0}
   result: nps
 
 return_value:

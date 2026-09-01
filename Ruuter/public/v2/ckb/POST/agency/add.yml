@@ -1,0 +1,54 @@
+declaration:
+  call: declare
+  version: 0.1
+  description: "Create a new agency"
+  method: post
+  accepts: json
+  returns: json
+  namespace: agency
+  allowlist:
+    body:
+      - field: name
+        type: string
+        description: "Name of the agency"
+      - field: sector
+        type: string
+        description: "Sector of the agency"
+
+extractRequestData:
+  assign:
+    name: "${incoming.body.name}"
+    sector: "${incoming.body.sector}"
+
+checkAgencyExists:
+  call: http.get
+  args:
+    url: "[#CKB_RESQL]/agency/check_agency_exists"
+  result: agencyExistsResult
+  next: validateSingleAgency
+
+validateSingleAgency:
+  switch:
+    - condition: ${agencyExistsResult.response.body[0].exists == true}
+      next: returnAgencyExistsError
+  next: createAgency
+
+returnAgencyExistsError:
+  return: "An agency already exists. CKB supports only one agency per deployment."
+  status: 409
+  next: end
+
+createAgency:
+  call: http.post
+  args:
+    url: "[#CKB_RESQL]/agency/create_agency"
+    headers:
+      type: json
+    body:
+      name: ${name}
+      sector: ${sector}
+  result: res
+
+returnSuccess:
+  return: ${res.response.body}
+  next: end

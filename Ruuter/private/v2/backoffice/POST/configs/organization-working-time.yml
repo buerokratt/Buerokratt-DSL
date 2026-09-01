@@ -83,6 +83,21 @@ declaration:
       - field: organizationOutsideWorkingHoursMessage
         type: string
         description: "Body field 'organizationOutsideWorkingHoursMessage'"
+      - field: domainUUID
+        type: object
+        description: "Body field 'domainUUID'"
+      - field: organizationBotCannotAnswerMessage
+        type: string
+        description: "Body field 'organizationBotCannotAnswerMessage'"
+      - field: organizationRedirectIfBotCannotAnswerMessage
+        type: string
+        description: "Body field 'organizationRedirectIfBotCannotAnswerMessage'"  
+      - field: organizationUseCSA
+        type: string
+        description: "Body field 'organizationUseCSA'"
+      - field: organizationValidationNoCsaMessage
+        type: string
+        description: "Body field 'organizationValidationNoCsaMessage'"  
 
 extractRequestData:
   assign:
@@ -111,8 +126,56 @@ extractRequestData:
     organizationNoCsaAvailableMessage: ${incoming.body.organizationNoCsaAvailableMessage}
     organizationOutsideWorkingHoursAskForContacts: ${incoming.body.organizationOutsideWorkingHoursAskForContacts}
     organizationOutsideWorkingHoursMessage: ${incoming.body.organizationOutsideWorkingHoursMessage}
-    organizationBotCannotAnswerAskToForwardToCSA: ${incoming.body.organizationBotCannotAnswerAskToForwardToCSA}
     organizationBotCannotAnswerMessage: ${incoming.body.organizationBotCannotAnswerMessage}
+    organizationRedirectIfBotCannotAnswerMessage: ${incoming.body.organizationRedirectIfBotCannotAnswerMessage}
+    organizationUseCSA: ${incoming.body.organizationUseCSA}
+    organizationValidationNoCsaMessage: ${incoming.body.organizationValidationNoCsaMessage}
+    domains: ${incoming.body.domainUUID}
+
+checkForDomains:
+  switch:
+    - condition: ${domains.length > 0}
+      next: setDomainOrganizationWorkingTime
+  next: setOrganizationWorkingTime
+
+setDomainOrganizationWorkingTime:
+  call: http.post
+  args:
+    url: "[#CHATBOT_RESQL]/set-domain-organization-working-time"
+    body:
+      organizationMondayWorkingTimeStartISO: ${organizationMondayWorkingTimeStartISO}
+      organizationMondayWorkingTimeEndISO: ${organizationMondayWorkingTimeEndISO}
+      organizationTuesdayWorkingTimeStartISO: ${organizationTuesdayWorkingTimeStartISO}
+      organizationTuesdayWorkingTimeEndISO: ${organizationTuesdayWorkingTimeEndISO}
+      organizationWednesdayWorkingTimeStartISO: ${organizationWednesdayWorkingTimeStartISO}
+      organizationWednesdayWorkingTimeEndISO: ${organizationWednesdayWorkingTimeEndISO}
+      organizationThursdayWorkingTimeStartISO: ${organizationThursdayWorkingTimeStartISO}
+      organizationThursdayWorkingTimeEndISO: ${organizationThursdayWorkingTimeEndISO}
+      organizationFridayWorkingTimeStartISO: ${organizationFridayWorkingTimeStartISO}
+      organizationFridayWorkingTimeEndISO: ${organizationFridayWorkingTimeEndISO}
+      organizationSaturdayWorkingTimeStartISO: ${organizationSaturdayWorkingTimeStartISO}
+      organizationSaturdayWorkingTimeEndISO: ${organizationSaturdayWorkingTimeEndISO}
+      organizationSundayWorkingTimeStartISO: ${organizationSundayWorkingTimeStartISO}
+      organizationSundayWorkingTimeEndISO: ${organizationSundayWorkingTimeEndISO}
+      organizationAllWeekdaysTimeStartISO: ${organizationAllWeekdaysTimeStartISO}
+      organizationAllWeekdaysTimeEndISO: ${organizationAllWeekdaysTimeEndISO}
+      organizationWorkingTimeWeekdays: ${organizationWorkingTimeWeekdays}
+      organizationClosedOnWeekEnds: ${organizationClosedOnWeekEnds}
+      organizationTheSameOnAllWorkingDays: ${organizationTheSameOnAllWorkingDays}
+      organizationWorkingTimeNationalHolidays: ${organizationWorkingTimeNationalHolidays}
+      organizationWorkingAllTime: ${organizationWorkingAllTime}
+      organizationNoCsaAskForContacts: ${organizationNoCsaAskForContacts}
+      organizationNoCsaAvailableMessage: ${organizationNoCsaAvailableMessage}
+      organizationOutsideWorkingHoursAskForContacts: ${organizationOutsideWorkingHoursAskForContacts}
+      organizationOutsideWorkingHoursMessage: ${organizationOutsideWorkingHoursMessage}
+      organizationBotCannotAnswerMessage: ${organizationBotCannotAnswerMessage}
+      organizationRedirectIfBotCannotAnswerMessage: ${organizationRedirectIfBotCannotAnswerMessage}
+      organizationUseCSA: ${incoming.body.organizationUseCSA}
+      organizationValidationNoCsaMessage: ${incoming.body.organizationValidationNoCsaMessage}
+      created: ${new Date().toISOString()}
+      domains: ${JSON.stringify(domains)}
+  result: setOrganizationWorkingTimeResult
+  next: mapOrganizationWorkingTimeData
 
 setOrganizationWorkingTime:
   call: http.post
@@ -144,8 +207,10 @@ setOrganizationWorkingTime:
       organizationNoCsaAvailableMessage: ${organizationNoCsaAvailableMessage}
       organizationOutsideWorkingHoursAskForContacts: ${organizationOutsideWorkingHoursAskForContacts}
       organizationOutsideWorkingHoursMessage: ${organizationOutsideWorkingHoursMessage}
-      organizationBotCannotAnswerAskToForwardToCSA: ${organizationBotCannotAnswerAskToForwardToCSA}
       organizationBotCannotAnswerMessage: ${organizationBotCannotAnswerMessage}
+      organizationRedirectIfBotCannotAnswerMessage: ${organizationRedirectIfBotCannotAnswerMessage}
+      organizationUseCSA: ${organizationUseCSA}
+      organizationValidationNoCsaMessage: ${organizationValidationNoCsaMessage}
       created: ${new Date().toISOString()}
   result: setOrganizationWorkingTimeResult
 

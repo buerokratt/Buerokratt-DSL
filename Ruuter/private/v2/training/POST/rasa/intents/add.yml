@@ -11,7 +11,7 @@ declaration:
       - field: name
         type: string
         description: "Body field 'name'"
-    headers:
+    header:
       - field: cookie
         type: string
         description: "Cookie field"
@@ -93,6 +93,7 @@ addInDatabase:
     body:
       intent: ${incoming.body.name}
       status: "ACTIVE"
+      isForService: false
   result: addIntentResult
 
 returnSuccess:

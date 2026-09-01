@@ -14,7 +14,7 @@ declaration:
       - field: isForService
         type: boolean
         description: "Value of isForService to mark intent for service use or not."
-    headers:
+    header:
       - field: cookie
         type: string
         description: "Cookie field"
@@ -49,7 +49,7 @@ validateIntentExists:
 updateInDatabase:
   call: http.post
   args:
-    url: "[#TRAINING_RESQL]/mark-intent-for-service"
+    url: "[#TRAINING_RESQL]/add-intent"
     body:
       intent: ${intent}
       isForService: ${isForService}

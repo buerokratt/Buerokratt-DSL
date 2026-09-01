@@ -7,6 +7,10 @@ declaration:
   returns: json
   namespace: backoffice
   allowlist:
+    headers:
+      - field: cookie
+        type: string
+        description: "Cookie field"
     body:
       - field: holidayNames
         type: string
@@ -20,6 +24,9 @@ declaration:
       - field: endUserTechnicalData
         type: json
         description: "Body field 'endUserTechnicalData'"
+      - field: domain
+        type: string
+        description: "Body field 'domain'"
 
 extractRequestData:
   assign:
@@ -28,6 +35,8 @@ extractRequestData:
     content: ${incoming.body.message.content ?? ""}
     endUserId: ""
     endUserEmail: ""
+    endUserFirstName: ""
+    endUserLastName: ""
     endUserPhone: ""
     endUserOs: ${incoming.body.endUserTechnicalData.endUserOs}
     endUserUrl: ${incoming.body.endUserTechnicalData.endUserUrl}
@@ -36,7 +45,130 @@ extractRequestData:
     forwardedToCsa: ""
     holidays: ${incoming.body.holidays}
     holidayNames: ${incoming.body.holidayNames}
+    domain: ${incoming.body.domain}
+
+check_if_anonymizer_is_active:
+  switch:
+    - condition: ${[#ANONYMIZER_ENABLED] === true}
+      next: checkForPassedDomain
+  next: checkIncomingCookie
+
+checkForPassedDomain:
+  switch:
+    - condition: ${domain === 'none'}
+      next: getAnonymizerConfig
+  next: getDomainUUID
+
+getDomainUUID:
+  call: http.post
+  args:
+    url: "[#CHATBOT_RESQL]/get-domain-uuid"
+    body:
+      domainUrl: ${domain + '%'}
+  result: domainUuid
+  next: validate_domain_res
+
+validate_domain_res:
+  switch:
+    - condition: ${domainUuid.response.body.length > 0}
+      next: getDomainAnonymizerConfig
+  next: getAnonymizerConfig
+
+getAnonymizerConfig:
+  call: http.post
+  args:
+    url: "[#CHATBOT_RESQL]/get-anonymizer-config"
+  result: anonymizer_configs_res
+  next: assignAnonymizerConfigs
+
+getDomainAnonymizerConfig:
+  call: http.post
+  args:
+    url: "[#CHATBOT_RESQL]/get-domain-anonymizer-config"
+    body:
+      domainUUID: ${domainUuid.response.body[0].domainId}
+  result: anonymizer_configs_res
+  next: assignAnonymizerConfigs
+
+assignAnonymizerConfigs:
+  assign:
+    anonymizer_configs: ${anonymizer_configs_res.response.body[0]}
+  next: check_if_content_needs_anonymization
+
+check_if_content_needs_anonymization:
+  switch:
+    - condition: ${anonymizer_configs.recordConversationsAnonymously === 'true'}
+      next: prepareAnonymizerConfig
+  next: checkIncomingCookie
+
+prepareAnonymizerConfig:
+  call: http.post
+  args:
+    url: "[#CHATBOT_DMAPPER_HBS]/prepare_anonymizer_config"
+    headers:
+      type: json
+    body:
+      texts: ${[content]}
+      approach: ${anonymizer_configs.anonymizerSelectedApproach}
+      entities: ${anonymizer_configs.anonymizerSelectedEntities.split(',')}
+      allowlist: ${anonymizer_configs.anonymizerAllowlist.split(',')}
+      denylist: ${anonymizer_configs.anonymizerDenylist.split(',')}
+      hash_type: "[#ANONYMIZER_HASH_TYPE]"
+  result: preparedAnonymizerConfigs
+  next: assignPreparedAnonymizerConfigs
+
+assignPreparedAnonymizerConfigs:
+  assign:
+    preparedAnonymizerConfigs: ${preparedAnonymizerConfigs.response.body}
+  next: anonymizeText
+
+anonymizeText:
+  call: http.post
+  args:
+    url: "[#CHATBOT_ANONYMIZER]/anonymize"
+    body:
+      texts: ${preparedAnonymizerConfigs.texts}
+      anonymizers: ${preparedAnonymizerConfigs.anonymizers}
+      entities: ${preparedAnonymizerConfigs.entities}
+      allowlist: ${preparedAnonymizerConfigs.allowlist}
+      denylist: ${preparedAnonymizerConfigs.denylist}
+  result: anonymize_res
+  next: assign_anonymized_content
+
+assign_anonymized_content:
+  assign:
+    content: ${anonymize_res.response.body.results[0].text ?? ''}
+  next: checkIncomingCookie
+
+checkIncomingCookie:
+  switch:
+    - condition: ${incoming.headers.cookie == null}
+      next: getChatUuid
+  next: getTaraUserInfo
+
+getTaraUserInfo:
+  call: http.post
+  args:
+   url: "[#CHATBOT_TIM]/jwt/custom-jwt-userinfo"
+   contentType: plaintext
+   headers:
+    cookie: ${incoming.headers.cookie}
+   plaintext: 
+      "customSmaxJwtCookie"
+  result: tara_info
+
+checkTaraInfo:
+  switch:
+    - condition: ${tara_info.response.body !== null}
+      next: assignEndUserFields
   next: getChatUuid
+
+assignEndUserFields:
+  assign:
+    endUserId: ${tara_info.response.body.personalCode}
+    endUserEmail: ${tara_info.response.body.login}
+    endUserFirstName: ${tara_info.response.body.firstName}
+    endUserLastName: ${tara_info.response.body.lastName}
 
 getChatUuid:
   call: http.post
@@ -103,6 +235,7 @@ postGreetingMessage:
     body:
       chatId: ${chatUuid}
       authorTimestamp: ${authorTimestamp}
+      domain: ${domain}
   result: greeting_result
   next: postClientMessage
 
@@ -117,10 +250,10 @@ postClientMessage:
       event: ""
       authorTimestamp: ${authorTimestamp}
       authorId: ${endUserId}
-      authorFirstName: ""
+      authorFirstName: ${endUserFirstName}
       authorRole: ${authorRole}
       created: ${new Date().toISOString()}
-      authorLastName: ""
+      authorLastName: ${endUserLastName}
       rating: ""
       forwardedByUser: ${forwardedByUser}
       forwardedFromCsa: ${forwardedFromCsa}
@@ -135,8 +268,8 @@ insertChat:
     body:
       id: ${chatUuid}
       endUserId: ${endUserId}
-      endUserFirstName: ""
-      endUserLastName: ""
+      endUserFirstName: ${endUserFirstName}
+      endUserLastName: ${endUserLastName}
       status: "OPEN"
       lastMessage: ${content}
       created: ${new Date().toISOString()}
@@ -164,6 +297,7 @@ postMessageToBot:
       content: ${content}
       holidays: ${holidays}
       holidayNames: ${holidayNames}
+      domain: ${domain}
   result: message_to_bot_result
   next: check_for_post_message_to_bot_result
 

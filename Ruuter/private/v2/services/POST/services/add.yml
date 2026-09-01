@@ -7,6 +7,10 @@ declaration:
   returns: json
   namespace: service
   allowlist:
+    header:
+      - field: cookie
+        type: string
+        description: "Cookie field"
     body:
       - field: content
         type: string
@@ -14,9 +18,12 @@ declaration:
       - field: description
         type: string
         description: "Body field 'description'"
-      - field: slot
-        type: string
-        description: "Slot input"
+      - field: entities
+        type: object
+        description: "Body field 'Entities'"
+      - field: examples
+        type: object
+        description: "Body field 'Examples'"
       - field: isCommon
         type: boolean
         description: "Body field 'isCommon'"
@@ -27,14 +34,17 @@ declaration:
         type: string
         description: "Body field 'serviceId'"
       - field: structure
-        type: json
+        type: object
         description: "Body field 'structure'"
       - field: type
         type: string
         description: "Body field 'type'"
       - field: updateServiceDb
         type: boolean
-        description: "Body field 'updateServiceDb'"  
+        description: "Body field 'updateServiceDb'"
+      - field: state
+        type: string
+        description: "Body field 'state'"  
 
 check_for_required_parameters:
   switch:
@@ -46,19 +56,37 @@ extract_request_data:
   assign:
     name: ${incoming.body.name}
     description: ${incoming.body.description}
-    slot: ${incoming.body.slot}
+    slot: ${""}
+    entities: ${incoming.body.entities}
+    examples: ${incoming.body.examples}
     type: ${incoming.body.type.toUpperCase()}
     content: ${incoming.body.content}
     serviceId: ${incoming.body.serviceId}
     isCommon: ${incoming.body.isCommon}
     structure: ${incoming.body.structure}
+    state: ${incoming.body.state}
   next: check_if_update_service_db
 
 check_if_update_service_db:
   switch:
     - condition: ${incoming.body.updateServiceDb === true}
-      next: service_add
+      next: check_if_name_exists
   next: delete_all_mcq_files
+
+check_if_name_exists:
+  call: http.post
+  args:
+    url: "[#SERVICE_RESQL]/services/check_name_exist"
+    body:
+      name: ${name}
+  result: name_exists_res
+  next: check_name_exists_result
+
+check_name_exists_result:
+  switch:
+    - condition: ${name_exists_res.response.body[0].nameExists}
+      next: return_name_already_exists
+  next: service_add   
 
 service_add:
   call: http.post
@@ -68,9 +96,12 @@ service_add:
       name: ${name}
       description: ${description}
       slot: ${slot}
+      entities: ${entities}
+      examples: ${examples}
       ruuter_type: ${type}
       service_id: ${serviceId}
       is_common: ${isCommon}
+      state: ${state}
       structure: ${structure}
   result: createdService
   next: convert_json_content_to_yml
@@ -81,7 +112,7 @@ delete_all_mcq_files:
     url: "[#SERVICE_DMAPPER]/file-manager/delete-all-that-starts-with"
     body:
       path: "[#RUUTER_SERVICES_PATH]/${type}/services/draft"
-      keyword: "${name}_"
+      keyword: "${name}_mcq_"
   result: deleteRes 
 
 convert_json_content_to_yml:
@@ -138,4 +169,9 @@ return_bad_request:
 return_incorrect_request:
   status: 400
   return: "Required parameter(s) missing"
+  next: end
+
+return_name_already_exists:
+  status: 409
+  return: "Service name already exists"
   next: end

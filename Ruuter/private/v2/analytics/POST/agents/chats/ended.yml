@@ -27,13 +27,50 @@ declaration:
         type: string
         description: "Body field 'search'"
       - field: customerSupportIds
-        type: array
+        type: object
         description: "Body field 'customerSupportIds'"
+      - field: urls
+        type: array
+        description: "Body field 'urls'"
+      - field: showTest
+        type: boolean
+        description: "Body field 'showTest'"
+      - field: feedbackRatings
+        type: array
+        description: "Body field 'feedbackRatings'"
+      - field: isTest
+        type: array
+        description: "Body field 'isTest'"
+      - field: isPreserve
+        type: array
+        description: "Body field 'isPreserve'"
+      - field: hasComment
+        type: array
+        description: "Body field 'hasComment'"
+      - field: hasFeedback
+        type: array
+        description: "Body field 'hasFeedback'"
+      - field: authenticatedChats
+        type: array
+        description: "Body field 'authenticatedChats'"
+      - field: status
+        type: array
+        description: "Body field 'status'"
+
 
 extractRequestData:
   assign:
-    startDate: "${incoming.body.startDate}"
-    endDate: "${incoming.body.endDate}"
+    startDate: ${incoming.body.startDate}
+    endDate: ${incoming.body.endDate}
+    urls: ${incoming.body.urls}
+    showTest: ${incoming.body.showTest}
+    feedbackRatings: ${incoming.body.feedbackRatings ?? []}
+    isTest: ${incoming.body.isTest ?? []}
+    isPreserve: ${incoming.body.isPreserve ?? []}
+    hasComment: ${incoming.body.hasComment ?? []}
+    hasFeedback: ${incoming.body.hasFeedback ?? []}
+    authenticatedChats: ${incoming.body.authenticatedChats ?? []}
+    status: ${incoming.body.status ?? []}
 
 getEndedChats:
   call: http.post
@@ -47,6 +84,16 @@ getEndedChats:
       sorting: ${incoming.body.sorting}
       search: ${incoming.body.search}
       customerSupportIds: ${incoming.body.customerSupportIds?.join(',') ?? ''}
+      csaId: ${"chatbot"}
+      urls: ${urls}
+      showTest: ${showTest}
+      feedbackRatings: ${feedbackRatings}
+      isTest: ${isTest}
+      isPreserve: ${isPreserve}
+      hasComment: ${hasComment}
+      hasFeedback: ${hasFeedback}
+      authenticatedChats: ${authenticatedChats}
+      status: ${status}
   result: res
 
 returnSuccess:
