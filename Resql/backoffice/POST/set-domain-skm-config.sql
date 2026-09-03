@@ -19,7 +19,11 @@ WHERE
      'skm_index_name',
      'skm_query_type',
      'skm_semantic_configuration',
-     'skm_in_scope'
+     'skm_in_scope',
+     'skm_use_agentic',
+     'azure_agent_name',
+     'azure_agent_type',
+     'azure_agentic_max_output_tokens'
     )
   AND c.deleted = FALSE
   AND c.id = (
@@ -34,7 +38,7 @@ WHERE
 SELECT
     v.key,
     v.value,
-    :created::timestamptz AS created
+    now() AS created
 FROM (
     VALUES
         ('skm_range', :skm_range),
@@ -44,7 +48,11 @@ FROM (
         ('skm_index_name', :skm_index_name),
         ('skm_query_type', :skm_query_type),
         ('skm_semantic_configuration', :skm_semantic_configuration),
-        ('skm_in_scope', :skm_in_scope)
+        ('skm_in_scope', :skm_in_scope),
+        ('skm_use_agentic', :skm_use_agentic),
+        ('azure_agent_name', :azure_agent_name),
+        ('azure_agent_type', :azure_agent_type),
+        ('azure_agentic_max_output_tokens', :azure_agentic_max_output_tokens)
    ) AS v(key, value)
     )
 INSERT INTO configuration (key, value, domain, created)

@@ -6,12 +6,15 @@ SELECT
     v.key,
     v.value,
     d.domain,
-    :created::timestamptz
+    now()
 FROM
     domain_list AS d
         CROSS JOIN LATERAL (
         VALUES
-            ('is_greeting_message_active',       :isActive),
-            ('greeting_message_est',   :message)
+            ('is_greeting_message_active',       :isActive::text),
+            ('greeting_message_est',   :message),
+            ('greeting_type',   :type),
+            ('greeting_service_id',   :serviceId),
+            ('greeting_service_name',   :serviceName)
             ) AS v(key, value)
         RETURNING key, value, domain;
