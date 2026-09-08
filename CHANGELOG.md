@@ -2,6 +2,179 @@
 
 All changes to Buerokratt-DSL from source repos.
 
+# Sync Run - 2026-09-08 09:44:44
+
+## Chatbot Changes
+### Liquibase/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20250211084322-add-request-nonces.sql
+
+### Ruuter/private/v2/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/GET/.guard
+
+## Training Changes
+### Ruuter/private/v2/training
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/GET/internal/return-file-locations.yml
+
+### Liquibase/training
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/training/changelog.yaml
+
+## Analytics Changes
+### Liquibase/analytics
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/liquibase.properties
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/changelog.yaml
+
+## Service Changes
+### Liquibase/services
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/services/liquibase.properties
+
+## CronManager Changes
+No changes detected.
+
+## CKB Changes
+No changes detected.
+
+## LLM Changes
+### Ruuter/private/v2/rag-search
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/rag-search/GET/embedding/models.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/rag-search/POST/llm-connections/add.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/rag-search/GET/llm-connections/production.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/rag-search/GET/llm-connections/list.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/rag-search/GET/llm-connections/cost/check.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/rag-search/POST/accounts/add.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/rag-search/GET/auth/jwt/userinfo.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/rag-search/POST/inference/results/production/store.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/rag-search/POST/llm-connections/update-status.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/rag-search/POST/llm-connections/get.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/rag-search/GET/llm-connections/all.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/rag-search/POST/inference/production.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/rag-search/POST/inference/test.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/rag-search/GET/llm/models-list.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/rag-search/GET/.guard
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/rag-search/POST/llm-connections/delete.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/rag-search/POST/llm-connections/exists.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/rag-search/POST/llm-connections/cost/update.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/rag-search/POST/vault/secret/create.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/rag-search/POST/accounts/exists.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/rag-search/POST/prompt-configuration/save.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/rag-search/POST/vault/secret/delete.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/rag-search/POST/accounts/users.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/rag-search/POST/inference/results/view.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/rag-search/POST/llm-connections/edit.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/rag-search/GET/auth/jwt/extend.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/rag-search/POST/accounts/edit.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/rag-search/POST/inference/results/test/store.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/rag-search/POST/.guard
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/rag-search/TEMPLATES/check-user-authority.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/rag-search/POST/accounts/delete.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/rag-search/POST/accounts/.guard
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/rag-search/POST/llm-connections/usage/check.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/rag-search/GET/accounts/user-role.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/rag-search/GET/llm/platforms.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/rag-search/GET/prompt-configuration/get.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/rag-search/GET/accounts/logout.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/rag-search/GET/llm/models.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/rag-search/TEMPLATES/check-user-authority-admin.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/rag-search/GET/embedding/platforms.yml
+
+### Ruuter/public/v2/rag-search
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/rag-search/POST/auth/login.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/rag-search/POST/inference/results/store.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/rag-search/POST/services/enrich.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/rag-search/GET/accounts/user-role.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/rag-search/POST/llm-connections/cost/reset.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/rag-search/POST/data/update.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/rag-search/POST/llm-connections/prompts/get-prompt.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/rag-search/POST/ckb/agency-data-import.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/rag-search/POST/api-tools/index.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/rag-search/GET/services/get-services.yml
+
+### Resql/rag-search
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/rag-search/POST/insert-endpoint.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/rag-search/POST/get-llm-connection-by-vault-uuid.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/rag-search/POST/get-embedding-models-by-platform.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/rag-search/POST/store-testing-inference-result.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/rag-search/POST/get-embedding-platforms.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/rag-search/POST/insert-user-role.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/rag-search/POST/store-inference-result.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/rag-search/POST/update-llm-connection-environment.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/rag-search/POST/get-llm-platforms.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/rag-search/POST/get-all-endpoints.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/rag-search/POST/mock-get-all-active-services.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/rag-search/POST/get-llm-connections-paginated.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/rag-search/POST/mock-get-service-by-id.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/rag-search/POST/insert-llm-connection.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/rag-search/POST/delete-user.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/rag-search/POST/get-user-with-roles.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/rag-search/POST/update-agency-hash.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/rag-search/POST/mock-count-active-services.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/rag-search/POST/insert-prompt-configuration.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/rag-search/GET/empty.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/rag-search/POST/get-testing-connection.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/rag-search/POST/mock-get-data-from-kb.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/rag-search/POST/get-configuration.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/rag-search/POST/get-llm-models-by-platform.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/rag-search/POST/update-user.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/rag-search/POST/get-production-connection.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/rag-search/POST/get-user.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/rag-search/POST/get-llm-connection.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/rag-search/POST/get-production-connection-filtered.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/rag-search/POST/reset-llm-connection-used-budget.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/rag-search/POST/insert-user.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/rag-search/POST/get-user-role.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/rag-search/POST/deactivate-llm-connection-budget-exceed.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/rag-search/POST/delete-llm-connection.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/rag-search/POST/update-prompt-configuration.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/rag-search/POST/update-llm-connection.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/rag-search/POST/get-users-with-roles-by-role.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/rag-search/POST/get-llm-models.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/rag-search/POST/get-all-llm-connections-paginated.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/rag-search/POST/store-production-inference-result.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/rag-search/POST/update-llm-connection-status.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/rag-search/GET/get-prompt-configuration.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/rag-search/POST/get-endpoint-by-id.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/rag-search/POST/update-llm-connection-used-budget.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/rag-search/POST/get-agency-id.sql
+
+### DataMapper/rag-search/hbs
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/rag-search/hbs/bot_responses_to_messages.handlebars
+
+### Liquibase/rag-search
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/rag-search/data/authority.csv
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/rag-search/changelog/rag-search-script-v2-user-management.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/rag-search/changelog/rag-search-script-v5-prompt-config.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/rag-search/changelog/rag-search-script-v8-uuid-vault-path.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/rag-search/changelog/rag-search-script-v1-llm-connections.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/rag-search/master.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/rag-search/changelog/rag-search-script-v6-endpoints.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/rag-search/changelog/rag-search-script-v3-configuration.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/rag-search/changelog/rag-search-script-v4-authority-data.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/rag-search/changelog/rag-search-script-v7-schema-migration.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/rag-search/langfuse-init/init-langfuse.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/rag-search/liquibase.properties
+
+### DataMapper/rag-search/lib
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/rag-search/lib/requestLoggerMiddleware.js
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/DataMapper/rag-search/lib/helpers.js
+
+### CronManager/rag-search
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/script/agency_data_resync.sh
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/DSL/service_enrichment.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/script/delete_secrets_from_vault.sh
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/DSL/data_resync.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/DSL/store_in_vault.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/script/service_enrichment.sh
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/config/config.ini
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/DSL/api_tool_indexer.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/script/api_tool_indexer.sh
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/DSL/reset.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/script/store_secrets_in_vault.sh
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/DSL/delete_from_vault.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/script/vector_indexer_pipeline.sh
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/script/budget_reset.sh
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/DSL/initiate_vector_indexer.yml
+
+
+
 # Sync Run - 2026-09-07 13:58:53
 
 ## Chatbot Changes
