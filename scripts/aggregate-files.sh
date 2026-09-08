@@ -14,6 +14,7 @@ SOURCE_REPOS=(
   "buerokratt/Common-Services:v3.3.1"
   "buerokratt/CronManager:v3.3.1"
   "buerokratt/Common-Knowledge:wip"
+  "buerokratt/LLM-Module:wip"
 )
 
 # Hardcoded version
@@ -29,10 +30,12 @@ CHATBOT_MAPPINGS=(
   "DSL/OpenSearch:OpenSearch/backoffice"
 )
 
+# Common Services mappings
 CS_MAPPINGS=(
   "DSL/Ruuter.public:Ruuter/public/v2/Common-Services"
 )
 
+# Training Module mappings
 TRAINING_MAPPINGS=(
   "DSL/Ruuter.private/training:Ruuter/private/v2/training"
   "DSL/Resql/training:Resql/training"
@@ -43,6 +46,7 @@ TRAINING_MAPPINGS=(
   "DSL/OpenSearch:OpenSearch/training"
 )
 
+# Analytics Module mappings
 ANALYTICS_MAPPINGS=(
   "DSL/Ruuter/analytics:Ruuter/private/v2/analytics"
   "DSL/Resql/analytics:Resql/analytics"
@@ -50,6 +54,7 @@ ANALYTICS_MAPPINGS=(
   "DSL/Liquibase:Liquibase/analytics"
 )
 
+# Service Module mappings
 SERVICE_MAPPINGS=(
   "DSL/Resql/services:Resql/services"
   "DSL/Resql/training:Resql/services"
@@ -61,6 +66,7 @@ SERVICE_MAPPINGS=(
   "DSL/OpenSearch:OpenSearch/services"
 )
 
+# CronManager mappings
 CRONMANAGER_MAPPINGS=(
   "DSL:CronManager"
 )
@@ -75,10 +81,28 @@ CKB_MAPPINGS=(
   "DSL/Liquibase:Liquibase/ckb"
 )
 
+# LLM Module / RAG mappings
+LLM_MAPPINGS=(
+  "DSL/Ruuter.public/rag-search:Ruuter/public/v2/rag-search"
+  "DSL/Ruuter.private/rag-search:Ruuter/private/v2/rag-search"
+  "DSL/Resql/rag-search:Resql/rag-search"
+  "DSL/DMapper/rag-search/hbs:DataMapper/rag-search/hbs"
+  "DSL/DMapper/rag-search/lib:DataMapper/rag-search/lib"
+  "DSL/Liquibase:Liquibase/rag-search"
+  "DSL/CronManager:CronManager/rag-search"
+)
+
 TEMP_DIR=$(mktemp -d)
 trap 'rm -rf "$TEMP_DIR"' EXIT
 
-declare -A CHATBOT_CHANGES TRAINING_CHANGES ANALYTICS_CHANGES SERVICE_CHANGES CRONMANAGER_CHANGES CKB_CHANGES
+declare -A \
+  CHATBOT_CHANGES \
+  TRAINING_CHANGES \
+  ANALYTICS_CHANGES \
+  SERVICE_CHANGES \
+  CRONMANAGER_CHANGES \
+  CKB_CHANGES \
+  LLM_CHANGES
 
 for repo in "${SOURCE_REPOS[@]}"; do
   REPO_NAME="${repo%%:*}"
@@ -86,29 +110,42 @@ for repo in "${SOURCE_REPOS[@]}"; do
   REPO_DIR="$TEMP_DIR/$(basename "$REPO_NAME")"
 
   echo "Cloning $REPO_NAME into $REPO_DIR"
-  git clone --depth 1 --branch "$REPO_BRANCH" "https://github.com/$REPO_NAME.git" "$REPO_DIR"
+  git clone --depth 1 --branch "$REPO_BRANCH" \
+    "https://github.com/$REPO_NAME.git" \
+    "$REPO_DIR"
 
   if [ "$REPO_NAME" = "buerokratt/Buerokratt-Chatbot" ]; then
     MAPPINGS=("${CHATBOT_MAPPINGS[@]}")
     CHANGES_ARRAY="CHATBOT_CHANGES"
+
   elif [ "$REPO_NAME" = "buerokratt/Training-Module" ]; then
     MAPPINGS=("${TRAINING_MAPPINGS[@]}")
     CHANGES_ARRAY="TRAINING_CHANGES"
+
   elif [ "$REPO_NAME" = "buerokratt/Analytics-Module" ]; then
     MAPPINGS=("${ANALYTICS_MAPPINGS[@]}")
     CHANGES_ARRAY="ANALYTICS_CHANGES"
+
   elif [ "$REPO_NAME" = "buerokratt/Service-Module" ]; then
     MAPPINGS=("${SERVICE_MAPPINGS[@]}")
     CHANGES_ARRAY="SERVICE_CHANGES"
+
   elif [ "$REPO_NAME" = "buerokratt/Common-Services" ]; then
     MAPPINGS=("${CS_MAPPINGS[@]}")
     CHANGES_ARRAY="SERVICE_CHANGES"
+
   elif [ "$REPO_NAME" = "buerokratt/CronManager" ]; then
     MAPPINGS=("${CRONMANAGER_MAPPINGS[@]}")
     CHANGES_ARRAY="CRONMANAGER_CHANGES"
+
   elif [ "$REPO_NAME" = "buerokratt/Common-Knowledge" ]; then
     MAPPINGS=("${CKB_MAPPINGS[@]}")
     CHANGES_ARRAY="CKB_CHANGES"
+
+  elif [ "$REPO_NAME" = "buerokratt/LLM-Module" ]; then
+    MAPPINGS=("${LLM_MAPPINGS[@]}")
+    CHANGES_ARRAY="LLM_CHANGES"
+
   else
     echo "Unknown repo $REPO_NAME - skipping"
     continue
@@ -117,37 +154,58 @@ for repo in "${SOURCE_REPOS[@]}"; do
   for mapping in "${MAPPINGS[@]}"; do
     SOURCE_FOLDER="${mapping%%:*}"
     DEST_FOLDER="${mapping##*:}"
+
     FULL_SOURCE="$REPO_DIR/$SOURCE_FOLDER/"
     FULL_DEST="$CENTRAL_PATH/$DEST_FOLDER/"
 
+    #
+    # Resql/services is special because multiple source folders
+    # are merged into the same destination.
+    #
     if [[ "$DEST_FOLDER" == "Resql/services" ]]; then
       STAGING_DEST="$TEMP_DIR/staging_Resql_services"
       mkdir -p "$STAGING_DEST"
+
       if [ -d "$FULL_SOURCE" ]; then
         rsync -av "$FULL_SOURCE" "$STAGING_DEST/"
         echo "Staged $FULL_SOURCE into $STAGING_DEST"
       else
         echo "No $FULL_SOURCE found in $REPO_NAME"
       fi
+
       continue
     fi
 
     if [ -d "$FULL_SOURCE" ]; then
       mkdir -p "$FULL_DEST"
+
       BEFORE_FILE=$(mktemp)
       AFTER_FILE=$(mktemp)
 
-      find "$FULL_DEST" -type f -exec sha256sum {} + 2>/dev/null | sort -k 3 > "$BEFORE_FILE"
+      find "$FULL_DEST" \
+        -type f \
+        -exec sha256sum {} + 2>/dev/null \
+        | sort -k 3 > "$BEFORE_FILE"
+
       RSYNC_OUTPUT=$(rsync -av --delete "$FULL_SOURCE" "$FULL_DEST" 2>&1)
+
       echo "Synced $FULL_SOURCE to $FULL_DEST"
-      find "$FULL_DEST" -type f -exec sha256sum {} + 2>/dev/null | sort -k 3 > "$AFTER_FILE"
+
+      find "$FULL_DEST" \
+        -type f \
+        -exec sha256sum {} + 2>/dev/null \
+        | sort -k 3 > "$AFTER_FILE"
 
       CHANGES=""
+
       if echo "$RSYNC_OUTPUT" | grep -qE "^deleting "; then
-        CHANGES+="Deleted: $(echo "$RSYNC_OUTPUT" | grep "^deleting " | sed 's/^deleting //')"
+        CHANGES+="Deleted: $(echo "$RSYNC_OUTPUT" \
+          | grep "^deleting " \
+          | sed 's/^deleting //')"
       fi
 
       ADDED_MODIFIED=$(comm -13 "$BEFORE_FILE" "$AFTER_FILE" | cut -c 67-)
+
       if [ -n "$ADDED_MODIFIED" ]; then
         CHANGES+=" Added/Modified: $ADDED_MODIFIED"
       fi
@@ -162,6 +220,9 @@ for repo in "${SOURCE_REPOS[@]}"; do
     fi
   done
 
+  #
+  # Merge staged Resql/services content.
+  #
   if [[ -d "$TEMP_DIR/staging_Resql_services" ]]; then
     FINAL_DEST="$CENTRAL_PATH/Resql/services/"
     mkdir -p "$FINAL_DEST"
@@ -169,16 +230,32 @@ for repo in "${SOURCE_REPOS[@]}"; do
     BEFORE_FILE=$(mktemp)
     AFTER_FILE=$(mktemp)
 
-    find "$FINAL_DEST" -type f -exec sha256sum {} + 2>/dev/null | sort -k 3 > "$BEFORE_FILE"
-    RSYNC_OUTPUT=$(rsync -av --delete "$TEMP_DIR/staging_Resql_services/" "$FINAL_DEST")
-    find "$FINAL_DEST" -type f -exec sha256sum {} + 2>/dev/null | sort -k 3 > "$AFTER_FILE"
+    find "$FINAL_DEST" \
+      -type f \
+      -exec sha256sum {} + 2>/dev/null \
+      | sort -k 3 > "$BEFORE_FILE"
+
+    RSYNC_OUTPUT=$(rsync \
+      -av \
+      --delete \
+      "$TEMP_DIR/staging_Resql_services/" \
+      "$FINAL_DEST")
+
+    find "$FINAL_DEST" \
+      -type f \
+      -exec sha256sum {} + 2>/dev/null \
+      | sort -k 3 > "$AFTER_FILE"
 
     CHANGES=""
+
     if echo "$RSYNC_OUTPUT" | grep -qE "^deleting "; then
-      CHANGES+="Deleted: $(echo "$RSYNC_OUTPUT" | grep "^deleting " | sed 's/^deleting //')"
+      CHANGES+="Deleted: $(echo "$RSYNC_OUTPUT" \
+        | grep "^deleting " \
+        | sed 's/^deleting //')"
     fi
 
     ADDED_MODIFIED=$(comm -13 "$BEFORE_FILE" "$AFTER_FILE" | cut -c 67-)
+
     if [ -n "$ADDED_MODIFIED" ]; then
       CHANGES+=" Added/Modified: $ADDED_MODIFIED"
     fi
@@ -191,22 +268,49 @@ for repo in "${SOURCE_REPOS[@]}"; do
   fi
 done
 
+#
 # Generate summary
+#
 TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
 SUMMARY="# Sync Run - $TIMESTAMP\n\n"
 
-for block in "Chatbot" "Training" "Analytics" "Service" "CronManager" "CKB"; do
+for block in \
+  "Chatbot" \
+  "Training" \
+  "Analytics" \
+  "Service" \
+  "CronManager" \
+  "CKB" \
+  "LLM"
+do
   SUMMARY+="## $block Changes\n"
+
   case "$block" in
-    "Chatbot") CHANGES_ARRAY="CHATBOT_CHANGES" ;;
-    "Training") CHANGES_ARRAY="TRAINING_CHANGES" ;;
-    "Analytics") CHANGES_ARRAY="ANALYTICS_CHANGES" ;;
-    "Service") CHANGES_ARRAY="SERVICE_CHANGES" ;;
-    "CronManager") CHANGES_ARRAY="CRONMANAGER_CHANGES" ;;
-    "CKB") CHANGES_ARRAY="CKB_CHANGES" ;;
+    "Chatbot")
+      CHANGES_ARRAY="CHATBOT_CHANGES"
+      ;;
+    "Training")
+      CHANGES_ARRAY="TRAINING_CHANGES"
+      ;;
+    "Analytics")
+      CHANGES_ARRAY="ANALYTICS_CHANGES"
+      ;;
+    "Service")
+      CHANGES_ARRAY="SERVICE_CHANGES"
+      ;;
+    "CronManager")
+      CHANGES_ARRAY="CRONMANAGER_CHANGES"
+      ;;
+    "CKB")
+      CHANGES_ARRAY="CKB_CHANGES"
+      ;;
+    "LLM")
+      CHANGES_ARRAY="LLM_CHANGES"
+      ;;
   esac
 
   eval "changes_count=\${#$CHANGES_ARRAY[@]}"
+
   if [ "$changes_count" -eq 0 ]; then
     SUMMARY+="No changes detected.\n\n"
   else
@@ -220,6 +324,9 @@ done
 echo -e "\n=== Sync Confirmation Summary ==="
 echo -e "$SUMMARY"
 
+#
+# Update CHANGELOG.md
+#
 TEMP_CHANGELOG=$(mktemp)
 echo -e "$SUMMARY" > "$TEMP_CHANGELOG"
 
