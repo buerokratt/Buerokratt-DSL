@@ -73,8 +73,8 @@ CRONMANAGER_MAPPINGS=(
 
 # Common Knowledge / CKB mappings
 CKB_MAPPINGS=(
-  "DSL/Ruuter/ckb:Ruuter/public/v2/ckb"
-  "DSL/Ruuter.internal/ckb:Ruuter/private/v2/ckb"
+  "DSL/Ruuter/ckb:Ruuter/private/v2/ckb"
+  "DSL/Ruuter.internal/ckb:Ruuter/internal/ckb"
   "DSL/Resql/ckb:Resql/ckb"
   "DSL/Resql/users:Resql/users"
   "DSL/DMapper/ckb/hbs:DataMapper/ckb/hbs"
