@@ -1,0 +1,24 @@
+FROM python:3.13.0b1-slim
+
+RUN apt-get update && apt-get install -y curl apt-transport-https gnupg2
+
+RUN curl -LO "https://dl.k8s.io/release/v1.23.0/bin/linux/amd64/kubectl" \
+    && install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+
+RUN pip install Flask
+
+WORKDIR /app
+
+COPY run.py .
+
+COPY Common-Knowledge/DSL/Ruuter/ckb /Ruuter/ckb
+COPY Common-Knowledge/DSL/Ruuter.internal/ckb /Ruuter.internal/ckb
+COPY Common-Knowledge/DSL/Resql /Resql
+COPY Common-Knowledge/DSL/DMapper/ckb/hbs /DataMapper/ckb/hbs
+COPY Common-Knowledge/DSL/Liquibase /Liquibase
+COPY Common-Knowledge/DSL/CronManager /CronManager
+COPY Common-Knowledge/DSL/Export /Export
+
+LABEL org.opencontainers.image.description="Docker PRE-ALPHA image for Common-Knowledge DSL"
+
+CMD ["python", "run.py"]
