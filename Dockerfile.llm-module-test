@@ -1,0 +1,24 @@
+FROM python:3.13.0b1-slim
+
+RUN apt-get update && apt-get install -y curl apt-transport-https gnupg2
+
+RUN curl -LO "https://dl.k8s.io/release/v1.23.0/bin/linux/amd64/kubectl" \
+    && install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+
+RUN pip install Flask
+
+WORKDIR /app
+
+COPY run.py .
+
+COPY LLM-Module/DSL/Ruuter.public/rag-search /Ruuter.public/rag-search
+COPY LLM-Module/DSL/Ruuter.private /Ruuter.private
+COPY LLM-Module/DSL/Resql/rag-search /Resql/rag-search
+COPY LLM-Module/DSL/DMapper/rag-search /DataMapper/rag-search
+COPY LLM-Module/DSL/Liquibase /Liquibase
+COPY LLM-Module/DSL/Liquibase_production /Liquibase_production
+COPY LLM-Module/DSL/CronManager /CronManager
+
+LABEL org.opencontainers.image.description="Docker PRE-ALPHA image for LLM-Module DSL"
+
+CMD ["python", "run.py"]
