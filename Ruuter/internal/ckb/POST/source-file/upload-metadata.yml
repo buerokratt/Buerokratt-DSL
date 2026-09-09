@@ -48,8 +48,6 @@ generateMetadata:
   call: http.post
   args:
     url: "[#CKB_DMAPPER_HBS]/generate_source_file_metadata"
-    headers:
-      type: json
     body:
       file_type: ${file_type}
       source_url: ${source_url}
