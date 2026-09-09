@@ -2,6 +2,213 @@
 
 All changes to Buerokratt-DSL from source repos.
 
+# Sync Run - 2026-09-09 07:40:44
+
+## Chatbot Changes
+### Liquibase/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20281882455432_add_away_status_config.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20250211084322-add-request-nonces.sql
+
+### Resql/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/get-new-nonce.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/use-nonce.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/get-notification-recipient-csa-list.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/set-session-length-conf.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/get-session-length-config.sql
+
+### Ruuter/public/v2/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/backoffice/TEMPLATES/chats/trigger-service.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/backoffice/POST/chats/init.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/backoffice/TEMPLATES/messages/notify.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/backoffice/TEMPLATES/chats/trigger-llm-service.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/backoffice/TEMPLATES/chats/notify.yml
+
+### Ruuter/private/v2/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/chats/end.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/TEMPLATES/messages/notify.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/chats/back-up-removable-chats.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/accounts/admin/session-length.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/GET/.guard
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/chats/chat-to-remove.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/cron-tasks/chat-generation/.guard
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/.guard
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/TEMPLATES/chats/notify.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/GET/cron-tasks/delete-conversations.yml
+
+## Training Changes
+### Ruuter/private/v2/training
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/GET/internal/return-file-locations.yml
+
+### Liquibase/training
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/training/changelog.yaml
+
+## Analytics Changes
+### Liquibase/analytics
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/liquibase.properties
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/changelog.yaml
+
+## Service Changes
+### Liquibase/services
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/services/liquibase.properties
+
+## CronManager Changes
+### CronManager
+Deleted: rag-search/script/vector_indexer_pipeline.sh
+rag-search/script/store_secrets_in_vault.sh
+rag-search/script/service_enrichment.sh
+rag-search/script/delete_secrets_from_vault.sh
+rag-search/script/budget_reset.sh
+rag-search/script/api_tool_indexer.sh
+rag-search/script/agency_data_resync.sh
+rag-search/script/
+rag-search/config/config.ini
+rag-search/config/
+rag-search/DSL/store_in_vault.yml
+rag-search/DSL/service_enrichment.yml
+rag-search/DSL/reset.yml
+rag-search/DSL/initiate_vector_indexer.yml
+rag-search/DSL/delete_from_vault.yml
+rag-search/DSL/data_resync.yml
+rag-search/DSL/api_tool_indexer.yml
+rag-search/DSL/
+rag-search/
+
+## CKB Changes
+### Ruuter/private/v2/ckb
+Deleted: GET/pipeline/zip.yml
+GET/pipeline/trigger-pipeline-for-sceduled-sources.yml
+GET/pipeline/scheduler-check-for-unscheduled-records.yml
+GET/pipeline/
+GET/client/data/new.yml
+GET/client/data/import.yml
+GET/client/data/exist.yml
+GET/client/data/
+GET/client/
+GET/source-file/get-source-file-exists-by-url.yml
+GET/source-file/get-one-source-file-to-scrape.yml
+POST/pipeline/upload-file-sync.yml
+POST/pipeline/delete-file-sync.yml
+POST/pipeline/clean-scraped-file.yml
+POST/pipeline/
+POST/agency/update-zip-dirty.yml
+POST/agency/update-data-hash.yml
+POST/agency/reset-is-zipping.yml
+POST/reports/logs/add.yml
+POST/reports/logs/
+POST/reports/update.yml
+POST/reports/add.yml
+POST/source-file/update-scrapped-file.yml
+POST/source-file/update-scrapped-file-stop-scrapping.yml
+POST/source-file/update-cleaned-file.yml
+POST/source-file/add-scrapped-file.yml
+POST/source/update-status.yml
+TEMPLATES/agency/zip.yml
+TEMPLATES/agency/ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/POST/agency/remove.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/GET/.guard
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/GET/get-download-url.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/GET/source-file/all.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/POST/source-file/add-uploaded-files.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/POST/source-file/refresh.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/POST/source/add-with-url-list.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/POST/auth/login.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/POST/source/file/create-source-if-not-exists-and-upload-urls.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/GET/reports/logs.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/GET/accounts/customer-support-activity.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/POST/source/file/get-upload-urls-for-existing-source.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/POST/reports/remove.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/GET/accounts/widget-data.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/POST/source/start-cleaning.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/POST/source/add.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/TEMPLATES/pipeline/trigger-scrapper-specified-pages.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/GET/accounts/logout.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/POST/source-file/exclude.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/POST/source-file/get-upload-urls.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/POST/source-file/bulk-exclude.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/POST/source-file/edit-file.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/POST/source/edit-scrape-interval.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/POST/source-file/refresh-multiple.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/POST/source-file/upload-metadata.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/README.md
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/POST/.guard
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/GET/source/api/all.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/GET/auth/tara/login.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/TEMPLATES/check-user-authority.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/POST/source/refresh.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/GET/auth/jwt/userinfo.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/POST/auth/.guard
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/GET/accounts/settings.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/TEMPLATES/pipeline/trigger-uploaded-files-task.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/GET/accounts/user-role.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/GET/agency/all.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/POST/source/stop.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/POST/source/edit-subsector.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/POST/source-file/remove.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/TEMPLATES/pipeline/trigger-scrapper-eesti-api-specified-files.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/GET/reports/all.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/POST/agency/edit.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/POST/source/remove.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/POST/agency/add.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/POST/source-file/bulk-remove.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/GET/reports/logs/all.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/ckb/GET/source/all.yml
+
+### Ruuter/internal/ckb
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/internal/ckb/POST/agency/update-zip-dirty.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/internal/ckb/GET/source/get.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/internal/ckb/TEMPLATES/tara.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/internal/ckb/GET/agency/get.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/internal/ckb/TEMPLATES/pipeline/trigger-scrapper-entire-source.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/internal/ckb/TEMPLATES/agency/zip.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/internal/ckb/GET/pipeline/trigger-pipeline-for-sceduled-sources.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/internal/ckb/GET/pipeline/zip.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/internal/ckb/POST/source-file/update-scrapped-file.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/internal/ckb/POST/pipeline/upload-file-sync.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/internal/ckb/GET/source-file/get-one-source-file-to-scrape.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/internal/ckb/POST/source-file/add-scrapped-file.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/internal/ckb/TEMPLATES/pipeline/trigger-scrapper-eesti-api-source.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/internal/ckb/POST/reports/update.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/internal/ckb/GET/pipeline/scheduler-check-for-unscheduled-records.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/internal/ckb/POST/agency/reset-is-zipping.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/internal/ckb/GET/client/data/exist.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/internal/ckb/POST/pipeline/delete-file-sync.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/internal/ckb/README.md
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/internal/ckb/TEMPLATES/pipeline/trigger-scrapper-sitemap-collect.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/internal/ckb/POST/source-file/update-scrapped-file-stop-scrapping.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/internal/ckb/POST/reports/logs/add.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/internal/ckb/POST/source-file/upload-metadata.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/internal/ckb/TEMPLATES/pipeline/update-next-rendered-timestamp.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/internal/ckb/POST/agency/update-data-hash.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/internal/ckb/GET/source-file/get-source-file-exists-by-url.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/internal/ckb/GET/client/data/new.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/internal/ckb/POST/pipeline/clean-scraped-file.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/internal/ckb/POST/reports/add.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/internal/ckb/TEMPLATES/source_file/upload-metadata.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/internal/ckb/TEMPLATES/pipeline/trigger-scrapper-specified-pages.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/internal/ckb/POST/source/update-status.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/internal/ckb/POST/source-file/update-cleaned-file.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/internal/ckb/GET/client/data/import.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/internal/ckb/TEMPLATES/pipeline/clean-file.yml
+
+## LLM Changes
+### CronManager/rag-search
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/script/agency_data_resync.sh
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/DSL/service_enrichment.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/script/delete_secrets_from_vault.sh
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/DSL/data_resync.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/DSL/store_in_vault.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/script/service_enrichment.sh
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/config/config.ini
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/DSL/api_tool_indexer.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/script/api_tool_indexer.sh
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/DSL/reset.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/script/store_secrets_in_vault.sh
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/DSL/delete_from_vault.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/script/vector_indexer_pipeline.sh
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/script/budget_reset.sh
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/DSL/initiate_vector_indexer.yml
+
+
+
 # Sync Run - 2026-09-08 09:44:44
 
 ## Chatbot Changes

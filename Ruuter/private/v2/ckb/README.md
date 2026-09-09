@@ -1,147 +1,115 @@
-# Ruuter Internal API Configuration
+# Ruuter External API Configuration
 
-This directory contains Ruuter configuration files for internal API endpoints that handle backend operations for the Common Knowledge Base. These endpoints are used by microservices for database operations and pipeline coordination.
+This directory contains Ruuter configuration files for the external-facing API endpoints of the Common Knowledge Base. These endpoints provide secure access to CKB functionality for authenticated users.
 
 ## Overview
 
-Ruuter Internal provides backend API endpoints that are called by other services within the CKB ecosystem. Unlike the external API, these endpoints do not require user authentication and are designed for service-to-service communication.
+Ruuter is a lightweight HTTP service router that handles API requests by executing predefined workflows defined in YAML files. This external API layer provides:
+- User authentication and authorization
+- Agency and source management
+- File upload and processing
+- Data export and reporting
+- Secure access to internal services
 
 ## Structure
 
 ```
-DSL/Ruuter.internal/ckb/
+DSL/Ruuter/ckb/
 ├── GET/                 # Read operations
+│   ├── accounts/        # User account management
 │   ├── agency/          # Agency data retrieval
-│   ├── client/          # Client data operations
-│   ├── pipeline/        # Pipeline status and triggers
-│   ├── source-file/     # File processing queries
-│   └── source/          # Source management
-├── POST/                # Write operations
-│   ├── agency/          # Agency updates
-│   ├── pipeline/        # Pipeline operations
+│   ├── auth/            # Authentication endpoints
+│   ├── reports/         # Report generation
+│   ├── source-file/     # File metadata access
+│   └── source/          # Source configuration access
+├── POST/                # Write operations  
+│   ├── agency/          # Agency CRUD operations
+│   ├── auth/            # Login/logout
 │   ├── reports/         # Report management
-│   ├── source-file/     # File processing
-│   └── source/          # Source updates
+│   ├── source-file/     # File operations
+│   └── source/          # Source management
 └── TEMPLATES/           # Reusable workflow templates
-    ├── agency/          # Agency-specific workflows
-    ├── pipeline/        # Data processing workflows
-    └── source_file/     # File processing workflows
+    ├── pipeline/        # Data processing triggers
+    ├── source_file/     # File processing workflows
+    └── check-user-authority.yml
 ```
 
 ## Key Endpoints
 
-### Pipeline Management
-- `GET /pipeline/scheduler-check-for-unscheduled-records` - Find sources needing scheduling
-- `GET /pipeline/trigger-pipeline-for-sceduled-sources` - Execute scheduled tasks
-- `GET /pipeline/zip` - Archive processed data
-- `POST /pipeline/clean-scraped-file` - Trigger file cleaning
-- `POST /pipeline/upload-file-sync` - Synchronous file upload
-- `POST /pipeline/delete-file-sync` - Synchronous file deletion
+### Authentication
+- `POST /auth/login` - User authentication
+- `GET /accounts/logout` - User logout
+- `GET /auth/jwt/userinfo` - JWT token validation
 
-### Source File Operations
-- `GET /source-file/get-one-source-file-to-scrape` - Get next file for processing
-- `POST /source-file/add-scrapped-file` - Add scraped file to database
-- `POST /source-file/update-cleaned-file` - Update file after cleaning
-- `POST /source-file/update-scrapped-file` - Update scraping status
-- `POST /source-file/upload-metadata` - Upload file metadata
-
-### Agency Operations
-- `GET /agency/get` - Retrieve agency information
-- `POST /agency/update-data-hash` - Update agency data hash
-- `POST /agency/update-zip-dirty` - Mark agency data for re-zipping
+### Agency Management
+- `GET /agency/all` - List all agencies
+- `GET /agency/get` - Get specific agency details
+- `POST /agency/add` - Create new agency
+- `POST /agency/edit` - Update agency information
+- `POST /agency/remove` - Delete agency
 
 ### Source Management
-- `GET /source/get` - Retrieve source configuration
-- `POST /source/update-status` - Update source processing status
+- `GET /source/all` - List all sources
+- `GET /source/api/all` - List API sources
+- `POST /source/add` - Create new source
+- `POST /source/edit-scrape-interval` - Update scraping frequency
+- `POST /source/refresh` - Trigger source refresh
+- `POST /source/stop` - Stop source processing
 
-### Client Data Operations
-- `GET /client/data/exist` - Check if client data exists
-- `GET /client/data/import` - Import client data
-- `GET /client/data/new` - Get new client data
+### File Operations
+- `GET /source-file/all` - List source files
+- `POST /source-file/add-uploaded-files` - Add uploaded files
+- `POST /source-file/get-upload-urls` - Get presigned upload URLs
+- `POST /source-file/exclude` - Exclude files from processing
+- `POST /source-file/remove` - Delete source files
 
-### Report Management
-- `POST /reports/add` - Create processing report
-- `POST /reports/update` - Update report status
-- `POST /reports/logs/add` - Add log entries
-
-## Templates
-
-Reusable workflow templates for common operations:
-
-### Pipeline Templates
-- `clean-file.yml` - File cleaning workflow
-- `trigger-scrapper-*.yml` - Various scraper trigger workflows
-- `update-next-rendered-timestamp.yml` - Scheduling updates
-
-### Agency Templates
-- `zip.yml` - Agency data archival workflow
-
-### File Templates
-- `upload-metadata.yml` - File metadata upload workflow
-
-### Authentication
-- `tara.yml` - TARA authentication integration
-
-## Database Integration
-
-Internal endpoints directly execute SQL queries via Resql integration:
-- **Read Operations**: Execute SELECT queries from `DSL/Resql/ckb/GET/`
-- **Write Operations**: Execute INSERT/UPDATE/DELETE from `DSL/Resql/ckb/POST/`
-- **Transaction Management**: Proper database transaction handling
-- **Connection Pooling**: Efficient database connection management
-
-## Service Communication
-
-Internal API endpoints are called by:
-- **Scrapper Service**: File processing and metadata updates
-- **Cleaning Service**: Cleaned file uploads and status updates
-- **Data Export**: Database queries and data extraction
-- **Scheduler**: Pipeline trigger coordination
-- **File Processing**: File upload/download operations
-
-## Configuration Format
-
-Each YAML file typically contains:
-```yaml
-DSL:
-  - name: operation_name
-    http:
-      method: GET/POST
-      url: /internal/endpoint
-    steps:
-      - name: step_name
-        resql:
-          query: query_name
-        assign: variable_name
-```
-
-## Error Handling
-
-- **Database Errors**: Proper SQL error handling and rollback
-- **Service Failures**: Graceful degradation when dependent services are unavailable
-- **Validation Errors**: Input validation with appropriate error responses
-- **Logging**: Comprehensive logging for debugging and monitoring
+### Reports and Monitoring
+- `GET /reports/all` - List processing reports
+- `GET /reports/logs/all` - Get processing logs
+- `POST /reports/remove` - Delete reports
 
 ## Security
 
-While internal endpoints don't require user authentication:
-- **Network Isolation**: Should only be accessible within the service network
-- **Input Validation**: All inputs validated before database operations
-- **SQL Injection Prevention**: Parameterized queries via Resql
-- **Resource Limits**: Rate limiting and resource constraints
+- **Authentication Required**: All endpoints require valid JWT tokens
+- **Authorization Checks**: User permissions validated via `check-user-authority.yml`
+- **Role-based Access**: Different access levels for different user types
+- **Secure File Handling**: Presigned URLs for secure file uploads/downloads
+
+## Configuration
+
+Each YAML file defines:
+- **Request Validation**: Input parameter validation
+- **Database Queries**: SQL operations via Resql integration
+- **Response Formatting**: Output data transformation
+- **Error Handling**: Error response generation
+- **Security Checks**: Authorization and authentication
+
+## Integration
+
+The external Ruuter API integrates with:
+- **Ruuter Internal**: Internal service calls for backend operations
+- **Database**: Direct database access via Resql queries
+- **Authentication Service**: JWT token validation
+- **File Processing**: Upload and download operations
+- **Scrapper Service**: Triggering scraping operations
+
+## Templates
+
+Reusable templates in `TEMPLATES/` directory:
+- **Pipeline Triggers**: Automated workflow initiation
+- **File Processing**: Common file operation patterns
+- **Authentication**: User authorization checks
+- **Data Processing**: ETL pipeline coordination
+
+## Usage
+
+These configurations are loaded by Ruuter service at runtime to provide REST API functionality. Each YAML file represents an API endpoint with defined request/response handling logic.
 
 ## Development
 
-When adding new internal endpoints:
-1. Create YAML configuration in appropriate GET/POST directory
-2. Define corresponding SQL queries in Resql directory
-3. Add error handling and validation
-4. Test service integration
-5. Update documentation
-
-## Monitoring
-
-- **Health Checks**: Endpoint availability monitoring
-- **Performance Metrics**: Query execution time tracking
-- **Error Rates**: Failed operation monitoring
-- **Resource Usage**: Database connection and memory monitoring
+When adding new endpoints:
+1. Create YAML file in appropriate GET/POST directory
+2. Define request validation and response formatting
+3. Include authorization checks using templates
+4. Test endpoint functionality
+5. Update API documentation
