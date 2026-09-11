@@ -3,7 +3,7 @@ name: Buerokratt DSL
 on:
   push:
     branches:
-      - image-build
+      - multi-cookie
     paths:
        - '.env'
 
