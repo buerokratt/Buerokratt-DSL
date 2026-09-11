@@ -2,6 +2,101 @@
 
 All changes to Buerokratt-DSL from source repos.
 
+# Sync Run - 2026-09-11 08:08:17
+
+## Chatbot Changes
+### Liquibase/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20281882455432_add_away_status_config.xml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20250211084322-add-request-nonces.sql
+
+### Resql/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/get-new-nonce.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/use-nonce.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/set-session-length-conf.sql
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Resql/backoffice/POST/get-session-length-config.sql
+
+### Ruuter/public/v2/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/backoffice/TEMPLATES/chats/trigger-service.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/backoffice/POST/chats/messages/add.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/backoffice/GET/chats/users/name.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/backoffice/POST/chats/messages/all.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/backoffice/POST/chats/get.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/backoffice/GET/chats/messages/new.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/backoffice/POST/chats/end.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/backoffice/TEMPLATES/chats/trigger-llm-service.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/backoffice/POST/chats/init-greeting-service.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/public/v2/backoffice/POST/chats/init.yml
+
+### Ruuter/private/v2/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/chats/back-up-removable-chats.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/accounts/admin/session-length.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/GET/.guard
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/chats/chat-to-remove.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/cron-tasks/chat-generation/.guard
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/.guard
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/GET/cron-tasks/delete-conversations.yml
+
+## Training Changes
+### Ruuter/private/v2/training
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/GET/internal/return-file-locations.yml
+
+### Liquibase/training
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/training/changelog.yaml
+
+## Analytics Changes
+### Liquibase/analytics
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/liquibase.properties
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/changelog.yaml
+
+## Service Changes
+### Liquibase/services
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/services/liquibase.properties
+
+## CronManager Changes
+### CronManager
+Deleted: rag-search/script/vector_indexer_pipeline.sh
+rag-search/script/store_secrets_in_vault.sh
+rag-search/script/service_enrichment.sh
+rag-search/script/delete_secrets_from_vault.sh
+rag-search/script/budget_reset.sh
+rag-search/script/api_tool_indexer.sh
+rag-search/script/agency_data_resync.sh
+rag-search/script/
+rag-search/config/config.ini
+rag-search/config/
+rag-search/DSL/store_in_vault.yml
+rag-search/DSL/service_enrichment.yml
+rag-search/DSL/reset.yml
+rag-search/DSL/initiate_vector_indexer.yml
+rag-search/DSL/delete_from_vault.yml
+rag-search/DSL/data_resync.yml
+rag-search/DSL/api_tool_indexer.yml
+rag-search/DSL/
+rag-search/
+
+## CKB Changes
+No changes detected.
+
+## LLM Changes
+### CronManager/rag-search
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/script/agency_data_resync.sh
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/DSL/service_enrichment.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/script/delete_secrets_from_vault.sh
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/DSL/data_resync.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/DSL/store_in_vault.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/script/service_enrichment.sh
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/config/config.ini
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/DSL/api_tool_indexer.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/script/api_tool_indexer.sh
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/DSL/reset.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/script/store_secrets_in_vault.sh
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/DSL/delete_from_vault.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/script/vector_indexer_pipeline.sh
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/script/budget_reset.sh
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/DSL/initiate_vector_indexer.yml
+
+
+
 # Sync Run - 2026-09-11 07:52:34
 
 ## Chatbot Changes
