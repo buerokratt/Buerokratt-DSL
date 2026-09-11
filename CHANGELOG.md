@@ -2,6 +2,211 @@
 
 All changes to Buerokratt-DSL from source repos.
 
+# Sync Run - 2026-09-11 07:52:34
+
+## Chatbot Changes
+### Liquibase/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20250211084322-add-request-nonces.sql
+
+### Ruuter/public/v2/backoffice
+Deleted: README.md
+GET/source/api/all.yml
+GET/source/api/
+GET/source/get.yml
+GET/source/all.yml
+GET/source/
+GET/source-file/all.yml
+GET/source-file/
+GET/reports/logs/all.yml
+GET/reports/logs/
+GET/reports/logs.yml
+GET/reports/all.yml
+GET/reports/
+GET/agency/get.yml
+GET/agency/all.yml
+GET/agency/
+GET/accounts/widget-data.yml
+GET/accounts/user-role.yml
+GET/accounts/settings.yml
+GET/accounts/logout.yml
+GET/accounts/customer-support-activity.yml
+GET/accounts/
+GET/get-download-url.yml
+GET/.guard
+POST/source/file/get-upload-urls-for-existing-source.yml
+POST/source/file/create-source-if-not-exists-and-upload-urls.yml
+POST/source/file/
+POST/source/stop.yml
+POST/source/start-cleaning.yml
+POST/source/remove.yml
+POST/source/refresh.yml
+POST/source/edit-subsector.yml
+POST/source/edit-scrape-interval.yml
+POST/source/add.yml
+POST/source/add-with-url-list.yml
+POST/source/
+POST/source-file/upload-metadata.yml
+POST/source-file/remove.yml
+POST/source-file/refresh.yml
+POST/source-file/refresh-multiple.yml
+POST/source-file/get-upload-urls.yml
+POST/source-file/exclude.yml
+POST/source-file/edit-file.yml
+POST/source-file/bulk-remove.yml
+POST/source-file/bulk-exclude.yml
+POST/source-file/add-uploaded-files.yml
+POST/source-file/
+POST/reports/remove.yml
+POST/reports/
+POST/agency/remove.yml
+POST/agency/edit.yml
+POST/agency/add.yml
+POST/agency/
+POST/.guard
+POST/auth/.guard
+TEMPLATES/source_file/upload-metadata.yml
+TEMPLATES/source_file/
+TEMPLATES/pipeline/update-next-rendered-timestamp.yml
+TEMPLATES/pipeline/trigger-uploaded-files-task.yml
+TEMPLATES/pipeline/trigger-scrapper-specified-pages.yml
+TEMPLATES/pipeline/trigger-scrapper-sitemap-collect.yml
+TEMPLATES/pipeline/trigger-scrapper-entire-source.yml
+TEMPLATES/pipeline/trigger-scrapper-eesti-api-specified-files.yml
+TEMPLATES/pipeline/trigger-scrapper-eesti-api-source.yml
+TEMPLATES/pipeline/clean-file.yml
+TEMPLATES/pipeline/
+TEMPLATES/tara.yml
+TEMPLATES/check-user-authority.yml
+
+### Ruuter/private/v2/backoffice
+Deleted: README.md
+GET/source/api/all.yml
+GET/source/api/
+GET/source/get.yml
+GET/source/all.yml
+GET/source/
+GET/source-file/all.yml
+GET/source-file/
+GET/reports/logs/all.yml
+GET/reports/logs/
+GET/reports/logs.yml
+GET/reports/all.yml
+GET/reports/
+GET/agency/get.yml
+GET/agency/all.yml
+GET/agency/
+GET/get-download-url.yml
+GET/auth/tara/login.yml
+GET/auth/tara/
+POST/source/file/get-upload-urls-for-existing-source.yml
+POST/source/file/create-source-if-not-exists-and-upload-urls.yml
+POST/source/file/
+POST/source/stop.yml
+POST/source/start-cleaning.yml
+POST/source/remove.yml
+POST/source/refresh.yml
+POST/source/edit-subsector.yml
+POST/source/edit-scrape-interval.yml
+POST/source/add.yml
+POST/source/add-with-url-list.yml
+POST/source/
+POST/source-file/upload-metadata.yml
+POST/source-file/remove.yml
+POST/source-file/refresh.yml
+POST/source-file/refresh-multiple.yml
+POST/source-file/get-upload-urls.yml
+POST/source-file/exclude.yml
+POST/source-file/edit-file.yml
+POST/source-file/bulk-remove.yml
+POST/source-file/bulk-exclude.yml
+POST/source-file/add-uploaded-files.yml
+POST/source-file/
+POST/reports/remove.yml
+POST/reports/
+POST/auth/login.yml
+POST/auth/.guard
+POST/auth/
+POST/agency/remove.yml
+POST/agency/edit.yml
+POST/agency/add.yml
+POST/agency/
+TEMPLATES/source_file/upload-metadata.yml
+TEMPLATES/source_file/
+TEMPLATES/pipeline/update-next-rendered-timestamp.yml
+TEMPLATES/pipeline/trigger-uploaded-files-task.yml
+TEMPLATES/pipeline/trigger-scrapper-specified-pages.yml
+TEMPLATES/pipeline/trigger-scrapper-sitemap-collect.yml
+TEMPLATES/pipeline/trigger-scrapper-entire-source.yml
+TEMPLATES/pipeline/trigger-scrapper-eesti-api-specified-files.yml
+TEMPLATES/pipeline/trigger-scrapper-eesti-api-source.yml
+TEMPLATES/pipeline/clean-file.yml
+TEMPLATES/pipeline/
+TEMPLATES/tara.yml Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/GET/.guard
+
+## Training Changes
+### Ruuter/private/v2/training
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/GET/internal/return-file-locations.yml
+
+### Liquibase/training
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/training/changelog.yaml
+
+## Analytics Changes
+### Liquibase/analytics
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/liquibase.properties
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/changelog.yaml
+
+## Service Changes
+### Liquibase/services
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/services/liquibase.properties
+
+### Ruuter/private/v2/services
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/services/POST/.guard
+
+## CronManager Changes
+### CronManager
+Deleted: rag-search/script/vector_indexer_pipeline.sh
+rag-search/script/store_secrets_in_vault.sh
+rag-search/script/service_enrichment.sh
+rag-search/script/delete_secrets_from_vault.sh
+rag-search/script/budget_reset.sh
+rag-search/script/api_tool_indexer.sh
+rag-search/script/agency_data_resync.sh
+rag-search/script/
+rag-search/config/config.ini
+rag-search/config/
+rag-search/DSL/store_in_vault.yml
+rag-search/DSL/service_enrichment.yml
+rag-search/DSL/reset.yml
+rag-search/DSL/initiate_vector_indexer.yml
+rag-search/DSL/delete_from_vault.yml
+rag-search/DSL/data_resync.yml
+rag-search/DSL/api_tool_indexer.yml
+rag-search/DSL/
+rag-search/
+
+## CKB Changes
+No changes detected.
+
+## LLM Changes
+### CronManager/rag-search
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/script/agency_data_resync.sh
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/DSL/service_enrichment.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/script/delete_secrets_from_vault.sh
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/DSL/data_resync.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/DSL/store_in_vault.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/script/service_enrichment.sh
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/config/config.ini
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/DSL/api_tool_indexer.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/script/api_tool_indexer.sh
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/DSL/reset.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/script/store_secrets_in_vault.sh
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/DSL/delete_from_vault.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/script/vector_indexer_pipeline.sh
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/script/budget_reset.sh
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/DSL/initiate_vector_indexer.yml
+
+
+
 # Sync Run - 2026-09-09 07:53:31
 
 ## Chatbot Changes
