@@ -1,4 +1,4 @@
-UPDATE rag_search.llm_connections 
+UPDATE public.llm_connections 
 SET 
     connection_status = 'inactive'
 WHERE vault_uuid = :vault_uuid::uuid

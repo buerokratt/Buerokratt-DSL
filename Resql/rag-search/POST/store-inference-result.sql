@@ -1,4 +1,4 @@
-INSERT INTO rag_search.inference_results (
+INSERT INTO public.inference_results (
     chat_id,
     user_question,
     refined_questions,
@@ -18,7 +18,7 @@ INSERT INTO rag_search.inference_results (
     :embedding_scores::JSONB,
     :final_answer,
     :environment,
-    (SELECT id FROM rag_search.llm_connections WHERE vault_uuid = :vault_uuid::uuid),
+    (SELECT id FROM public.llm_connections WHERE vault_uuid = :vault_uuid::uuid),
     :created_at::timestamp with time zone
 ) RETURNING 
     id, 

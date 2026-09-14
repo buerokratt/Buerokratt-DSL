@@ -1,7 +1,7 @@
 -- Insert a new API endpoint into the endpoints table
 -- Returns the generated endpoint_id for use in indexing pipeline
 
-INSERT INTO rag_search.mock_endpoints (
+INSERT INTO public.mock_endpoints (
     service_id,
     name,
     description,

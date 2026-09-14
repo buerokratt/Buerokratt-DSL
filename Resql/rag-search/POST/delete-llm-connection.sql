@@ -1,2 +1,2 @@
-DELETE FROM rag_search.llm_connections
+DELETE FROM public.llm_connections
 WHERE id = :connection_id;

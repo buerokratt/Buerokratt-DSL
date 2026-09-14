@@ -7,14 +7,14 @@ SELECT u.login,
        u.csa_email,
        ua.authority_name AS authorities,
        CEIL(COUNT(*) OVER() / :page_size::DECIMAL) AS total_pages
-FROM rag_search."user" u
+FROM public."user" u
 LEFT JOIN (
     SELECT authority_name, user_id, ROW_NUMBER() OVER (PARTITION BY user_id ORDER BY id DESC) AS rn
-    FROM rag_search.user_authority AS ua
+    FROM public.user_authority AS ua
     WHERE authority_name && ARRAY [ :roles ]::character varying array
       AND ua.id IN (
           SELECT max(id)
-          FROM rag_search.user_authority
+          FROM public.user_authority
           GROUP BY user_id
       )
 ) ua ON u.id_code = ua.user_id
@@ -22,7 +22,7 @@ WHERE u.status <> 'deleted'
   AND array_length(authority_name, 1) > 0
   AND u.id IN (
       SELECT max(id)
-      FROM rag_search."user"
+      FROM public."user"
       GROUP BY id_code
   )
 ORDER BY

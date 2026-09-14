@@ -3,5 +3,5 @@ SELECT
 	platform_id,
     model_key as value,
     model_name as label
-FROM rag_search.llm_models 
+FROM public.llm_models 
 ORDER BY model_name;
