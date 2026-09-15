@@ -65,6 +65,13 @@ extract_request_data:
     isCommon: ${incoming.body.isCommon}
     structure: ${incoming.body.structure}
     state: ${incoming.body.state}
+  next: logstep
+
+logstep:
+  log: ${type}
+
+logstep2:
+  log: ${incoming.body}
   next: check_if_update_service_db
 
 check_if_update_service_db:
