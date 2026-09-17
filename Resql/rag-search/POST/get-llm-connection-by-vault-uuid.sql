@@ -8,6 +8,6 @@ SELECT
     embedding_model,
     environment,
     connection_status
-FROM public.llm_connections
+FROM rag_search.llm_connections
 WHERE vault_uuid = :vault_uuid::uuid
   AND connection_status <> 'deleted';

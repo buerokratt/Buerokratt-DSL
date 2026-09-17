@@ -1,4 +1,4 @@
-UPDATE public.llm_connections 
+UPDATE rag_search.llm_connections 
 SET 
     used_budget = 0.00
 WHERE connection_status <> 'deleted'

@@ -14,6 +14,6 @@ SELECT
     created_at,
     updated_at
 FROM
-    public.mock_endpoints
+    rag_search.mock_endpoints
 ORDER BY
     created_at ASC

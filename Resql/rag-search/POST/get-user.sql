@@ -1,5 +1,5 @@
 SELECT id_code
-FROM public."user"
+FROM rag_search."user"
 WHERE id_code = :userIdCode
   AND status <> 'deleted'
-  AND id IN (SELECT max(id) FROM public."user" WHERE id_code = :userIdCode)
+  AND id IN (SELECT max(id) FROM rag_search."user" WHERE id_code = :userIdCode)

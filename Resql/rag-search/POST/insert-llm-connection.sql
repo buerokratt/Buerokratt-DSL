@@ -1,4 +1,4 @@
-INSERT INTO public.llm_connections (
+INSERT INTO rag_search.llm_connections (
     connection_name,
     llm_platform,
     llm_model,

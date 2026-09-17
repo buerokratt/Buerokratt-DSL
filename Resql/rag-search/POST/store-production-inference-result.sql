@@ -1,4 +1,4 @@
-INSERT INTO public.inference_results (
+INSERT INTO rag_search.inference_results (
     chat_id,
     user_question,
     refined_questions,

@@ -200,6 +200,29 @@ activate_all_mcq_services:
       keyword: "${name}_mcq_"
       format: "yml"
   result: active_move_results
+  next: call_llm_index
+
+call_llm_index:
+  call: http.post
+  args:
+    url: "[#SERVICE_RUUTER]/services/service-index-llm"
+    headers:
+      cookie: ${incoming.headers.cookie}
+    body:
+      serviceId: ${id}
+      name: ${name}
+      description: ${service_data_result.response.body[0].description}
+      examples: ${service_data_result.response.body[0].examples}
+      entities: ${service_data_result.response.body[0].entities}
+      type: ${ruuter_type}
+      state: ${new_state}
+      isCommon: ${service_data_result.response.body[0].isCommon}
+  result: llm_enrich_result
+  error: llm_enrich_error
+  next: return_ok
+
+llm_enrich_error:
+  log: "Error occurred while calling LLM enrich service for service id: ${id}"
   next: return_ok
 
 deactivate_service:

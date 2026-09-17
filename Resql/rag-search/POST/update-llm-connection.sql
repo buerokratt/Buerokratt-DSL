@@ -1,4 +1,4 @@
-UPDATE public.llm_connections 
+UPDATE rag_search.llm_connections 
 SET 
     connection_name = :connection_name,
     llm_platform = :llm_platform,
