@@ -22,13 +22,13 @@ extractRequestData:
 getDomains:
   call: http.post
   args:
-    url: "[#CKB_USERS_RESQL]/get-widget-domains"
+    url: "[#CHATBOT_RESQL]/get-widget-domains"
   result: domains
 
 getUserDomains:
   call: http.post
   args:
-    url: "[#CKB_USERS_RESQL]/get-user-domains"
+    url: "[#CHATBOT_RESQL]/get-user-domains"
     body:
       user_login: ${user_id}
   result: user_domains
@@ -36,7 +36,7 @@ getUserDomains:
 mapDomainsData:
   call: http.post
   args:
-    url: "[#CKB_DMAPPER]/utils/map-domains-data"
+    url: "[#CHATBOT_DMAPPER]/utils/map-domains-data"
     body:
       domains: ${domains.response.body}
       userDomains: ${user_domains.response.body[0]}
