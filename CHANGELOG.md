@@ -2,6 +2,294 @@
 
 All changes to Buerokratt-DSL from source repos.
 
+# Sync Run - 2026-09-18 11:07:32
+
+## Chatbot Changes
+### Liquibase/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20250211084322-add-request-nonces.sql
+
+### Ruuter/private/v2/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/GET/.guard
+
+## Training Changes
+### Ruuter/private/v2/training
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/GET/internal/return-file-locations.yml
+
+### Liquibase/training
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/training/changelog.yaml
+
+## Analytics Changes
+No changes detected.
+
+## Service Changes
+No changes detected.
+
+## CronManager Changes
+### CronManager
+Deleted: rag-search/script/vector_indexer_pipeline.sh
+rag-search/script/store_secrets_in_vault.sh
+rag-search/script/service_enrichment.sh
+rag-search/script/delete_secrets_from_vault.sh
+rag-search/script/budget_reset.sh
+rag-search/script/api_tool_indexer.sh
+rag-search/script/agency_data_resync.sh
+rag-search/script/
+rag-search/config/config.ini
+rag-search/config/
+rag-search/DSL/store_in_vault.yml
+rag-search/DSL/service_enrichment.yml
+rag-search/DSL/reset.yml
+rag-search/DSL/initiate_vector_indexer.yml
+rag-search/DSL/delete_from_vault.yml
+rag-search/DSL/data_resync.yml
+rag-search/DSL/api_tool_indexer.yml
+rag-search/DSL/
+rag-search/
+
+## CKB Changes
+### Ruuter/private/v2/backoffice/POST
+Deleted: smax/chats/sync.yml
+smax/chats/
+smax/
+session/logout.yml
+session/.guard
+session/
+labels/label-history.yml
+labels/
+internal/sync/delete-conversations-cron.yml
+internal/sync/
+internal/chat-and-message-when-bot-is-not-active.yml
+internal/
+history/send-history-to-email.yml
+history/
+greeting/message.yml
+greeting/is-active.yml
+greeting/greetings-message.yml
+greeting/.guard
+greeting/
+end-user/id-name.yml
+end-user/email-phone.yml
+end-user/
+cron-tasks/chat-generation/message.yml
+cron-tasks/chat-generation/insert-chat.yml
+cron-tasks/chat-generation/feedback-config.yml
+cron-tasks/chat-generation/.guard
+cron-tasks/chat-generation/
+cron-tasks/end-dead-chats.yml
+cron-tasks/
+configs/transfer/widget.yml
+configs/transfer/skm-config.yml
+configs/transfer/organization-working-time.yml
+configs/transfer/greeting.yml
+configs/transfer/feedback.yml
+configs/transfer/emergency-notice.yml
+configs/transfer/chat-analysis.yml
+configs/transfer/bot-config.yml
+configs/transfer/anonymizer.yml
+configs/transfer/
+configs/skm-config/secret.yml
+configs/skm-config/id.yml
+configs/skm-config/
+configs/widget.yml
+configs/widget-domains.yml
+configs/update-delete-messages-config.yml
+configs/skm-config.yml
+configs/organization-working-time.yml
+configs/feedback.yml
+configs/end-user-session-length.yml
+configs/emergency-notice.yml
+configs/chat-analysis.yml
+configs/bot-config.yml
+configs/anonymizer.yml
+configs/.guard
+configs/
+comments/history.yml
+comments/
+chats/quality/measurements.yml
+chats/quality/
+chats/pending/assign.yml
+chats/pending/
+chats/options/insert.yml
+chats/options/
+chats/messages/edit.yml
+chats/messages/approve-validation.yml
+chats/messages/
+chats/ended/unavailable.yml
+chats/ended/download.yml
+chats/ended/
+chats/status.yml
+chats/search.yml
+chats/redirect.yml
+chats/mark-test.yml
+chats/mark-preserve.yml
+chats/get.yml
+chats/end.yml
+chats/empty-conversations-by-chat-ids.yml
+chats/claim.yml
+chats/chat-to-remove.yml
+chats/back-up-removable-chats.yml
+chats/
+bots/active.yml
+bots/.guard
+bots/
+anonymizer/anonymize.yml
+anonymizer/
+agents/chats/messages/insert.yml
+agents/chats/messages/event.yml
+agents/chats/messages/edit.yml
+agents/chats/messages/all.yml
+agents/chats/messages/
+agents/chats/removable.yml
+agents/chats/ended.yml
+agents/chats/
+agents/removable-count.yml
+agents/messages-by-id.yml
+agents/ended-count.yml
+agents/
+accounts/admin/smax-connection.yml
+accounts/admin/session-length.yml
+accounts/admin/exists.yml
+accounts/admin/edit.yml
+accounts/admin/delete.yml
+accounts/admin/add.yml
+accounts/admin/.guard
+accounts/admin/
+accounts/update-page-preference.yml
+accounts/settings.yml
+accounts/estimated-waiting-time.yml
+accounts/estimated-waiting-time-active.yml
+accounts/edit-user-domains.yml
+accounts/customer-support-agents.yml
+accounts/customer-support-activity.yml
+accounts/customer-support-activity-by-id.yml
+accounts/
+extend.yml
+blacklist.yml Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/agency/remove.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/source-file/add-uploaded-files.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/source-file/refresh.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/source/add-with-url-list.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/auth/login.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/source/file/create-source-if-not-exists-and-upload-urls.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/source/file/get-upload-urls-for-existing-source.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/reports/remove.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/source/start-cleaning.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/source/add.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/source-file/exclude.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/source-file/get-upload-urls.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/source-file/bulk-exclude.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/source-file/edit-file.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/source/edit-scrape-interval.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/source-file/refresh-multiple.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/source-file/upload-metadata.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/.guard
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/source/refresh.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/auth/.guard
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/source/stop.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/source/edit-subsector.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/source-file/remove.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/agency/edit.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/source/remove.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/agency/add.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/source-file/bulk-remove.yml
+
+### Ruuter/private/v2/backoffice/GET
+Deleted: service/services-list.yml
+service/.guard
+service/
+jira/chats/sync.yml
+jira/chats/
+jira/
+health/components-status.yml
+health/
+greeting/message.yml
+greeting/.guard
+greeting/
+cron-tasks/delete-conversations.yml
+cron-tasks/
+configs/widget.yml
+configs/widget-domains.yml
+configs/skm-config.yml
+configs/organization-working-time.yml
+configs/feedback.yml
+configs/end-user-session-length.yml
+configs/emergency-notice.yml
+configs/delete-conversation-config.yml
+configs/chat-analysis.yml
+configs/bot-config.yml
+configs/anonymizer.yml
+configs/.guard
+configs/
+comments/history.yml
+comments/
+chats/quality/measurements.yml
+chats/quality/
+chats/assigned/unclaim.yml
+chats/assigned/
+chats/validations.yml
+chats/establishments.yml
+chats/
+bots/active.yml
+bots/.guard
+bots/
+agents/csa/is-chat-editable.yml
+agents/csa/.guard
+agents/csa/
+agents/chats/messages/preview.yml
+agents/chats/messages/new.yml
+agents/chats/messages/
+agents/chats/pending.yml
+agents/chats/active.yml
+agents/chats/
+agents/
+accounts/admin/session-length.yml
+accounts/admin/.guard
+accounts/admin/
+accounts/user-role.yml
+accounts/settings.yml
+accounts/logout.yml
+accounts/get-page-preference.yml
+accounts/estimated-waiting-time.yml
+accounts/customer-support-activity.yml
+accounts/admins.yml
+auth/jwt/userinfo.yml
+auth/jwt/ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/GET/.guard
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/GET/source/get.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/GET/get-download-url.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/GET/agency/get.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/GET/source-file/all.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/GET/reports/logs.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/GET/accounts/widget-data.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/GET/generic/userinfo.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/GET/source/api/all.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/GET/auth/tara/login.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/GET/generic/.guard
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/GET/agency/all.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/GET/generic/accounts/customer-support-activity.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/GET/reports/all.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/GET/generic/accounts/user-role.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/GET/reports/logs/all.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/GET/source/all.yml
+
+## LLM Changes
+### CronManager/rag-search
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/script/agency_data_resync.sh
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/DSL/service_enrichment.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/script/delete_secrets_from_vault.sh
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/DSL/data_resync.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/DSL/store_in_vault.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/script/service_enrichment.sh
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/config/config.ini
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/DSL/api_tool_indexer.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/script/api_tool_indexer.sh
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/DSL/reset.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/script/store_secrets_in_vault.sh
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/DSL/delete_from_vault.yml
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/script/vector_indexer_pipeline.sh
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/script/budget_reset.sh
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/CronManager/rag-search/DSL/initiate_vector_indexer.yml
+
+
+
 # Sync Run - 2026-09-18 10:52:31
 
 ## Chatbot Changes
