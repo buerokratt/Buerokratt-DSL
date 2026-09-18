@@ -2,6 +2,63 @@
 
 All changes to Buerokratt-DSL from source repos.
 
+# Sync Run - 2026-09-18 10:22:56
+
+## Chatbot Changes
+### Liquibase/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/backoffice/changelog/20250211084322-add-request-nonces.sql
+
+### Ruuter/private/v2/backoffice
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/GET/.guard
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/backoffice/POST/.guard
+
+## Training Changes
+### Ruuter/private/v2/training
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Ruuter/private/v2/training/GET/internal/return-file-locations.yml
+
+### Liquibase/training
+ Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/training/changelog.yaml
+
+## Analytics Changes
+### Liquibase/analytics
+Deleted: changelog.yaml Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/liquibase.properties
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/analytics/master.yml
+
+## Service Changes
+### Liquibase/services
+Deleted: changelog.yaml Added/Modified: /home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/services/liquibase.properties
+/home/runner/work/Buerokratt-DSL/Buerokratt-DSL/Liquibase/services/master.yml
+
+## CronManager Changes
+### CronManager
+Deleted: rag-search/script/vector_indexer_pipeline.sh
+rag-search/script/store_secrets_in_vault.sh
+rag-search/script/service_enrichment.sh
+rag-search/script/delete_secrets_from_vault.sh
+rag-search/script/budget_reset.sh
+rag-search/script/api_tool_indexer.sh
+rag-search/script/agency_data_resync.sh
+rag-search/script/
+rag-search/config/config.ini
+rag-search/config/
+rag-search/DSL/store_in_vault.yml
+rag-search/DSL/service_enrichment.yml
+rag-search/DSL/reset.yml
+rag-search/DSL/initiate_vector_indexer.yml
+rag-search/DSL/delete_from_vault.yml
+rag-search/DSL/data_resync.yml
+rag-search/DSL/api_tool_indexer.yml
+rag-search/DSL/
+rag-search/
+
+## CKB Changes
+No changes detected.
+
+## LLM Changes
+No changes detected.
+
+
+
 # Sync Run - 2026-09-17 08:26:37
 
 ## Chatbot Changes
