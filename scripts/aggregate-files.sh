@@ -114,14 +114,16 @@ done
 TEMP_DIR="$(mktemp -d)"
 trap 'rm -rf "$TEMP_DIR"' EXIT
 
-declare -A \
-  CHATBOT_CHANGES \
-  TRAINING_CHANGES \
-  ANALYTICS_CHANGES \
-  SERVICE_CHANGES \
-  CRONMANAGER_CHANGES \
-  CKB_CHANGES \
-  LLM_CHANGES
+# Initialize associative arrays explicitly.
+# This is required because set -u treats an empty but uninitialized
+# associative array as an unbound variable.
+declare -A CHATBOT_CHANGES=()
+declare -A TRAINING_CHANGES=()
+declare -A ANALYTICS_CHANGES=()
+declare -A SERVICE_CHANGES=()
+declare -A CRONMANAGER_CHANGES=()
+declare -A CKB_CHANGES=()
+declare -A LLM_CHANGES=()
 
 #
 # Creates a sorted list containing file hashes.
