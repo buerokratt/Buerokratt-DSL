@@ -16,4 +16,7 @@ guard_success:
   next: end
 EOF
 
+cd Resql/rag-search/POST && sed -i 's/rag_search\./public\./g' *.sql && cd ../../../
+cd Ruuter/private/v2 && rsync -av --ignore-existing rag-search/ backoffice/ && cd ../../public/v2/ && rsync -av --ignore-existing rag-search/ backoffice/ && cd ../../../
+
 echo "local changes done"
