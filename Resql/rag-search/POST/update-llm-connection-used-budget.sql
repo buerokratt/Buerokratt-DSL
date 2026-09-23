@@ -1,4 +1,4 @@
-UPDATE rag_search.llm_connections 
+UPDATE public.llm_connections 
 SET 
     used_budget = used_budget + :usage
 WHERE vault_uuid = :vault_uuid::uuid

@@ -1,4 +1,4 @@
-UPDATE rag_search.agency_sync 
+UPDATE public.agency_sync 
 SET 
     agency_data_hash = :newAgencyDataHash,
     data_url = :dataUrl,

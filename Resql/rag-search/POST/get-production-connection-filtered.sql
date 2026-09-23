@@ -32,7 +32,7 @@ SELECT
         WHEN (used_budget::DECIMAL / monthly_budget::DECIMAL) >= (warn_budget_threshold::DECIMAL / 100.0) THEN 'close_to_exceed'
         ELSE 'within_budget'
     END AS budget_status
-FROM rag_search.llm_connections
+FROM public.llm_connections
 WHERE environment = 'production'
     AND connection_status <> 'deleted'
     AND (:llm_platform IS NULL OR :llm_platform = '' OR llm_platform = :llm_platform)

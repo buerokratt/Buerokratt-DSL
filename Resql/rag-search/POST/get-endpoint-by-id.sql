@@ -14,6 +14,6 @@ SELECT
     created_at,
     updated_at
 FROM
-    rag_search.mock_endpoints
+    public.mock_endpoints
 WHERE
     endpoint_id = :endpointId::uuid

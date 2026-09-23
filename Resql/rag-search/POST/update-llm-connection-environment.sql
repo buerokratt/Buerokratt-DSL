@@ -1,4 +1,4 @@
-UPDATE rag_search.llm_connections 
+UPDATE public.llm_connections 
 SET 
     environment = :environment
 WHERE id = :connection_id
