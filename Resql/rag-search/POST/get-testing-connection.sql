@@ -22,5 +22,6 @@ SELECT
     END AS budget_status
 FROM public.llm_connections
 WHERE environment = 'testing'
+    AND connection_status = 'active'
 ORDER BY created_at DESC
 LIMIT 1;
