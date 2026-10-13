@@ -17,6 +17,7 @@ guard_success:
 EOF
 
 cd Resql/rag-search/POST && sed -i 's/rag_search\./public\./g' *.sql && cd ../../../
+cd Resql/rag-search/GET && sed -i 's/rag_search\./public\./g' *.sql && cd ../../../
 cd Ruuter/private/v2 && rsync -av --ignore-existing rag-search/ backoffice/ && cd ../../public/v2/ && rsync -av --ignore-existing rag-search/ backoffice/ && cd ../../../
 cd DataMapper && rsync -av --ignore-existing ckb/hbs/ backoffice/hbs/ && cd ../
 
