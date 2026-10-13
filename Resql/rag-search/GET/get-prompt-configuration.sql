@@ -1,5 +1,5 @@
 SELECT 
     id,
     prompt
-FROM rag_search.prompt_configuration
+FROM public.prompt_configuration
 LIMIT 1
