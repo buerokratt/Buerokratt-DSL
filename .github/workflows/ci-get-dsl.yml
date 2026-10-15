@@ -3,7 +3,7 @@ name: Buerokratt DSL
 on:
   push:
     branches:
-      - main-image-build
+      - main-image-build-temp
     paths:
        - '.env'
 
