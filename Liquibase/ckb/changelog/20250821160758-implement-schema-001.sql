@@ -26,3 +26,4 @@ GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA data_collection TO PUBLIC;
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA monitoring TO PUBLIC;
 
 -- Revoke CREATE on public schema to prevent future usage
+REVOKE CREATE ON SCHEMA public FROM public;

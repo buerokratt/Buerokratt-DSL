@@ -1,6 +1,8 @@
 -- liquibase formatted sql
 
 -- changeset Ruwini:rag-script-v6-changeset1
+-- preconditions onFail:MARK_RAN
+-- precondition-sql-check expectedResult:0 SELECT count(*) FROM information_schema.tables WHERE table_schema = 'public' AND table_name = 'mock_endpoints'
 CREATE TABLE public.mock_endpoints (
     endpoint_id     UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     service_id      UUID,
@@ -19,6 +21,8 @@ CREATE INDEX idx_mock_endpoints_service_id ON public.mock_endpoints(service_id);
 CREATE INDEX idx_mock_endpoints_visibility ON public.mock_endpoints(visibility);
 
 -- changeset Ruwini:rag-script-v6-changeset2
+-- preconditions onFail:MARK_RAN
+-- precondition-sql-check expectedResult:0 SELECT count(*) FROM public.mock_endpoints
 -- Seed data: 3 test endpoints for development and testing
 
 INSERT INTO public.mock_endpoints (name, description, type, visibility, method, url, params)

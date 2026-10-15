@@ -1,6 +1,8 @@
 -- liquibase formatted sql
 
 -- changeset uuid-vault-path:rag-script-v8-changeset1
+-- preconditions onFail:MARK_RAN
+-- precondition-sql-check expectedResult:0 SELECT count(*) FROM pg_constraint WHERE conname = 'llm_connections_vault_uuid_unique'
 -- Add UUID column to llm_connections for stable Vault secret paths
 ALTER TABLE public.llm_connections
     ADD COLUMN IF NOT EXISTS vault_uuid UUID DEFAULT gen_random_uuid();
