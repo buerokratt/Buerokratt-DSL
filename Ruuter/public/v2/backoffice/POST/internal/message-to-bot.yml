@@ -98,7 +98,7 @@ check_domain_bot_is_active:
       key: "is_bot_active"
       domain: ${domainId.response.body[0].domainId}
   result: is_bot_active_result
-  next: check_bot_activity_result
+  next: check_domain_bot_activity_result
 
 check_bot_is_active:
   call: http.post
@@ -109,11 +109,55 @@ check_bot_is_active:
   result: is_bot_active_result
   next: check_bot_activity_result
 
+check_domain_bot_activity_result:
+  switch:
+    - condition: ${is_bot_active_result.response.body[0]?.value === 'true'}
+      next: get_domain_llm_module_activity
+  next: assign_bot_not_active_response
+
 check_bot_activity_result:
   switch:
     - condition: ${is_bot_active_result.response.body[0]?.value === 'true'}
-      next: check_for_intent
+      next: get_llm_module_activity
   next: assign_bot_not_active_response
+
+get_domain_llm_module_activity:
+  call: http.post
+  args:
+    url: "[#CHATBOT_RESQL]/get-domain-configuration"
+    body:
+      key: "llm_module_active"
+      domain: ${domainId.response.body[0].domainId}
+  result: llm_module_activity_result
+  next: check_if_llm_module_active  
+
+get_llm_module_activity:
+  call: http.post
+  args:
+    url: "[#CHATBOT_RESQL]/get-configuration"
+    body:
+      key: "llm_module_active"
+  result: llm_module_activity_result
+  next: check_if_llm_module_active
+
+check_if_llm_module_active:
+  switch:
+    - condition: ${llm_module_activity_result.response.body[0]?.value === 'true'}
+      next: call_llm_orchestration
+  next: check_for_intent
+
+call_llm_orchestration:
+  call: http.post
+  args:
+    url: "[#CHATBOT_RUUTER_PUBLIC_INTERNAL]/internal/llm_orchestration"
+    body:
+      chatId: ${chatId}
+      authorId: ${chat_bot_name}
+      message: ${content}
+      domain: ${domain}
+  result: llm_orchestration_response
+  error: return_bot_error
+  next: return_message_sent
 
 assign_bot_not_active_response:
   assign:
@@ -141,12 +185,44 @@ check_service_result:
   switch:
     - condition: ${llm_service_response.response.body.response === 'skip'}
       next: check_for_service
-  next: assign_llm_service_response
+    - condition: ${llm_service_response.response.body.response?.content}
+      next: assign_simple_response
+  next: assign_object_response
 
-assign_llm_service_response:
+assign_object_response:
   assign:
-    converted_messages_res: ${llm_service_response.response.body.response}
-  next: add_bot_message_to_db
+    responseContent: ${llm_service_response.response.body.response.content}
+    responseButtons: ${llm_service_response.response.body.response.buttons}
+  next: check_if_buttons_exist
+
+check_if_buttons_exist:
+  switch:
+    - condition: ${responseButtons != null && responseButtons != '[]'}
+      next: assign_with_parsed_buttons
+  next: assign_without_buttons
+
+assign_with_parsed_buttons:
+  assign:
+    botMsg:
+      - recipient_id: ${chatId}
+        text: ${responseContent}
+        buttons: ${JSON.parse(responseButtons)}
+  next: normalize_html_links_in_bot_messages
+
+assign_without_buttons:
+  assign:
+    botMsg:
+      - recipient_id: ${chatId}
+        text: ${responseContent}
+        buttons: []
+  next: normalize_html_links_in_bot_messages
+
+assign_simple_response:
+  assign:
+    botMsg:
+      - recipient_id: ${chatId}
+        text: ${llm_service_response.response.body.response}
+  next: normalize_html_links_in_bot_messages
 
 check_for_service:
   switch:
@@ -199,40 +275,13 @@ trigger_service:
     chatId: ${chatId}
     authorId: ${chat_bot_name}
   result: converted_messages_res
-  error: insert_unavailable_service_message
+  error: return_bot_error
   next: check_for_trigger_service_response
 
 check_for_trigger_service_response:
   switch:
     - condition: ${converted_messages_res === 'Service is not approved'}
       next: post_message_to_bot
-    - condition: ${converted_messages_res == null || converted_messages_res === 'There was a problem triggering the service' || converted_messages_res.length === 0}
-      next: insert_unavailable_service_message
-  next: add_bot_message_to_db
-
-insert_unavailable_service_message:
-  call: http.post
-  args:
-    url: "[#CHATBOT_DMAPPER_HBS]/bot_responses_to_messages"
-    headers:
-      type: json
-    body:
-      data:
-        {
-          "botMessages": [{"text": "Kahjuks see teenus ei ole praegu saadaval. Saate jätkata vestlust."}],
-          "chatId": "${chatId}",
-          "authorId": "${chat_bot_name}",
-          "authorFirstName": "",
-          "authorLastName": "",
-          "authorTimestamp": "${new Date().toISOString()}",
-          "created": "${new Date().toISOString()}",
-        }
-  result: converted_messages_res
-  next: assign_unavailable_service_messages
-
-assign_unavailable_service_messages:
-  assign:
-    converted_messages_res: ${converted_messages_res.response.body}
   next: add_bot_message_to_db
 
 check_if_client_bot_is_active:
