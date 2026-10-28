@@ -23,6 +23,9 @@ getNextChatForSynchronization:
       chatBaseId: ${synchronization.response.body[0]?.chatBaseId ?? ""}
   result: chat
 
+logstep:
+  log: ${synchronization.response.body}
+
 checkIfChatExists:
   maxRecursions: 5
   switch:
