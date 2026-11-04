@@ -14,7 +14,7 @@ SOURCE_REPOS=(
   "buerokratt/Common-Services:v3.3.1"
   "buerokratt/CronManager:v3.3.1"
   "buerokratt/Common-Knowledge:v1.0.0"
-  "buerokratt/LLM-Module:v1.0.0"
+  "buerokratt/LLM-Module:v2.0.0"
 )
 
 # Hardcoded version
