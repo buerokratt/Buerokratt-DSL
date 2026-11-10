@@ -26,6 +26,9 @@ declaration:
       - field: domain
         type: string
         description: "Body field 'domain'"  
+      - field: endUserUrl
+        type: string
+        description: "Body field 'endUserUrl'"
 
 extractRequestData:
   assign:
@@ -38,6 +41,8 @@ extractRequestData:
     domain: ${incoming.body.domain}
     event: ""
     isOrgAvailable: false
+    messageTimestamp: ${new Date().toISOString()}
+    messageEndUserUrl: ${incoming.body.endUserUrl ?? ''}
 
 get_bot_name:
   call: http.post
@@ -83,6 +88,7 @@ trigger_bgk_bot:
       sender: ${sender}
       message: ${message.content ?? ''}
       domain: ${domain}
+      endUserUrl: ${messageEndUserUrl}
   result: bgk_bot_response
   error: return_bad_request
   next: end
@@ -322,8 +328,8 @@ format_messages:
           "authorFirstName": "",
           "authorLastName": "",
           "event": "${event ?? ''}",
-          "authorTimestamp": "${new Date().toISOString()}",
-          "created": "${new Date().toISOString()}",
+          "authorTimestamp": "${messageTimestamp}",
+          "created": "${messageTimestamp}",
         }
   result: formated_messages_res
 
@@ -345,17 +351,18 @@ insertMessage:
       chatId: ${sender}
       messageId: ${uuid}
       content: ${format_messages[0].content}
-      authorTimestamp: ${new Date().toISOString()}
+      authorTimestamp: ${messageTimestamp}
       authorId: ${authorId}
       authorFirstName: ""
       authorRole: "buerokratt"
-      created: ${new Date().toISOString()}
+      created: ${messageTimestamp}
       authorLastName: ""
       rating: ""
       event: ${event ?? ""}
       forwardedByUser: ""
       forwardedFromCsa: ""
       forwardedToCsa: ""
+      endUserUrl: ""
   result: insertMessageResult
 
 notify_chats:

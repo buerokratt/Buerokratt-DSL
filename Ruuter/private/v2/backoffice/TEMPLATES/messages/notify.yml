@@ -14,7 +14,7 @@ notify:
     body:
       eventUuid: ${notification_uuid_result.response.body.uuid}
       recipient: "CHAT"
-      recipientUuid: ${incoming.body.chatId}
+      recipientUuid: ${[incoming.body.chatId]}
       type: ${incoming.body.type}
       payload:
         messageId: ${incoming.body.messageId}
