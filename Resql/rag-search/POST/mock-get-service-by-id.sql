@@ -9,6 +9,7 @@ SELECT
     description,
     ruuter_type,
     current_state,
+    is_common,
     slot,
     entities,
     examples,
@@ -20,5 +21,4 @@ FROM
     public.services
 WHERE 
     service_id = :serviceId
-    AND current_state = 'active'
-    AND discoverable = true;
+    AND current_state = 'active';

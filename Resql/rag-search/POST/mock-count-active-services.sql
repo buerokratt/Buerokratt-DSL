@@ -8,5 +8,4 @@ SELECT
 FROM 
     public.services
 WHERE 
-    current_state = 'active'
-    AND discoverable = true;
+    current_state = 'active';
