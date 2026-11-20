@@ -16,8 +16,6 @@ assignValues:
   assign:
     wholeCookie: ${incoming.headers.cookie}
 
-logstep:
-  log: ${incoming.headers.cookie}
 
 get_old_user:
   call: http.post
@@ -29,9 +27,6 @@ get_old_user:
     plaintext:
       "customJwtCookie"
   result: oldLogin
-
-logstep2:
-  log: ${oldLogin}
 
 get_tara_user_info:
   call: http.get
