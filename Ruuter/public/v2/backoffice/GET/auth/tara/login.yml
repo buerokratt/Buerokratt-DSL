@@ -16,6 +16,8 @@ assignValues:
   assign:
     wholeCookie: ${incoming.headers.cookie}
 
+logstep:
+  log: ${incoming.headers.cookie}
 
 get_old_user:
   call: http.post
