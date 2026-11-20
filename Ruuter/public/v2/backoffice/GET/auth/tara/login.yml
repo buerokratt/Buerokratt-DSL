@@ -19,6 +19,9 @@ assignValues:
 logstep:
   log: ${incoming.headers}
 
+logstep2:
+  log: ${incoming}
+
 get_old_user:
   call: http.post
   args:
