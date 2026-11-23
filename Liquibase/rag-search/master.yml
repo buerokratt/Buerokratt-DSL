@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - include:
+      file: changelog/rag-search-script-v1-llm-connections.sql
+  - include:
+      file: changelog/rag-search-script-v5-prompt-config.sql
+  - include:
+      file: changelog/rag-search-script-v6-endpoints.sql
+  - include:
+      file: changelog/rag-search-script-v8-uuid-vault-path.sql
+  - include:
+      file: changelog/rag-search-script-v9-gpt5-models.sql
+  - include:
+      file: changelog/rag-search-shared-db-authority.sql
