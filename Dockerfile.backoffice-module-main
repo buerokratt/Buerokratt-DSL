@@ -24,6 +24,23 @@ COPY Liquibase/backoffice /Liquibase/backoffice
 COPY Ruuter/public/v2/Common-Services /Ruuter/public/Common-Services
 COPY DataMapper/services/hbs /DataMapper/common-services/hbs
 
+# Common Knowledge / CKB
+COPY Ruuter/private/v2/ckb /Ruuter/private/ckb
+COPY Ruuter/internal/ckb /Ruuter/internal/ckb
+COPY Resql/ckb /Resql/ckb
+COPY Resql/users /Resql/users
+COPY DataMapper/ckb/hbs /DataMapper/ckb/hbs
+COPY Liquibase/ckb /Liquibase/ckb
+
+# LLM Module / RAG
+COPY Ruuter/public/v2/rag-search /Ruuter/public/rag-search
+COPY Ruuter/private/v2/rag-search /Ruuter/private/rag-search
+COPY Resql/rag-search /Resql/rag-search
+COPY DataMapper/rag-search/hbs /DataMapper/rag-search/hbs
+COPY DataMapper/rag-search/lib /DataMapper/rag-search/lib
+COPY Liquibase/rag-search /Liquibase/rag-search
+COPY CronManager/rag-search /CronManager/rag-search
+
 LABEL org.opencontainers.image.description Docker PRE-ALPHA image for Buerokratt-DSL
 
 CMD ["python", "run.py"]
